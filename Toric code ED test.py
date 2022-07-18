@@ -20,6 +20,7 @@ def state(edges):
 
 sample_state = state([1,0,0,1,1,0,1,1])
 
+
 def edges(state):
     binary = format(np.where(state == 1)[0][0], "08b")
     edge = []
