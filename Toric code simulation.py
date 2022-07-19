@@ -231,6 +231,29 @@ Hamiltonian = -(vertex1 + vertex2 + vertex3 + vertex4 + vertex5 +
                 plaquette1 + plaquette2 + plaquette3 + plaquette4 + plaquette5 +
                 plaquette6 + plaquette7 + plaquette8 + plaquette9)/2
 
+'''
+GS = np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+     np.kron([1,0],
+             [1,0]
+             )))))))))))))))))
+'''
+
+
 GS = eigsh(Hamiltonian,k=10,which='SA')[1][:,0:4]
 GS[np.abs(GS)<1e-12] = 0
 
@@ -268,18 +291,30 @@ def EV_checks(state):
 
 # number of first excited states (i.e. pairs of defects) is 45
 
-def perturbation():
+# General function for creating defects. You give a list of edges you want to hit with either type X (pauli X for vertex defects) or type Z (pauli Z for plaquette defects).
 
-    perturbation = sparse.kron(sig_X,
-                               sparse.identity(2**17,format='csr'))
+def perturbation(edges,type):
 
-    return perturbation
+    perturbation = sparse.identity(2**18,format='csr')
+    if type == 'X':
+        pauli = sig_X
+    elif type == 'Z':
+        pauli = sig_Z
 
-def perturbation2():
-
-    perturbation = sparse.kron(sig_Z,
-                               sparse.identity(2**17,format='csr'))
-
+    for edge in edges:
+        if edge == 1:
+            perturbation = perturbation @ sparse.kron(pauli,
+                                                      sparse.identity(2**17,format='csr')
+                                                      )
+        elif edge == 18:
+            perturbation = perturbation @ sparse.kron(sparse.identity(2**17,format='csr'),
+                                                      pauli
+                                                      )
+        else:
+            perturbation = perturbation @ sparse.kron(sparse.identity(2**(edge-1),format='csr'),
+                                          sparse.kron(pauli,
+                                                      sparse.identity(2**(18-edge),format='csr')
+                                                      ))
     return perturbation
 
 
