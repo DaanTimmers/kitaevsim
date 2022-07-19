@@ -231,31 +231,147 @@ Hamiltonian = -(vertex1 + vertex2 + vertex3 + vertex4 + vertex5 +
                 plaquette1 + plaquette2 + plaquette3 + plaquette4 + plaquette5 +
                 plaquette6 + plaquette7 + plaquette8 + plaquette9)/2
 
-'''
-GS = np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-     np.kron([1,0],
-             [1,0]
+# These functions generate the toric ground states. Because of the 4-fold ground state degeneracy, automatic diagonalisation doesn't extract these specific states, but generally results in some linear combinations. These give the 'code space' states, but sadly they take a long time to run.
+
+GS00_init = np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+                    [1,0]
              )))))))))))))))))
-'''
 
+GS00 = np.zeros(2**18)
 
-GS = eigsh(Hamiltonian,k=10,which='SA')[1][:,0:4]
-GS[np.abs(GS)<1e-12] = 0
+for i in range(512):
+    GS00 += (plaquette1**int(format(i,'09b')[0]) @
+             plaquette2**int(format(i,'09b')[1]) @
+             plaquette3**int(format(i,'09b')[2]) @
+             plaquette4**int(format(i,'09b')[3]) @
+             plaquette5**int(format(i,'09b')[4]) @
+             plaquette6**int(format(i,'09b')[5]) @
+             plaquette7**int(format(i,'09b')[6]) @
+             plaquette8**int(format(i,'09b')[7]) @
+             plaquette9**int(format(i,'09b')[8])) @ GS00_init
+
+GS00 /= 32
+
+GS01_init = np.kron([0,1],
+            np.kron([0,1],
+            np.kron([0,1],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+                    [1,0]
+             )))))))))))))))))
+
+GS01 = np.zeros(2**18)
+
+for i in range(512):
+    GS01 += (plaquette1**int(format(i,'09b')[0]) @
+             plaquette2**int(format(i,'09b')[1]) @
+             plaquette3**int(format(i,'09b')[2]) @
+             plaquette4**int(format(i,'09b')[3]) @
+             plaquette5**int(format(i,'09b')[4]) @
+             plaquette6**int(format(i,'09b')[5]) @
+             plaquette7**int(format(i,'09b')[6]) @
+             plaquette8**int(format(i,'09b')[7]) @
+             plaquette9**int(format(i,'09b')[8])) @ GS01_init
+
+GS01 /= 32
+
+GS10_init = np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([0,1],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([0,1],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([0,1],
+            np.kron([1,0],
+                    [1,0]
+             )))))))))))))))))
+
+GS10 = np.zeros(2**18)
+
+for i in range(512):
+    GS10 += (plaquette1**int(format(i,'09b')[0]) @
+             plaquette2**int(format(i,'09b')[1]) @
+             plaquette3**int(format(i,'09b')[2]) @
+             plaquette4**int(format(i,'09b')[3]) @
+             plaquette5**int(format(i,'09b')[4]) @
+             plaquette6**int(format(i,'09b')[5]) @
+             plaquette7**int(format(i,'09b')[6]) @
+             plaquette8**int(format(i,'09b')[7]) @
+             plaquette9**int(format(i,'09b')[8])) @ GS10_init
+
+GS10 /= 32
+
+GS11_init = np.kron([0,1],
+            np.kron([0,1],
+            np.kron([0,1],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([0,1],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([0,1],
+            np.kron([1,0],
+            np.kron([1,0],
+            np.kron([0,1],
+            np.kron([1,0],
+                    [1,0]
+             )))))))))))))))))
+
+GS11 = np.zeros(2**18)
+
+for i in range(512):
+    GS11 += (plaquette1**int(format(i,'09b')[0]) @
+             plaquette2**int(format(i,'09b')[1]) @
+             plaquette3**int(format(i,'09b')[2]) @
+             plaquette4**int(format(i,'09b')[3]) @
+             plaquette5**int(format(i,'09b')[4]) @
+             plaquette6**int(format(i,'09b')[5]) @
+             plaquette7**int(format(i,'09b')[6]) @
+             plaquette8**int(format(i,'09b')[7]) @
+             plaquette9**int(format(i,'09b')[8])) @ GS11_init
+
+GS11 /= 32
 
 
 matrices = {'vertex 1': vertex1,
