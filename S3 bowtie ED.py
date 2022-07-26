@@ -467,6 +467,35 @@ def remote_perturbation25(element,side='r'):
 
     return perturbation
 
+def remote_test25(element):
+
+    perturbation = sparse.csr_matrix((46656,46656))
+
+    for i in range(6):                             # Loop over all values g4 can take and project
+        g4 = np.zeros(6)
+        g4[i] = 1
+
+        ribbon = sparse.csr_matrix((46656,46656))
+
+        projector = sparse.kron(sparse.identity(6**3,format='csr'),
+                sparse.kron(sparse.csr_matrix(np.outer(g4,g4)),
+                            sparse.identity(6**2,format='csr')))
+
+        for h in conjugacy_class[element]:
+
+            multiplier1 = sparse.csr_matrix(right_mult(inv @ h))
+            multiplier6 = sparse.csr_matrix(right_mult(inv @ g4) @ right_mult(inv @ h) @ right_mult(g4))
+
+            ribbon +=   sparse.kron(multiplier1,
+                        sparse.kron(sparse.identity(6**4,format='csr'),
+                                    multiplier6
+                                    ))
+            ribbon /= np.sqrt(len(conjugacy_class[element]))
+            perturbation += ribbon @ projector
+
+    return perturbation
+
+
 def remote_perturbation34(element, side='r'):
 
     perturbation = sparse.csr_matrix((46656,46656))
@@ -530,7 +559,6 @@ def commutation():
             b = remote_perturbation34(red)@remote_perturbation25(blue)@GS
 
             print('Blue: ',blue,'Red: ',red, 'Inner product: ',np.dot(a,b))
-
 
 
 
