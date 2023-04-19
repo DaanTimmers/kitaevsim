@@ -61,12 +61,9 @@ In the next chapter, we will discuss the general framework of manipulating the n
 In this section we will review Kitaev's quantum double models\cite{Kitaev_2003} and discuss their ground states and anyonic excitations. We will also present our protocols for creating/manipulating anyons and measuring topological charge. 
 
 Kitaev's quantum double models are Hamiltonian formulations of lattice gauge theory with the following properties:
-\caro{I wouldn't use bullet points here. I would reserve bullet points for crucial essential things, mostly regarding OUR work.}
-\begin{itemize}
-    \item the gauge group $G$ is finite,
-    \item Gauss' law is enforced energetically at each vertex, i.e. Gauge fixing,
-    \item the model is at the deconfinement fixed point, i.e. no electric field terms.
-\end{itemize}
+the gauge group $G$ is finite;
+Gauss' law is enforced energetically at each vertex, i.e. Gauge fixing;
+and the model is at the deconfinement fixed point, i.e. no electric field terms.
 The Hamiltonian will, therefore, have two sets of terms, the gauge-invariant (magnetic) plaquette terms and the Gauss' law vertex terms\cite{cui2018topological, Kitaev_2003}. 
 
 
@@ -92,8 +89,8 @@ On the other hand, the plaquette term
 	$\mathbf A_p=\frac{1}{|G|} \sum_{g \in G} A^{(g)}_p$
 is defined in terms of operators $A^{(g)}_p$ which shift the labels of the edges forming the plaquette by $g$. Again, to obtain a consistent model, the plaquettes are assigned an \emph{orientation} and depending on whether the edge direction is aligned or anti-aligned with the orientation of the plaquette, the shift acts as $g_i \rightarrow gg_i$ and $g_i \rightarrow g_ig^{-1}$, respectively. For example, for the plaquette shown in Fig. \ref{eqn:As_def}, we have 
 \begin{equation}
-	A_p^{(g)}\ket{g_1, g_2, \ldots} = \ket{gg_1, g_2g^{-1}, \ldots}
-\end{equation}.  
+	A_p^{(g)}\ket{g_1, g_2, \ldots} = \ket{gg_1, g_2g^{-1}, \ldots}.
+\end{equation} 
 
 
 
@@ -130,7 +127,7 @@ This state trivially obeys all $B$-term projectors, so we just need to apply all
 \begin{equation}
     \ket{\psi} = \prod_{p \in P} \mathbf A_p \ket{\{e\}}.
 \end{equation}
-The action of the $A$-terms guarantees survival of $\ket{e}$. If the embedding manifold is a 2-sphere, this is the unique ground state and corresponds to the equal weight superposition of all states whose labels respect Gauss' law at each vertex.
+The action of the $A$-terms guarantees survival of $\ket{\{e\}}$. If the embedding manifold is a 2-sphere, this is the unique ground state and corresponds to the equal weight superposition of all states whose labels respect Gauss' law at each vertex.
 
 
 % Used to be a Subsection "Excitatons"
@@ -164,18 +161,18 @@ This is the on-site representation of the quantum double algebra of a finite gro
 The on-site excitations are labelled by the irreducible representations of this algebra \cite{cui2018topological, Kitaev_2003}. In particular, the ground state is the state with the trivial (charge free) representation on each site. 
 %\caro{At some point we need to introduce the notion of pure charge, pure flux and a dyon, we should state the simplified expressions for pure charge and pure flux, and the notion of generalized conjugation in the dyon case, as we use this later on.}
 
-The irreducible representations of this algebra are labelled by two objects, a conjugacy class $C$ of the group $G$ and an irreducible representation $\chi$ of the centralizer of the class representative $Z(r)$, with $r \in C$. The vector space on which $(C, \chi)$ acts is spanned by a basis $\ket{\mu} = \ket{c, i}$, where $c \in C$ and $i \in \{1, 2, \ldots, \text{dim}\chi\}$, i.e. the first index goes over the conjugacy class elements while the second goes over the vector indices of the irreducible representation $\chi$.
+The irreducible representations of this algebra are labelled by two objects, a conjugacy class $C$ of the group $G$ and an irreducible representation $\chi$ of the centralizer, $Z(r)$, of the class representative $r \in C$. The vector space on which $(C, \chi)$ acts is spanned by a basis $\ket{\mu} = \ket{c, i}$, where $c \in C$ and $i \in \{1, 2, \ldots, \text{dim}\chi\}$, i.e. the first index goes over the conjugacy class elements while the second goes over the vector indices of the irreducible representation $\chi$.
 
 
 The action of the algebra generators on this vector space is
-\caro{what happens with $i,i'$ in the first line?} 
+%\caro{what happens with $i,i'$ in the first line?} 
 \begin{equation}
     \begin{split}
-        B^{(h)}_{\mu\nu}=\bra{c, i} B^{(h)} \ket{c', i'} = \delta_{c, h} \delta_{c, c'}, \\
+        B^{(h)}_{\mu\nu}=\bra{c, i} B^{(h)} \ket{c', i'} = \delta_{c, h} \delta_{c, c'}\delta_{i, i'}, \\
         A^{(g)}_{\mu\nu} = \bra{c, i} A^{(g)} \ket{c', i'} = \delta_{c,gc'g^{-1}} \Gamma^\chi_{ii'}(q_{c}^{-1}gq_{c'}),
     \end{split}
 \end{equation}
-where $\Gamma$ is the $\chi$-representation matrix and $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$. Note that $q_c^{-1}gq_{c'} \in Z(r)$ for all $g$ such that $c = gc'g^{-1}$ and that the $B$-matrices do not depend on the second label in $\ket{c, i}$.
+where $\Gamma$ are the $\chi$-representation matrices and $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$. Note that $q_c^{-1}gq_{c'} \in Z(r)$ for all $g$ such that $c = gc'g^{-1}$.
 %\caro{omit: These representation matrices are going to play a central role in our protocols for creating and manipulating anyons.}
 
 As an example, the aforementioned vacuum (or trivial) representation, labelled by $(\{e\}, \mathbb{1})$, is one-dimensional and spanned by $\ket{e, 0}$:
@@ -194,7 +191,7 @@ Other important examples are pure charges and fluxes. A pure flux is labelled by
         A^{(g)}_{\mu\nu} = \bra{c, 0} A^{(g)} \ket{c', 0} = \delta_{c,gc'g^{-1}}.
     \end{split}
 \end{equation}
-Pure flux excitations only violate the the vertex term.
+Pure flux excitations only violate the vertex term.
 
 Pure charge excitations are labelled by the group identity and a representation of the group $G$ itself, $(\{e\}, \chi)$. Its basis vectors are $\ket{e, i}$ for $i \in \{1, 2, \ldots, \text{dim}\chi\}$, with
 \begin{equation}
@@ -220,13 +217,15 @@ All other anyons are called dyons. They violate vertex and plaquette terms simul
 
 In the following, we will explain how to create and manipulate the excitations we have classified above.
 
-The excitations are always created in pairs from the vacuum. To see why, imagine we take the ground state and shift the label of one of the legs, $e_0 \in E$, by $G$-multiplying it by some constant group element, i.e. $f(e_0) \rightarrow gf(e_0)$ for all labellings $f: E \rightarrow G$ in the superposition, this action disturbs two vertex operators $B^{(e)}_{e_0^+}$ and $B^{(e)}_{e_0^-}$ on each end of the leg $e_0$.
+The excitations are always created in pairs from the vacuum. 
+
+To see why, imagine we take the ground state on a 2-sphere, the state is a superposition of all assignments of group elements to edges, $f: E \rightarrow G$, that do not violate the Gauss' law. Now we shift the label of one of the legs, $e_0$, by some constant group element $g$. The superposition is now made up from different assignments, which only differ on one leg, $f'(e_0) = gf(e_0)$. This action disturbs two vertex operators $B^{(e)}_{e_0^+}$ and $B^{(e)}_{e_0^-}$ on each end of the leg $e_0$, i.e. a pair of pure fluxes have been created.
 
 There exists a set of such line/ribbon operators that when acted upon a ground state create two excitations on both of its ends. These operators are labelled by the elementary excitations they create, $(C, \chi)$.
 
 If the ribbons are closed, they leave the ground state unchanged, since there are no ends. Moreover, they span all (loop) operators that leave the ground state invariant, it is in that way that the quantum double ground state knows about the quasiparticle spectrum.
 
-The ribbon operators are constructed in Ref \cite{}. These operators represent a planar diagram algebra generated by the specific Braiding Tensor Category (BTC) and hence were conceived as a model that can perform fault-tolerant quantum computing by the means of braiding anyons. 
+The ribbon operators are constructed in Ref \cite{Kitaev_2003,cui2018topological}. These operators represent a planar diagram algebra generated by the specific Braiding Tensor Category (BTC) and hence were conceived as a model that can perform fault-tolerant quantum computing by the means of braiding anyons. 
 
 However, even though the braid group itself is universal \cite{} its image on this planar diagram algebra is finite, hence non-universal. For some gauge groups it can be made universal by the addition of measurements, but it will not be the case for our example.
 
