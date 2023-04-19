@@ -1,4 +1,5 @@
 writeup/*
-!writeup/Figures/*
+
+!writeup/Figures
 !writeup/*.bib
 !writeup/*.tex
