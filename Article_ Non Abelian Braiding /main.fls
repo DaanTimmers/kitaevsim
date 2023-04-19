@@ -1,8 +1,8 @@
-PWD /Users/jovanjovanovic/Downloads/Article_ Non Abelian Braiding 
+PWD /Users/jovanjovanovic/Code/kitaevsim/kitaevsim/Article_ Non Abelian Braiding 
 INPUT /usr/local/texlive/2023/texmf.cnf
 INPUT /usr/local/texlive/2023/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/jovanjovanovic/Downloads/Article_ Non Abelian Braiding /main.tex
+INPUT /Users/jovanjovanovic/Code/kitaevsim/kitaevsim/Article_ Non Abelian Braiding /main.tex
 OUTPUT main.log
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2023/texmf-dist/tex/latex/base/article.cls
