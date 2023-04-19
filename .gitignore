@@ -1,4 +1,6 @@
 writeup/*
+.vscode
+.DS_Store
 
 !writeup/Figures
 !writeup/*.bib
