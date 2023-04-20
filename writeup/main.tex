@@ -243,7 +243,7 @@ The more involved one is that the fusion outcomes span a $d\times d$ space of th
 
 We, however, require storing this information locally since we need to do measurements on this space as we move the anyons. This is done by keeping one auxiliary qudit per anyon/end of the ribbon.
 
-Geometrically, every ribbon is made up from two main kinds of elementary triangles, see Figure \ref{}. If we imagine that appending elementary triangles onto a ribbon is moving the anyons at the ribbon's end by elongating the ribbon, the two \textit{Types} are:\begin{itemize}
+Geometrically, every ribbon is made up from two main kinds of elementary triangles, see Figure \ref{fig:rib_exampl}. If we imagine that appending elementary triangles onto a ribbon is moving the anyons at the ribbon's end by elongating the ribbon, the two \textit{Types} are:\begin{itemize}
     \item[I)] Triangles whose side follows the leg it touches, whose edges include two vertices and one plaquette. These triangles move the flux component of the anyon from the first vertex to the second vertex,
     \item[II)] Triangles which cross the leg it touches, whose edges include two plaquettes and one vertex. these triangles move the charge component of the anyon from the first plaquette to the second plaquette.
 \end{itemize}
@@ -251,9 +251,13 @@ Geometrically, every ribbon is made up from two main kinds of elementary triangl
 The type of the triangle determines the step \textbf{2.} of the algorithm we are about to describe. This step will also depend on the exact configuration of leg orientation, ribbon orientation etc., see Figure \ref{} and Appendix \ref{app:ribs} for an exhaustive list.
 
 
-\todo{Figure Ribbon Example: An example of a ribbon decomposed into elementary triangles}
+\begin{figure}
+    \centering
+    \includegraphics[width= \linewidth]{Figures/ribbon_examp.pdf}
+    \caption{An example of a ribbon between site $s_1$ and $s_2$. The ribbon is made up from six Type I elementary triangles and two Type II elementary triangles, they are labelled.}
+    \label{fig:rib_exampl}
+\end{figure}
 
-\todo{Figure Triangles: Figure showing the 16 types of triangles: [(I, II), (R, L), (in, out), (f, b)]}
 
 %\caro{You do that sequentially, i.e., not just 'for all $t_i$' but one after another. Also, would be easier to just talk about a forward moving ribbon where you only have $|c,i\rangle$ and $|g\rangle$ and then consider backwards in an appendix} I would still include both qubits, since there are two indices in the def. of F
 
@@ -1103,6 +1107,8 @@ In this section, we will discuss what carries over from our study further onto t
 
 \section{Ribbon Types}\label{app:ribs}
 \jovan{ToDo, a lot ToDo.}
+
+\todo{Figure Triangles: Figure showing the 16 types of triangles: [(I, II), (R, L), (in, out), (f, b)]}
 \section{Representation Theory of $D_4$ and $D(D_4)$}\label{app:reps}
 \jovan{$\ldots$}
 \section{Circuits for $D_4$-related operations}\label{app:cirqs}
