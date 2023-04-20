@@ -248,13 +248,13 @@ Geometrically, every ribbon is made up from two main kinds of elementary triangl
     \item[II)] Triangles which cross the leg it touches, whose edges include two plaquettes and one vertex. these triangles move the charge component of the anyon from the first plaquette to the second plaquette.
 \end{itemize}
 
-The type of the triangle determines the step \textbf{2.} of the algorithm we are about to describe. This step will also depend on the exact configuration of leg orientation, ribbon orientation etc., see Figure \ref{} and Appendix \ref{app:ribs} for an exhaustive list.
+The type of the triangle determines the step \textbf{2.} of the algorithm we are about to describe. This step will also depend on the exact configuration of leg orientation, ribbon orientation etc., see Figure \ref{fig:all_triang} in Appendix \ref{app:ribs} for an exhaustive list.
 
 
 \begin{figure}
     \centering
     \includegraphics[width= \linewidth]{Figures/ribbon_examp.pdf}
-    \caption{An example of a ribbon between site $s_1$ and $s_2$. The ribbon is made up from six Type I elementary triangles and two Type II elementary triangles, they are labelled.}
+    \caption{An example of a ribbon, $R = \{t_1, t_2, t_3, t_4, t_5, t_6, t_7, t_8\}$, between site $s_1$ and $s_2$. The ribbon is made up from six Type I elementary triangles and two Type II elementary triangles, they are labelled.}
     \label{fig:rib_exampl}
 \end{figure}
 
@@ -263,7 +263,7 @@ The type of the triangle determines the step \textbf{2.} of the algorithm we are
 
 \textbf{The algorithm} that creates two anyons along a ribbon path $R$ made up from a set of triangles $R = \{t_1, t_2, \ldots, t_N\}$ in the internal state: $\ket{\alpha; \beta} = \ket{c', i'; c, i}$ i.e. applying $F_{\alpha, \beta}^{(C,\chi)}(R)$ is:\begin{enumerate}
     \item Initialize the two auxiliary qudits in the states $\ket{\alpha, \beta}$. We will think of the first qudit as the ribbon's backend and the second as its frontend.
-    \item Focusing on one case of many: growing the ribbon from $t_1$ onwards, for each $t_i$ sequentially in R do one of the following unitaries depending on the \textit{Type} (and orientation) of the triangle: \begin{itemize}
+    \item In the case of growing the ribbon from $t_1$ onwards, for each $t_i$ sequentially in R do one of the following unitaries depending on the \textit{Type} (and orientation) of the triangle $t_i$: \begin{itemize}
         \item[I)] Multiply the label of the $t_i$'s leg by the group element encoded by the forward auxiliary qudit: $\ket{c', i';c, i}\ket{g}_{t_i} \rightarrow \ket{c', i';c, i}\ket{cg}_{t_i}$.
         \item[II)] (Generalize-)Conjugate the forward axially qudit by the label of the leg crossed by $t_i$: $\ket{\alpha;\beta}\ket{g}_{t_i} \rightarrow \sum_\gamma A_{\gamma\beta}^{(g)}\ket{\alpha;\gamma}\ket{g}_{t_i}$.
     \end{itemize}
@@ -274,7 +274,7 @@ This procedure creates a pair of excitations on the ends of a ribbon $R$ of type
 
 The matrices $A^{(g)}$ are the representation matrices for the irreducible representation $(C, \chi)$. The projection is done by measurement and post-selection (or error correction).
 
-For the other variants of Step \textbf{2.}, for different leg orientations etc., consult the Appendix \ref{app:ribs} and Figure \ref{}. 
+For the other variants of Step \textbf{2.}, for different leg orientations etc., consult the Figure \ref{fig:all_triang} in Appendix \ref{app:ribs}. 
 
 In the way presented above, we have started building up the ribbon from start-to-finish using only forward-type elementary triangles. Similarly, we could have started in the middle and extend in parallel both forward and backwards with appropriate types of elementary triangles, see Appendix \ref{app:ribs}. Backwards-type elementary triangles, analogously to Step \textbf{2.} stated above, act with the backwards auxiliary qudit.
 
@@ -1108,7 +1108,13 @@ In this section, we will discuss what carries over from our study further onto t
 \section{Ribbon Types}\label{app:ribs}
 \jovan{ToDo, a lot ToDo.}
 
-\todo{Figure Triangles: Figure showing the 16 types of triangles: [(I, II), (R, L), (in, out), (f, b)]}
+\begin{figure}
+    \centering
+    \includegraphics[width = 0.5\linewidth]{Figures/all_triangles.pdf}
+    \caption{All variants of step \textbf{2.}.}
+    \label{fig:all_triang}
+\end{figure}
+
 \section{Representation Theory of $D_4$ and $D(D_4)$}\label{app:reps}
 \jovan{$\ldots$}
 \section{Circuits for $D_4$-related operations}\label{app:cirqs}
