@@ -5,3 +5,4 @@ writeup/*
 !writeup/Figures
 !writeup/*.bib
 !writeup/*.tex
+.DS_Store
