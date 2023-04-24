@@ -147,6 +147,8 @@ for all $v \in V$, $p \in P$ and $g \in G$. Therefore, the elementary excitation
 
 To get a better understanding of the latter, we look at the algebra spanned by the vertex and plaquette operators $B_v$ and $A_p$. But first, we need to put vertices and plaquettes on an equal footing. This is done by pairing plaquettes and adjacent vertices one-to-one into \emph{sites}\footnote{Either some vertices or some plaquettes will be left over depending on the exact geometry of the lattice.} $s_i = (v_i, p_i)$ such that $A_{s_i}^{(g)} = A_{p_i}^{(g)}$ and $B_{s_i}^{(h)} = B_{v_i}^{(h)}$. 
 
+\jovan{Soften the approach to formalism by the example of Toric code excitations.}
+
 Operators on different sites commute trivially, while on the same site we have 
 \begin{equation}
     \begin{split}
@@ -210,7 +212,34 @@ In particular, if we have a gauge field state, $\ket{\chi, p; i}$, where each si
 where $i$ and $i'$ are the internal degrees of freedom of the charge\footnote{Note that the charge can be vector valued for non-abelian symmetry groups.}.
 This is the way a charged state transforms under gauge transformations in gauge field theory. Hence, we say that the plaquette terms generate gauge transformations.
 
-All other anyons are called dyons. They violate vertex and plaquette terms simultaneously, meaning they have a flux component associated with a vertex of the site $(v,p)$ and a charge component associated with its plaquette. In nonabelian theories, the two components are not separable.
+All other anyons are called dyons. They violate vertex and plaquette terms simultaneously, meaning they have a flux component associated with a vertex of the site $(v,p)$ and a charge component associated with its plaquette. In the case of non-abelian gauge groups, the two components are not separable.
+
+\textbf{Fusion Algebra.} One of the main ways of manipulating these excitations is to combine them into composites, i.e. fusion. This can be done by moving them to a same site, or it can be done by coarse graining. By coarse graining, by which we mean measuring the topological charge, the label $(C, \chi)$, on a large region encompasing many sites.
+
+The charge content, a set of labels $(C, \chi)$ at each site, determines the state of the gauge field, but not completelly. There is a residual degeneracy associated with the dimension of the space each of the onsite representation acts on: 
+\begin{equation}
+D = \text{dim}\bigotimes_s(C_s, \chi_s)=\prod_s \text{dim}(C_s, \chi_s). \label{eqn:degen}
+\end{equation}
+This can be explained locally as stemming from the local spin-like degree of freedom of anyons at each site, vaccum anyons included. 
+
+This, however, missed an important point. There is an algebra associated with the tensor product of representation:
+\begin{equation}
+	a \otimes b = \bigoplus_{c}N^c_{ab} c,\label{eqn:fuse} 
+\end{equation}
+with $a$, $b$ and $c$ going over a set of all anyon labels $(C, \chi)$. This algebra is analogous to the Clebsch-Gordan decomposition of tensor products of linear representation of groups into a tensor sum of irreducible representations.
+The \textit{integer} coefficients $N_{ab}^c$ number how many instances of the irreducible representation $c$ appear in the tensor product of irreducible representations $a$ and $b$.
+
+How this algebra manifests physically, in terms of fusion of anyons, is that if we have two anyons with labels $a$ and $b$ and we fuse them, upon measuring the topological charge we can detect any charge $c$ for which $N_{ab}^c\neq 0$.
+In fact, if the joint state of anyons $a$ and $b$ is such that it is within one of the possible irreducible subspaces $c_0$, the charge upon fusion will be $c_0$.
+
+Let us use the algebra of Eq.~\eqref{eqn:fuse} to simplify Eq.~\eqref{eqn:degen} in the case of four sites carrying identical charges $a$
+\begin{equation}
+\text{dim}(((a\otimes a)\otimes a)\otimes a) = \sum_{c, d, e} N^c_{aa}N^d_{ca}N^e_{da}\text{dim}(e), \label{eqn:tree_bas}
+\end{equation}
+in addition let us also assume we have measured the total charge and got $e\in\{(\{e\}, \mathbb{1})\} = \{0\}$, i.e. there is no total topological charge.
+
+In this case, the degeneracy is completely determined by the algebra coefficients and a suitable basis for this degenerate space is $\ket{b,c,d}$ for triples $(b,c,d)$ where none of the coefficients in Eq.~\eqref{eqn:tree_bas} vanish.
+
 
 \jovan{Add a discussion on dimension! Nonabelian!}
 
