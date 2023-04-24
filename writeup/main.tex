@@ -218,11 +218,11 @@ All other anyons are called dyons. They violate vertex and plaquette terms simul
 
 The charge content, a set of labels $(C, \chi)$ at each site, determines the state of the gauge field, but not completelly. There is a residual degeneracy associated with the dimension of the space each of the onsite representation acts on: 
 \begin{equation}
-D = \text{dim}\bigotimes_s(C_s, \chi_s)=\prod_s \text{dim}(C_s, \chi_s). \label{eqn:degen}
+D = \text{dim}\bigotimes_s(C_s, \chi_s)=\prod_s \text{dim}(C_s, \chi_s) = \prod_s d_s. \label{eqn:degen}
 \end{equation}
-This can be explained locally as stemming from the local spin-like degree of freedom of anyons at each site, vaccum anyons included. 
+This can be explained locally as stemming from the local spin-like degree of freedom of anyons at each site, vaccum anyons included. We will call $$d = \text{dim}(C, \chi) = |C|\text{dim}(\chi),$$ the internal dimension of the anyon of type $(C, \chi)$.
 
-This, however, missed an important point. There is an algebra associated with the tensor product of representation:
+This, however, missed an important point. There is an algebra associated with the tensor product of representation, anyon labels:
 \begin{equation}
 	a \otimes b = \bigoplus_{c}N^c_{ab} c,\label{eqn:fuse} 
 \end{equation}
@@ -238,10 +238,22 @@ Let us use the algebra of Eq.~\eqref{eqn:fuse} to simplify Eq.~\eqref{eqn:degen}
 \end{equation}
 in addition let us also assume we have measured the total charge and got $e\in\{(\{e\}, \mathbb{1})\} = \{0\}$, i.e. there is no total topological charge.
 
+\jovan{Maybe put a picture of a fusion three?}
+
 In this case, the degeneracy is completely determined by the algebra coefficients and a suitable basis for this degenerate space is $\ket{b,c,d}$ for triples $(b,c,d)$ where none of the coefficients in Eq.~\eqref{eqn:tree_bas} vanish.
 
+Anyon braiding, i.e. moving anyons, acts on this degenerate space and the action is expressed most naturally in this global basis.
 
-\jovan{Add a discussion on dimension! Nonabelian!}
+Here we arrive at the main difference between the case where the gauge group is commutative, Abelian Theories, and non-commutative, Non-Abelian Theories.
+
+In the Abelian case, all group elements are in their own conjugacy class with their centres being the entire group whose every irreducible representation is one-dimensional. This implies that all $D(G)$ representations are also one-dimensional. 
+
+Looking at the dimensions of the LHS and the RHS in the Eq.~\eqref{eqn:fuse} we see that for each $a
+$ and $b$ there exists exactly one $c$ for which $N_{ab}^c$ is non-zero, i.e. one.
+
+This furthermore, implies that there is no degeneracy once we have specified the charges at each site and that the action of braiding can only introduce a phase, i.e. it has no computational power.
+
+Non-Abelian theories, on the other had, are characterised by non-unique fusion and non-trivial braiding, both phenomenologies we show are detectable with the experiments described in this paper.
 
 \subsection{Ribbon Operators}
 
