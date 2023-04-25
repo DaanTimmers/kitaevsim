@@ -79,13 +79,13 @@ For a given group $G$ we can define a quantum double model on any arbitrary \emp
 \begin{equation}
     H = -  \sum_{v \in V} \mathbf B_v -  \sum_{p  \in  P} \mathbf A_p \label{eqn:ham} \;.
 \end{equation}
-We will now discuss these terms in more detail. As mentioned before, the vertex term should enforce Gauss' law. To achieve this we first introduce a general vertex operator $B_v^{(h)}$ for every vertex. This operator projects to all states for which the group elements meeting at the vertex multiply to $h$. To make the product unambiguous, every vertex is assigned an \emph{ordering} of the edges. In addition, an incoming edge labeled by $g$ enters as $g$ while an outgoing edge enters as $g^{-1}$. E.g. for the trivalent vertex depicted in Fig.~\ref{eqn:Bs_def} we have 
+We will now discuss these terms in more detail. As mentioned before, the vertex term should enforce Gauss' law. To achieve this we first introduce a general vertex operator $B_v^{(h)}$ for every vertex. This operator projects to all states for which the group elements meeting at the vertex multiply to $h$. To make the product unambiguous, every vertex is assigned an ordering of the edges. In addition, an incoming edge labeled by $g$ enters as $g$ while an outgoing edge enters as $g^{-1}$. E.g. for the trivalent vertex depicted in Fig.~\ref{eqn:Bs_def} we have 
 \begin{equation}
 B_v^{(h)} |g_1,g_2,g_3\rangle= \delta_{g_1 g_2 g_3,h} |g_1,g_2,g_3\rangle \;.	
 \end{equation}
-Gauss' law is then enforced by choosing $\mathbf B_v=B^{(e)}_v$, where $e$ denotes the identity element of the group.
+Gauss' law is then enforced by choosing $\mathbf B_v=B^{(e)}_v$, where $e$ denotes the identity element of the group. To ensure that the vertex projector commutes with the plaquette projector, defined momentarily, the ordering of the edges is chosen in counter-clockwise orientation as is the orientation of the plaquettes. In addition to uniquely define the product of the edges a starting edge is specified for each vertex.
 
-On the other hand, the plaquette term 
+The plaquette term 
 	$\mathbf A_p=\frac{1}{|G|} \sum_{g \in G} A^{(g)}_p$
 is defined in terms of operators $A^{(g)}_p$ which shift the labels of the edges forming the plaquette by $g$. Again, to obtain a consistent model, the plaquettes are assigned an \emph{orientation} and depending on whether the edge direction is aligned or anti-aligned with the orientation of the plaquette, the shift acts as $g_i \rightarrow gg_i$ and $g_i \rightarrow g_ig^{-1}$, respectively. For example, for the plaquette shown in Fig. \ref{eqn:As_def}, we have 
 \begin{equation}
@@ -99,13 +99,13 @@ is defined in terms of operators $A^{(g)}_p$ which shift the labels of the edges
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width= \linewidth]{Figures/B_ops.pdf}
-        \caption{Vertex operator. Ordering of the edges is required to make the group multiplication unambiguous. \caro{in addition to the vertex being oriented}}
+        \caption{Vertex operator. The vertices are oriented in accordance with the plaquette operators (counter-clockwise) and have a starting edge to make the group multiplication assignment unambiguous.}
         \label{eqn:Bs_def}
     \end{subfigure}\hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width = \linewidth]{Figures/A_ops.pdf}
-        \caption{Plaquette operator. The orientation of the plaquettes determines pre or post multiplication with the inverse.}
+        \caption{Plaquette operator. The orientation of the plaquettes determines pre or post multiplication with the inverse and is chosen in agreement with the orientation of the vertex operators (counter-clockwise).}
         \label{eqn:As_def}
     \end{subfigure}\hfill
     \caption{The vertex and plaquette operators. \caro{todo: figure does not need a,b, and global caption}}
