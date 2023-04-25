@@ -263,7 +263,7 @@ The excitations are always created in pairs from the vacuum.
 
 To see why, imagine we take the ground state on a 2-sphere, the state is a superposition of all assignments of group elements to edges that do not violate the Gauss' law. Now we shift the label of one of the edges, $e_0$, by some constant group element. The superposition is now made up from different assignments, which only differ on the edge $e_0$. This action disturbs two vertex operators on each end of the edge $e_0$, i.e. a pair of pure fluxes have been created.
 
-Analogously, there are operations on the edge $e_0$ that disturbs two plaquette operators touching the leg $e_0$. i.e. that create a pair of pure charges.
+Analogously, there are operations on the edge $e_0$ that disturbs two plaquette operators touching the edge $e_0$. i.e. that create a pair of pure charges.
 
 Moreover, for any anyon, $(C, \chi)$, and any path in the graph between two sites, see Figure \ref{fig:rib_exampl}, there is an operator that creates a pair of said anyons at the end sites. These paths are called ribbons and the associated operators ribbon operators, which themselves are labelled by the anyons they create, $(C, \chi)$.
 
@@ -292,13 +292,13 @@ The more involved one is that the fusion outcomes span a $d\times d$ space of th
 We, however, require storing this information locally since we need to do measurements on this space as we move the anyons. This is done by keeping one auxiliary qudit per anyon/end of the ribbon.
 
 Geometrically, every ribbon is made up from two main kinds of elementary triangles, see Figure \ref{fig:rib_exampl}. If we imagine that appending elementary triangles onto a ribbon is moving the anyons at the ribbon's end by elongating the ribbon, the two \textit{Types} are:\begin{itemize}
-    \item[I)] Triangles whose side follow the leg it touches, whose edges include two vertices and one plaquette. These triangles move the flux component of the anyon from the first vertex to the second vertex,
-    \item[II)] Triangles which cross the leg it touches, whose edges include two plaquettes and one vertex. these triangles move the charge component of the anyon from the first plaquette to the second plaquette.
+    \item[I)] Triangles whose side follow the edge it touches, whose edges include two vertices and one plaquette. These triangles move the flux component of the anyon from the first vertex to the second vertex,
+    \item[II)] Triangles which cross the edge it touches, whose edges include two plaquettes and one vertex. these triangles move the charge component of the anyon from the first plaquette to the second plaquette.
 \end{itemize}
 
 \jovan{Remove the forward references.}
 
-The type of the triangle determines the step \textbf{2.} of the algorithm we are about to describe. This step will also depend on the exact configuration of leg orientation, ribbon orientation etc., see Figure \ref{fig:all_triang} in Appendix \ref{app:ribs} for an exhaustive list.
+The type of the triangle determines the step \textbf{2.} of the algorithm we are about to describe. This step will also depend on the exact configuration of edge orientation, ribbon orientation etc., see Figure \ref{fig:all_triang} in Appendix \ref{app:ribs} for an exhaustive list.
 
 
 \begin{figure}
@@ -314,8 +314,8 @@ The type of the triangle determines the step \textbf{2.} of the algorithm we are
 \textbf{The algorithm} that creates two anyons along a ribbon path $R$ made up from a set of triangles $R = \{t_1, t_2, \ldots, t_N\}$ in the internal state: $\ket{\alpha; \beta} = \ket{c', i'; c, i}$ i.e. applying $F_{\alpha, \beta}^{(C,\chi)}(R)$ is:\begin{enumerate}
     \item Initialize the two auxiliary qudits in the states $\ket{\alpha, \beta}$. We will think of the first qudit as the ribbon's backend and the second as its frontend.
     \item In the case of growing the ribbon from $t_1$ onwards, for each $t_i$ sequentially in R do one of the following unitaries depending on the \textit{Type} (and orientation) of the triangle $t_i$: \begin{itemize}
-        \item[I)] Multiply the label of the $t_i$'s leg by the group element encoded by the forward auxiliary qudit: $\ket{c', i';c, i}\ket{g}_{t_i} \rightarrow \ket{c', i';c, i}\ket{cg}_{t_i}$.
-        \item[II)] (Generalize-)Conjugate the forward axially qudit by the label of the leg crossed by $t_i$: $\ket{\alpha;\beta}\ket{g}_{t_i} \rightarrow \sum_\gamma A_{\gamma\beta}^{(g)}\ket{\alpha;\gamma}\ket{g}_{t_i}$.
+        \item[I)] Multiply the label of the $t_i$'s edge by the group element encoded by the forward auxiliary qudit: $\ket{c', i';c, i}\ket{g}_{t_i} \rightarrow \ket{c', i';c, i}\ket{cg}_{t_i}$.
+        \item[II)] (Generalize-)Conjugate the forward axially qudit by the label of the edge crossed by $t_i$: $\ket{\alpha;\beta}\ket{g}_{t_i} \rightarrow \sum_\gamma A_{\gamma\beta}^{(g)}\ket{\alpha;\gamma}\ket{g}_{t_i}$.
     \end{itemize}
     \item Project the ancillary qudits to a Bell-pair state: $\bra{\Phi^+} = \frac{1}{\sqrt{d}}\sum_\nu \bra{\nu; \nu}$.
 \end{enumerate}
@@ -324,7 +324,7 @@ This procedure creates a pair of excitations on the ends of a ribbon $R$ of type
 
 The matrices $A^{(g)}$ are the representation matrices for the irreducible representation $(C, \chi)$. The projection is done by measurement and post-selection (or error correction).
 
-For the other variants of Step \textbf{2.}, for different leg orientations etc., consult the Figure \ref{fig:all_triang} in Appendix \ref{app:ribs}. 
+For the other variants of Step \textbf{2.}, for different edge orientations etc., consult the Figure \ref{fig:all_triang} in Appendix \ref{app:ribs}. 
 
 In the way presented above, we have started building up the ribbon from start-to-finish using only forward-type elementary triangles. Similarly, we could have started in the middle and extend in parallel both forward and backwards with appropriate types of elementary triangles, see Appendix \ref{app:ribs}. Backwards-type elementary triangles, analogously to Step \textbf{2.} stated above, act with the backwards auxiliary qudit.
 
@@ -341,7 +341,6 @@ The two types of triangles couple the two spaces in two different ways, for Type
 
 \jovan{do not use weak measurements, partial}
 \jovan{remove flavours}
-\jovan{legs or edges // edges}
 
 In this section, we will explain how we measure charge, the last element of our toolkit for probing topological order. The main idea of our protocol is to construct weak topological charge measurements that are easy to implement in terms of circuit depth. However, such weak measurements do not determine the charge completely, but when we combine a set of such weak measurement results we are able to deduce the full charge content of a region of our system.
 
@@ -357,7 +356,7 @@ The result of such measurement is a labelling, $f: E \rightarrow G$ from which w
 \jovan{Postpone the discussion about difficulty.}
 
 However, the problem lies in measuring the (off-diagonal) charge component of the full topological charge.
-This problem is implementing a controlled $A^{(g)}_s$ operator which needs a controlled group multiplication applied to all legs of $s$'s plaquette, i.e. $\ket{g}\ket{g_i} \rightarrow \ket{g}\ket{gg_i}$ for all $\ket{g_i}$ around the plaquette.
+This problem is implementing a controlled $A^{(g)}_s$ operator which needs a controlled group multiplication applied to all edges of $s$'s plaquette, i.e. $\ket{g}\ket{g_i} \rightarrow \ket{g}\ket{gg_i}$ for all $\ket{g_i}$ around the plaquette.
 This, in the case of non-abelian groups, such as $D_4$, is prohibitively expensive. 
 
 % Used to be a subsection: {Reduced Charge Measurement}
@@ -373,7 +372,7 @@ With Eq.~\eqref{eqn:tranfs} in mind, we propose the following protocol:
 
 \textbf{The algorithm} for the $H$-reduced charge measurement on a plaquette $p$:\begin{enumerate}
     \item Prepare an auxiliary qudit, $a$, encoding the elements of $H\subset G$, in an equal superposition over all elements, so that the joint total state of the system is: $$ \sum_{h \in H} \ket{h}_a\ket{\psi}_{G.F.}. $$
-    \item Apply a $a$-controlled $G$-multiplication unitary onto the legs touching the plaquette $p$:$$ \sum_{h \in H} \ket{h}_a\ket{\psi}_{G.F.} \rightarrow \sum_{h \in H} \ket{h}_a A^{(h)}_p \ket{\psi}_{G.F.}. $$
+    \item Apply a $a$-controlled $G$-multiplication unitary onto the edges touching the plaquette $p$:$$ \sum_{h \in H} \ket{h}_a\ket{\psi}_{G.F.} \rightarrow \sum_{h \in H} \ket{h}_a A^{(h)}_p \ket{\psi}_{G.F.}. $$
     \item Apply a unitary $$ U_a = \sum_{\chi_H}\sum_{i', j'}\sum_{h'\in H}  \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a $$ onto the auxiliary qudit $a$. Here the $\chi_H$ labels the irreducible representations of $H \subset G$, $\Gamma^{\chi_H}(h')$ are the representation matrices, with $i'$ and $j'$ being the vector indices for a given representation $\chi_H$.
     \item Measure the auxiliary qudit $a$.
 \end{enumerate}
@@ -509,7 +508,7 @@ It is easy to obtain the results of the first two experiments from the result of
 
 In this section, we will discuss the $D_4$ group element encoding and group operation circuits based around this encoding.
 
-\textbf{The Encoding.} The states of the gauge field are characterized by group element labelings of the legs of the graph.
+\textbf{The Encoding.} The states of the gauge field are characterized by group element labelings of the edges of the graph.
 In general, our degrees of freedom are group valued.
 The cardinality of $D_4$ is 8, hence we need three qubits to encode a group element.
 We chose the following map
@@ -588,10 +587,10 @@ Let us look at the circuits involved in the ribbon application protocol for two 
 These two representations are two-dimensional, anyons are non-abelian and have an internal state space spanned by vectors: $\{\ket{m; ++}, \ket{mr^2; ++}\}$ for $\Psi_m$ and $\{\ket{m; --}, \ket{mr^2; --}\}$ for $\tilde{\Phi}_m$.
 This space is encodable with a single auxiliary qubit for each anyon, $\ket{a}_{\text{aux}} \equiv \ket{m(r^2)^a; \sigma\sigma}$.
 
-The matter will act on this space every time an anyon crosses some leg $i$ via $U_{\text{GC}}: \ket{a}\ket{g}_i \rightarrow (A^{(g)}\ket{a})\ket{g}_i$, which we need to compile.
+The matter will act on this space every time an anyon crosses some edge $i$ via $U_{\text{GC}}: \ket{a}\ket{g}_i \rightarrow (A^{(g)}\ket{a})\ket{g}_i$, which we need to compile.
 The circuits for this operation are shown in Figure \ref{fig:genConj} (Left and Center).
 It is easy to check that these circuits agree with the representation matrices given in Table \ref{tab:somereps}. 
-The auxiliary space acts on the matter every time an anyon moves along a leg $i$ via $U_{\text{CM}}: \ket{a}\ket{g}_i \rightarrow \ket{a}\ket{m(r^2)^a g}_i$, the circuit which performs this operation is shown in Figure \ref{fig:genConj} (Right).
+The auxiliary space acts on the matter every time an anyon moves along a edge $i$ via $U_{\text{CM}}: \ket{a}\ket{g}_i \rightarrow \ket{a}\ket{m(r^2)^a g}_i$, the circuit which performs this operation is shown in Figure \ref{fig:genConj} (Right).
 
 \begin{figure}
 \begin{equation*}
@@ -649,7 +648,7 @@ The auxiliary space acts on the matter every time an anyon moves along a leg $i$
 \end{split}
 \end{equation*}
  
-    \caption{Circuits involved in anyon manipulation, ribbon operators. The first three qubits encode the physical, group valued, degree of freedom of the gauge field; the last qubit encodes the auxiliary bit representing the internal state of the (two-dimensional) anyon. Left: the conjugation unitary $U_{\text{C}}: \ket{c; ++}\ket{g}_i \rightarrow \ket{gcg^{-1}; ++}\ket{g}_i$ used when the pure flux $\Psi_m$ crosses a leg $i$. Middle: the generalized conjugation unitary $U_{\text{GC}}: \ket{c: --}\ket{g}_i \rightarrow (A^{(g)}\ket{c; --})\ket{g}_i$ used when a dyon $\tilde{\Phi}_m$ crosses a leg $i$. Right: multiplication unitary $U_{\text{CM}}: \ket{c; \sigma\sigma}\ket{g}_i \rightarrow\ket{c; \sigma\sigma}\ket{cg}$ used when either of the two mentioned anyons moves along a physical leg $i$. Note: $\ket{c; \sigma\sigma} = \ket{a}_{\text{aux}} \iff c = m(r^2)^a$, for $a\in\{0,1\}$. The Pauli-$S$ gate is a phase gate: $S = \text{diag}(1, i)$. \jovan{Neds cleaner wording.}}
+    \caption{Circuits involved in anyon manipulation, ribbon operators. The first three qubits encode the physical, group valued, degree of freedom of the gauge field; the last qubit encodes the auxiliary bit representing the internal state of the (two-dimensional) anyon. Left: the conjugation unitary $U_{\text{C}}: \ket{c; ++}\ket{g}_i \rightarrow \ket{gcg^{-1}; ++}\ket{g}_i$ used when the pure flux $\Psi_m$ crosses a edge $i$. Middle: the generalized conjugation unitary $U_{\text{GC}}: \ket{c: --}\ket{g}_i \rightarrow (A^{(g)}\ket{c; --})\ket{g}_i$ used when a dyon $\tilde{\Phi}_m$ crosses a edge $i$. Right: multiplication unitary $U_{\text{CM}}: \ket{c; \sigma\sigma}\ket{g}_i \rightarrow\ket{c; \sigma\sigma}\ket{cg}$ used when either of the two mentioned anyons moves along a physical edge $i$. Note: $\ket{c; \sigma\sigma} = \ket{a}_{\text{aux}} \iff c = m(r^2)^a$, for $a\in\{0,1\}$. The Pauli-$S$ gate is a phase gate: $S = \text{diag}(1, i)$. \jovan{Neds cleaner wording.}}
     \label{fig:genConj}
 \end{figure}
 
@@ -735,7 +734,7 @@ Borrowing the notation from Figure \ref{fig:latticeGS}, we can write the ground 
 \begin{equation}
     \ket{G.S.} = \sum_{\{g_{12}, g_{23}, \ldots\}} \ket{g_{12}}_1\ket{g_{12}}_2\ket{g_{34}}_3\ket{g_{34}}_4\ldots,
 \end{equation}
-where $\ket{g}_i$ is the state/label of the $i^{\text{th}}$ leg in Figure \ref{fig:latticeGS}.
+where $\ket{g}_i$ is the state/label of the $i^{\text{th}}$ edge in Figure \ref{fig:latticeGS}.
 
 The state in the above equation is not topologically ordered, in a sense that it does not have topological entanglement entropy.
 However, one can build up the needed entanglement once one starts proliferating anyons via ribbon operators.
@@ -883,7 +882,7 @@ A smarter alternative way is to condition the anyon flavour of the ribbon, a rib
 }
 \end{split}
 \end{equation*}
-\caption{The compiled conditional ribbon operators, where the flavour of the ribbon is conditioned on the state of the control bit $c$. Left: controlled multiply circuit used when anyon moves along a leg $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus\tilde{0}$. Center: controlled multiply circuit used when anyon moves along a leg $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus 0$, i.e. doing nothing. Right: controlled conjugation circuit used when anyon crosses along a leg $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus\tilde{0}$ or $0\oplus 0$. Note: ribbons can also be associated with reducible representations of $D(G)$ as long as they are closed, if we require a well-defined topological charge of the end state, the scheme for applying ribbon operators associated with the reducible representations is the same as for the irreducible representations.}
+\caption{The compiled conditional ribbon operators, where the flavour of the ribbon is conditioned on the state of the control bit $c$. Left: controlled multiply circuit used when anyon moves along a edge $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus\tilde{0}$. Center: controlled multiply circuit used when anyon moves along a edge $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus 0$, i.e. doing nothing. Right: controlled conjugation circuit used when anyon crosses along a edge $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus\tilde{0}$ or $0\oplus 0$. Note: ribbons can also be associated with reducible representations of $D(G)$ as long as they are closed, if we require a well-defined topological charge of the end state, the scheme for applying ribbon operators associated with the reducible representations is the same as for the irreducible representations.}
 \label{fig:flavCond}
 \end{figure}
 
