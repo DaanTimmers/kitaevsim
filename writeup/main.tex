@@ -212,48 +212,58 @@ In particular, if we have a gauge field state, $\ket{\chi, p; i}$, where each si
 where $i$ and $i'$ are the internal degrees of freedom of the charge\footnote{Note that the charge can be vector valued for non-abelian symmetry groups.}.
 This is the way a charged state transforms under gauge transformations in gauge field theory. Hence, we say that the plaquette terms generate gauge transformations.
 
-All other anyons are called dyons. They violate vertex and plaquette terms simultaneously, meaning they have a flux component associated with a vertex of the site $(v,p)$ and a charge component associated with its plaquette. In the case of non-abelian gauge groups, the two components are not separable.
+All other anyons are called dyons. They violate vertex and plaquette terms simultaneously, meaning they have a flux component associated with a vertex of the site $(v,p)$ and a charge component associated with its plaquette.
 
-\textbf{Fusion Algebra.} One of the main ways of manipulating these excitations is to combine them into composites, i.e. fusion. This can be done by moving them to a same site, or it can be done by coarse graining. By coarse graining, by which we mean measuring the topological charge, the label $(C, \chi)$, on a large region encompasing many sites.
+\jovan{Redo the Fusion Section}
 
-The charge content, a set of labels $(C, \chi)$ at each site, determines the state of the gauge field, but not completelly. There is a residual degeneracy associated with the dimension of the space each of the onsite representation acts on: 
+\textbf{Fusion Algebra.} To understand the distinction between the excitations of the Abelian and Non-Abelian gauge fields we will focus on the physical meaning of the internal dimension of the anyon.
+
+If the anyon has a label $(C, \chi)$ it is associated with that irreducible representation. This means that if this anyon is occupying a site $s$ the plaquette and vertex terms of that site will transform the state in accordance with that representation.
+
+The representation acts on a vector space of dimension $d = \text{dim}(C, \chi) = |C|\text{dim}(\chi)$. Hence if we specify that gauge field has a particular excitation at a particular site, this description must be degenerate in order to allow vertex and plaquette terms to be represented accordingly. This degeneracy is exactly $d$-fold and can be associated with a spin-like local degree of freedom of the anyon itself, internal space being spanned by the basis defined in the previous section, $\ket{c, i}$.
+
+Moreover if we completely specify the charge content of the gauge field, i.e  anyon labels at every site, this will not uniquely determine the gauge field state, but only a degenerate space of dimension
 \begin{equation}
-D = \text{dim}\bigotimes_s(C_s, \chi_s)=\prod_s \text{dim}(C_s, \chi_s) = \prod_s d_s. \label{eqn:degen}
+	D = |\mathcal{H_{\text{deg.}}}| = \prod_s d_s.
 \end{equation}
-This can be explained locally as stemming from the local spin-like degree of freedom of anyons at each site, vaccum anyons included. We will call $$d = \text{dim}(C, \chi) = |C|\text{dim}(\chi),$$ the internal dimension of the anyon of type $(C, \chi)$.
+Moreover we can then associate the degenerate space $\mathcal{H_\text{fusion}}$ with the product of internal spaces of anyons at each site $$\mathcal{H_{\text{fusion}}} \equiv \bigotimes_s (C_s, \chi_s).$$
 
-This, however, missed an important point. There is an algebra associated with the tensor product of representation, anyon labels:
+This description, however, there is an algebra associated with the tensor product of representations, analogous to the Glebsch-Gordan (GC) decomposition of tensor product of representations into tensor sum of irreducible representations. In fact, for pure charges this algebra is the GC decomposition
+\begin{equation}
+\begin{split}
+	(\{e\}, \chi_i)\otimes (\{e\}, \chi_j) = \bigoplus_k n^k_{ij} (\{e\}, \chi_k) \text{, for}\\
+	\chi_i\otimes\chi_j = \bigoplus_k n^k_{ij} \chi_k.
+\end{split}
+\end{equation}
+
+This is what anyon fusion is, in the case of excitations of the quantum double model. 
+
+For other anyons we write
 \begin{equation}
 	a \otimes b = \bigoplus_{c}N^c_{ab} c,\label{eqn:fuse} 
 \end{equation}
-with $a$, $b$ and $c$ going over a set of all anyon labels $(C, \chi)$. This algebra is analogous to the Clebsch-Gordan decomposition of tensor products of linear representation of groups into a tensor sum of irreducible representations.
-The \textit{integer} coefficients $N_{ab}^c$ number how many instances of the irreducible representation $c$ appear in the tensor product of irreducible representations $a$ and $b$.
+with $a$, $b$ and $c$ going over a set of all anyon labels $(C, \chi)$. See Appendix \ref{app:fusion} for explicit evaluation of the algebra/decomposition coefficients $N_{ab}^c$ for the representations of the quantum double.
 
-How this algebra manifests physically, in terms of fusion of anyons, is that if we have two anyons with labels $a$ and $b$ and we fuse them, upon measuring the topological charge we can detect any charge $c$ for which $N_{ab}^c\neq 0$.
-In fact, if the joint state of anyons $a$ and $b$ is such that it is within one of the possible irreducible subspaces $c_0$, the charge upon fusion will be $c_0$.
+How this manifests physically is that if we have anyons $a$ and $b$ at two sites and we fuse them and measure the topological charge, anyon label, at the site of fusion we may get any label $c$ for which $N_{ab}^c \neq 0$.
 
-Let us use the algebra of Eq.~\eqref{eqn:fuse} to simplify Eq.~\eqref{eqn:degen} in the case of four sites carrying identical charges $a$
+If the gauge group is Abelian that implies $|C|=1$ for all conjugacy classes and $\text{dim}(\chi) = 1$ for all group representations, i.e. all \emph{algebra} representations are one-dimensional, $d = 1$. There is no degeneracy once the charge content of a gauge field is fixed.
+Looking at the dimensions of the LHS and RHS of Eq.~\eqref{eqn:fuse}, we see that for every $a$ and $b$ there is only one $c$ for which $N_{ab}^c$ is nonzero, i.e. one. The fusion of anyons is unambiguous. This fact, for example, implies that splitting of charge and flux components of an Abelian dyon is well-defined since we can always recombine it and get the charge we dyon we started with. This is not the case for Non-Abelian dyons, $d>1$.
+
+Let us now use the algebra of Eq.~\eqref{eqn:fuse} to simplify the form of the $\mathcal{H_{\text{deg.}}}}$. For this example, we will take the charge content to be four anyon of the same type $a$ occupying four sites
 \begin{equation}
-\text{dim}(((a\otimes a)\otimes a)\otimes a) = \sum_{c, d, e} N^c_{aa}N^d_{ca}N^e_{da}\text{dim}(e), \label{eqn:tree_bas}
+	\mathcal{H}_{\text{deg.}} = \bigoplus_{c, d, e} N_{aa}^c N_{ca}^d N_{da}^ee, 
 \end{equation}
-in addition let us also assume we have measured the total charge and got $e\in\{(\{e\}, \mathbb{1})\} = \{0\}$, i.e. there is no total topological charge.
+let us also assume that we have measured zero total topological charge, i.e. $e$ is fixed to be $(\{e\}, \mathbb{1}) = 0$.
 
-\jovan{Maybe put a picture of a fusion three?}
+This equation informs a choice of basis that has nothing to do with the local spin-like variables and is spanned by all fusion outcomes $(c, d)$ for which none of the above mentioned algebra coefficient vanish, $$\mathcal{H}_{\text{deg.}} = \mathcal{H}_{\text{fusion}} = \text{span}\{\ket{c,d}\},$$
+hence this space is also called the fusion space, and this basis, fusion tree basis.
+Note that addition of sites occupied by vacuum does nothing since vacuum fuses trivially with everything, $a\otimes0 = a$.
 
-In this case, the degeneracy is completely determined by the algebra coefficients and a suitable basis for this degenerate space is $\ket{b,c,d}$ for triples $(b,c,d)$ where none of the coefficients in Eq.~\eqref{eqn:tree_bas} vanish.
+\jovan{assumed def in the intro}
+Braiding anyons acts on this degenerate space, hence for braiding to have any computational power, the degeneracy must be non-trivial and anyons Non-abelian. See Appendix \ref{app:braid} for the treatment of braiding of quantum double anyons in both local and fusion basis.
 
-Anyon braiding, i.e. moving anyons, acts on this degenerate space and the action is expressed most naturally in this global basis.
 
-Here we arrive at the main difference between the case where the gauge group is commutative, Abelian Theories, and non-commutative, Non-Abelian Theories.
 
-In the Abelian case, all group elements are in their own conjugacy class with their centres being the entire group whose every irreducible representation is one-dimensional. This implies that all $D(G)$ representations are also one-dimensional. 
-
-Looking at the dimensions of the LHS and the RHS in the Eq.~\eqref{eqn:fuse} we see that for each $a
-$ and $b$ there exists exactly one $c$ for which $N_{ab}^c$ is non-zero, i.e. one.
-
-This furthermore, implies that there is no degeneracy once we have specified the charges at each site and that the action of braiding can only introduce a phase, i.e. it has no computational power.
-
-Non-Abelian theories, on the other had, are characterised by non-unique fusion and non-trivial braiding, both phenomenologies we show are detectable with the experiments described in this paper.
 
 \subsection{Ribbon Operators}
 
