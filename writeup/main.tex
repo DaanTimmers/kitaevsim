@@ -262,7 +262,9 @@ How this manifests physically is that if we have anyons $a$ and $b$ at two sites
 The gauge group being Abelian implies $|C|=1$ for all conjugacy classes and $\text{dim}(\chi) = 1$ for all group representations, i.e. all \emph{algebra} representations are one-dimensional, $d = 1$. There is no degeneracy once the charge content of a gauge field is specified and the fusion is unambigous. 
 We can see that by looking at the dimensions of the LHS and RHS of Eq.~\eqref{eqn:fuse}, for every $a$ and $b$ there is only one $c$ for which $N_{ab}^c$ is nonzero, i.e. one.
 
-For example, let us take the charge content of the gauge filed to be four anyon of the same type $a$ occupying four sites and look at the form of the degenerate subspace $\mathcal{H_{\text{deg.}}}}$.
+For Non-Abelian gauge groups, there are always one-dimensional representations associated with Abelian anyons of the Non-Abelian quantum double model. Majority of representations, however, are have dimension larger than one and are associated with the Non-Abelian anyons. It is the Non-Abelian anyons that contribute to the dimension of the degenerate subspace with a certain charge content. 
+
+As an example, let us take the charge content of the gauge filed to be four Non-Abelian anyons of the same type $a$ occupying four sites and look at the form of the degenerate subspace $\mathcal{H_{\text{deg.}}}}$.
 Using the algebra of Eq.~\eqref{eqn:fuse} to simplify the form of the subspace we get 
 \begin{equation}
 	\mathcal{H}_{\text{deg.}} = \bigoplus_{c, d, f} N_{aa}^c N_{ca}^d N_{da}^ff,\label{eqn:decomp} 
@@ -270,21 +272,23 @@ Using the algebra of Eq.~\eqref{eqn:fuse} to simplify the form of the subspace w
 also assuming that we have measured zero total topological charge of the four sites, i.e. $f$ is fixed to be $(\{e\}, \mathbb{1}) = 0$.
 
 The space has $D = \sum_{c, d, f} N_{aa}^c N_{ca}^d N_{da}^0$ one-dimensional sectors, each spanned by the one vector in the trivial representation, $\ket{e,0}$. The sector are labeled by the fusion outcomes $(c, d)$ for which none of the algebra coefficients vanish. Therefore, this space is also called the fusion space and a its natural basis the fusion tree basis
-$$\mathcal{H}_{\text{deg.}} = \mathcal{H}_{\text{fusion}} = \text{span}\{\ket{c,d; e, 0}\}.$$
+$$\mathcal{H}_{\text{deg.}} = \mathcal{H}_{\text{fusion}} = \text{span}_{(c,d)}\{\ket{c,d; e, 0}\}.$$
 
 Note that this description has nothing to do with the local spin-like variables we began with and is completely determined by the fusion algebra.
 
 Also note that addition of sites occupied by the vacuum doesn't change anything since vacuum fuses trivially with other representations, $a\otimes0 = a$.
 
 \jovan{assumed def in the intro}
-Lastly, braiding of anyons doesn't change the charge content, hence, it must act within this degenerate space. Therefore, the degeneracy must be non-trivial and anyons Non-abelian for their braiding to have any computational power and its action is best described in the fusion basis in terms of topological variables such as $F$- and $R$-symbols \cite{cui2018topological, Kitaev_2003}. See Appendix \ref{app:braid} for the treatment of braiding of quantum double anyons in both local and fusion basis.
+Finally, to answer why studying the space $\mathcal{H}_{\text{fusion}}$ is important in the first place, we look at the action of \emph{anyon braiding}. Braiding doesn't change the charge content, hence, it must transform states only within this degenerate space. Therefore, the degeneracy must be non-trivial, i.e. anyons Non-abelian for their braiding to have any computational power. 
+
+The braiding action is best described in the global fusion tree basis in terms of topological variables such as the $F$- and $R$-symbols \cite{cui2018topological, Kitaev_2003}. See Appendix \ref{app:braid} for the treatment of braiding of quantum double anyons in both local spin-like and fusion tree basis. \jovan{Needs reform.}
 
 
 \subsection{Ribbon Operators}
 
-In the following text, we will explain how to create and manipulate the excitations we have classified above.
+In the following text, we will explain how to create and move the anyons, i.e. the excitations we have classified above.
 
-The excitations are always created in pairs from the vacuum. 
+Anyons are always created in pairs from the vacuum. 
 
 To see why, imagine we take the ground state on a 2-sphere, the state is a superposition of all assignments of group elements to edges that do not violate the Gauss' law. Now we shift the label of one of the edges, $e_0$, by some constant group element. The superposition is now made up from different assignments, which only differ on the edge $e_0$. This action disturbs two vertex operators on each end of the edge $e_0$, i.e. a pair of pure fluxes have been created.
 
@@ -292,33 +296,31 @@ Analogously, there are operations on the edge $e_0$ that disturbs two plaquette 
 
 Moreover, for any anyon, $(C, \chi)$, and any path in the graph between two sites, see Figure \ref{fig:rib_exampl}, there is an operator that creates a pair of said anyons at the end sites. These paths are called ribbons and the associated operators ribbon operators, which themselves are labelled by the anyons they create, $(C, \chi)$.
 
-If the ribbons are closed and contractable, the associated ribbon operators leave the ground state unchanged. Moreover, they span the loop operator algebra that leave the ground state invariant, it is in that way that the quantum double ground state knows about the quasiparticle spectrum.
+If the ribbons are closed and contractable, the associated ribbon operators leave the ground state unchanged. Moreover, they span the loop operator algebra that leave the ground state invariant, it is in that way that the quantum double ground state knows about the anyon spectrum.
 
-We will not explain the construction of ribbon operators themselves just how to apply them to a state, for a detailed derivation see Ref \cite{Kitaev_2003,cui2018topological}. 
+We will not explain the derivation of the ribbon operators themselves, see Ref \cite{Kitaev_2003,cui2018topological}, just how to apply them to a state.
 
-\jovan{General, add to introduction: These operators represent a planar diagram algebra, i.e. a braiding group representation generated by a specific Braiding Tensor Category (BTC) and hence were conceived as a model of a system that can perform fault-tolerant quantum computing by the means of braiding anyons.} 
+\jovan{General, add to introduction: These operators represent a planar diagram algebra, i.e. a braiding group representation generated by a specific Braiding Tensor Category (BTC) and hence were conceived as a model of a system that can perform fault-tolerant quantum computing by the means of braiding anyons.
+However, even though the braid group itself is universal its image on this planar diagram algebra is finite, hence non-universal \cite{cui2018topological}. For some gauge groups it can be made universal by the addition of measurements \cite{Cui_2015}.}
 
-However, even though the braid group itself is universal its image on this planar diagram algebra is finite, hence non-universal \cite{cui2018topological}. For some gauge groups it can be made universal by the addition of measurements \cite{Cui_2015}.
+The ribbon operators are not unitary in general. If the anyons have a dimension $d$ larger than one, the operators that create and manipulate them are non-local projectors. This is a problem when compiling unitary quantum circuits for braiding Non-Abelian anyons, we will need measurements. 
 
-The ribbon operators are not unitary in general. If the anyons have an internal dimension larger than one, the operators that create and manipulate the excitations are non-local projectors. This is a problem when compiling unitary quantum circuits for braiding anyons. In Ref. \cite{andersen2022observation} the group overcame this issue by the means of unitary lattice deformations, unitarily transforming from a state with a set of nonabelian anyons on one graph to another state with the same anyon content but defined on another graph, hence they were able to move the internal dimension-1/2 (majorana fermions) anyons unitarily. However, these are extrinsic and static lattice defects on top of a theory that is an Abelian $\mathbb Z_2$ gauge theory, hence, the nature of their nonabelian anyons is different from intrinsic gauge field excitations.
+In Ref. \cite{andersen2022observation} the group overcame this issue by means of unitary lattice deformations, unitarily transforming from a state with a set of nonabelian anyons on one graph to another state with the same anyon content but defined on a different graph, hence they were able to move the Non-Abelian Majorana fermions unitarily. However, these are extrinsic and static lattice defects on top of a theory that is an Abelian $\mathbb Z_2$ gauge theory, hence, the nature of their nonabelian anyons is different from intrinsic gauge field excitations.
 
 \subsubsection{Application Scheme}
 
 The protocol starts by identifying the anyon type, i.e. the representation associated with them. 
 
-Say we have a ribbon of type $(C, \chi)$ whose anyons have dimension $d = \text{dim}(C, \chi)$. There are a couple of interpretations of this dimension $d$.
+Say we have a ribbon of type $(C, \chi)$ whose anyons have dimension $d = \text{dim}(C, \chi)$.
 
-The simpler one is that the anyons carry an internal spin-like degree of freedom encoded in the gauge field itself. 
+As we mentioned, the pair of anyons define a $d^2$-dimensional degenerate subspace of the gauge field Hilbert space that encodes the outcomes of their fusion. This encoding is increasingly non-local as we separate the anyons, this being the main idea of topological quantum computation with anyons.
 
-The more involved one is that the fusion outcomes span a $d\times d$ space of the representation $(C, \chi) \otimes (C, \chi)$, individual fusion outcomes labelled by the irreducible subspaces in the Clebsch-Gordan decomposition of this product of representations. All of this structure is encoded in the gauge field but non-locally once the anyons are separated, this is the main idea of fault-tolerant topological quantum computing with anyons.
 
-\jovan{Not as we mode them! Reformulate.}
-
-We, however, require storing this information locally since we need to do measurements on this space as we move the anyons. This is done by keeping one auxiliary qudit per anyon/end of the ribbon.
+We, however, require storing this information locally since we need to do measurements on this space to create and move anyons. This is done by keeping one auxiliary qudit per anyon/end of the ribbon.
 
 Geometrically, every ribbon is made up from two main kinds of elementary triangles, see Figure \ref{fig:rib_exampl}. If we imagine that appending elementary triangles onto a ribbon is moving the anyons at the ribbon's end by elongating the ribbon, the two \textit{Types} are:\begin{itemize}
-    \item[I)] Triangles whose side follow the edge it touches, whose edges include two vertices and one plaquette. These triangles move the flux component of the anyon from the first vertex to the second vertex,
-    \item[II)] Triangles which cross the edge it touches, whose edges include two plaquettes and one vertex. these triangles move the charge component of the anyon from the first plaquette to the second plaquette.
+    \item[I)] Triangles whose side follow the edge they touch, whose points include two vertices and one plaquette. These triangles move the flux component of the anyon from the first vertex to the second vertex,
+    \item[II)] Triangles which cross the edge they touch, whose points include two plaquettes and one vertex. these triangles move the charge component of the anyon from the first plaquette to the second plaquette.
 \end{itemize}
 
 \jovan{Remove the forward references.}
@@ -439,9 +441,13 @@ We may repeat the procedure using different subgroups of $G$ to gather further p
 
 This relies on partial orthogonality of character tables of a group and its subgroup, and is best explored in the specific cases below.
 
+\section{$D_4$-Lattice Gauge Theory}
+
+\jovan{Add a section on D4 LGT and specifics charge measurements}
+
 \subsubsection{Specific example of $D_4$}
 
-\jovan{Move this is to the next section.}
+\jovan{Move this is to the next section and \textbf{reformulate} to fit in!}
 
 In this section, we explore the reduced charge measurement in the case of $D_4$ gauge group.
 Limiting ourselves to only pure charges, remembering that the flux component can be directly read out, we have five possibilities for topological charge on a site: $0$, $\Sigma_r$, $\Sigma_m$, $\Sigma_{mr}$ and $\Sigma_{\epsilon}$. Please consult the Appendix \ref{app:reps} for the list of all representations of $D(D_4)$.
@@ -510,9 +516,6 @@ Now imagine we have performed all three measurement and got a set of labels $\{(
 %\caro{We are more interested in the inverse direction, namely, the result $\{(1,-1); (1,-1); 1\}$ is only compatible with charge $\Sigma_r$.} Agreed, better phrasing.
 
 The main advantage of doing these three measurements instead of a full charge measurement is twofold, both the controlled multiply unitary $U_{\text{CM}}: \ket{h, g} \rightarrow \ket{h, hg}$ and the decoupling unitary $U_a$ are much simpler if we restrict ourselves to $h \in H \subset G$.
-
-
-\jovan{Add a section on D4 and charge measurements}
 
 \section{Braiding Experiments and Numerical Results}
 
