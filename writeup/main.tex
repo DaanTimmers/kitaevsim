@@ -150,7 +150,13 @@ To get a better understanding of the latter, we look at the algebra spanned by t
 
 \jovan{Soften the approach to formalism by the example of Toric code excitations.}
 
+Site being occupied by an excitation means that at least one of the conditions in Eq.~\eqref{eqn:ground_state} for that site is violated. In the example of the toric code, $G = \mathbb{Z}_2 = \{0, 1\}$, we have three kinds of excitations. 
 
+These are electric, magnetic and fermionic excitations. The state with an electric excitation at a site $s$ is odd under the action of $A_s^{(1)}$, but is fixed by $B_s^{(0)}$. The state with a magnetic excitation at a site $s$ is annihilated by $B_s^{(0)}$, but fixed under both $A_s^{(g)}$ and by $B_s^{(1)}$. Finally, the state with the fermion at a site $s$ breaks both $A$- and $B$-type conditions, in fact, it is just an electric and a magnetic excitation populating the plaquette and vertex of the site respectively.
+
+
+In the case of Non-Abelian gauge groups, this notion of breaking an $A$-type or a $B$-type condition becomes much more involved due to the more complicated operator algebra being induced by the more complicated group multiplication.
+ 
 Operators on different sites commute trivially, while on the same site we have 
 \begin{equation}
     \begin{split}
@@ -162,10 +168,13 @@ Operators on different sites commute trivially, while on the same site we have
 
 This is the on-site representation of the quantum double algebra of a finite group $G$, $D(G)$. The algebraic relations in Eq.~\eqref{eqn:alg} do not depend on the exact grouping of plaquettes and vertices into sites.
 
-The on-site excitations are labelled by the irreducible representations of this algebra \cite{cui2018topological, Kitaev_2003}. In particular, the ground state is the state with the trivial (charge free) representation on each site. 
+The on-site excitations are labelled by the irreducible representations of this algebra \cite{cui2018topological, Kitaev_2003}. In particular, the ground state is the state with the trivial (charge free) representation on each site.
+
+In the case of the toric code, the operator algebra is small, four dimensional, and commutative. It has only four irreducible representations, which we mentioned above: vacuum, electric, magnetic and fermionic.
+ 
 %\caro{At some point we need to introduce the notion of pure charge, pure flux and a dyon, we should state the simplified expressions for pure charge and pure flux, and the notion of generalized conjugation in the dyon case, as we use this later on.}
 
-The irreducible representations of this algebra are labelled by two objects, a conjugacy class $C$ of the group $G$ and an irreducible representation $\chi$ of the centralizer, $Z(r)$, of the class representative $r \in C$. The vector space on which $(C, \chi)$ acts is spanned by a basis $\ket{\mu} = \ket{c, i}$, where $c \in C$ and $i \in \{1, 2, \ldots, \text{dim}\chi\}$, i.e. the first index goes over the conjugacy class elements while the second goes over the vector indices of the irreducible representation $\chi$.
+More generally, the irreducible representations of this algebra are labelled by two objects, a conjugacy class $C$ of the group $G$ and an irreducible representation $\chi$ of the centralizer, $Z(r)$, of the class representative $r \in C$. The vector space on which $(C, \chi)$ acts is spanned by a basis $\ket{\mu} = \ket{c, i}$, where $c \in C$ and $i \in \{1, 2, \ldots, \text{dim}\chi\}$, i.e. the first index goes over the conjugacy class elements while the second goes over the vector indices of the irreducible representation $\chi$.
 
 
 The action of the algebra generators on this vector space is
@@ -195,7 +204,7 @@ Other important examples are pure charges and fluxes. A pure flux is labelled by
         A^{(g)}_{\mu\nu} = \bra{c, 0} A^{(g)} \ket{c', 0} = \delta_{c,gc'g^{-1}}.
     \end{split}
 \end{equation}
-Pure flux excitations only violate the vertex term.
+Pure flux excitations only violate the vertex term, the $B$-term.
 
 Pure charge excitations are labelled by the group identity and a representation of the group $G$ itself, $(\{e\}, \chi)$. Its basis vectors are $\ket{e, i}$ for $i \in \{1, 2, \ldots, \text{dim}\chi\}$, with
 \begin{equation}
@@ -204,7 +213,7 @@ Pure charge excitations are labelled by the group identity and a representation 
         A^{(g)}_{\mu\nu} = \bra{e, i} A^{(g)} \ket{e, i'} = \Gamma^\chi_{ii'}(g).
     \end{split}
 \end{equation}
-Pure charge excitations only violate the plaquette term.
+Pure charge excitations only violate the plaquette term, the $A$-term.
 
 
 In particular, if we have a gauge field state, $\ket{\chi, p; i}$, where each site houses a trivial representation except for one, $(v, p)$, which is occupied by a pure charge $(\{e\}, \chi)$, this state satisfies all the constraints in Eq.~\eqref{eqn:ground_state} except for
@@ -214,23 +223,25 @@ In particular, if we have a gauge field state, $\ket{\chi, p; i}$, where each si
 where $i$ and $i'$ are the internal degrees of freedom of the charge\footnote{Note that the charge can be vector valued for non-abelian symmetry groups.}.
 This is the way a charged state transforms under gauge transformations in gauge field theory. Hence, we say that the plaquette terms generate gauge transformations.
 
-All other anyons are called dyons. They violate vertex and plaquette terms simultaneously, meaning they have a flux component associated with a vertex of the site $(v,p)$ and a charge component associated with its plaquette.
+All other excitations are called dyons. They violate vertex and plaquette terms simultaneously, meaning they have a flux component associated with a vertex of the site $(v,p)$ and a charge component associated with its plaquette, but unlike the toric code fermion cannot be broken down to a combination of the pure charge and the pure flux sitting next to one another.
 
 \jovan{Redo the Fusion Section}
 
-\textbf{Fusion Algebra.} To understand the distinction between the excitations of the Abelian and Non-Abelian gauge fields we will focus on the physical meaning of the internal dimension of the anyon.
+\textbf{Fusion Algebra.} To understand the distinction between the excitations of the Abelian and Non-Abelian gauge fields we will focus on the physical meaning of the internal dimension of these excitations, i.e. the anyons of the quantum double model.
 
-If the anyon has a label $(C, \chi)$ it is associated with that irreducible representation. This means that if this anyon is occupying a site $s$ the plaquette and vertex terms of that site will transform the state in accordance with that representation.
+If we have a gauge field state with an anyon of type $(C, \chi)$ at a site $s$, the plaquette and vertex terms of that site will transform this state in accordance with that algebra representation.
 
-The representation acts on a vector space of dimension $d = \text{dim}(C, \chi) = |C|\text{dim}(\chi)$. Hence if we specify that gauge field has a particular excitation at a particular site, this description must be degenerate in order to allow vertex and plaquette terms to be represented accordingly. This degeneracy is exactly $d$-fold and can be associated with a spin-like local degree of freedom of the anyon itself, internal space being spanned by the basis defined in the previous section, $\ket{c, i}$.
+This implies that specifying the type and location of this anyon doesn't uniquely fix the gauge field state. There is a $d$-dimensional degenerate subspace of the total Hilbert space that is associated with this anyon occupying this site. The dimension of this subspace is the dimension of the representation, $d = \text{dim}(C, \chi) = |C|\text{dim}(\chi)$, in order for the vertex and plaquette terms to represent the algebra on this subspace accordingly.
 
-Moreover if we completely specify the charge content of the gauge field, i.e  anyon labels at every site, this will not uniquely determine the gauge field state, but only a degenerate space of dimension
+This $d$-fold degeneracy can be associated with a spin-like local degree of freedom of the anyon encoded in the gauge field, the internal space of which is spanned by the basis defined in the previous section, $\ket{c, i}$.
+
+Moreover, completely specifying the charge content of the gauge field, i.e. labels of anyons sitting at each site of the lattice (vacuum anyons includes), $\{(C_s, \chi_s)\}_s$, we specify a total degenerate subspace of the total Hilbert space which is given by the product of the internal spaces of each anyon
 \begin{equation}
-	D = |\mathcal{H_{\text{deg.}}}| = \prod_s d_s.
+	\mathcal{H}_{\text{deg.}} = \bigotimes_s (C_s, \chi_s).
 \end{equation}
-Moreover we can then associate the degenerate space $\mathcal{H_\text{fusion}}$ with the product of internal spaces of anyons at each site $$\mathcal{H_{\text{fusion}}} \equiv \bigotimes_s (C_s, \chi_s).$$
 
-This description, however, there is an algebra associated with the tensor product of representations, analogous to the Glebsch-Gordan (GC) decomposition of tensor product of representations into tensor sum of irreducible representations. In fact, for pure charges this algebra is the GC decomposition
+A more powerful alternative to this local description can be derived if we notice that
+there is an algebra associated with the tensor product of representations, analogous to the Clebsch-Gordan (CG) decomposition of tensor product of linear representations of a group into tensor sum of irreducible representations. In fact, for pure charges this algebra is exactly given by the CG decomposition
 \begin{equation}
 \begin{split}
 	(\{e\}, \chi_i)\otimes (\{e\}, \chi_j) = \bigoplus_k n^k_{ij} (\{e\}, \chi_k) \text{, for}\\
@@ -244,27 +255,29 @@ For other anyons we write
 \begin{equation}
 	a \otimes b = \bigoplus_{c}N^c_{ab} c,\label{eqn:fuse} 
 \end{equation}
-with $a$, $b$ and $c$ going over a set of all anyon labels $(C, \chi)$. See Appendix \ref{app:fusion} for explicit evaluation of the algebra/decomposition coefficients $N_{ab}^c$ for the representations of the quantum double.
+with $a$, $b$ and $c$ going over a set of anyon labels $(C, \chi)$. See Appendix \ref{app:fusion} for explicit evaluation of the algebra/decomposition coefficients $N_{ab}^c$ for the representations of the quantum double algebra.
 
-How this manifests physically is that if we have anyons $a$ and $b$ at two sites and we fuse them and measure the topological charge, anyon label, at the site of fusion we may get any label $c$ for which $N_{ab}^c \neq 0$.
+How this manifests physically is that if we have anyons $a$ and $b$ at two sites and we fuse them and measure the topological charge, anyon label, at the site of the fusion we may get any label $c$ for which $N_{ab}^c \neq 0$.
 
-If the gauge group is Abelian that implies $|C|=1$ for all conjugacy classes and $\text{dim}(\chi) = 1$ for all group representations, i.e. all \emph{algebra} representations are one-dimensional, $d = 1$. There is no degeneracy once the charge content of a gauge field is fixed.
-Looking at the dimensions of the LHS and RHS of Eq.~\eqref{eqn:fuse}, we see that for every $a$ and $b$ there is only one $c$ for which $N_{ab}^c$ is nonzero, i.e. one. The fusion of anyons is unambiguous. This fact, for example, implies that splitting of charge and flux components of an Abelian dyon is well-defined since we can always recombine it and get the charge we dyon we started with. This is not the case for Non-Abelian dyons, $d>1$.
+The gauge group being Abelian implies $|C|=1$ for all conjugacy classes and $\text{dim}(\chi) = 1$ for all group representations, i.e. all \emph{algebra} representations are one-dimensional, $d = 1$. There is no degeneracy once the charge content of a gauge field is specified and the fusion is unambigous. 
+We can see that by looking at the dimensions of the LHS and RHS of Eq.~\eqref{eqn:fuse}, for every $a$ and $b$ there is only one $c$ for which $N_{ab}^c$ is nonzero, i.e. one.
 
-Let us now use the algebra of Eq.~\eqref{eqn:fuse} to simplify the form of the $\mathcal{H_{\text{deg.}}}}$. For this example, we will take the charge content to be four anyon of the same type $a$ occupying four sites
+For example, let us take the charge content of the gauge filed to be four anyon of the same type $a$ occupying four sites and look at the form of the degenerate subspace $\mathcal{H_{\text{deg.}}}}$.
+Using the algebra of Eq.~\eqref{eqn:fuse} to simplify the form of the subspace we get 
 \begin{equation}
 	\mathcal{H}_{\text{deg.}} = \bigoplus_{c, d, f} N_{aa}^c N_{ca}^d N_{da}^ff,\label{eqn:decomp} 
 \end{equation}
-let us also assume that we have measured zero total topological charge, i.e. $f$ is fixed to be $(\{e\}, \mathbb{1}) = 0$.
+also assuming that we have measured zero total topological charge of the four sites, i.e. $f$ is fixed to be $(\{e\}, \mathbb{1}) = 0$.
 
-This equation informs a choice of basis that has nothing to do with the local spin-like variables and is spanned by all fusion outcomes $(c, d)$ for which none of the algebra coefficients in Eq.~\eqref{eqn:decomp} vanish, $$\mathcal{H}_{\text{deg.}} = \mathcal{H}_{\text{fusion}} = \text{span}\{\ket{c,d; e, 0}\},$$
-hence this space is also called the fusion space, and this basis, the fusion tree basis. The second pair of indices label the one state in the vacuum representation and can be dropped.
-Note that addition of sites occupied by vacuum does nothing since vacuum fuses trivially with everything, $a\otimes0 = a$.
+The space has $D = \sum_{c, d, f} N_{aa}^c N_{ca}^d N_{da}^0$ one-dimensional sectors, each spanned by the one vector in the trivial representation, $\ket{e,0}$. The sector are labeled by the fusion outcomes $(c, d)$ for which none of the algebra coefficients vanish. Therefore, this space is also called the fusion space and a its natural basis the fusion tree basis
+$$\mathcal{H}_{\text{deg.}} = \mathcal{H}_{\text{fusion}} = \text{span}\{\ket{c,d; e, 0}\}.$$
+
+Note that this description has nothing to do with the local spin-like variables we began with and is completely determined by the fusion algebra.
+
+Also note that addition of sites occupied by the vacuum doesn't change anything since vacuum fuses trivially with other representations, $a\otimes0 = a$.
 
 \jovan{assumed def in the intro}
-Braiding anyons acts on this degenerate space, hence for braiding to have any computational power, the degeneracy must be non-trivial and anyons Non-abelian. See Appendix \ref{app:braid} for the treatment of braiding of quantum double anyons in both local and fusion basis.
-
-
+Lastly, braiding of anyons doesn't change the charge content, hence, it must act within this degenerate space. Therefore, the degeneracy must be non-trivial and anyons Non-abelian for their braiding to have any computational power and its action is best described in the fusion basis in terms of topological variables such as $F$- and $R$-symbols \cite{cui2018topological, Kitaev_2003}. See Appendix \ref{app:braid} for the treatment of braiding of quantum double anyons in both local and fusion basis.
 
 
 \subsection{Ribbon Operators}
