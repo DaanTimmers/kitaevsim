@@ -506,65 +506,49 @@ $-1$ & $1$   & $-1$            & $1$             & $-1$                         
 $-i$ & $1$   & $i$            & $-1$             & $i$                                  \\ \hline
 \end{tabular}
 \begin{tabular}{|l|llll|}\hline
-  $H_m$ & $e$ & $m$ & $r^2$ & $mr^2$ \\ \hline
+  $H_m (H_{mr})$ & $e$ & $m(mr)$ & $r^2$ & $mr^2(mr^3)$ \\ \hline
 $(1,1)$ & $1$   & $1$            & $1$             & $1$                                  \\ 
 $(1,-1)$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
 $(-1,1)$ & $1$   & $1$            & $-1$             & $-1$                                  \\ 
 $(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                                  \\ \hline
 \end{tabular}
-\begin{tabular}{|l|llll|}\hline
-  $H_{mr}$ & $e$ & $mr$ & $r^2$ & $mr^3$ \\ \hline
-$(1,1)$ & $1$   & $1$            & $1$             & $1$                                  \\ 
-$(1,-1)$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
-$(-1,1)$ & $1$   & $1$            & $-1$             & $-1$                                  \\ 
-$(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                                  \\ \hline
-\end{tabular}
-\caption{Character tables of relevant subgroups of $D_4$.}
-\label{tab:red_ch}
+\caption{Character tables of relevant subgroups of $D_4$. The groups $H_m$ and $H_{mr}$ are isomorphic.}
+\label{tab:char_sub}
 \end{table}
 
 The task of listing all of the irreducible representations of $D(D_4)$ and their dimensions from this data is straightforward. There are $2 \times 5  + 3 \times 4 = 22$ irreducible representations, i.e. the types of anyons in the $D_4$ quantum double model.
 
-Eight of them are one-dimensional, i.e. Abelian, while the rest are two-dimensional. 
+Eight of them are one-dimensional, i.e. Abelian, while the rest are two-dimensional. Other than vacuum, four of them are pure charges and four pure fluxes. For dyons with the $\mathcal{C}_{r^2}$ flux component we say that they have a trivial flux, the flux can be factored out, just like in the case of the toric code fermion. This is stemming from the fact that $r^2$ commutes with all group elements, just like the identity. 
+
+\textbf{Anyon content of $D(D_4)$.} The vacuum and the trivial flux we label as $0 \equiv (\mathcal{C}_e, 1)$ and $0 \equiv (\mathcal{C}_{r^2}, 1)$ respectively. The pure charges and dyons with trivial flux we label respectively as $\Sigma_{\chi} \equiv (\mathcal{C}_e, \chi)$ and $\tilde{\Sigma}_{\chi} \equiv (\mathcal{C}_{r^2}, \chi)$, with $\chi$ being one of the nontrivial irreducible representations of $D_4$.
+
+Nontrivial pure fluxes we label as $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ being one of the nontrivial conjugacy classes of $D_4$. The rest of the dyons have less informative labels such as $\{\tilde{\Psi}_x, \Phi_x, \tilde{\Phi}_x\}$.
 
 
-\subsubsection{Specific example of $D_4$}
+
 
 \jovan{Move this is to the next section and \textbf{reformulate} to fit in!}
 
-In this section, we explore the reduced charge measurement in the case of $D_4$ gauge group.
-Limiting ourselves to only pure charges, remembering that the flux component can be directly read out, we have five possibilities for topological charge on a site: $0$, $\Sigma_r$, $\Sigma_m$, $\Sigma_{mr}$ and $\Sigma_{\epsilon}$. Please consult the Appendix \ref{app:reps} for the list of all representations of $D(D_4)$.
+\textbf{Charge Measurements Reprise.}
+In the following, we explore the reduced charge measurement in the case of $D_4$ gauge group.
+More precisely we look at the partial character table orthogonality we mentioned in the previous section that underpins this approach.
 
-The traces of the representation matrices $\sum_i\Gamma^\chi_{ii}(g) = \chi(g)$ for the five flavours are given in Table \ref{tab:char}. This is the character table of $D_4$ and the association between the irreps and topological charges mentioned above are: $1 \rightarrow 0$, $\alpha_x \rightarrow \Sigma_x$ and $\epsilon \rightarrow \Sigma_\epsilon$.
+The character table of $D_4$ is given in Table \ref{tab:char}, while the character tables of relevant subgroups are given in Table \ref{tab:char_sub}. Note, the subgroups $\{H_r, H_m, H_{mr}\}$ were mentioned in the context of centres of relevant conjugacy classes, but they also prove to be a great choice of subgroups to be used in the reduced charge measurement protocol, in this case. \jovan{word better}
 
-\begin{table}[h]
-\centering    \begin{tabular}{c|c c c c c }
-         %\hline
-         $D_4$ & $\mathcal C_e$ & $\mathcal C_{r^2}$ & $\mathcal C_{r}$ & $\mathcal C_m$ & $\mathcal C_{mr}$ \\
-         \hline
-         $1$ & 1 & 1 & 1 & 1 & 1 \\
-        % \hline
-         $\alpha_r $& 1 & 1 & 1 & -1 & -1  \\
-         %\hline
-         $\alpha_{m}$ & 1 & 1 & -1 & 1 & -1  \\
-         %\hline
-         $\alpha_{mr}$ & 1 & 1 & -1 & -1 & 1  \\
-         %\hline
-         $\epsilon$ & 2 & -2 & 0 & 0 & 0  \\
-         %\hline 
-    \end{tabular}
-    \caption{Character table of $D_4$.}\label{tab:char}
-\end{table}
+All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional, this means that the measurement outcome of the reduced charge measurement is just the irrep label $(\chi_{H_x})$.
 
-All the proper subgroups of $D_4$ are abelian, hence all the $\chi_H$ are one dimensional, this means that the measurement outcome of the reduced charge measurement is just the irrep label $(\chi_H)$.
-
-We will focus on the three four element subgroups $H_r = \{e, r, r^2, r^3\} \equiv \mathbb{Z}_4$, $H_m = \{e, r^2, mr^2, mr^2\} \equiv \mathbb{Z}_2 \times \mathbb{Z}_2$ and $H_{mr} = \{e, r^2, mr, mr^3\} \equiv \mathbb{Z}_2 \times \mathbb{Z}_2$.
-
-The partial orthogonality of irreps of $D_4$ and these three groups is captured in the quantity: $ \braket{\chi, \chi_H} = \sum_h \chi(h)\chi_H(h)$. This is shown in Table \ref{tab:red_ch}, see the Appendix \ref{app:reps} for the list of irreps of subgroups of $D_4$.
+The partial orthogonality of the characters of the $D_4$ and these three groups is captured in the quantity: $ \braket{\chi_{H_x}, \chi} = \sum_{h\in H_x} \chi_{H_x}(h)\chi(h)$,  see Table \ref{tab:red_ch}.
 
 
 \begin{table}[h]
 \centering
+\begin{tabular}{l|lllll}
+  $\braket{\chi_{H_r}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
+$1$ & 4   & 4            & 0             & 0               & 0                   \\ 
+$-1$ & 0   & 0            & 4             & 4               & 0                   \\ 
+$i$ & 0   & 0            & 0             & 0               & 4                   \\ 
+$-i$ & 0   & 0            & 0             & 0               & 4                   \\ 
+\end{tabular}
 \begin{tabular}{l|lllll}
   $\braket{\chi_{H_m}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $(1,1)$ & 4   & 0            & 4             & 0               & 0                   \\ 
@@ -579,22 +563,15 @@ $ (1,-1)$ & 0   & 4            & 4             & 0               & 0            
 $(-1,1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
 $(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
 \end{tabular}
-\begin{tabular}{l|lllll}
-  $\braket{\chi_{H_r}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
-$1$ & 4   & 4            & 0             & 0               & 0                   \\ 
-$-1$ & 0   & 0            & 4             & 4               & 0                   \\ 
-$i$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$-i$ & 0   & 0            & 0             & 0               & 4                   \\ 
-\end{tabular}
 \caption{Partial orthogonality of $D_4$ with respect to its three four-element subgroups.}
 \label{tab:red_ch}
 \end{table}
 
 %\caro{What about the $\pm i$ outcomes for $H_r$? we can't measure $\pm i$.} See encoding.
 
-The Table \ref{tab:red_ch} is to be interpreted as follows, imagine we performed a $H_m$-reduced charge measurement on a plaquette $p$ and got a label $(1,1)$. This label has a non-vanishing overlap with $1$ and $\alpha_m$, hence both $0$ and $\Sigma_m$ can be on a plaquette $p$.
+The Table \ref{tab:red_ch} is to be interpreted as follows, imagine we performed a $H_m$-reduced charge measurement on a plaquette $p$ and got a label $(1,1)$. This label has a non-vanishing overlap with $1$ and $\alpha_m$, hence both $0$ and $\Sigma_{\alpha_m}$ can be on a plaquette $p$.
 
-Now imagine we have performed all three measurement and got a set of labels $\{(1, 1), (1, -1), -1\}$, this set is only compatible with $\alpha_m$ and hence $\Sigma_m$ must be on a plaquette $p$.
+Now imagine we have performed all three measurement and got a set of labels $\{-1, (1, 1), (1, -1)\}$, this set is only compatible with $\alpha_m$ and hence $\Sigma_m$ must be on a plaquette $p$.
 
 %\caro{We are more interested in the inverse direction, namely, the result $\{(1,-1); (1,-1); 1\}$ is only compatible with charge $\Sigma_r$.} Agreed, better phrasing.
 
