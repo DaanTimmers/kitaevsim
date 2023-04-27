@@ -441,7 +441,7 @@ We may repeat the procedure using different subgroups of $G$ to gather further p
 
 This relies on partial orthogonality of character tables of a group and its subgroup, and is best explored in the specific cases below.
 
-\section{$D_4$-Lattice Gauge Theory}
+\section{Quantum Double of $D_4$}
 
 Throughout the rest of the paper we will mostly focus on the case of $D_4$ lattice gauge theory.
 Hence in this section, we will describe the group structure of $D_4$, its quantum double algebra, as well as representation theory of both.
@@ -461,15 +461,65 @@ where $e$ is the group identity.
 This group is solvable and all of its proper subgroups are Abelian. The group can be decomposed as $D_4 = \mathbb{Z}^m_2 \ltimes \mathbb{Z}^r_4$, the semi-direct product between the two obvious subgroup defined my the last line in Eq.~\eqref{eqn:group}.
 This decomposition is not unique, $D_4 = \mathbb{Z}_2^m\ltimes(\mathbb{Z}_2^{r^2}\times\mathbb{Z}^{mr}_2)$ is also a valid decomposition.\footnote{The superscripts in $\mathbb{Z}_n^x$ label the group generator, $\mathbb{Z}_n^x = \{x, x^2, \ldots, x^{n-1}, x^n = e\}$.}
 
-This group has five conjugacy classes. The conjugacy classes alongside their centres are listed in Table
-
+The conjugacy classes of $D_4$ alongside their centres are listed in Table \ref{tab:conjs}.
 \begin{table}[h]
 \centering    \begin{tabular}{|c | c|}\hline
          $C$ & $Z(r) \text{, } r\in C$\\ \hline $\mathcal C_e = \{e\}$ & $D_4$\\ $\mathcal C_{r^2}= \{r^2\}$ & $D_4$\\ $\mathcal C_{r}=\{r, r^3\}$ & $\mathbb{Z}_4^r \equiv H_r$\\ $\mathcal C_m=\{m, mr^2\}$& $\mathbb{Z}_2^m \times \mathbb{Z}_2^{r^2}\equiv H_m$ \\ $\mathcal C_{mr}=\{mr, mr^3\}$& $\mathbb{Z}_2^{mr} \times \mathbb{Z}_2^{r^2}\equiv H_{mr}$\\
          \hline 
     \end{tabular}
-    \caption{The conjugacy classes of $D_4$ alongside their centres.}\label{tab:char}
+    \caption{The conjugacy classes of $D_4$ alongside their centres.}\label{tab:conjs}
 \end{table}
+There are five conjugacy classes, which implies five irreducible representations, with dimensions $(1,1,1,1,2)$. The characters, traces of representation matrices, are given in Table \ref{tab:char}.
+\begin{table}[h]
+\centering    \begin{tabular}{|c|c c c c c |}
+         \hline
+         $D_4$ & $\mathcal C_e$ & $\mathcal C_{r^2}$ & $\mathcal C_{r}$ & $\mathcal C_m$ & $\mathcal C_{mr}$ \\
+         \hline
+         $1$ & 1 & 1 & 1 & 1 & 1 \\
+        % \hline
+         $\alpha_r $& 1 & 1 & 1 & -1 & -1  \\
+         %\hline
+         $\alpha_{m}$ & 1 & 1 & -1 & 1 & -1  \\
+         %\hline
+         $\alpha_{mr}$ & 1 & 1 & -1 & -1 & 1  \\
+         %\hline
+         $\epsilon$ & 2 & -2 & 0 & 0 & 0  \\
+         \hline 
+    \end{tabular}
+    \caption{Character table of $D_4$.}\label{tab:char}
+\end{table}
+
+When labelling the algebra representations we will also need the irreducible representations of the centres of conjugacy classes. The centres of the three non-trivial conjugacy classes ($|C|>1$) are all Abelian and have four elements, hence they will have four one-dimensional irreducible representations. The character tables of these subgroups are shown in Table
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|llll|}\hline
+  $H_r$ & $e$ & $r$ & $r^2$ & $r^3$ \\ \hline
+$1$ & $1$   & $1$            & $1$             & $1$                                  \\ 
+$i$ & $1$   & $i$            & $-1$             & $-i$                                  \\ 
+$-1$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
+$-i$ & $1$   & $i$            & $-1$             & $i$                                  \\ \hline
+\end{tabular}
+\begin{tabular}{|l|llll|}\hline
+  $H_m$ & $e$ & $m$ & $r^2$ & $mr^2$ \\ \hline
+$(1,1)$ & $1$   & $1$            & $1$             & $1$                                  \\ 
+$(1,-1)$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
+$(-1,1)$ & $1$   & $1$            & $-1$             & $-1$                                  \\ 
+$(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                                  \\ \hline
+\end{tabular}
+\begin{tabular}{|l|llll|}\hline
+  $H_{mr}$ & $e$ & $mr$ & $r^2$ & $mr^3$ \\ \hline
+$(1,1)$ & $1$   & $1$            & $1$             & $1$                                  \\ 
+$(1,-1)$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
+$(-1,1)$ & $1$   & $1$            & $-1$             & $-1$                                  \\ 
+$(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                                  \\ \hline
+\end{tabular}
+\caption{Character tables of relevant subgroups of $D_4$.}
+\label{tab:red_ch}
+\end{table}
+
+The task of listing all of the irreducible representations of $D(D_4)$ and their dimensions from this data is straightforward. There are $2 \times 5  + 3 \times 4 = 22$ irreducible representations, i.e. the types of anyons in the $D_4$ quantum double model.
+
+Eight of them are one-dimensional, i.e. Abelian, while the rest are two-dimensional. 
 
 
 \subsubsection{Specific example of $D_4$}
