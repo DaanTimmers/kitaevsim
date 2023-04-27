@@ -59,19 +59,15 @@ In the next chapter, we will discuss the general framework of manipulating the n
 \item Thematic consistencty, note what will be in the introduction
 \end{itemize}}
 
-In this section we will review Kitaev's quantum double models\cite{Kitaev_2003} and discuss their ground states and anyonic excitations. We will also present our protocols for creating/manipulating anyons and measuring topological charge. 
+In this section we will review Kitaev's quantum double models\cite{Kitaev_2003} and discuss their ground states and anyonic excitations. We will also present our protocols for creating and manipulating anyons, and for measuring topological charge. 
 
-Kitaev's quantum double models are Hamiltonian formulations of lattice gauge theory with the following properties:
-the gauge group $G$ is finite;
-Gauss' law is enforced energetically at each vertex, i.e. Gauge fixing;
-and the model is at the deconfinement fixed point, i.e. no electric field terms.
-The Hamiltonian will, therefore, have two sets of terms, the gauge-invariant (magnetic) plaquette terms and the Gauss' law vertex terms\cite{cui2018topological, Kitaev_2003}. 
+Kitaev's quantum double models are Hamiltonian formulations of lattice gauge theory for finite gauge groups. Gauss' law is enforced energetically at each vertex by a Hamiltonian term and the model is at the deconfinement fixed point, where there are no electric field terms.
+The Hamiltonian, therefore, has two sets of terms -- the gauge-invariant (magnetic) plaquette terms and the Gauss' law vertex terms\cite{cui2018topological, Kitaev_2003}. 
 
-
-It is instructive to view the quantum double models as a generalization of Kitaev's toric code, for which $G=\mathbb Z_2$. The latter constitutes the simplest example of a topologically ordered phase, characterized by a topological ground state degeneracy and anyonic excitations. However, the anyons are Abelian. In order to obtain non-Abelian anyons, it is necessary to consider non-Abelian gauge groups $G$. While the models for the latter are conceptually very similar to the toric code, their definitions require slightly more care and notation, which we will introduce in the following.
+Quantum double models can also be understood as a subclass of the more general string-net models\cite{Levin_2005}, which describe all non-chiral topological phases of matter, or as a generalisation of Kitaev's toric code\cite{Kitaev_2003} for which the gauge group is $\mathbb Z_2$ to general groups $G$. While all quantum double models have anyonic excitations, the anyons for models with Abelian gauge group are themselves Abelian. In order to obtain non-Abelian anyons, it is necessary to consider non-Abelian gauge groups $G$. While the models for the latter are conceptually still very similar to the toric code, their definitions require slightly more care and notation, which we will introduce in the following. 
 
 %\footnote{It is worth noting that there exist an even more general class of models, known as Levin-Wen string-net model\cite{Levin_2005}.}.
-For a given group $G$ we can define a quantum double model on any arbitrary \emph{directed} graph in the following way. The local degrees of freedom are $|G|$-dimensional and assigned to the edges $E$. In other words, the total Hilbert space is spanned by all possible assignments of group elements to the edges. The Hamiltonian is given by  a sum of mutually commuting terms that act on vertices $V$ and plaquettes $P$, respectively
+For a given group $G$ we can define its quantum double model on any arbitrary \emph{directed} graph. The local degrees of freedom are $|G|$-dimensional and assigned to the edges. The basis of their local Hilbert space is labeled by the group elements, i.e., we think of edges as being labeled by elements $g\in G$. The Hamiltonian is given by a sum of mutually commuting terms that act on vertices $V$ and plaquettes $P$, respectively
 
 
 %In Figure \ref{fig:vertex_ops} the basis vectors are shown on the parts of the graph where the plaquette and vertex terms operate.
@@ -80,15 +76,15 @@ For a given group $G$ we can define a quantum double model on any arbitrary \emp
 \begin{equation}
     H = -  \sum_{v \in V} \mathbf B_v -  \sum_{p  \in  P} \mathbf A_p \label{eqn:ham} \;.
 \end{equation}
-We will now discuss these terms in more detail. As mentioned before, the vertex term should enforce Gauss' law. To achieve this we first introduce a general vertex operator $B_v^{(h)}$ for every vertex. This operator projects to all states for which the group elements meeting at the vertex multiply to $h$. To make the product unambiguous, every vertex is assigned an ordering of the edges. In addition, an incoming edge labeled by $g$ enters as $g$ while an outgoing edge enters as $g^{-1}$. E.g. for the trivalent vertex depicted in Fig.~\ref{eqn:Bs_def} we have 
+We will now discuss these terms in more detail. As mentioned above, the vertex term enforces Gauss' law. To achieve this we first introduce a general vertex operator $B_v^{(h)}$ for every vertex. This operator projects onto all states for which the group elements assigned to the edges adjacent to the vertex multiply to $h$. To make the product unambiguous we need to order the edges. This ordering has to fulfil additional constraints to be specified momentarily. In addition, a group element $g$ assigned to an incoming (outgoing) edge enter as $g$ ($g^{-1}$). E.g. for the trivalent vertex depicted in Fig.~\ref{eqn:Bs_def} we have 
 \begin{equation}
 B_v^{(h)} |g_1,g_2,g_3\rangle= \delta_{g_1 g_2 g_3,h} |g_1,g_2,g_3\rangle \;.	
 \end{equation}
-Gauss' law is then enforced by choosing $\mathbf B_v=B^{(e)}_v$, where $e$ denotes the identity element of the group. To ensure that the vertex projector commutes with the plaquette projector, defined momentarily, the ordering of the edges is chosen in counter-clockwise orientation as is the orientation of the plaquettes. In addition to uniquely define the product of the edges a starting edge is specified for each vertex.
+Gauss' law is then enforced by choosing $\mathbf B_v=B^{(e)}_v$, where $e$ denotes the identity element of the group. To ensure that the vertex projector commutes with the plaquette projector introduced below, the ordering of the edges needs to be consistent with the orientation of the latter. This can be done by endowing both with a counter-clockwise orientation. The ordering is then obtained by additionally specifying a starting edge for each vertex.
 
 The plaquette term 
 	$\mathbf A_p=\frac{1}{|G|} \sum_{g \in G} A^{(g)}_p$
-is defined in terms of operators $A^{(g)}_p$ which shift the labels of the edges forming the plaquette by $g$. Again, to obtain a consistent model, the plaquettes are assigned an \emph{orientation} and depending on whether the edge direction is aligned or anti-aligned with the orientation of the plaquette, the shift acts as $g_i \rightarrow gg_i$ and $g_i \rightarrow g_ig^{-1}$, respectively. For example, for the plaquette shown in Fig. \ref{eqn:As_def}, we have 
+is defined in terms of operators $A^{(g)}_p$ which shift the labels of the edges forming the plaquette by $g$. As alluded to previously, the plaquettes have an \emph{orientation}. If the edge direction is aligned (anti-aligned) with this orientation, the shift acts as $g_i \rightarrow gg_i$ ($g_i \rightarrow g_ig^{-1}$). E.g. for the plaquette shown in Fig. \ref{eqn:As_def}, we have 
 \begin{equation}
 	A_p^{(g)}\ket{g_1, g_2, \ldots} = \ket{gg_1, g_2g^{-1}, \ldots}.
 \end{equation} 
@@ -115,20 +111,19 @@ is defined in terms of operators $A^{(g)}_p$ which shift the labels of the edges
 
 
 
-\textbf{Ground State.} The vertex term is diagonal in the basis we defined above, while the plaquette terms are off-diagonal.
-However, all terms commute, hence we can diagonalize the Hamiltonian term-by-term and the leftover degeneracy depends only on the genus of the surface our graph is embedded in\cite{Kitaev_2003, cui2018topological}.
+\textbf{Ground State.} It is not hard to verify that all terms in the Hamiltonian commute, Hence we can diagonalize it term-by-term. One can show that the leftover degeneracy depends only on the genus of the surface the graph is embedded in\cite{Kitaev_2003, cui2018topological}. However, we will work on a sphere-topology, where the ground state is unique.
 
 % Used to be a Subsection "Ground State"
 
 %The form of the ground state depends heavily on the geometry of the graph the theory is defined on.
 %As an example, ground state degeneracy depends on the topology of the manifold the graph is embedded in.
 
-All terms in the Hamiltonian are also projectors, hence, one way to construct a ground state, $\ket{\psi}$, is to apply all the projectors onto a state that has some overlap with the ground state. In particular, we can take the state $\ket{\{e\}}$, where every edge is labelled by the identity element.
-This state trivially obeys all $B$-term projectors, so we just need to apply all $A$-term projectors
+All terms in the Hamiltonian are also projectors. Hence, one way to construct the ground state is to apply all projectors onto a state that has non-zero overlap with the ground state. In particular, we can start with the state $\ket{\{e\}}$, where every edge is labelled by the identity element.
+This state trivially obeys all vertex projectors, so we just need to apply all plaquette projectors
 \begin{equation}
     \ket{\psi} = \prod_{p \in P} \mathbf A_p \ket{\{e\}}.
 \end{equation}
-The action of the $A$-terms guarantees survival of $\ket{\{e\}}$. If the embedding manifold is a 2-sphere, this is the unique ground state and corresponds to the equal weight superposition of all states whose labels respect Gauss' law at each vertex.
+This state is the unique ground state and corresponds to the equal weight superposition of all states respecting Gauss' law.
 
 
 % Used to be a Subsection "Excitatons"
@@ -137,27 +132,29 @@ The action of the $A$-terms guarantees survival of $\ket{\{e\}}$. If the embeddi
 %\caro{Move this to GS section}: I do not agree that's better
 
 
-\textbf{Excitations.} The ground state is stabilized\footnote{Meaning, it is the $+1$ eigenstate.} by the projectors in Eq.~\eqref{eqn:ham}. Together with the property $A_p^{(g_1)}A_p^{(g_2)} = A_p^{(g_1 g_2)}$ this furthermore implies the stronger condition
+\textbf{Excitations.} The ground state is stabilized\footnote{Meaning, it is the $+1$ eigenstate.} by the projectors in Eq.~\eqref{eqn:ham}. Together with the property $A_p^{(g_1)}A_p^{(g_2)} = A_p^{(g_1 g_2)}$ this implies the stronger condition
 \begin{equation}
 \begin{split}
     A^{(g)}_p \ket{\psi} = \ket{\psi},\\
     B^{(e)}_v \ket{\psi} = \ket{\psi},
 \end{split}\label{eqn:ground_state}
 \end{equation}
-for all $v \in V$, $p \in P$ and $g \in G$. Therefore, the elementary excitation above the ground state will violate one or more of the equations above.
+for all $v \in V$, $p \in P$ and $g \in G$. Therefore, the elementary excitation above the ground state will violate one or more of the equations above and are characterized by how the operators $B_v(h)$ and $A_p(g)$ act on them. More precisely, these operators form an algebra\cite{cui2018topological, Kitaev_2003} (the quantum double algebra $D(G)$), which contains the full information about the anyonic excitations. In particular its irreducible representations label the anyons.
 
-To get a better understanding of the latter, we look at the algebra spanned by the vertex and plaquette operators $B_v$ and $A_p$. But first, we need to put vertices and plaquettes on an equal footing. This is done by pairing plaquettes and adjacent vertices one-to-one into \emph{sites}\footnote{Either some vertices or some plaquettes will be left over depending on the exact geometry of the lattice.} $s_i = (v_i, p_i)$ such that $A_{s_i}^{(g)} = A_{p_i}^{(g)}$ and $B_{s_i}^{(h)} = B_{v_i}^{(h)}$. 
+For the toric code model, the $A$ and $B$ operators always commute and their algebras can be investigated independently. One finds the well-known $e$ (for electric) and $m$ (for magnetic) particles associated to vertex and plaquette violations, respectively, and their combination, the fermionic $(e,m)$-particle. However, for non-Abelian gauge-groups the operators $A_p(g)$ and $B_v(g)$ whose plaquette and vertex overlap, do no longer commute. To discuss their joint algebra, we consider \emph{sites}
+%\footnote{Either some vertices or some plaquettes will be left over depending on the exact geometry of the lattice.} 
+ $s_i = (v_i, p_i)$ of adjacent vertices and plaquettes.
+%
+%\jovan{Soften the approach to formalism by the example of Toric code excitations.}
+%%
+%Site being occupied by an excitation means that at least one of the conditions in Eq.~\eqref{eqn:ground_state} for that site is violated. In the example of the toric code, $G = \mathbb{Z}_2 = \{0, 1\}$, we have three kinds of excitations. 
+%
+%These are electric, magnetic and fermionic excitations. The state with an electric excitation at a site $s$ is odd under the action of $A_s^{(1)}$, but is fixed by $B_s^{(0)}$. The state with a magnetic excitation at a site $s$ is annihilated by $B_s^{(0)}$, but fixed under both $A_s^{(g)}$ and by $B_s^{(1)}$. Finally, the state with the fermion at a site $s$ breaks both $A$- and $B$-type conditions, in fact, it is just an electric and a magnetic excitation populating the plaquette and vertex of the site respectively.
 
-\jovan{Soften the approach to formalism by the example of Toric code excitations.}
-
-Site being occupied by an excitation means that at least one of the conditions in Eq.~\eqref{eqn:ground_state} for that site is violated. In the example of the toric code, $G = \mathbb{Z}_2 = \{0, 1\}$, we have three kinds of excitations. 
-
-These are electric, magnetic and fermionic excitations. The state with an electric excitation at a site $s$ is odd under the action of $A_s^{(1)}$, but is fixed by $B_s^{(0)}$. The state with a magnetic excitation at a site $s$ is annihilated by $B_s^{(0)}$, but fixed under both $A_s^{(g)}$ and by $B_s^{(1)}$. Finally, the state with the fermion at a site $s$ breaks both $A$- and $B$-type conditions, in fact, it is just an electric and a magnetic excitation populating the plaquette and vertex of the site respectively.
-
-
-In the case of Non-Abelian gauge groups, this notion of breaking an $A$-type or a $B$-type condition becomes much more involved due to the more complicated operator algebra being induced by the more complicated group multiplication.
+%
+%In the case of Non-Abelian gauge groups, this notion of breaking an $A$-type or a $B$-type condition becomes much more involved due to the more complicated operator algebra being induced by the more complicated group multiplication.
  
-Operators on different sites commute trivially, while on the same site we have 
+Operators on different sites commute trivially, while on the same site we have\footnote{We remark, that the algebraic relations in Eq.~\eqref{eqn:alg} do not depend on the exact grouping of plaquettes and vertices into sites.} 
 \begin{equation}
     \begin{split}
         A_s^{(g)}A_s^{(h)} = A_s^{(gh)}, \\
@@ -165,20 +162,22 @@ Operators on different sites commute trivially, while on the same site we have
         A_s^{(g)}B_s^{(h)} = B_s^{(ghg^{-1})}A_s^{(g)}.
     \end{split}\label{eqn:alg}
 \end{equation}
+This is the on-site representation of the quantum double algebra $D(G)$ 
+\cite{cui2018topological, Kitaev_2003}. 
 
-This is the on-site representation of the quantum double algebra of a finite group $G$, $D(G)$. The algebraic relations in Eq.~\eqref{eqn:alg} do not depend on the exact grouping of plaquettes and vertices into sites.
-
-The on-site excitations are labelled by the irreducible representations of this algebra \cite{cui2018topological, Kitaev_2003}. In particular, the ground state is the state with the trivial (charge free) representation on each site.
-
-In the case of the toric code, the operator algebra is small, four dimensional, and commutative. It has only four irreducible representations, which we mentioned above: vacuum, electric, magnetic and fermionic.
+%In particular, the ground state is the state with the trivial (charge free) representation on each site.
+%
+%In the case of the toric code, the operator algebra is small, four dimensional, and commutative. It has only four irreducible representations, which we mentioned above: vacuum, electric, magnetic and fermionic.
  
 %\caro{At some point we need to introduce the notion of pure charge, pure flux and a dyon, we should state the simplified expressions for pure charge and pure flux, and the notion of generalized conjugation in the dyon case, as we use this later on.}
 
-More generally, the irreducible representations of this algebra are labelled by two objects, a conjugacy class $C$ of the group $G$ and an irreducible representation $\chi$ of the centralizer, $Z(r)$, of the class representative $r \in C$. The vector space on which $(C, \chi)$ acts is spanned by a basis $\ket{\mu} = \ket{c, i}$, where $c \in C$ and $i \in \{1, 2, \ldots, \text{dim}\chi\}$, i.e. the first index goes over the conjugacy class elements while the second goes over the vector indices of the irreducible representation $\chi$.
+We will now discuss its irreducible representations. However, we will refrain from providing any derivations (see e.g. Ref.~\cite{Cui_2015}) and just state the results. 
 
+The irreducible representations are labelled by two objects, a conjugacy class $C$ of the group $G$ and an irreducible representation $\chi$ of the centralizer, $Z(r)$, of the class representative $r \in C$. The vector space on which $(C, \chi)$ acts is spanned by a basis $\ket{\mu} = \ket{c, i}$, where $c \in C$ and $i \in \{1, 2, \ldots, \text{dim}\chi\}$, i.e. the first index goes over the conjugacy class elements while the second goes over the vector indices of the irreducible representation $\chi$.
 
-The action of the algebra generators on this vector space is
-%\caro{what happens with $i,i'$ in the first line?} 
+Note, that in the case of abelian groups, in particular the toric code, the conjugacy classes are trivial and identical to the group elements themselves. Their center is $G$, which has $|G|$ one-dimensional representations. Hence, the irreducible representations factorize as indicated above and the anyons are Abelian. 
+
+In the general, non-Abelian case the irreducible representations do not factorize as can be seen from the action of the algebra generators on the vector space spanned by $\ket{\mu}=\ket{c,i}$ %\caro{what happens with $i,i'$ in the first line?} 
 \begin{equation}
     \begin{split}
         B^{(h)}_{\mu\nu}=\bra{c, i} B^{(h)} \ket{c', i'} = \delta_{c, h} \delta_{c, c'}\delta_{i, i'}, \\
@@ -188,16 +187,17 @@ The action of the algebra generators on this vector space is
 where $\Gamma$ are the $\chi$-representation matrices and $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$. Note that $q_c^{-1}gq_{c'} \in Z(r)$ for all $g$ such that $c = gc'g^{-1}$.
 %\caro{omit: These representation matrices are going to play a central role in our protocols for creating and manipulating anyons.}
 
-As an example, the aforementioned vacuum (or trivial) representation, labelled by $(\{e\}, \mathbb{1})$, is one-dimensional and spanned by $\ket{e, 0}$:
+
+To get a better understanding of the meaning behind these expressions, we consider three simple examples. Let us start with the vacuum (or trivial) representation, labelled by $(\{e\}, \mathbb{1})$. This representation is one-dimensional and spanned by $\ket{e, 0}$
 \begin{equation}
     \begin{split}
         B^{(h)}\ket{e, 0} = \delta_{h,e}\ket{e, 0},\\
-        A^{(g)}\ket{e, 0} = \ket{e,0},
+        A^{(g)}\ket{e, 0} = \ket{e,0}.
     \end{split}
 \end{equation}
-hence Eq.~\eqref{eqn:ground_state} implies that the ground state is such that every site houses a trivial representation.
+Hence, Eq.~\eqref{eqn:ground_state} implies that for the ground state every site houses the trivial representation.
 
-Other important examples are pure charges and fluxes. A pure flux is labelled by a conjugacy class and the trivial representation of its centre, $(C, \mathbb{1})$. Its basis vectors are $\ket{c, 0}$ for $c \in C$, with
+Other important examples are pure charges and pure fluxes. A pure flux is labelled by a conjugacy class and the trivial representation of its centre, $(C, \mathbb{1})$. Its basis vectors are $\ket{c, 0}$ for $c \in C$, with
 \begin{equation}
     \begin{split}
         B^{(h)}_{\mu\nu}=\bra{c, 0} B^{(h)} \ket{c', 0} = \delta_{c, h} \delta_{c, c'}, \\
@@ -223,7 +223,7 @@ In particular, if we have a gauge field state, $\ket{\chi, p; i}$, where each si
 where $i$ and $i'$ are the internal degrees of freedom of the charge\footnote{Note that the charge can be vector valued for non-abelian symmetry groups.}.
 This is the way a charged state transforms under gauge transformations in gauge field theory. Hence, we say that the plaquette terms generate gauge transformations.
 
-All other excitations are called dyons. They violate vertex and plaquette terms simultaneously, meaning they have a flux component associated with a vertex of the site $(v,p)$ and a charge component associated with its plaquette, but unlike the toric code fermion cannot be broken down to a combination of the pure charge and the pure flux sitting next to one another.
+All other excitations are called dyons. They violate vertex and plaquette terms simultaneously, meaning they have a flux component associated with a vertex of the site $(v,p)$ and a charge component associated with its plaquette, but unlike the toric code fermion cannot be broken down to a combination of pure charge and pure flux sitting next to one another.
 
 \jovan{Redo the Fusion Section}
 
