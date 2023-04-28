@@ -181,13 +181,19 @@ The irreducible representations are labelled by two objects, a conjugacy class $
 Note, that in the case of abelian groups, in particular the toric code, the conjugacy classes are trivial and identical to the group elements themselves. Their center is $G$, which has $|G|$ one-dimensional representations. Hence, the irreducible representations factorize as indicated above. 
 
 In the general, non-Abelian case the irreducible representations do not factorize as can be seen from the action of the algebra generators on the vector space spanned by $\ket{\mu}=\ket{c,i}$ %\caro{what happens with $i,i'$ in the first line?} 
+%\begin{equation}
+%    \begin{split}
+%        B^{(h)}_{\mu\nu}=\bra{c, i} B^{(h)} \ket{c', i'} = \delta_{c, h} \delta_{c, c'}\delta_{i, i'}, \\
+%        A^{(g)}_{\mu\nu} = \bra{c, i} A^{(g)} \ket{c', i'} = \delta_{c,gc'g^{-1}} \Gamma^\chi_{ii'}(q_{c}^{-1}gq_{c'}),
+%    \end{split}
+%\end{equation}
 \begin{equation}
     \begin{split}
         B^{(h)}_{\mu\nu}=\bra{c, i} B^{(h)} \ket{c', i'} = \delta_{c, h} \delta_{c, c'}\delta_{i, i'}, \\
-        A^{(g)}_{\mu\nu} = \bra{c, i} A^{(g)} \ket{c', i'} = \delta_{c,gc'g^{-1}} \Gamma^\chi_{ii'}(q_{c}^{-1}gq_{c'}),
+        A^{(g)}_{\mu\nu} = \bra{c, i} A^{(g)} \ket{c', i'} = \delta_{c,gc'g^{-1}} \Gamma^\chi_{c,ii'}(g),
     \end{split}
 \end{equation}
-where $\Gamma$ are the $\chi$-representation matrices and $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$. Note that $q_c^{-1}gq_{c'} \in Z(r)$ for all $g$ such that $c = gc'g^{-1}$. \caro{as we anyways dont really define what the gamma matrices are, why dont we just redefine $\Gamma^\chi_{ii'}(q_{c}^{-1}gq_{c'})=\tilde \Gamma^\chi_{ii'}(g)$. this should work as the only non-zero entries are the ones with $c'=g^{-1}cg$}
+where $\Gamma^\chi_c(g)$ are the $\chi$-representation matrices. The latter are defined for elements of the centraliser $Z$ which are obtained from $g$ via the map $q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$. 
 %\caro{omit: These representation matrices are going to play a central role in our protocols for creating and manipulating anyons.}
 
 
@@ -353,7 +359,7 @@ Moving anyons means appending elementary triangles onto a ribbon. Each triangle 
     \item For each triangle in the ribbon, sequentially apply one of the following unitaries depending on the triangle \textit{type} (and the edge orientations) 
     \begin{itemize}
         \item[I)] Multiply on the coincidng edge\\  $\ket{c, i}\ket{g}_\text{phys} \rightarrow \ket{c, i}\ket{cg}_\text{phys}$.
-       \caro{ \item[II)] Generalised-conjugate by the crossed edge\\ $\ket{c,i}\ket{h}_\text{phys} \rightarrow \ket{gcg^{-1}} \Gamma^\chi(h) \ket{i} \ket{h}_\text{phys}$.}
+       \item[II)] Generalised-conjugate by the crossed edge\\ $\ket{c,i}\ket{h}_\text{phys} \rightarrow \ket{gcg^{-1}} \Gamma^\chi_c(h) \ket{i} \ket{h}_\text{phys}$.
     \end{itemize}
     \item Project the ancillary qudits to the Bell state $\bra{\Phi^+} = \frac{1}{\sqrt{d}}\sum_\nu \bra{\nu; \nu}$. The projection is done by measurement and post-selection
 \end{enumerate}
@@ -369,103 +375,77 @@ To interpret what we have here, let us look at the quantum resources. We have th
 
 The two types of triangles couple the two spaces in two different ways, for type I the $\mathcal{H}_{\text{ancilas}}$ controls an action on $\mathcal{H}_{\text{matter}}$ and for type II it is the other way around. After the measurement that disentangles, the redundant copy of $\mathcal{H}_{\text{fusion}}$ the $\mathcal{H}_{\text{matter}}$ is left in a state with the ribbon operator imprinted on it as signalled by the topological charge, braiding amplitude and phase.
 
-\jovan{add something about the non-commutativity of these operations and their action on the degen. space}
+%\jovan{add something about the non-commutativity of these operations and their action on the degen. space}
 
-\subsection{Charge Measurement}
+\subsection{Charge Measurements}
 %\caro{Explain the idea of reduced charge measurement in words, i.e., get partial information and combine the partial information for different $H$ to deduce charge}
 
-\jovan{do not use weak measurements, partial}
-\jovan{remove flavours}
-
-In this section, we will explain how we measure charge, the last element of our toolkit for probing topological order. The main idea of our protocol is to construct weak topological charge measurements that are easy to implement in terms of circuit depth. However, such weak measurements do not determine the charge completely, but when we combine a set of such weak measurement results we are able to deduce the full charge content of a region of our system.
-
-The ideal charge measurement would differentiate any type of excitation on any site, such measurement is associated with the following set of projectors \cite{}:
+In this section, we will explain how we measure the topological charge, i.e., the anyon label. This is the last element of our toolkit for probing topological order. The ideal charge measurement would differentiate any type of excitation on any site, such measurement is associated with the following set of projectors \cite{}:
 \begin{equation}
     P_s^{(C, \chi)} = \frac{\chi(e)}{|Z(r)|}\sum_{c \in C}\sum_{z \in Z(r)}\chi^*(z)B_s^{(c)}A_s^{(q_c z \bar{q}_c)},
 \end{equation}
 for each irreducible representation of the $D(G)$.
 
-Since we work in a basis where projectors onto a given $G$-valued flux through a vertex $v$, $B_v^{(h)}$, are diagonal, we can just do a full projective measurement of our gauge field degrees of freedom in that basis. 
-The result of such measurement is a labelling, $f: E \rightarrow G$ from which we just compute the flux through any vertex. 
+Since we work in a basis where projectors onto a given $G$-valued flux through a vertex $v$, $B_v^{(h)}$, are diagonal, we can just do a full projective measurement of the gauge field degrees of freedom in that basis. 
+The result of such measurement is a labelling of all edges by group elements from which we can compute the flux through any vertex. 
 
-\jovan{Postpone the discussion about difficulty.}
+However, in order to measure the charge component, one needs to implement a controlled $A^{(g)}_s$ operator which needs a controlled group multiplication applied to all edges of $s$'s plaquette, i.e. $\ket{g}\ket{g_i} \rightarrow \ket{g}\ket{gg_i}$ for all $\ket{g_i}$ around the plaquette.
+This requires circuits which, in the case of non-abelian groups such as $D_4$ which we will study in more detail, are prohibitively expensive. 
 
-However, the problem lies in measuring the (off-diagonal) charge component of the full topological charge.
-This problem is implementing a controlled $A^{(g)}_s$ operator which needs a controlled group multiplication applied to all edges of $s$'s plaquette, i.e. $\ket{g}\ket{g_i} \rightarrow \ket{g}\ket{gg_i}$ for all $\ket{g_i}$ around the plaquette.
-This, in the case of non-abelian groups, such as $D_4$, is prohibitively expensive. 
+The main idea to circumvent this problem is to instead use partial charge measurements that have a substantially reduced circuit depth. Such partial measurements do not determine the charge completely. However, when we combine a set of different partial measurements we are able to deduce the full charge content from the measurement outcomes.
 
 % Used to be a subsection: {Reduced Charge Measurement}
 
 %\caro{general comment: just talk about the reduced charge measurement, make the purpose of it clear in the first few sentences: reduced circuit depth is traded for only gaining partial information because measurement outcomes for a single subgroup are compatible with several charges, repeating the measurement for different subgroups allows to deduce charge uniquely for examples considered (D4, Q8), skip all of the following until}
 
-The key idea behind the weak measurement protocol is that controlled $A_s^{(g)}$ becomes significantly simpler to perform once we restrict ourselves to a proper subset of the full group, i.e. $g \in H \subset G$.
-This restriction is the key to greatly reduce the complexity of the circuit, in terms of depth, for measuring the topological charge,
-%\caro{the figure here is too early and does make little sense, we need to introduce the encoding first, we also need to explain why toffoli are so costly, bc here it looks like depth 6 to depth 3}
-see Section \ref{subsec:enc} for full details.
+The key idea behind the partial measurement protocol is that controlled $A_s^{(g)}$ becomes significantly simpler to perform once we restrict ourselves to a proper subset of the full group, i.e. $g \in H \subset G$.
 
-With Eq.~\eqref{eqn:tranfs} in mind, we propose the following protocol:
-
-\textbf{The algorithm} for the $H$-reduced charge measurement on a plaquette $p$:\begin{enumerate}
-    \item Prepare an auxiliary qudit, $a$, encoding the elements of $H\subset G$, in an equal superposition over all elements, so that the joint total state of the system is: $$ \sum_{h \in H} \ket{h}_a\ket{\psi}_{G.F.}. $$
-    \item Apply a $a$-controlled $G$-multiplication unitary onto the edges touching the plaquette $p$:$$ \sum_{h \in H} \ket{h}_a\ket{\psi}_{G.F.} \rightarrow \sum_{h \in H} \ket{h}_a A^{(h)}_p \ket{\psi}_{G.F.}. $$
+With Eq.~\eqref{eqn:tranfs} in mind, we propose the following algorithm for the $H$-reduced charge measurement on a plaquette $p$:\begin{enumerate}
+    \item Prepare an auxiliary qudit, $a$, encoding the elements of $H\subset G$, in an equal superposition over all elements, so that the joint total state of the system is: $$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys}. $$
+    \item Apply a $a$-controlled $A$-multiplication onto the edges of the plaquette $p$$$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys} \rightarrow \sum_{h \in H} \ket{h}_a A^{(h)}_p \ket{\psi}_\text{phys}. $$
     \item Apply a unitary $$ U_a = \sum_{\chi_H}\sum_{i', j'}\sum_{h'\in H}  \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a $$ onto the auxiliary qudit $a$. Here the $\chi_H$ labels the irreducible representations of $H \subset G$, $\Gamma^{\chi_H}(h')$ are the representation matrices, with $i'$ and $j'$ being the vector indices for a given representation $\chi_H$.
     \item Measure the auxiliary qudit $a$.
 \end{enumerate}
 
 %Needs a case example
-To see how this protocol works, let us examine a following case.
-Take the gauge field in a state of well-defined pure charge on a plaquette $p$: $\ket{\psi}_{G.F.} = \ket{\chi, p; i}$.
-
-Using the Eq.~\eqref{eqn:tranfs} we can write the joint state after Step \textbf{2.} as:
+To see how this protocol works, let us examine the case of a  gauge field with well-defined pure charge on a plaquette  $\ket{\psi}_\text{phys} = \ket{\chi; i}$. Using  Eq.~\eqref{eqn:tranfs} we can write the joint state after step 2 as
 \begin{equation}
-    \sum_{h \in H} \ket{h}_a A^{(h)}_p \ket{\chi, p; i} = \sum_{h \in H} \ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi, p; j}.
+    \sum_{h \in H} \ket{h}_a A^{(h)}_p \ket{\chi; i} = \sum_{h \in H} \ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi; j}.
 \end{equation}
 
-
-\jovan{Remove duplicates.}
-
-Let us also take $H = G$, in which case this becomes a full charge measurement. The unitary $U_a$ is then: \begin{equation}
-    U_a = \sum_{\chi'}\sum_{i', j'}\sum_{h'\in G}  \Gamma^{\chi'}_{i'j'}(h') \ket{\chi'; i', j'}_a\bra{h'}_a.
-\end{equation}
-
-The joint state after Step \textbf{3.} becomes:\begin{equation}
+If $H = G$, the state after step 3 becomes\begin{equation}
     \begin{split}
         \sum_{h \in G} U_a\ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi, p; j} = \\
         \sum_{h \in G} \sum_{\chi'}\sum_{i', j'}  \Gamma^{\chi'}_{i'j'}(h)\Gamma^{\chi}_{ij}(h) \ket{\chi'; i', j'}_a \ket{\chi, p; j} =\\
         \sum_j\ket{\chi; i, j}_a \ket{\chi, p; j}
     \end{split}
 \end{equation}
+The decoupling we see in the last line after summing over $h$ is guaranteed by Schur's orthogonality lemma.
 
-The decoupling we see in the last line after summing over $h$ is guaranteed by the Schur's orthogonality lemma, the orthogonality lemma is the main reason for suggesting the form of the decoupling unitary $U_a$ we have suggested.
-
-In the case above, the result of the measurement in Step \textbf{4.} is a label $(\chi, i, j)$, representing the charge, the internal state before the measurement and the internal state after the measurement.
+In the case above, the result of the measurement in step 4 is a label $(\chi, i, j)$, representing the charge, the internal state before the measurement and the internal state after the measurement.
 
 If we, however, take $H \subset G$, then the charge information is partial.
-By partial charge information, we mean that the result of the measurement protocol, the label $(\chi_H, i, j)$ is no longer compatible with only one charge but a set of charges, i.e. charge is not fully determined.
+By partial charge information, we mean that the result of the measurement in the last step, the label $(\chi_H, i, j)$ is no longer compatible with only one charge but a set of charges, i.e. the charge is not fully determined.
 
-We may repeat the procedure using different subgroups of $G$ to gather further partial information on the charge in the hope that we may be able to deduce the charge fully. \jovan{Needs better wording.}
-
-This relies on partial orthogonality of character tables of a group and its subgroup, and is best explored in the specific cases below.
+We may repeat the procedure using different subsets $H \in G$ to gather further partial information on the charge in the hope that we will be able to deduce the charge fully. In the considered examples, choosing different subgroups proves to be sufficient. This relies on the partial orthogonality of character tables of a group and its subgroup, and is demonstrated for the example of the group $D_4$ below.
 
 \subsection{Quantum Double of $D_4$}
 
-Throughout the rest of the paper we will mostly focus on the case of $D_4$ lattice gauge theory.
+Throughout the rest of the paper we will focus on the group $D_4$ and its lattice gauge theory.
 Hence in this section, we will describe the group structure of $D_4$, its quantum double algebra, as well as representation theory of both.
 
-The dihedral group of order 8 is the symmetry group of a square. It is generated by the quarter turn rotation and the reflection along it's diagonal, labelled by $r$ and $m$ respectively.
-
+The dihedral group of order 8 is the symmetry group of a square. It is generated by a $\pi/2$-rotation $r$ and a reflection  $m$ along a diagonal.
 The group law is defined by following identities
 \begin{equation}
 	\begin{split}
-		r^4 = e,\\
-		m^2 = e \text{ and }\\
-		mr = r^3m, \label{eqn:group}
+		r^4 = e,\;
+		m^2 = e,	\;	mr = r^3m. \label{eqn:group}
 	\end{split}
 \end{equation}
-where $e$ is the group identity.
 
-This group is solvable and all of its proper subgroups are Abelian. The group can be decomposed as $D_4 = \mathbb{Z}^m_2 \ltimes \mathbb{Z}^r_4$, the semi-direct product between the two obvious subgroup defined my the last line in Eq.~\eqref{eqn:group}.
-This decomposition is not unique, $D_4 = \mathbb{Z}_2^m\ltimes(\mathbb{Z}_2^{r^2}\times\mathbb{Z}^{mr}_2)$ is also a valid decomposition.\footnote{The superscripts in $\mathbb{Z}_n^x$ label the group generator, $\mathbb{Z}_n^x = \{x, x^2, \ldots, x^{n-1}, x^n = e\}$.}
+This group is solvable and all of its proper subgroups are abelian. It can be decomposed as $D_4 = \mathbb{Z}^m_2 \ltimes \mathbb{Z}^r_4$.
+This decomposition is not unique, $D_4 = \mathbb{Z}_2^m\ltimes(\mathbb{Z}_2^{r^2}\times\mathbb{Z}^{mr}_2)$ is also a valid decomposition.\footnote{The superscripts in $\mathbb{Z}_n^x$ label the group generator.}
+%, $\mathbb{Z}_n^x = \{x, x^2, \ldots, x^{n-1}, x^n = e\}$.}
 
 The conjugacy classes of $D_4$ alongside their centres are listed in Table \ref{tab:conjs}.
 \begin{table}[h]
@@ -475,7 +455,7 @@ The conjugacy classes of $D_4$ alongside their centres are listed in Table \ref{
     \end{tabular}
     \caption{The conjugacy classes of $D_4$ alongside their centres.}\label{tab:conjs}
 \end{table}
-There are five conjugacy classes, which implies five irreducible representations, with dimensions $(1,1,1,1,2)$. The characters, traces of representation matrices, are given in Table \ref{tab:char}.
+There are five conjugacy classes, which implies that there are also five irreducible representations. Their dimensions are $(1,1,1,1,2)$. The characters, i.e., the traces of the representation matrices, are given in Table \ref{tab:char}.
 \begin{table}[h]
 \centering    \begin{tabular}{|c|c c c c c |}
          \hline
@@ -495,7 +475,7 @@ There are five conjugacy classes, which implies five irreducible representations
     \caption{Character table of $D_4$.}\label{tab:char}
 \end{table}
 
-When labelling the algebra representations we will also need the irreducible representations of the centres of conjugacy classes. The centres of the three non-trivial conjugacy classes ($|C|>1$) are all Abelian and have four elements, hence they will have four one-dimensional irreducible representations. The character tables of these subgroups are shown in Table
+When labelling the representations of the algebra $D(D_4)$ we will also need the irreducible representations of the centres of the conjugacy classes. The centres of the three non-trivial conjugacy classes are abelian and have four elements. Hence, they have four one-dimensional irreducible representations. Their character tables are shown in Table~\ref{tab:char_sub}.
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|llll|}\hline
@@ -507,7 +487,7 @@ $-i$ & $1$   & $i$            & $-1$             & $i$                          
 \end{tabular}
 \begin{tabular}{|l|llll|}\hline
   $H_m (H_{mr})$ & $e$ & $m(mr)$ & $r^2$ & $mr^2(mr^3)$ \\ \hline
-$(1,1) \equiv 1$ & $1$   & $1$            & $1$             & $1$                                  \\ 
+$(1,1)$ & $1$   & $1$            & $1$             & $1$                                  \\ 
 $(1,-1)$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
 $(-1,1)$ & $1$   & $1$            & $-1$             & $-1$                                  \\ 
 $(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                                  \\ \hline
@@ -516,52 +496,46 @@ $(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                    
 \label{tab:char_sub}
 \end{table}
 
-The task of listing all of the irreducible representations of $D(D_4)$ and their dimensions from this data is straightforward. There are $2 \times 5  + 3 \times 4 = 22$ irreducible representations, i.e. the types of anyons in the $D_4$ quantum double model.
+The task of listing all of the irreducible representations of $D(D_4)$ and their dimensions from this data is straightforward. There are $2 \times 5  + 3 \times 4 = 22$ irreducible representations, i.e., types of anyons in the $D_4$ quantum double model.
 
-Eight of them are one-dimensional, i.e. Abelian, while the rest are two-dimensional. Other than vacuum, four of them are pure charges and four pure fluxes. For dyons with the $\mathcal{C}_{r^2}$ flux component we say that they have a trivial flux, the flux can be factored out, just like in the case of the toric code fermion. This is stemming from the fact that $r^2$ commutes with all group elements, just like the identity. 
+Eight of them are one-dimensional, i.e. abelian, while the rest are two-dimensional. Other than the vacuum, four of them are pure charges and four are pure fluxes. For dyons with the $\mathcal{C}_{r^2}$ flux component we say that they have a trivial flux. The flux can be factored out, just like in the case of the toric code fermion. This comes from the fact that $r^2$ commutes with all group elements, just like the identity. 
 
-\textbf{Anyon content of $D(D_4)$.} The vacuum and the trivial flux we label as $0 \equiv (\mathcal{C}_e, 1)$ and $0 \equiv (\mathcal{C}_{r^2}, 1)$ respectively. The pure charges and dyons with trivial flux we label respectively as $\Sigma_{\chi} \equiv (\mathcal{C}_e, \chi)$ and $\tilde{\Sigma}_{\chi} \equiv (\mathcal{C}_{r^2}, \chi)$, with $\chi$ being one of the nontrivial irreducible representations of $D_4$.
+\textbf{Anyon content of $D(D_4)$.} We label the vacuum and the trivial flux as $0 \equiv (\mathcal{C}_e, 1)$ and $\tilde 0 \equiv (\mathcal{C}_{r^2}, 1)$, respectively. Likewise, the pure charges and dyons with trivial flux are labelled as $\Sigma_{\chi} \equiv (\mathcal{C}_e, \chi)$ and $\tilde{\Sigma}_{\chi} \equiv (\mathcal{C}_{r^2}, \chi)$, with $\chi$ being one of the nontrivial irreducible representations of $D_4$.
+Nontrivial pure fluxes are labelled $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ being one of the nontrivial conjugacy classes of $D_4$. The rest of the dyons have less informative labels such as $\{\tilde{\Psi}_x, \Phi_x, \tilde{\Phi}_x\}$ and can be found in Appendix \ref{app:reps}.
 
-Nontrivial pure fluxes we label as $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ being one of the nontrivial conjugacy classes of $D_4$. The rest of the dyons have less informative labels such as $\{\tilde{\Psi}_x, \Phi_x, \tilde{\Phi}_x\}$.
+\textbf{Charge Measurements Reprise.}
+Let us review the partial charge measurements for $D(D_4)$.
+We choose the subgroups $\{H_r, H_m, H_{mr}\}$ for the measurement protocol. All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional, this means that the measurement outcome of the reduced charge measurement is just the irrep label $(\chi_{H_x})$. Looking at their character tables, we note the partial orthogonality with the characters of the irreps of $G$. 
+
+%The character table of $D_4$ is given in Table \ref{tab:char}, while the character tables of relevant subgroups are given in Table \ref{tab:char_sub}. Note, the subgroups $\{H_r, H_m, H_{mr}\}$ were mentioned in the context of centres of relevant conjugacy classes, but they also prove to be a great choice of subgroups to be used in the reduced charge measurement protocol, in this case. \jovan{word better}
 
 
-
-
-\jovan{Move this is to the next section and \textbf{reformulate} to fit in!}
-
-\textbf{Charge Measurement Reprise.}
-In the following, we explore the reduced charge measurement in the case of $D_4$ gauge group.
-More precisely we look at the partial character table orthogonality we mentioned in the previous section that underpins this approach.
-
-The character table of $D_4$ is given in Table \ref{tab:char}, while the character tables of relevant subgroups are given in Table \ref{tab:char_sub}. Note, the subgroups $\{H_r, H_m, H_{mr}\}$ were mentioned in the context of centres of relevant conjugacy classes, but they also prove to be a great choice of subgroups to be used in the reduced charge measurement protocol, in this case. \jovan{word better}
-
-All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional, this means that the measurement outcome of the reduced charge measurement is just the irrep label $(\chi_{H_x})$.
-
-The partial orthogonality of the characters of the $D_4$ and these three groups is captured in the quantity: $ \braket{\chi_{H_x}, \chi} = \sum_{h\in H_x} \chi_{H_x}(h)\chi(h)$,  see Table \ref{tab:red_ch}.
+More concretely, we compute $ \braket{\chi_{H_x}, \chi} = \sum_{h\in H_x} \chi_{H_x}(h)\chi(h)$ for the five different charges and list the results in Table \ref{tab:red_ch}.
 
 
 \begin{table}[h]
 \centering
-\begin{tabular}{|l|lllll|}\hline
+\begin{tabular}{l|lllll}
   $\braket{\chi_{H_r}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $1$ & 4   & 4            & 0             & 0               & 0                   \\ 
 $-1$ & 0   & 0            & 4             & 4               & 0                   \\ 
 $i$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$-i$ & 0   & 0            & 0             & 0               & 4                   \\ \hline
+$-i$ & 0   & 0            & 0             & 0               & 4                   \\ 
 \end{tabular}
-\begin{tabular}{|l|lllll|}\hline
+
+\begin{tabular}{l|lllll}
   $\braket{\chi_{H_m}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $(1,1)$ & 4   & 0            & 4             & 0               & 0                   \\ 
 $ (1,-1)$ & 0   & 4            & 0             & 4               & 0                   \\ 
 $(-1,1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ \hline
+$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
 \end{tabular}
-\begin{tabular}{|l|lllll|}\hline
+\begin{tabular}{l|lllll}
   $\braket{\chi_{H_{mr}}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $(1,1)$ & 4   & 0            & 0             & 4               & 0                   \\ 
 $ (1,-1)$ & 0   & 4            & 4             & 0               & 0                   \\ 
 $(-1,1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ \hline
+$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
 \end{tabular}
 \caption{Partial orthogonality of $D_4$ with respect to its three four-element subgroups.}
 \label{tab:red_ch}
@@ -569,13 +543,13 @@ $(-1,-1)$ & 0   & 0            & 0             & 0               & 4            
 
 %\caro{What about the $\pm i$ outcomes for $H_r$? we can't measure $\pm i$.} See encoding.
 
-The Table \ref{tab:red_ch} is to be interpreted as follows, imagine we performed a $H_m$-reduced charge measurement on a plaquette $p$ and got a label $(1,1)$. This label has a non-vanishing overlap with $1$ and $\alpha_m$, hence both $0$ and $\Sigma_{\alpha_m}$ can be on a plaquette $p$.
+Table \ref{tab:red_ch} is to be interpreted as follows. Imagine we performed a $H_m$-partial charge measurement on a plaquette $p$ and obtained the measurement outcome $(1,1)$. This label has a non-vanishing overlap with the trivial charge $1$ and charge $\alpha_m$. Hence, both $0$ and $\Sigma_{\alpha_m}$ can be anyons present on the plaquette.
 
-Now imagine we have performed all three measurement and got a set of labels $\{-1, (1, 1), (1, -1)\}$, this set is only compatible with $\alpha_m$ and hence $\Sigma_{\alpha_m}$ must be on a plaquette $p$.
+Now imagine we have performed all three measurement and obtained the set of labels $\{-1, (1, 1), (1, -1)\}$. This set is only compatible with the charge $\alpha_m$ and hence $\Sigma_m$ must be on a plaquette $p$.
 
 %\caro{We are more interested in the inverse direction, namely, the result $\{(1,-1); (1,-1); 1\}$ is only compatible with charge $\Sigma_r$.} Agreed, better phrasing.
 
-The main advantage of doing these three measurements instead of a full charge measurement is twofold, both the controlled multiply unitary $U_{\text{CM}}: \ket{h, g} \rightarrow \ket{h, hg}$ and the decoupling unitary $U_a$ are much simpler if we restrict ourselves to $h \in H \subset G$.
+%The advantage of doing these three measurements instead of a full charge measurement is twofold. Both the controlled multiply unitary $U_{\text{CM}}: \ket{h, g} \rightarrow \ket{h, hg}$ and the decoupling unitary $U_a$ are much simpler in terms of circuit depth, if we restrict ourselves to $h \in H \subset G$.
 
 \section{Braiding Experiments and Numerical Results}
 
