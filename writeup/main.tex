@@ -371,7 +371,7 @@ The two types of triangles couple the two spaces in two different ways, for type
 
 \jovan{add something about the non-commutativity of these operations and their action on the degen. space}
 
-\subsection{Charge Measurements}
+\subsection{Charge Measurement}
 %\caro{Explain the idea of reduced charge measurement in words, i.e., get partial information and combine the partial information for different $H$ to deduce charge}
 
 \jovan{do not use weak measurements, partial}
@@ -507,7 +507,7 @@ $-i$ & $1$   & $i$            & $-1$             & $i$                          
 \end{tabular}
 \begin{tabular}{|l|llll|}\hline
   $H_m (H_{mr})$ & $e$ & $m(mr)$ & $r^2$ & $mr^2(mr^3)$ \\ \hline
-$(1,1)$ & $1$   & $1$            & $1$             & $1$                                  \\ 
+$(1,1) \equiv 1$ & $1$   & $1$            & $1$             & $1$                                  \\ 
 $(1,-1)$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
 $(-1,1)$ & $1$   & $1$            & $-1$             & $-1$                                  \\ 
 $(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                                  \\ \hline
@@ -529,7 +529,7 @@ Nontrivial pure fluxes we label as $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ bei
 
 \jovan{Move this is to the next section and \textbf{reformulate} to fit in!}
 
-\textbf{Charge Measurements Reprise.}
+\textbf{Charge Measurement Reprise.}
 In the following, we explore the reduced charge measurement in the case of $D_4$ gauge group.
 More precisely we look at the partial character table orthogonality we mentioned in the previous section that underpins this approach.
 
@@ -542,26 +542,26 @@ The partial orthogonality of the characters of the $D_4$ and these three groups 
 
 \begin{table}[h]
 \centering
-\begin{tabular}{l|lllll}
+\begin{tabular}{|l|lllll|}\hline
   $\braket{\chi_{H_r}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $1$ & 4   & 4            & 0             & 0               & 0                   \\ 
 $-1$ & 0   & 0            & 4             & 4               & 0                   \\ 
 $i$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$-i$ & 0   & 0            & 0             & 0               & 4                   \\ 
+$-i$ & 0   & 0            & 0             & 0               & 4                   \\ \hline
 \end{tabular}
-\begin{tabular}{l|lllll}
+\begin{tabular}{|l|lllll|}\hline
   $\braket{\chi_{H_m}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $(1,1)$ & 4   & 0            & 4             & 0               & 0                   \\ 
 $ (1,-1)$ & 0   & 4            & 0             & 4               & 0                   \\ 
 $(-1,1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
+$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ \hline
 \end{tabular}
-\begin{tabular}{l|lllll}
+\begin{tabular}{|l|lllll|}\hline
   $\braket{\chi_{H_{mr}}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $(1,1)$ & 4   & 0            & 0             & 4               & 0                   \\ 
 $ (1,-1)$ & 0   & 4            & 4             & 0               & 0                   \\ 
 $(-1,1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
+$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ \hline
 \end{tabular}
 \caption{Partial orthogonality of $D_4$ with respect to its three four-element subgroups.}
 \label{tab:red_ch}
@@ -571,7 +571,7 @@ $(-1,-1)$ & 0   & 0            & 0             & 0               & 4            
 
 The Table \ref{tab:red_ch} is to be interpreted as follows, imagine we performed a $H_m$-reduced charge measurement on a plaquette $p$ and got a label $(1,1)$. This label has a non-vanishing overlap with $1$ and $\alpha_m$, hence both $0$ and $\Sigma_{\alpha_m}$ can be on a plaquette $p$.
 
-Now imagine we have performed all three measurement and got a set of labels $\{-1, (1, 1), (1, -1)\}$, this set is only compatible with $\alpha_m$ and hence $\Sigma_m$ must be on a plaquette $p$.
+Now imagine we have performed all three measurement and got a set of labels $\{-1, (1, 1), (1, -1)\}$, this set is only compatible with $\alpha_m$ and hence $\Sigma_{\alpha_m}$ must be on a plaquette $p$.
 
 %\caro{We are more interested in the inverse direction, namely, the result $\{(1,-1); (1,-1); 1\}$ is only compatible with charge $\Sigma_r$.} Agreed, better phrasing.
 
