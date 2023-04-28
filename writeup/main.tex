@@ -551,60 +551,50 @@ Now imagine we have performed all three measurement and obtained the set of labe
 
 %The advantage of doing these three measurements instead of a full charge measurement is twofold. Both the controlled multiply unitary $U_{\text{CM}}: \ket{h, g} \rightarrow \ket{h, hg}$ and the decoupling unitary $U_a$ are much simpler in terms of circuit depth, if we restrict ourselves to $h \in H \subset G$.
 
-\section{Braiding Experiments and Numerical Results}
+\section{Probing Non-Abelions}
 
-In this chapter, we will present a set of braiding protocols that fully demonstrate the braiding statistics of the $D_4$ lattice gauge theory excitations. These also generate all the braiding amplitudes of the braiding protocols, however direct evaluation of longer protocols on current NISQ hardware is prohibited by the limitation on the circuit depth imposed by the noise, as the reader will see in the next chapter. 
+In this chapter, we will present a set of protocols that allow us to demonstrate the non-Abelian character of the anyons of $D(D_4)$ on realistic to-date quantum hardware. The main obstacle to overcome here is the noise which limits the depth of the circuits. In this section we will show how low circuit depths can be achieved for all protocols. A benchmark of the proposed experiments is presented in the next section showing numerical simulation results for a realistic noise model.
 
-The main experiments showcasing the nonabelian nature of the excitations are as follows:\begin{itemize}
 
-\item[i)] anyon fusion; the fusion outcome doesn't have an unique topological charge,
+The main experiments showcasing the nonabelian nature of the excitations we propose are the following.
+\begin{itemize}
 
-\item[ii)] nonabelian braiding; the braiding amplitude changes as we change the order of braids,
+\item[i)] Anyon fusion. Here, the non-Abelian nature is signalled by non-unique fusion outcomes.
 
-\item[iii)] \caro{full S- and T-matrix measurement; this generates the complete UTC data that specifies any braiding amplitude.
+\item[ii)] Non-Abelian braiding. The order of the braids does not commute.
+
+\item[iii)] S- and T-matrix measurements. This data describes the amplitudes of links and twists and almost uniquely\footnote{There are some exceptions, where the anyon theory, i.e., the UMTC is not determined uniquely by the $S$-and $T$-matrices alone.\caro{look up reference}} characterises the full anyon theory.
 %Technically speaking, the UMTC data is not captured by S and T matrix alone
-} 
 \end{itemize}
 
-It is easy to obtain the results of the first two experiments from the result of the last one, however it is useful to consider the two foundational phenomenological facts pertaining to the nonabelian anyons in separate points.
+%It is easy to obtain the results of the first two experiments from the result of the last one, however it is useful to consider the two foundational phenomenological facts pertaining to the nonabelian anyons in separate points.
 
-\subsection{Encoding, Ribbon operators and Charge Measurements}\label{subsec:enc}
+\subsection{Achieving low circuit depth}\label{subsec:enc}
 
-In this section, we will discuss the $D_4$ group element encoding and group operation circuits based around this encoding.
+In this section we will discuss how low circuit depth can be achieved for creating and moving the anyons of $D(D_4)$. We will present the encoding of group elements into qubits, and show how short circuits for the elementary triangles of the ribbon operators discussed in section ~\ref{sec:ribbon} can be obtaind.
 
-\textbf{The Encoding.} The states of the gauge field are characterized by group element labelings of the edges of the graph.
-In general, our degrees of freedom are group valued.
+\textbf{Encoding.} 
 The cardinality of $D_4$ is 8, hence we need three qubits to encode a group element.
 We chose the following map
 \begin{equation}
     \ket{g} \equiv \ket{a}_m\ket{b}_r\ket{c}_{r^2} \iff g = m^a r^b (r^2)^c,
 \end{equation}
-where $a,b,c \in \{0,1\}$ and $r$ is the $90^{\text{o}}$ rotations and $m$ is the reflection.
+where $a,b,c \in \{0,1\}$, $r$ is the $90^{\text{o}}$ rotation and $m$ is the reflection.
 
-When encoding the internal space of the anyon, which we need for our ribbon operator protocol, we note that the basis also include a group element component: $\ket{\nu} = \ket{c, i}$, where $c \in C_x$, for some conjugacy class.
-The elements of a conjugacy class are also encoded similarly, for example, $C_r = \{r, r^3\}$:
-\begin{equation}
-    \ket{c} \equiv \ket{a}_{r^2} \iff c = m^0r^1(r^2)^a,
+When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Similarly the subgroups are encoded with two qubits. For example for $h\in H_r$ we use\begin{equation}
+    \ket{h} \equiv \ket{a}_r\ket{b}_{r^2} \iff h = m^0r^a(r^2)^b.
 \end{equation}
-using only one qubit.
-
-This also hold for encoding elements of a subgroup:
-\begin{equation}
-    \ket{h} \equiv \ket{a}_r\ket{b}_{r^2} \iff h = m^0r^a(r^2)^b,
-\end{equation}
-for the example of $h \in H_r$.
-
 %These \caro{restrictions%these are not really restrictions, maybe say that we often just need to multiply with elements from a certain conjugacy class as indicated by the ribbon operator prescriptions in Eq. sth and that for this purpose we can use a single qubit and a circuit that is much shorter than the general group multiplication circuit.
 %} 
 %not only reduce the number of bits needed, but also greatly reduce the complexity of circuits implementing %various group operations.
+%
+%The restriction of the domain of the controlled $G$-multiplication unitary map not only reduce the number of qubits needed to encode the inputs, but also greatly reduce the depth of the circuit implementing the map, which we will see very shortly.
 
-The restriction of the domain of the controlled $G$-multiplication unitary map not only reduce the number of qubits needed to encode the inputs, but also greatly reduce the depth of the circuit implementing the map, which we will see very shortly.
-
-However, before talking about the circuits, we would lastly note that there is no natural way to encode the representations of the subgroups $\chi_H$, hence for $H_m$ and $H_{mr}$ we will use:
+To encode the representations of the subgroups $\chi_H$ for $H_m$ and $H_{mr}$ we will use
 \begin{equation}
     \ket{(-1)^a,(-1)^b} \equiv \ket{a,b},
 \end{equation}
-while:
+and for $H_{r}$ we use
 \begin{equation}
     \ket{i^{2a+b}} \equiv \ket{a, b}.
 \end{equation}
@@ -614,26 +604,27 @@ while:
 %This is the first time we actually discuss circuits. How about we start off with 'we need group multiplication and conjugation', these are the general circuits that do these two operations, they are long bc they involve x number of tofollis. however for ribbons we need only group multiplication for elements of conjugacy class which reduces circuit depths significantly, then include fig:restMult
 %}
 
-\textbf{The Circuits.} For the rest of the section, we will focus on circuits implementing the group related operations appearing in our protocols. These operations include:\begin{enumerate}
-    \item Controlled $G$-multiplication, $U_{\text{CM}}: \ket{g, h} \rightarrow \ket{g, gh}$, of both full and restricted domain of the input:\begin{enumerate}
-        \item full domain variant ($g \in G$) is used for ground state preparation, see the next section.
-        \item domain restricted to a conjugacy class variant ($g \in C$) is used in ribbon operator application protocol.
-        \item domain restricted to a four element subgroup variant ($g \in H$) is used in $H$-reduced charge measurement. 
+\textbf{Circuits.} To implement the anyon protocols we need circuits for the following operations.
+\begin{enumerate}
+    \item Controlled group multiplication $\ket{g, h} \rightarrow \ket{g, gh}$  \begin{enumerate}
+        \item full domain variant ($g \in G$), used for ground state preparation,
+        \item restricted domain variant ($g \in C$), used in ribbon operators,
+        \item restricted domain variant ($g \in H$), used for partial charge measurements 
     \end{enumerate}
-    \item Controlled generalized $(C, \chi)$-conjugation, $U_{\text{GC}}: \ket{\alpha}\ket{g} \rightarrow (A^{(g)}\ket{\alpha}\ket{g})$, with $A^{(g)}$ being the representation matrices of the $(C, \chi)$ representation, used in ribbon operator application protocol.
-    \item The decoupling unitary of the $H$-reduced charge measurement: $$ U_a = \sum_{\chi_H}\sum_{i', j'}\sum_{h'\in H}  \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a. $$
+    \item Controlled generalized conjugation\\ $\ket{c} \ket{i}\ket{g} \rightarrow \ket{gcg^{-1}} \Gamma^\chi_{c} \ket{i}\ket{g}$.
+    \item Decoupling unitary of the partial charge measurement $$ U_a = \sum_{\chi_H}\sum_{i', j'}\sum_{h'\in H}  \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a. $$
 \end{enumerate} 
 
 The full list of circuits for all variants of the above-mentioned operations are presented in Appendix \ref{app:cirqs}.
-We will now focus on a set of examples illustrating the expected circuit depths.
+We will now focus on a set of examples illustrating the expected circuit depths. The full domain group multiplication (see Fig. \ref{fig:restMult}) consists of three Toffoli and 2 CNOT gates. Note, that on most hardwares a 3-qubit Toffoli gate must be decomposed into 2-qubit gates. Hence, each Toffoli gate should be seen as a depth-6 circuit in itself. With this in mind, the circuit depth for a single group multiplication is 22. Current noise levels limit the circuit depth to about 100 gates. Therefore, a naive protocol based on full domain group multiplication is doomed to fail. 
 
-A sample of controlled multiply circuits, both of full and restricted domain, are shown in Figure \ref{fig:restMult}. We must note that a 3-qubit Toffoli gate must be compiled in terms of 2-qubit coupling gates, which is true for almost all quantum simulators, since they cannot perform Toffoli gates natively. Hence, each Toffoli gate should be seen as a depth-6 circuit in itself. With this in mind, we can appreciate a dramatic reduction of circuit depth achieved by restricting the domain of the controlled multiplication circuit.
+We now contrast this with the reduced domain multiplication, wehre the control qubits are restricted do a certain conjugacy class. A representative example is shown in Fig.~\ref{fig:restMult}. The circuit is reduced to three CNOT gates. We can appreciate a dramatic reduction of circuit depth achieved by restricting the domain of the controlled multiplication circuit.
 
-This is one of the main facts that allows us to greatly simplify many circuits related to ribbon operators and reduced charge measurement. However, the direct ground state preparation doesn't benefit from these simplifications.
+This is one of the main facts that allows us to greatly simplify many circuits related to ribbon operators and partial charge measurements. However, the direct ground state preparation does not benefit from these simplifications. We will discuss the ground state preparation separetely in the next section.
 
-We saw that the ribbon operators are made up from two types of elementary triangles. The first require group multiplication maps, restricted to a single conjugacy class, from the auxiliary degree of freedom onto the matter. The other are acting the other way around, implementing a specific representation of the group transformation onto the auxiliary degree of freedom controlled by the matter, a controlled generalized $(C, \chi)$-conjugation map.
+%We saw that the ribbon operators are made up from two types of elementary triangles. The first require group multiplication maps, restricted to a single conjugacy class, from the auxiliary degree of freedom onto the matter. The other are acting the other way around, implementing a specific representation of the group transformation onto the auxiliary degree of freedom controlled by the matter, a controlled generalized $(C, \chi)$-conjugation map.
 
-Let us look at the circuits involved in the ribbon application protocol for two different anyon flavours, a pure $m$-flux $\Psi_m \equiv (C_m, (1,1))$ and a $m$-dyon $\tilde{\Phi}_m \equiv (C_m, (-1, -1))$. These two anyons differ notably in how difficult it is to create and manipulate them, as we will see. The representation matrices $A^{(g)}$ for the two representations are shown in Figure \ref{tab:somereps}. The full list of the representations is discussed in Appendix \ref{app:reps}.
+Let us move on to the generalized conjugation. The circuit depths for the latter heavily depends on the type of anyon. For a pure flux the representation matrix $\Gamma$ is trivial and the generalized conjugation simplifies to a conventional conjugation which can be implemented by a circuit of depth one or two (see Fig.~\ref{fig:} for an example). In contrast for a dyon with a one-dimensional but non-trivial irrep of the center, the circuit is more involved. Since the irrep is one dimensional, it corresponds to a phase factor and does not need to be encoded in an additional vector space. I.e., we can still use $\ket{c}$ instead of $\ket{c,i}$. However, the conjugation of $c$ has to be accompanied by appropriate phase factors implementing the action of $\Gamma^\chi_c(g)$. A circuit showing such a generalized conjugation for the $m$-dyon $\tilde{\Phi}_m \equiv (C_m, (-1, -1))$ is shown in Fig.~\ref{}. We note, that there is still no need for Toffoli gates, however, the circuit is more complex than for pure fluxes. The full list of circuits for generalized conjugations is discussed in Appendix \ref{app:reps}.
 
 \begin{table}[]
     \centering
@@ -647,14 +638,14 @@ Let us look at the circuits involved in the ribbon application protocol for two 
     \caption{$A^{(g)}$ matrices for $\Psi_m$ and $\tilde{\Phi}_m$ representation of $D(D_4)$.}
     \label{tab:somereps}
 \end{table}
-
-These two representations are two-dimensional, anyons are non-abelian and have an internal state space spanned by vectors: $\{\ket{m; ++}, \ket{mr^2; ++}\}$ for $\Psi_m$ and $\{\ket{m; --}, \ket{mr^2; --}\}$ for $\tilde{\Phi}_m$.
-This space is encodable with a single auxiliary qubit for each anyon, $\ket{a}_{\text{aux}} \equiv \ket{m(r^2)^a; \sigma\sigma}$.
-
-The matter will act on this space every time an anyon crosses some edge $i$ via $U_{\text{GC}}: \ket{a}\ket{g}_i \rightarrow (A^{(g)}\ket{a})\ket{g}_i$, which we need to compile.
-The circuits for this operation are shown in Figure \ref{fig:genConj} (Left and Center).
-It is easy to check that these circuits agree with the representation matrices given in Table \ref{tab:somereps}. 
-The auxiliary space acts on the matter every time an anyon moves along a edge $i$ via $U_{\text{CM}}: \ket{a}\ket{g}_i \rightarrow \ket{a}\ket{m(r^2)^a g}_i$, the circuit which performs this operation is shown in Figure \ref{fig:genConj} (Right).
+%
+%These two representations are two-dimensional, anyons are non-abelian and have an internal state space spanned by vectors: $\{\ket{m; ++}, \ket{mr^2; ++}\}$ for $\Psi_m$ and $\{\ket{m; --}, \ket{mr^2; --}\}$ for $\tilde{\Phi}_m$.
+%This space is encodable with a single auxiliary qubit for each anyon, $\ket{a}_{\text{aux}} \equiv \ket{m(r^2)^a; \sigma\sigma}$.
+%
+%The matter will act on this space every time an anyon crosses some edge $i$ via $U_{\text{GC}}: \ket{a}\ket{g}_i \rightarrow (A^{(g)}\ket{a})\ket{g}_i$, which we need to compile.
+%The circuits for this operation are shown in Figure \ref{fig:genConj} (Left and Center).
+%It is easy to check that these circuits agree with the representation matrices given in Table \ref{tab:somereps}. 
+%The auxiliary space acts on the matter every time an anyon moves along a edge $i$ via $U_{\text{CM}}: \ket{a}\ket{g}_i \rightarrow \ket{a}\ket{m(r^2)^a g}_i$, the circuit which performs this operation is shown in Figure \ref{fig:genConj} (Right).
 
 \begin{figure}
 \begin{equation*}
@@ -733,11 +724,11 @@ The auxiliary space acts on the matter every time an anyon moves along a edge $i
     \caption{The coupling unitary map used in the $H$-reduced charge measurement, $U_a$. Left: the case where the subgroup $H$ is isomorphic to $\mathbb{Z}_2 \times \mathbb{Z}_2$. Right: the case where the subgroup $H$ is isomorphic to $\mathbb{Z}_4$. The one qubit unitary $R_2$ is just equal to $\sqrt{Z}$.}
     \label{fig:decopU}
 \end{figure}
-
-These elementary operations, with a couple of additional edge cases (see Appendices \ref{app:ribs} and \ref{app:cirqs}), allow us to apply ribbon operators along any path.
-We can create, move/braid and annihilate anyons by means of these couple simple circuits.
-
-However, there are adaptive constant-depth circuits (measurement-based schemes) for applying ribbon operators that have better scaling for solvable gauge groups (such as $D_4$)\cite{}, but, the measurement overhead  makes them less preferable for such small systems and the universality of this approach makes it a good avenue for further exploration. \jovan{Needs better wording.}
+%
+%These elementary operations, with a couple of additional edge cases (see Appendices \ref{app:ribs} and \ref{app:cirqs}), allow us to apply ribbon operators along any path.
+%We can create, move/braid and annihilate anyons by means of these couple simple circuits.
+%
+\caro{move to somewhere fitting: However, there are adaptive constant-depth circuits (measurement-based schemes) for applying ribbon operators that have better scaling for solvable gauge groups (such as $D_4$)\cite{}, but, the measurement overhead  makes them less preferable for such small systems and the universality of this approach makes it a good avenue for further exploration. \jovan{Needs better wording.}}
 
 Lastly, we look at the decoupling unitaries for $H$-reduced charge measurements $U_a$, they are shown in Figure \ref{fig:decopU}. For $H \equiv \mathbb{Z}_2 \times \mathbb{Z}_2$ the circuit is just two Hadamard gates applied to the two auxiliary qubits, while for $H \equiv\mathbb{Z}_4$ it is a 2-qubit Quantum Fourier Transform circuit.
 
