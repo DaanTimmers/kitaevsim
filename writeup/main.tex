@@ -290,7 +290,7 @@ The Hilbert space associated with the presence of multiple non-Abelian anyons is
 %The braiding action is best described in the global fusion tree basis in terms of topological variables such as the $F$- and $R$-symbols \cite{cui2018topological, Kitaev_2003}. See Appendix \ref{app:braid} for the treatment of braiding of quantum double anyons in both local spin-like and fusion tree basis. \jovan{Needs reform.}
 %
 %
-\subsection{Ribbon Operators}
+\subsection{Ribbon Operators}\label{sec:ribbon_ops}
 
 In the following, we will explain how to create and move anyons. Anyons are always created in pairs from the vacuum. 
 %
@@ -1220,10 +1220,30 @@ In this section, we will discuss what carries over from our study further onto t
 
 \jovan{Start after the main text.}
 
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+\FloatBarrier
+\onecolumn
 \appendix
 
 \section{Ribbon Types}\label{app:ribs}
-\jovan{ToDo, a lot ToDo.}
+
+
+In this appendix, we will all the variants of the ribbon operator application algorithm introduced in Section \ref{sec:ribbon_ops}.
+
+More precisely it is how we couple the ancillary qudit with the gauge field degrees of freedom that depending on the exact type of the elementary triangle that is the source of the great number of variants of the application algorithm. 
+
+In the main text we have chosen one case to showcase for the sake of brevity, while in this section we provide an exhaustive list of all sixteen variants.
+
+There are sixteen kinds of elementary triangles, which can be understood as coming from four binary descriptors:\begin{enumerate}
+	\item The aforementioned triangle type, i.e. does it cross or follow the leg it touches,
+	\item Handedness, the triangle and its mirror image must act as inverses to one another,
+	\item The end of the ribbon it is appended to, does it extend the ribbon forwards or backwards,
+	\item The leg it touches can be oriented in two direction.
+\end{enumerate} 
+
+
 
 \begin{figure}
     \centering
@@ -1244,10 +1264,6 @@ In this section, we will discuss what carries over from our study further onto t
 \section{Abelian anyons of $D_4$ gauge theory}\label{app:abl}
 
 \section{Postsellection and one-qubit marginals}\label{app:marg}
-
-
-\bibliographystyle{plain}
-\bibliography{bibliography}
 
 
 \end{document}
