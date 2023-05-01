@@ -1243,7 +1243,9 @@ There are sixteen kinds of elementary triangles, which can be understood as comi
 	\item The leg it touches can be oriented in two direction.
 \end{enumerate}
 
-The various different rules for the sixteen cases are  
+The various different rules for the sixteen cases are shown in Figure \ref{fig:al_trigs}. The main actions are controlled multiplication $U_{CM}$ that is controlled by the ancillary qudits and done on the gauge fields degrees of freedom and the generalised conjugation $U_{GC}$ that acts conversely, from the gauge filed onto the ancillary qudits.
+
+Another main distinction is between triangles that are appended to the front and the back of the ribbon, one set involving the forward ancilla, $a_f$, and the other backwards ancilla, $a_b$, respectively. 
 
 \begin{figure}
 \centering
@@ -1266,6 +1268,16 @@ The various different rules for the sixteen cases are
 \end{tabular}\vspace{10pt}
 \caption{The variants of the ribbon application algorithm for different kinds of Type I and II elementary triangles. \jovan{Type II rules for backwards triangles are wrong because one needs to apply $A^{T}(g)$, which I need to figure out how it is written in our new convention.}}
 \label{fig:al_trigs}
+\end{figure}
+
+The ability to append to the backend helps in halving the circuit depth of the ribbon application, since, they can be applied in parallel, see Figure \ref{fig:both_ends}. In this example the ribbon in Figure \ref{fig:rib_exampl} can be applied in four sequential steps instead of seven if we only grew it by appending the triangles to the frontend.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.45\linewidth]{Figures/front_end.pdf}
+	\includegraphics[width=0.45\linewidth]{Figures/both_ends.pdf}
+	\caption{The ribbon in Figure \ref{fig:rib_exampl}, broken down so that it can be applied in half the depth, by extending it from the middle (X) in both directions. The number label in which layer each elementary triangle is applied.}
+	\label{fig:both_ends}
 \end{figure}
 
 \section{Fusion of Quantum Double Excitations}\label{app:fusion}
