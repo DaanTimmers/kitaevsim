@@ -1309,6 +1309,17 @@ After applying the co-product to the $x$-projector we arrive at the form of the 
 	P_{a \otimes b}^x = \frac{\chi_x(e)}{|Z(r_x)|}\sum_{c \in C_x}\sum_{z \in Z(r_x)}\sum_{g\in G}\chi_x^*(z)B_a^{(g)}A_a^{(q_c z \bar{q}_c)}\otimes B_b^{(\bar{g}c)}A_b^{(q_c z \bar{q}_c)}.
 \end{equation}
  The rank of this projector will be an integer multiple of the dimension of the $x$ representation and that integer is the fusion algebra coefficient $N_{ab}^x$.
+ 
+ The more general way of calculating these fusion coefficients that is more familiar and is applicable for all anyon theories is the Verlinde formula
+ \begin{equation}
+ 	N_{ab}^x = \sum_{l}\frac{S_{al}S_{bl}S^*_{cl}}{S_{0l}},
+ \end{equation}
+ where the sum is taken over all the anyon labels in the theory, the irreducible representations in our case. The matrix $S$ is the linking matrix and is defined, in terms of the planar diagram algera, as the following diagram
+ \begin{figure}
+ 	\centering
+ 	\includegraphics[width= 0.35\linewidth]{Figures/S_mat_def.pdf}
+ 	\caption{The diagram definition of the linking matrix elements between anyons $a$ and $b$ and its evaluation in the case of the quantum double model. $\sigma_{ii+1}$ represent the action of the braid group generator, the exchange of $i^{\text{th}}$ and $(i+1)^{\text{st}}$ anyon, on the representation space $a \otimes a \otimes b \otimes b$. $P_{xx}^0$ are projectors from the representation space $x \otimes x$ onto the trivial sector and $\phi_{xx}^0$ are functions whose inverses are these projectors. }
+ \end{figure}
 
 
 \section{Representation Theory of $D_4$ and $D(D_4)$}\label{app:reps}
