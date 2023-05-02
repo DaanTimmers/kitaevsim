@@ -132,7 +132,7 @@ This state is the unique ground state and corresponds to the equal weight superp
 %\caro{Move this to GS section}: I do not agree that's better
 
 
-\subsection{Anyon content}
+\subsection{Anyon content}\label{sec:anyon}
 In the following we will discuss the anyonic excitations in quantum double models and the algebra describing the latter.
 
 \textbf{The algebra $D(G)$.} The ground state is stabilized\footnote{Meaning, it is the $+1$ eigenstate.} by the projectors in Eq.~\eqref{eqn:ham}. Together with the property $A_p^{(g_1)}A_p^{(g_2)} = A_p^{(g_1 g_2)}$ this implies the stronger condition
@@ -1246,7 +1246,6 @@ There are sixteen kinds of elementary triangles, which can be understood as comi
 The various different rules for the sixteen cases are shown in Figure \ref{fig:al_trigs}. The main actions are controlled multiplication $U_{CM}$ that is controlled by the ancillary qudits and done on the gauge fields degrees of freedom and the generalised conjugation $U_{GC}$ that acts conversely, from the gauge filed onto the ancillary qudits.
 
 Another main distinction is between triangles that are appended to the front and the back of the ribbon, one set involving the forward ancilla, $a_f$, and the other backwards ancilla, $a_b$, respectively. 
-
 \begin{figure}
 \centering
 \caption*{$U_{CM}\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i}_{\text{phys}} = $}
@@ -1269,20 +1268,48 @@ Another main distinction is between triangles that are appended to the front and
 \caption{The variants of the ribbon application algorithm for different kinds of Type I and II elementary triangles. \jovan{Type II rules for backwards triangles are wrong because one needs to apply $A^{T}(g)$, which I need to figure out how it is written in our new convention.}}
 \label{fig:al_trigs}
 \end{figure}
-
-The ability to append to the backend helps in halving the circuit depth of the ribbon application, since, they can be applied in parallel, see Figure \ref{fig:both_ends}. In this example the ribbon in Figure \ref{fig:rib_exampl} can be applied in four sequential steps instead of seven if we only grew it by appending the triangles to the frontend.
-
+The ability to append to the backend helps in halving the circuit depth of the ribbon application, since, both ends can be grown in parallel, see Figure \ref{fig:both_ends}. In this example the ribbon in Figure \ref{fig:rib_exampl} can be applied in four sequential steps instead of seven if we only grew it by appending the triangles to the frontend.
 \begin{figure}
 	\centering
 	\includegraphics[width=0.45\linewidth]{Figures/front_end.pdf}
 	\includegraphics[width=0.45\linewidth]{Figures/both_ends.pdf}
-	\caption{The ribbon in Figure \ref{fig:rib_exampl}, broken down so that it can be applied in half the depth, by extending it from the middle (X) in both directions. The number label in which layer each elementary triangle is applied.}
+	\caption{The ribbon in Figure \ref{fig:rib_exampl}, broken down so that it can be applied in half the depth, by extending it from the middle ($\times$) in both directions. The numbers label in which layer each elementary triangle can be applied.}
 	\label{fig:both_ends}
 \end{figure}
 
-\section{Fusion of Quantum Double Excitations}\label{app:fusion}
 
-\section{Braiding of Quantum Double Excitations}\label{app:braid}
+\section{Quantum Double Algebra}
+
+\section{Fusion and Braiding of Quantum Double Excitations}\label{app:fusion}\label{app:braid}
+
+In section \ref{sec:anyon}, we have mentioned that there is an algebra associated with irreducible representations of the quantum double algebra $D(G)$. In this appendix, we will derive the fusion coefficients that appear in this algebra
+\begin{equation}
+	a \otimes b = \bigoplus_c N_{ab}^x x,
+\end{equation}
+where labels $\{a,b,x\}$ are short versions of the full label of the irreducible representations, $x \equiv (C_x, \chi_x)$, where $C_x$ is some conjugacy class of the group $G$ and the $\chi_x$ is a irreducible representation of its centre.
+
+The algebra above is completely analogous to the Clebsch-Gordan decomposition of the product of linear representations of a group into its irreducible representations. The number $N_{ab}^x$ numbers how many time does the representation $x$ appear in the product representations of $a$ and $b$.
+
+To derive this quantity we start with the projector onto the representations $c$
+\begin{equation}
+	P^x = \frac{\chi_x(e)}{|Z(r_x)|}\sum_{c \in C_x}\sum_{z \in Z(r_x)}\chi_x^*(z)B_x^{(c)}A_x^{(q_c z \bar{q}_c)},
+\end{equation}
+where $q_c$ is a nonunique group element obeying $q_c c \bar{q}_c = r_x$, with $r_x$ as the $C_x$'s representative.
+
+The matrices $A_x$ and $B_x$ in the equation above are the representation matrices in the $x$ irreducible representations, but the form of the projector is representation independent. We just need to figure out the their form in the $a\otimes b$ representation.
+
+For this specific reason, the quantum double algebra is by definition equiped with a co-product operator
+\begin{equation}\begin{split}
+	\Delta(A_x^{(g)}) = A_a^{(g)} \otimes A_b^{(g)}\\
+	\Delta(B_x^{(h)}) = \sum_{g \in G} B_a^{(g)}\otimes B_b^{(\bar{g}h)}.
+\end{split}\end{equation}
+
+After applying the co-product to the $x$-projector we arrive at the form of the projector in the $a\otimes b$ basis
+\begin{equation}
+	P_{a \otimes b}^x = \frac{\chi_x(e)}{|Z(r_x)|}\sum_{c \in C_x}\sum_{z \in Z(r_x)}\sum_{g\in G}\chi_x^*(z)B_a^{(g)}A_a^{(q_c z \bar{q}_c)}\otimes B_b^{(\bar{g}c)}A_b^{(q_c z \bar{q}_c)}.
+\end{equation}
+ The rank of this projector will be an integer multiple of the dimension of the $x$ representation and that integer is the fusion algebra coefficient $N_{ab}^x$.
+
 
 \section{Representation Theory of $D_4$ and $D(D_4)$}\label{app:reps}
 \jovan{$\ldots$}
