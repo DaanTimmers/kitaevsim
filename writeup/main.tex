@@ -1256,7 +1256,7 @@ Another main distinction is between triangles that are appended to the front and
  \includegraphics[width=0.12\linewidth]{Figures/IRgb.pdf} &   $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{c'g_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IRib.pdf}           &       $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i c'^{-1}}_{\text{phys}}$                  \\ 
 \includegraphics[width=0.12\linewidth]{Figures/ILib.pdf} &   $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{c'^{-1}g_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/ILgb.pdf}           &       $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i c'}_{\text{phys}}$                  \\  
 \end{tabular}\vspace{10pt}
-\vspace{10pt}
+\hline\vspace{10pt}
 \caption*{$U_{GC}\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{h_i}_{\text{phys}} = $}
 \vspace{10pt}
 	\begin{tabular}{llll}
@@ -1314,12 +1314,16 @@ After applying the co-product to the $x$-projector we arrive at the form of the 
  \begin{equation}
  	N_{ab}^x = \sum_{l}\frac{S_{al}S_{bl}S^*_{cl}}{S_{0l}},
  \end{equation}
- where the sum is taken over all the anyon labels in the theory, the irreducible representations in our case. The matrix $S$ is the linking matrix and is defined, in terms of the planar diagram algera, as the following diagram
+ where the sum is taken over all the anyon labels in the theory, the irreducible representations in our case. The matrix $S$ is the linking matrix and is defined, in terms of the planar diagram algera, as in the diagram in Figure \ref{fig:S_mat_def}.
  \begin{figure}
  	\centering
  	\includegraphics[width= 0.35\linewidth]{Figures/S_mat_def.pdf}
  	\caption{The diagram definition of the linking matrix elements between anyons $a$ and $b$ and its evaluation in the case of the quantum double model. $\sigma_{ii+1}$ represent the action of the braid group generator, the exchange of $i^{\text{th}}$ and $(i+1)^{\text{st}}$ anyon, on the representation space $a \otimes a \otimes b \otimes b$. $P_{xx}^0$ are projectors from the representation space $x \otimes x$ onto the trivial sector and $\phi_{xx}^0$ are functions whose inverses are these projectors. }
+ 	\label{fig:S_mat_def}
  \end{figure}
+ The only additional information we need to evaluate the linking matrix elements in the case of the quantum double model is also provided by the definition of the quantum double algebra.
+ 
+The action of the exchange of 
 
 
 \section{Representation Theory of $D_4$ and $D(D_4)$}\label{app:reps}
