@@ -37,11 +37,16 @@
 
 
 \section{Introduction}
+\caro{Todo: \begin{itemize}
+	\item writing: intro, discussion and outlook, abstract
+	\item numerical results: fusion and braiding results, more details on layout, circuit depths, interferometry error discussion
+	\item cleaning up figures and captions
+	\item context discussion (we vs others) scattered throughout main text or commented out, integrate into text appropriately
+	\item make a plan about appendices
+\end{itemize}
+}
 
-\jovan{\begin{itemize}
-    \item To be revisited after the main body of the text is finished
-    \item Needs Steve's input
-\end{itemize}}
+
 
 We have developed a framework of manipulating nonabelian excitations on top of a lattice gauge theory ground state realized on a digital quantum simulator.
 
@@ -54,10 +59,6 @@ The reason for this choice is the suitable geometry of Sycamore for implementing
 In the next chapter, we will discuss the general framework of manipulating the nonabelian anyons of the quantum double model, with a brief overview of the model itself. Afterwards, we will propose a series of experiments one can compile for a digital quantum processor that showcase the nonabelian nature of these particles: non-unique fusion, nonabelian nature of the braid group represented by these particles and the non-trivial linking matrix. Following that, we will present the results of our noisy simulations, the goal of which are to show that these signatures are indeed measurable on the current quantum hardware. The last chapter will be dedicated to the discussion of future research in quantum simulation, having now ways to prepare arbitrary lattice gauge theory states.
 
 \section{Quantum double models}
-\caro{\begin{itemize}
-\item Language!
-\item Thematic consistencty, note what will be in the introduction
-\end{itemize}}
 
 In this section we will review Kitaev's quantum double models\cite{Kitaev_2003} and discuss their ground states and anyonic excitations. We will also present our protocols for creating and manipulating anyons, and for measuring topological charge. 
 
@@ -1093,7 +1094,7 @@ In this section, we report on the layouts of qubits on the chip used in our nume
 
 
 \subsection{Interferometry and Tomography}
-
+\caro{Need to discuss that we are dealing with a mixed state and that we have entanglement between control and gauge field bc of errors}
 In Section \ref{subsec:Intef} we explain how one can extract  S- and T-matrix elements from the interferometry protocol in section \ref{}.
 One may think that the process of reading it out is a simple single qubit tomography, and it is, but with a couple of caveats.
 
@@ -1160,6 +1161,7 @@ Tomography protocol consists of two scans:\begin{enumerate}
 \end{enumerate}
 From the scans we extract, by fitting Eq. \ref{eqn:estim}, $\phi_{max}$ and $\theta_{max}$, angles where polarization was maximal in the two scans respectively. 
 The two angles then fix the value of $\tilde{S}_{ab}$: $$\tilde{S}_{ab} = \sqrt{\frac{1-\cos{\theta_{max}}}{1+\cos{\theta_{max}}}}e^{i\phi_{max}}.$$
+\caro{Looks like this formula only works for $r_y=0$}
 Other, two parameters, the amplitude and the offset of the polarization do not convey any physics, but only determine the effective readout biases $\bar{\epsilon}$ and $\Delta\epsilon$.
 
 Everything remains the same for $T_{aa}$.
