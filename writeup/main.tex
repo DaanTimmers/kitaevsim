@@ -1304,9 +1304,9 @@ For this specific reason, the quantum double algebra is by definition equiped wi
 	\Delta(B_x^{(h)}) = \sum_{g \in G} B_a^{(g)}\otimes B_b^{(\bar{g}h)}.
 \end{split}\end{equation}
 
-After applying the co-product to the $x$-projector we arrive at the form of the projector in the $a\otimes b$ basis
+After applying the co-product to the $x$-projector we arrive at the form of the projector in the $a\otimes b$ space
 \begin{equation}
-	P_{a \otimes b}^x = \frac{\chi_x(e)}{|Z(r_x)|}\sum_{c \in C_x}\sum_{z \in Z(r_x)}\sum_{g\in G}\chi_x^*(z)B_a^{(g)}A_a^{(q_c z \bar{q}_c)}\otimes B_b^{(\bar{g}c)}A_b^{(q_c z \bar{q}_c)}.
+	P_{a \otimes b}^x = P_{ab}^x = \frac{\chi_x(e)}{|Z(r_x)|}\sum_{c \in C_x}\sum_{z \in Z(r_x)}\sum_{g\in G}\chi_x^*(z)B_a^{(g)}A_a^{(q_c z \bar{q}_c)}\otimes B_b^{(\bar{g}c)}A_b^{(q_c z \bar{q}_c)}.
 \end{equation}
  The rank of this projector will be an integer multiple of the dimension of the $x$ representation and that integer is the fusion algebra coefficient $N_{ab}^x$.
  
@@ -1314,17 +1314,30 @@ After applying the co-product to the $x$-projector we arrive at the form of the 
  \begin{equation}
  	N_{ab}^x = \sum_{l}\frac{S_{al}S_{bl}S^*_{cl}}{S_{0l}},
  \end{equation}
- where the sum is taken over all the anyon labels in the theory, the irreducible representations in our case. The matrix $S$ is the linking matrix and is defined, in terms of the planar diagram algera, as in the diagram in Figure \ref{fig:S_mat_def}.
+ where the sum is taken over all the anyon labels in the theory, the irreducible representations in our case. The matrix $S$ is the linking matrix and is defined, in terms of the planar diagram algera, as in the diagram in Figure \ref{fig:S_mat_def} (Left).
  \begin{figure}
  	\centering
- 	\includegraphics[width= 0.35\linewidth]{Figures/S_mat_def.pdf}
- 	\caption{The diagram definition of the linking matrix elements between anyons $a$ and $b$ and its evaluation in the case of the quantum double model. $\sigma_{ii+1}$ represent the action of the braid group generator, the exchange of $i^{\text{th}}$ and $(i+1)^{\text{st}}$ anyon, on the representation space $a \otimes a \otimes b \otimes b$. $P_{xx}^0$ are projectors from the representation space $x \otimes x$ onto the trivial sector and $\phi_{xx}^0$ are functions whose inverses are these projectors. }
+ 	\includegraphics[width= 0.45\linewidth]{Figures/S_mat_def.pdf}\hspace{10pt}
+ 	\includegraphics[width= 0.30\linewidth]{Figures/ribbon_crossing.pdf}
+ 	\caption{(Left) The diagram definition of the linking matrix elements between anyons $a$ and $b$ and its evaluation in the case of the quantum double model. $\sigma_{ii+1}$ represent the action of the braid group generator, the exchange of $i^{\text{th}}$ and $(i+1)^{\text{st}}$ anyon, on the representation space $a \otimes a \otimes b \otimes b$. $P_{xx}^0$ are projectors from the representation space $x \otimes x$ onto the trivial sector and $\phi_{xx}^0$ are functions whose inverses are these projectors. (Right) An example of ribbon crossing that arrises while braiding or annihilating the anyons. The two legs shared between the ribbons are marked in bold. Note that for each leg they share the ribbons have the opposite type of elementary triangle touching it; also that for each ribbon the triangles that touch the two shared legs are of opposite type.}
  	\label{fig:S_mat_def}
  \end{figure}
- The only additional information we need to evaluate the linking matrix elements in the case of the quantum double model is also provided by the definition of the quantum double algebra.
  
-The action of the exchange of 
+ In Figure \ref{fig:S_mat_def} (Left) we also shown how to evaluate the matrix element in the case of quantum double model, the only additional information we need to evaluate it is also provided by the definition of the quantum double algebra.
+The action of the exchange of anyons on the product space is  given bu
+\begin{equation}
+	\begin{split}
+		\boldmath{\sigma}_{i i+1}: a_1 \otimes \ldots \otimes a_i \otimes a_{i+1} \otimes \ldots \otimes a_n \rightarrow a_1 \otimes \ldots \otimes a_{i+1} \otimes a_{i} \otimes \ldots \otimes a_n,\\
+		\boldmath{\sigma}_{i i+1} = \mathbb{1} \otimes \ldots (\text{Flip } \circ \sum_{h \in G} A_i^{(h)}\otimes B_{i+1}^{(h)}) \otimes \ldots \otimes \mathbb{1},
+	\end{split}
+\end{equation}
+with Flip operator denoting the trivial exchange of vector spaced in the tensor product. One can easily check that the exchange operators defined on this space obey the group multiplication rule of the braid group generators
+$$\sigma_{i,i+1}\sigma_{i+1,i+2}\sigma_{i, i+1} =\sigma_{i+1,i+2}\sigma_{i,i+1}\sigma_{i+1, i+2}, $$
+hence, it is a representation of the braid group on the product space.
 
+Note that when we do the exchange of actual anyons in our system with the ribbon operators defined in Section \ref{sec:ribbon_ops} this action of the braid group generator is implemented.
+The key is that once we perform the braiding (create, exchange and annihilate the anyons) the ribbons of the two exchanged anyons will cross, see Figure \ref{fig:S_mat_def} (Right).
+The crossing ribbons share two legs and on these two legs the type of their elementary triangles are opposite, also for each ribbon the type of the elementary triangles
 
 \section{Representation Theory of $D_4$ and $D(D_4)$}\label{app:reps}
 \jovan{$\ldots$}
