@@ -1214,7 +1214,15 @@ The phases of all values are also estimated remarkably well.
 
 \subsubsection{Circuit Depth}
 
-In this section, we report the characteristics of the circuit implementing our interference protocols.
+In this section, we provide the specifications of the simulation whose results we presented above.
+
+The layout of the qubits on the Sycamore chip is shown in Figure \ref{fig:intef_setup}.
+\begin{figure*}
+	\centering
+	\includegraphics[width=0.75\linewidth]{Figures/intef_setup.pdf}
+	\caption{(Left) The qubit layout of the interference protocol simulation done via Google Colab platform. The chip simulated is the Google's Sycamore chip and the layout was chosen to occupy a part of the chip with low noise two qubit connections, also this layout reduces the overall number of two qubit gates used int the final circuit. (Right) The ribbons operators applied in the simulation.}
+	\label{fig:intef_setup}
+\end{figure*}
 
 \jovan{ToDo.}
 
@@ -1254,10 +1262,10 @@ More precisely it is how we couple the ancillary qudit with the gauge field degr
 In the main text we have chosen one case to showcase for the sake of brevity, while in this section we provide an exhaustive list of all sixteen variants.
 
 There are sixteen kinds of elementary triangles, which can be understood as coming from four binary descriptors:\begin{enumerate}
-	\item The aforementioned triangle type, i.e. does it cross or follow the leg it touches,
+	\item The aforementioned triangle type, i.e. does it cross or follow the edge it touches,
 	\item Handedness, the triangle and its mirror image must act as inverses to one another,
 	\item The end of the ribbon it is appended to, does it extend the ribbon forwards or backwards,
-	\item The leg it touches can be oriented in two direction.
+	\item The edge it touches can be oriented in two direction.
 \end{enumerate}
 
 The various different rules for the sixteen cases are shown in Figure \ref{fig:al_trigs}. The main actions are controlled multiplication $U_{CM}$ that is controlled by the ancillary qudits and done on the gauge fields degrees of freedom and the generalised conjugation $U_{GC}$ that acts conversely, from the gauge filed onto the ancillary qudits.
@@ -1299,7 +1307,7 @@ The ability to append to the backend helps in halving the circuit depth of the r
 
 \section{Fusion and Braiding of Quantum Double Excitations}\label{app:fusion}\label{app:braid}
 
-In section \ref{sec:anyon}, we have mentioned that there is an algebra associated with irreducible representations of the quantum double algebra $D(G)$. In this appendix, we will derive the fusion coefficients that appear in this algebra
+\textbf{Fusion.} In section \ref{sec:anyon}, we have mentioned that there is an algebra associated with irreducible representations of the quantum double algebra $D(G)$. In this appendix, we will derive the fusion coefficients that appear in this algebra
 \begin{equation}
 	a \otimes b = \bigoplus_c N_{ab}^x x,
 \end{equation}
@@ -1336,12 +1344,17 @@ After applying the co-product to the $x$-projector we arrive at the form of the 
  	\centering
  	\includegraphics[width= 0.45\linewidth]{Figures/S_mat_def.pdf}\hspace{10pt}
  	\includegraphics[width= 0.30\linewidth]{Figures/ribbon_crossing.pdf}
- 	\caption{(Left) The diagram definition of the linking matrix elements between anyons $a$ and $b$ and its evaluation in the case of the quantum double model. $\sigma_{ii+1}$ represent the action of the braid group generator, the exchange of $i^{\text{th}}$ and $(i+1)^{\text{st}}$ anyon, on the representation space $a \otimes a \otimes b \otimes b$. $P_{xx}^0$ are projectors from the representation space $x \otimes x$ onto the trivial sector and $\phi_{xx}^0$ are functions whose inverses are these projectors. (Right) An example of ribbon crossing that arrises while braiding or annihilating the anyons. The two legs shared between the ribbons are marked in bold. Note that for each leg they share the ribbons have the opposite type of elementary triangle touching it; also that for each ribbon the triangles that touch the two shared legs are of opposite type.}
+ 	\caption{(Left) The diagram definition of the linking matrix elements between anyons $a$ and $b$ and its evaluation in the case of the quantum double model. $\sigma_{ii+1}$ represent the action of the braid group generator, the exchange of $i^{\text{th}}$ and $(i+1)^{\text{st}}$ anyon, on the representation space $a \otimes a \otimes b \otimes b$. $P_{xx}^0$ are projectors from the representation space $x \otimes x$ onto the trivial sector and $\phi_{xx}^0$ are functions whose inverses are these projectors. (Right) An example of ribbon crossing that arrises while braiding or annihilating the anyons. The two edges shared between the ribbons are marked in bold. Note that for each edge they share the ribbons have the opposite type of elementary triangle touching it; also that for each ribbon the triangles that touch the two shared edges are of opposite type.}
  	\label{fig:S_mat_def}
  \end{figure}
  
- In Figure \ref{fig:S_mat_def} (Left) we also shown how to evaluate the matrix element in the case of quantum double model, the only additional information we need to evaluate it is also provided by the definition of the quantum double algebra.
-The action of the exchange of anyons on the product space is  given bu
+A well known result links the linking matrix of the quantum double model and the representation theory of the gauge group $G$
+\begin{equation}
+	S_{ab} = \frac{1}{|G|}\sum_{c_a \in C_a, c_b \in C_b, c_a c_b = c_b c_b} \chi_a(q_{c_a}^{-1}c_b q_{c_a})\chi_b(q_{c_b}^{-1}c_a q_{c_b}).\label{eqn:verlinde}
+\end{equation}
+ 
+ \textbf{Braiding. }In Figure \ref{fig:S_mat_def} (Left) we also shown how to derive Eq.~\eqref{eqn:verlinde} starting from the quantum double algebra representations, the only additional information we need is also provided by the definition of the quantum double algebra.
+The action of the exchange of anyons on the product space is  given by
 \begin{equation}
 	\begin{split}
 		\boldmath{\sigma}_{i i+1}: a_1 \otimes \ldots \otimes a_i \otimes a_{i+1} \otimes \ldots \otimes a_n \rightarrow a_1 \otimes \ldots \otimes a_{i+1} \otimes a_{i} \otimes \ldots \otimes a_n,\\
@@ -1354,7 +1367,12 @@ hence, it is a representation of the braid group on the product space.
 
 Note that when we do the exchange of actual anyons in our system with the ribbon operators defined in Section \ref{sec:ribbon_ops} this action of the braid group generator is implemented.
 The key is that once we perform the braiding (create, exchange and annihilate the anyons) the ribbons of the two exchanged anyons will cross, see Figure \ref{fig:S_mat_def} (Right).
-The crossing ribbons share two legs and on these two legs the type of their elementary triangles are opposite, also for each ribbon the type of the elementary triangles
+The crossing ribbons share two edges and on these two edges the types of their elementary triangles are opposite, furthermore, the looking at each ribbon individually the the two elementary triangles touching the two edges are also opposite. This remains true even for irregular graphs.
+
+The consequence of this geometrical fact on our protocol is that once the first ribbon traverses the shared edges it will multiply its edge label by it's own flux. And when the second ribbon crosses the edge that the first have had traversed the group action on the auxiliary qudit is shifter by this flux compared to the case where it was traversing the vacuum. This is exactly the required braiding action on the internal space of the anyons
+\begin{equation}
+	\sigma_{i,i+1}\ket{c, i}_i\ket{c', i'}_{i+1} = \sum_{h \in G}B_{i+1}^{(h)}\ket{c',i'}_{i+1} A_i^{(h)}\ket{c,i}_i = \ket{c',i'}_{i+1} A_i^{(c')}\ket{c,i}_{i}. 
+\end{equation}
 
 \section{Representation Theory of $D_4$ and $D(D_4)$}\label{app:reps}
 \jovan{$\ldots$}
