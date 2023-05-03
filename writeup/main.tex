@@ -569,7 +569,7 @@ The main experiments showcasing the nonabelian nature of the excitations we prop
 
 %It is easy to obtain the results of the first two experiments from the result of the last one, however it is useful to consider the two foundational phenomenological facts pertaining to the nonabelian anyons in separate points.
 
-\subsection{Achieving low circuit depth}\label{subsec:enc}
+\subsection{Achieving low circuit depth \caro{still unsure about subsection title}}\label{subsec:enc}
 
 In this section we will discuss how low circuit depth can be achieved for creating and moving the anyons of $D(D_4)$. We will present the encoding of group elements into qubits, and show how short circuits for the elementary triangles of the ribbon operators discussed in section ~\ref{sec:ribbon} can be obtaind.
 
@@ -855,6 +855,212 @@ In the second version, we annihilate the pairs whose fusion channel is not fixed
 
 For further discussion of a concrete implementation and numerical results, see Section \ref{sec:num}.
 
+\subsection{Anyon interferometry}\label{subsec:Intef}
+
+
+
+%In order to access full data of the S- and T-matrix, amplitude and phase of its elements, we must devise an interference protocol.
+
+In order to measure the relative phase between different braiding processes, we need to devise an interference protocol. This is done by setting up a control qubit $c$, whose states are entangled with different braiding protocols
+\begin{equation}
+    \ket{\psi}_c\ket{\text{GS}} \rightarrow \ket{0}_c \ket{\Psi_0} + \ket{1}_c \ket{\Psi_1},
+\end{equation}
+where $\Psi_i$ are the two wave functions of the matter degrees of freedom corresponding after two different braiding operations.
+
+If the charge content of the two states is the same they may only differ by a constant. Hence we can write
+\begin{equation}
+    \ket{0}_c \ket{\Psi_0} + \ket{1}_c \ket{\Psi_1} = (\ket{0}_c + C_{01}\ket{1}_c)\ket{\Psi_0},
+\end{equation}
+and by the means of tomography on the control qubit $c$ we can extract the relative constant $C_{01}$.
+
+For a suitable choice of two braiding protocols, this constant reveals the elements of S- and T-matrix, see Figure \ref{fig:intef_example}.
+
+\textbf{S-matrix elements.}
+To measure the S-matrix elements, we create a superposition of two states by conditioning an equal time (closed) ribbon operator shown in blue in Fig.~\ref{fig:S-mat} on the control qubit . 
+
+
+
+
+
+Note that the S-matrix appearing in Figure is normalized:
+\begin{equation}
+    \tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b),
+\end{equation}
+which makes $|\tilde{S}(a,b)| \leq 1$.
+
+
+
+The straight forward way to do this, is to condition the entire ribbon operator (see Figure \ref{fig:cond_ex}).  In conjunction with the calibration shown in Figure \ref{fig:phase_check}, this is conceptually the same as the ideal protocol in Figure \ref{fig:intef_example}. 
+The calibration is done to make sure there is no dynamical phase accumulated by applying the $b$ ribbon itself.
+However, in this protocol every single qubit gate of the ribbon operator becomes a two qubit gate and every two qubit gate becomes a three qubit gate (unitarily similar to a Toffoli gate). Hence, the number of entangling gates grows fast.
+
+A smarter alternative is to condition the anyon type of the ribbon (see Figure \ref{fig:cond_flav}). In this case we identify where the ribbon operators for the two anyon types differ, and condition only those operations. The circuit for this can be much shorter, see Fig. \ref{fig:cond_flav} for an example. In particular, for the case of $D(D_4)$, it turns out, that it is easier to compare the linking of anyons $a$ and $b$ to the linking of $a$ and $0 \oplus \tilde 0$, then comparing it to the linking of $a$ with vacuum. Thus, we condition whether we apply the ribbon $b$ or the ribbon corresponding to $0 \oplus \tilde 0$. 
+
+However, this protocol requires additional knowledge of the theory. Concretely, if we are interested in the S-matrix element $S_{ab}$, we need the additional knowledge of  $S(a, 0)$ and $S(a, \tilde{0})$. Both can in fact be measured directly with a simple protocol since $0$ and $\tilde{0}$ are abelian, see Appendix \ref{app:abl}.
+Since $S(a, 0) = S(a, \tilde{0}) = 1$, we can just read off $S(a,b)$ after tomographing the control qubit.
+
+In our example, we will fix $b$ to be pure flux $\Psi_m$ again due to the relative simplicity of its ribbon operators. For the other anyon we will choose one of the following $a\in\{\Psi_m,\tilde{\Psi}_m, \Phi_r \}$ which gives us all three possible values of the S-matrix elements for the $D_4$ theory, $\{1, -1, 0\}$.
+
+
+
+The exact method of tomography will be presented alongside the numerical result in Section \ref{sec:num}. 
+
+
+
+The result is illustrated in Fig.~\ref{fig:flavCond}.
+
+%In that example, the control qubit is selecting between two different ribbon operators. The first one is the ribbon creating the pure flux $\Psi_m$ and the other one corresponds to the reducible two-dimensional representation $0 \oplus \tilde{0}$.
+
+
+% One can also look at the case where we condition the existence of the ribbon as selecting between two types, $\Psi_m$ and the vacuum (represented as $0 \oplus 0$), see Figure \ref{fig:flavCond} (left).
+
+% We will use both schemes in our phase-sensitive S-matrix experiment.
+
+%First, depending on the state of the control qubit, $c$ the ribbon is either for an irrep label $b$ of $D(D_4)$, corresponding to an anyon, or for the reducible representation\footnote{The ribbon operator application scheme is the same for ribbons labelled by reducible and irreducible representations.} $0\oplus\tilde{0}$ spanned by vectors $\{\ket{e;1}, \ket{r^2;1}\}$.
+
+
+%Second, depending on the state of the control qubit $c$, the ribbon is either for the irrep $b$ or for the reducible representation $0\oplus 0$. This basically means that if the state of the control is $\ket{0}_c$ then we do nothing.
+
+%
+%However, given that every operation of the conditioned ribbon is conditioned on $c$, the complexity of the circuit for the second option is larger than for the first option where only some operations are conditioned on $c$.
+
+
+
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.5em @R=0.7em @!R{
+\lstick{c} & \ctrl{3} & \qw& \ctrl{1}& \qw\\
+\lstick{m} & \qw & \qw & \targ& \qw\\
+\lstick{R} & \qw  & \qw & \qw& \qw\\
+\lstick{R^{2}} & \targ  & \qw & \qw& \qw\\
+\lstick{\text{aux}} &  \ctrl{-1} & \qw& \qw& \qw
+}%
+\qquad \qquad \qquad
+\Qcircuit @C=0.5em @R=0.7em @!R{
+\lstick{c} & \ctrl{1} & \qw\\
+\lstick{m} & \targ & \qw \\
+\lstick{R} & \qw  & \qw \\
+\lstick{R^{2}} & \targ  & \qw \\
+\lstick{\text{aux}} &  \ctrl{-1} & \qw
+}
+%
+%\Qcircuit @C=0.5em @R=0.7em @!R{
+%\lstick{c} & \ctrl{2} & \qw\\
+%\lstick{m} & \qw & \qw \\
+%\lstick{R} & \ctrl{2}  & \qw \\
+%\lstick{R^{2}} & \qw  & \qw \\
+%\lstick{\text{aux}} &  \targ & \qw
+%}
+\end{equation*}
+\caption{Controlled multiply circuits of an elementary triangle of a ribbon operator conditioned on a control qubit $c$. Left. Implementing $\Psi_m$ vs vacuum, represented as $0\oplus 0$. Right. Implementing $\Psi_m$ vs $0\oplus\tilde{0}$.}
+%Left:  
+%
+%
+%used when anyon moves along a edge $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label . 
+%
+%
+%Center: controlled multiply circuit used when anyon moves along a edge $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus 0$, i.e. doing nothing. 
+%
+%
+%Right: controlled conjugation circuit used when anyon crosses along a edge $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus\tilde{0}$ or $0\oplus 0$. Note: ribbons can also be associated with reducible representations of $D(G)$ as long as they are closed, if we require a well-defined topological charge of the end state, the scheme for applying ribbon operators associated with the reducible representations is the same as for the irreducible representations.}
+\label{fig:flavCond}
+\end{figure}
+
+
+
+
+
+\begin{figure*}
+\centering
+
+\begin{subfigure}{0.47\textwidth}
+    \includegraphics[width = \linewidth]{Figures/intef_example.pdf}
+    \caption{The ideal interferometry scheme for measuring the S-matrix elements. The two possible braiding are appropriately entangled with the controlling bit $c$, which is achieved by controlled ribbon operators.}
+    \label{fig:intef_example}
+\end{subfigure}\hfill
+\begin{subfigure}{0.47\textwidth}
+    \includegraphics[width=\linewidth]{Figures/intefFlav.pdf}
+    \caption{Conditioning the flavour of the ribbon, if the state of the control bit is $\ket{0}_c$ then the flavour is the reducible representation $0\oplus\tilde{0}$ and $\Psi_m$ otherwise. This is the shallowest protocol in terms of total compiled circuit depth.}
+    \label{fig:cond_flav}
+\end{subfigure}
+\vspace{15pt}
+
+\begin{subfigure}{0.47\textwidth}
+    \includegraphics[width=\linewidth]{Figures/intefEx.pdf}
+    \caption{Conditioning the existence of the ribbon. The ribbon $\Psi_m$ is only applied, if the state of the control qubit is $\ket{1}_c$. Equivalently, conditioning whether to apply $\Psi_m$ or the reducible representation $0\oplus 0$.}
+    \label{fig:cond_ex}
+\end{subfigure}\hfill
+\begin{subfigure}{0.47\textwidth}
+    \includegraphics[width=\linewidth]{Figures/phaseCheck.pdf}
+    \caption{Phase check. Making sure to remove any phase that is due to the application of the closed ribbon $\Psi_m$ itself.}
+    \label{fig:phase_check}
+\end{subfigure}
+\caption{The interference protocols used for phase sensitive measurement of the (normalized) S-matrix elements  $\tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b)$\caro{general b? adjust figures?, for
+$S(a, \Psi_m)$ for $a\in\{\Psi_m, \tilde{\Psi}_m, \Psi_r\}$.}}
+\label{fig:S-mat}
+\end{figure*}
+
+\begin{figure*}
+\centering
+\begin{subfigure}{0.47\textwidth}
+    \centering
+    \includegraphics[width = \linewidth]{Figures/Tmat2.pdf}
+    \caption{Interference protocol for measuring the phase of the T-matrix elements. Note: $|T_{aa}| = 1$ for all anyons $a$. The inference is done between two paths that differ by only one twist. We have restored the two-dimensionality of the ribbons in our representation in order to showcase the extra twist.}
+    \label{fig:Tmat}
+\end{subfigure}\hfill
+\begin{subfigure}{0.47\textwidth}
+\begin{equation*}
+\Qcircuit @C=0.5em @R=0.7em @!R{
+\lstick{c}&\qw&\ctrl{1}&\qw& \gate{X}&\qw&\ctrl{1}&\qw&\gate{X}&\qw\\
+\lstick{\text{aux}}&\qw&\multigate{1}{U}&\qw &\qw&\qw&\multigate{1}{V}&\qw&\qw&\qw\\
+\lstick{GF}&\qw&\ghost{U}&\qw&\qw&\qw&\ghost{V}&\qw&\qw&\qw
+}
+\end{equation*}
+\caption{A circuit that depending on the state of the control bit $c$ either applies a unitary $U$ or $V$ onto the joint gauge field ($GF$) and auxiliary (aux) degrees of freedom.}
+\label{fig:condcirq}
+\end{subfigure}
+\caption{The interferometry scheme to measure the phase difference between two paths alongside with a circuit diagram implementing the difference of the two paths.}
+\label{fig:tmatfull}
+\end{figure*}
+
+
+
+\textbf{T-matrix elements}
+
+In this section, we will describe the interference protocol for measuring the matrix elements of the diagonal T-matrix, or the spin of the anyons.
+Here we note that ribbon operators are in-fact ribbons in space-time, hence they can acquire a twist.
+Each twist contributes a phase factor to the wavefunction, $T_{aa} = e^{i\theta_a}$. 
+
+The protocol is illustrated in Figure \ref{fig:Tmat}. We identify where the twisted and untwisted paths of a ribbon operator associated with some anyon $a$ differ and apply a controlled circuit of the form illustrated in Figure \ref{fig:condcirq} accordingly. If for the untwisted (twisted) version, we need to apply the unitary $U$ ($V$), the circuit implementing is straight-forward and shown in Figure \ref{fig:condcirq}.
+
+The endpoint of the two ribbons are on the same site, hence the charge content is the same and we can factor out the gauge field wavefunction. 
+The control qubit is in a pure state (assuming there is no noise) that we can tomograph and read off the twisting phase.
+
+
+\section{Numerical Experiments}\label{sec:num}
+
+In this section, we provide numerical evidence for the feasibility of our proposal on state of the art NISQ devices. The simulations were done using Google's 'cirq\_google' python package running on Google's cloud computing platform 'Google Colab'. This package executes the quantum trajectory simulation of the circuit using the Kraus operators obtained from the direct Pauli Transfer Matrix tomography on various single and two qubit gates on the Sycamore chip \cite{}.
+
+Knowing the characteristics of the two-qubit gates, single-qubit gates and single- and multi-qubit readout performances of the chip \cite{} we have chosen a suitable part of the chip for our simulations. A similar setup would be suitable for an actual experiment on the Sycamore chip. However, the optimal allocation of recourses (gauge field degrees of freedom, ribbon ancillaries, control and other) will be chip depended. The layout we used is shown in Figure \ref{}.
+
+\caro{[move that to a bit further down the line]
+Given that we argue for feasibility of these experiments, i.e. will the signals we expect be detectable given the noise, we have to take into account how well does this numerical scheme, quantum trajectories with noisy one- and two-qubit gates, will reproduce the actual measurements.
+Heuristics shows that it is in fact a good approximation of what we expect to see from the actual experiment \cite{}, even if it neglects any cross-talk between qubits that are not directly coupled by the circuit.}
+
+It is also important to note that, we are further limited by the number of qubits we can simulate classically.
+Indeed, for the case of $D_4$ which is a solvable group, only a few operations are non-Clifford hence the ideal circuits are from the computational point of view simple, close to classical. 
+\caro{[not sure that noise automatically means one can no longer get speed ups if the gates are clifford, better double check that]
+Clifford gate means that it takes maps a Pauli string into a Pauli string, but this would imply a very simple Pauli transfer matrix, i.e. only one Krauss operator, hence it cannot be noisy (non-unitary).
+If we are interested in Noisy simulations we are automatically outside Clifford group and we cannot get around doing a quantum circuit simulation in-full.}
+
+
+\subsection{Fusion and Braiding}
+
+In this section, we report on the layouts of qubits on the chip used in our numerical experiments.
+\jovan{ToDo.}
+
+
 \begin{figure*}
 \centering
 
@@ -885,205 +1091,16 @@ For further discussion of a concrete implementation and numerical results, see S
 \end{figure*}
 
 
-\subsection{Anyon interferometry}\label{subsec:Intef}
-
-In order to access full data of the S- and T-matrix, amplitude and phase of its elements, we must devise an interference protocol.
-
-There will be a controlling bit $c$, whose states are entangled with different braiding protocol after a specific protocol:
-\begin{equation}
-    \ket{\psi}_c\ket{\text{G.S.}} \rightarrow \ket{0}_c \ket{\Psi_0} + \ket{1}_c \ket{\Psi_1},
-\end{equation}
-where $\Psi_i$ are the two wave functions of the matter degrees of freedom corresponding to two braiding operations.
-
-If the charge content of the two states is the same they may only differ by a constant, hence we can write:
-\begin{equation}
-    \ket{0}_c \ket{\Psi_0} + \ket{1}_c \ket{\Psi_1} = (\ket{0}_c + C_{01}\ket{1}_c)\ket{\Psi_0},
-\end{equation}
-and by the means of tomography on the control bit $c$ we can extract the relative constant $C_{01}$.
-
-For a suitable choice of two braiding protocols, this constant can equal some element of S- (and T-) matrix, see Figure \ref{fig:intef_example}.
-
-This superposition is constructed by conditional braiding, conditioned on the state of the control bit. 
-The conditional braiding is achieved by applying conditional ribbon operators.
-For example, we can condition the existence of a ribbon by making any unitary gate involved in applying the ribbon operator conditioned on the state of the control bit.
-Every, single qubit gate becomes a two qubit gate and every two qubit gate becomes a three qubit gate (unitarily similar to a Toffoli gate), hence, the number of entangling gates grows fast.
-
-A smarter alternative way is to condition the anyon flavour of the ribbon, a ribbon label that is. One just needs to look at two ribbon operators and identify where they differ, and condition only those operations. The result is illustrated in Figure \ref{fig:flavCond}.
-
-
-\begin{figure}
-\begin{equation*}
-\begin{split}
-\Qcircuit @C=0.5em @R=0.7em @!R{
-\lstick{c} & \ctrl{1} & \qw\\
-\lstick{m} & \targ & \qw \\
-\lstick{R} & \qw  & \qw \\
-\lstick{R^{2}} & \targ  & \qw \\
-\lstick{\text{aux}} &  \ctrl{-1} & \qw
-}\qquad\qquad
-\Qcircuit @C=0.5em @R=0.7em @!R{
-\lstick{c} & \ctrl{3} & \qw& \ctrl{1}& \qw\\
-\lstick{m} & \qw & \qw & \targ& \qw\\
-\lstick{R} & \qw  & \qw & \qw& \qw\\
-\lstick{R^{2}} & \targ  & \qw & \qw& \qw\\
-\lstick{\text{aux}} &  \ctrl{-1} & \qw& \qw& \qw
-}\qquad\qquad
-\Qcircuit @C=0.5em @R=0.7em @!R{
-\lstick{c} & \ctrl{2} & \qw\\
-\lstick{m} & \qw & \qw \\
-\lstick{R} & \ctrl{2}  & \qw \\
-\lstick{R^{2}} & \qw  & \qw \\
-\lstick{\text{aux}} &  \targ & \qw
-}
-\end{split}
-\end{equation*}
-\caption{The compiled conditional ribbon operators, where the flavour of the ribbon is conditioned on the state of the control bit $c$. Left: controlled multiply circuit used when anyon moves along a edge $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus\tilde{0}$. Center: controlled multiply circuit used when anyon moves along a edge $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus 0$, i.e. doing nothing. Right: controlled conjugation circuit used when anyon crosses along a edge $i$ encoded by the middle three bits, control bit $c$ selects between pure flux $\Psi_m$ and reducible label $0\oplus\tilde{0}$ or $0\oplus 0$. Note: ribbons can also be associated with reducible representations of $D(G)$ as long as they are closed, if we require a well-defined topological charge of the end state, the scheme for applying ribbon operators associated with the reducible representations is the same as for the irreducible representations.}
-\label{fig:flavCond}
-\end{figure}
-
-In that example, the control bit is selecting between two ribbon flavours, the pure flux $\Psi_m$ and the one labelled by a reducible two-dimensional representation $0 \oplus \tilde{0}$. One can also look at the case where we condition the existence of the ribbon, by making every gate controlled by qubit $c$, as also selecting between two flavours, $\Psi_m$ and $0 \oplus 0$, the previous scheme simplifying the multiplication past of the circuit, Figure \ref{fig:flavCond} (left).
-
-We will use both schemes in our phase-sensitive S-matrix experiment.
-
-\textbf{S-matrix elements}
-
-In this section, we describe in detail the inference protocols for measuring the S-matrix element.
-The two protocols are based around conditional ribbon operators.
-We explore two options when it comes to conditional ribbon operators.
-
-First, depending on the state of some control qubit, $c$ the flavour of the ribbon is either some well-defined anyon label $b$, well-defined meaning $b$ is an irrep of $D(D_4)$, or a reducible representation $0\oplus\tilde{0}$ spanned by vectors $\{\ket{e;1}, \ket{r^2;1}\}$.
-The ribbon operator application scheme is the same for ribbons labelled by reducible and irreducible representations.
-
-Second, depending on the state of the control bit $c$, the flavour is either $b$ or $0\oplus 0$. This basically means that if the state of the control is $\ket{0}_c$ then we do nothing.
-
-The second method, shown in Figure \ref{fig:cond_ex} in conjunction with the calibration shown in Figure \ref{fig:phase_check},  is conceptually the same as the ideal protocol in Figure \ref{fig:intef_example}. 
-The calibration is done to make sure there is no dynamical phase accumulated by applying the $b$ ribbon by itself.
-
-However, given every operation of the conditioned ribbon is conditioned on $c$, the complexity of the circuit for the second option is bigger than the first option where only some operations are conditioned on $c$.
-
-The first method shown in Figure \ref{fig:cond_flav} is, as a quantum circuit, much simpler than the second method. 
-However, it requires some input from the theory, that being $S(a, 0)$ and $S(a, \tilde{0})$ which in fact can be directly measured with a very simple protocol since $0$ and $\tilde{0}$ are Abelian, see Appendix \ref{app:abl}.
-
-If $S(a, 0) = S(a, \tilde{0}) = 1$, then the factorization presented in Figure \ref{fig:cond_flav} is correct, and we can just read off the $S(a,b)$ after tomographing the control bit.
-
-Note that the S-matrix appearing in Figure \ref{fig:S-mat} is normalized:
-\begin{equation}
-    \tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b),
-\end{equation}
-which makes $|\tilde{S}(a,b)| \leq 1$.
-
-In our example, we will fix $b$ to be pure flux $\Psi_m$ again due to the relative simplicity of its ribbon operators. For the other anyon we will choose one of the following $a\in\{\Psi_m,\tilde{\Psi}_m, \Phi_r \}$ which gives us all three possible values of the S-matrix elements for the $D_4$ theory, those being $\{1, -1, 0\}$ respectively.
-
-The exact method of tomography we will use will be presented alongside the numerical result, Figure \ref{}, in Section \ref{sec:num}. The way the noise interact with the protocol is non-trivial and deserves a separate discussion.
-
-\begin{figure*}
-\centering
-
-\begin{subfigure}{0.47\textwidth}
-    \includegraphics[width = \linewidth]{Figures/intef_example.pdf}
-    \caption{The ideal interferometry scheme for measuring the S-matrix elements. The two possible braiding are appropriately entangled with the controlling bit $c$, which is achieved by controlled ribbon operators.}
-    \label{fig:intef_example}
-\end{subfigure}\hfill
-\begin{subfigure}{0.47\textwidth}
-    \includegraphics[width=\linewidth]{Figures/intefFlav.pdf}
-    \caption{Conditioning the flavour of the ribbon, if the state of the control bit is $\ket{0}_c$ then the flavour is the reducible representation $0\oplus\tilde{0}$ and $\Psi_m$ otherwise. This is the shallowest protocol in terms of total compiled circuit depth.}
-    \label{fig:cond_flav}
-\end{subfigure}
-\vspace{15pt}
-
-\begin{subfigure}{0.47\textwidth}
-    \includegraphics[width=\linewidth]{Figures/intefEx.pdf}
-    \caption{Conditioning the existence of the ribbon, if the ribbon $\Psi_m$ is only applied if the state of the control bit is $\ket{1}_c$. You can also look at it as flavour conditioning, where the other flavour is the reducible $0\oplus 0$.}
-    \label{fig:cond_ex}
-\end{subfigure}\hfill
-\begin{subfigure}{0.47\textwidth}
-    \includegraphics[width=\linewidth]{Figures/phaseCheck.pdf}
-    \caption{Phase check. Making sure to remove any phase that is due to the application of the closed ribbon $\Psi_m$ itself.}
-    \label{fig:phase_check}
-\end{subfigure}
-\caption{The interference protocols used in the numerical simulation for phase sensitive measurement of following S-matrix elements $S(a, \Psi_m)$ for $a\in\{\Psi_m, \tilde{\Psi}_m, \Psi_r\}$.}
-\label{fig:S-mat}
-\end{figure*}
-
-\begin{figure*}
-\centering
-\begin{subfigure}{0.47\textwidth}
-    \centering
-    \includegraphics[width = \linewidth]{Figures/Tmat2.pdf}
-    \caption{Interference protocol for measuring the phase of the T-matrix elements. Note: $|T_{aa}| = 1$ for all anyons $a$. The inference is done between two paths that differ by only one twist. We have restored the two-dimensionality of the ribbons in our representation in order to showcase the extra twist.}
-    \label{fig:Tmat}
-\end{subfigure}\hfill
-\begin{subfigure}{0.47\textwidth}
-\begin{equation*}
-\Qcircuit @C=0.5em @R=0.7em @!R{
-\lstick{c}&\qw&\ctrl{1}&\qw& \gate{X}&\qw&\ctrl{1}&\qw&\gate{X}&\qw\\
-\lstick{\text{aux}}&\qw&\multigate{1}{U}&\qw &\qw&\qw&\multigate{1}{V}&\qw&\qw&\qw\\
-\lstick{G.F.}&\qw&\ghost{U}&\qw&\qw&\qw&\ghost{V}&\qw&\qw&\qw
-}
-\end{equation*}
-\caption{A circuit that depending on the state of the control bit $c$ either applies a unitary $U$ or $V$ onto the joint gauge field ($G.F.$) and auxiliary (aux) degrees of freedom.}
-\label{fig:condcirq}
-\end{subfigure}
-\caption{The interferometry scheme to measure the phase difference between two paths alongside with a circuit diagram implementing the difference of the two paths.}
-\label{fig:tmatfull}
-\end{figure*}
-
-
-
-\textbf{T-matrix elements}
-
-In this section, we will describe the interference protocol for measuring the matrix elements of the diagonal T-matrix, or the spin of the anyons.
-Here we note that ribbon operators are in-fact ribbons in space-time, hence they can acquire a twist.
-Each twist contributes a phase factor to the wavefunction, $T_{aa} = e^{i\theta_a}$, just like the electron's wavefunction acquires a $\pi$-Barry phase once we take its spin around a great circle on a unit shere once.
-In 2+1 dimensions the phases are not restricted to $0$ and $\pi$, for example $\pi/2$ in the case of some anyons of $D_4$ theory.
-
-The protocol is illustrated in Figure \ref{fig:Tmat}.
-
-The way we realize this interference scheme is as follows.
-We identify where the two paths differ and apply a usual ribbon operator associated with some anyon $a$. Where they differ, we apply a controlled circuit of the form illustrated in Figure \ref{fig:condcirq}.
-
-In Figure \ref{fig:condcirq} we have that unitary $U$ applies a ribbon operator along one path and $V$ along another one, in order to get the wavefunction in Figure \ref{fig:Tmat}.
-
-The endpoint of the two ribbons are on the same site, hence the charge contetnt is the same, we can factor out the Gauge Field wavefunction. 
-The control bit in the pure state that we can tomograph and read off the twisting phase.
-The process of the tomography in this case is a bit elaborate, given the nontrivial way the noise play a part in this, hence we will leave the discussion of the results, Figure \ref{}, for Section \ref{sec:num}.
-
-\section{Numerical Experiments}\label{sec:num}
-
-In this section, we provided numerical evidence for the feasibility of our proposal, i.e. a set of noisy quantum circuit simulations that show that the nonabelian braiding signatures are observable.
-
-The simulations were done via Google's 'cirq\_google' python package running on Google's cloud computing platform 'Google Colab'. This package executes the quantum trajectory simulation of the circuit using the Kraus operators obtained from the direct Pauli Transfer Matrix tomography on various single and two qubit gates on the Sycamore chip \cite{}.
-
-Knowing the characteristics of the two-qubit gates, single-qubit gates and single- and multi-qubit readout performances of the chip \cite{} we have chosen a suitable part of the chip for our numerics, a similar setup would be suitable for an actual experiment if it to be done on the Sycamore chip, however, the optimal allocation of recourses (gauge field degrees of freedom, ribbon ancillaries, control and other) will be chip depended. The layout we used is shown in Figure \ref{}.
-
-Given that we argue for feasibility of these experiments, i.e. will the signals we expect be detectable given the noise, we have to take into account how well does this numerical scheme, quantum trajectories with noisy one- and two-qubit gates, will reproduce the actual measurements.
-
-Heuristics shows that it is in fact a good approximation of what we expect to see from the actual experiment \cite{}, even if it neglects any cross-talk between qubits that are not directly coupled by the circuit.
-
-It is also important to note that, further to the size limitation imposed by the chip, we are further limited by the number of qubits we can simulate classically.
-Indeed, for the case of $D_4$ which is a solvable group, only flew operations are non-Clifford hence the circuits are from the computational point of view simple, close to classical. 
-Clifford gate means that it takes maps a Pauli string into a Pauli string, but this would imply a very simple Pauli transfer matrix, i.e. only one Krauss operator, hence it cannot be noisy (non-unitary).
-If we are interested in Noisy simulations we are automatically outside Clifford group and we cannot get around doing a quantum circuit simulation in-full.
-
-
-\subsection{Fusion and Braiding}
-
-In this section, we report on the layouts of qubits on the chip used in our numerical experiments.
-\jovan{ToDo.}
 
 \subsection{Interferometry and Tomography}
 
-In Section \ref{subsec:Intef}, we have explained how one can extract a topological constant such as S- and T-matrix elements and imprint it onto a state of some auxiliary bit, the control bit in our interferometry protocol.
+In Section \ref{subsec:Intef} we explain how one can extract  S- and T-matrix elements from the interferometry protocol in section \ref{}.
 One may think that the process of reading it out is a simple single qubit tomography, and it is, but with a couple of caveats.
 
-The reason why in the interference protocol, we want to end up with a state of a well-defined charge in the case of both states of the control is that we can factor out the gauge field and be left with a pure state of the control bit.
-Due to the noise, it will be a mixed:
-\begin{equation}
-    \rho_c = \frac{\mathbb{1} + \vec{r} \cdot \vec{\sigma}}{2}.
+The interference protocol is designed such that we end up with a state of well-defined charge independent of the state of the control. Thus, we can factor out the gauge field and are left with a pure state of the control qubit. However, due to noise, it will be a mixed state \begin{equation}
+    \rho_c = \frac{\mathbb{1} + \vec{r} \cdot \vec{\sigma}}{2},
 \end{equation}
-This is a Bloch vector parametrization of the single-qubit density matrix, $\vec{r}$ is the Bloch vector and $\vec{\sigma} = (\sigma_x, \sigma_y, \sigma_z)$ is the vector of Pauli matrices.
-
-The Bloch vector lives inside a unit sphere, $|\vec{r}|\leq 1$, equality being reached for pure states.
+where $\vec{r}$ is the Bloch vector and $\vec{\sigma} = (\sigma_x, \sigma_y, \sigma_z)$ is the vector of Pauli matrices. The Bloch vector lives inside a unit sphere, $|\vec{r}|\leq 1$, equality being reached for pure states.
 
 We are interested in the direction of the Bloch vector and in order to deduce it we measure in a couple of different bases, parametrized by vectors $\vec{s}_i$ with $\sigma_{s_i} = \vec{s}_i \cdot \vec{\sigma}$ being the associated Hermitian operator.
 
@@ -1256,8 +1273,8 @@ Another main distinction is between triangles that are appended to the front and
  \includegraphics[width=0.12\linewidth]{Figures/IRgb.pdf} &   $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{c'g_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IRib.pdf}           &       $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i c'^{-1}}_{\text{phys}}$                  \\ 
 \includegraphics[width=0.12\linewidth]{Figures/ILib.pdf} &   $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{c'^{-1}g_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/ILgb.pdf}           &       $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i c'}_{\text{phys}}$                  \\  
 \end{tabular}\vspace{10pt}
-\hline\vspace{10pt}
-\caption*{$U_{GC}\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{h_i}_{\text{phys}} = $}
+
+\caption*{$U_{GC}\ket{c', i'}_{a_b} \ket{c, i}_{a_f}\ket{h_i}_{\text{phys}} = $}
 \vspace{10pt}
 	\begin{tabular}{llll}
  \includegraphics[width=0.12\linewidth]{Figures/IIRgf.pdf} &   $\ket{c', i'}_{a_b}\ket{h_i c h_i^{-1}} \Gamma^{\chi}_c(h_i)\ket{i}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IIRif.pdf}           &       $\ket{c', i'}_{a_b}\ket{h_i^{-1} c h_i} \Gamma^{\chi}_c(h_i^{-1})\ket{i}_{a_f}\ket{h_i}_{\text{phys}}$                  \\ 
