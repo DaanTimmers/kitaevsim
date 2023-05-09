@@ -43,8 +43,46 @@
 	\item cleaning up figures and captions
 	\item context discussion (we vs others) scattered throughout main text or commented out, integrate into text appropriately
 	\item make a plan about appendices
+	\item error bars
 \end{itemize}
 }
+
+In 1982 Frank Wilczek explored the idea of \emph{anyons} -- quasiparticles with fractional statistics that are neither Bosons nor Fermions. Simultaneously, Tsui and Stoermer discovered the fractional quantum Hall effect. Since then, the investigation of topological order and its signature -- anyonic excitation -- has become a major topic in modern condensed matter physics, culminating in the 2016 noble prize. 
+
+
+
+Beyond the study of unconventional phases of matter, topological order has been explored and praised for its potential applications in quantum computation and the study of its underlying rather sophisticated mathematical structure has received a lot of interested from the mathematical community. 
+
+
+Today, almost half a century later one may say that the theoretical understanding is slowly approaching completion. However, unambiguous experimental evidence of anyons in 'natural' physical systems is still scarce. This is in particular true for the more complex types of anyons, so called \emph{non-Abelian anyons} for which  braiding two particles changes the wave-function by a unitary rotation instead of just a phase factor.
+
+
+%
+%
+%In Kitaev's toric code the topological ground state degeneracy is used to protect quantum information against noise. The topological phase needed for that is relatively simple, its excitations are Abelian and 
+%
+%as is done in Kitaev's toric code, the idea of performing computations via the braiding of anyons is referred to 
+%
+%
+% \emph{non-Abelian anyons}
+%
+%
+%, particles that change the state of the system by a unitary operation instead of just a phase
+%
+%
+%However, almost half a century later unambiguous experimental evidence for demonstrating non-Abelian anyons in 'natural' physical systems is still scarce.
+
+On that grounds, one may argue that the majority of topological phases of matter is just too complicated to exist in nature and is thus more of a mathematical curiosity than an actual physical phenomenon, however, a series of striking experiments \cite{iqbal2023creation,xu2022digital,andersen2022observation} performed recently on noisy intermediate scale quantum computers (NISQ) strongly refutes such  criticism. Two experiments performed on superconducting qubits \cite{xu2022digital,andersen2022observation} demonstrated the non-Abelian braiding of mobile lattice defects which behave like Ising anyons embedded into an abelian phase. Another experiment performed on trapped ions \cite{iqbal2023creation} prepared the topologically ordered ground state of a non-Abelian phase and detected an intrinsically non-Abelian braiding processes (Borromean rings) via anyon interferometry. 
+
+All three experiments indicate that today's quantum computers are capable of simulating states of matter whose complexity exceeds that of abelian topological order and can be seen as one more significant step towards topologically protected quantum computation. While open questions of the scalability and the improvement of noise levels are left for the future to decide, it is clear that by now non-Abelian anyons have descended from the somewhat esoteric mathematical realm to the concrete and tangible.
+
+Motivated by these findings, we propose an alternative scheme to realize non-Abelian anyons on a NISQ device. Our proposal focuses on Kitaev's quantum double models -- a discrete realization of lattice gauge theory -- and in particular the topological phase $D(D_4)$. This phase is equivalent to the phase realized in Ref.~\cite{iqbal2023creation}. However, its microscopic Hamiltonian and the protocols we propose to demonstrate non-Abelian braiding are quite different from the ones in Ref.~\cite{iqbal2023creation}. 
+
+The main challenge that needs to be overcome in any experiment that realizes non-Abelian topological order on a NISQ device is an intrinsic and a profound one. Both by definition, a NISQ device is noisy meaning that beyond a certain circuit depth quantum information is scrambled beyond recognition, likewise, the preparation of a topological ordered states requires a relatively deep circuit. By definition, the depth scales linearly with the system size. In addition to that, moving anyons on a topological background requires operators whose circuit depth again scale with the length of the paths. Thus, realizing non-Abelian anyons on a NISQ device becomes a challenging game of finding ways to circumvent these rather daunting limitations. 
+
+There are three levels on which to tackle this problem. The first and most important is to identify a suitable type of order. It is reasonable to refine the classification into simple, i.e. abelian, and complicated, i.e., non-Abelian anyons, a little further. Non-Abelian anyons in particular, can be classified by their computational power which, perhaps unsurprisingly, seems to coincide with the difficulty of realizing them. For some anyons such as the Fibonacci anyons braiding alone allows one to perform universal quantum computation. In contrast, all anyons obtained from quantum double models, are not universal for braiding alone, however, some of them can be used for quantum computation when assisted with measurements, like the anyons of $D(S_3)$. One step lower on that hierarchy, we find the anyons of $D(G)$, where $G$ is a nilpotent group. These don't 
+
+
 
 
 
@@ -564,7 +602,7 @@ The main experiments showcasing the nonabelian nature of the excitations we prop
 
 \item[ii)] Non-Abelian braiding. The order of the braids does not commute.
 
-\item[iii)] S- and T-matrix measurements. This data describes the amplitudes of links and twists and almost uniquely\footnote{There are some exceptions, where the anyon theory, i.e., the UMTC is not determined uniquely by the $S$-and $T$-matrices alone.\caro{look up reference}} characterises the full anyon theory.
+\item[iii)] S- and T-matrix measurements. This data describes the amplitudes of links and twists and almost uniquely\footnote{There are some exceptions, where the anyon theory, i.e., the UMTC is not determined uniquely by the $S$-and $T$-matrices alone\cite{notdetermined2021}.} characterises the full anyon theory.
 %Technically speaking, the UMTC data is not captured by S and T matrix alone
 \end{itemize}
 
@@ -1041,28 +1079,26 @@ The control qubit is in a pure state (assuming there is no noise) that we can to
 
 \section{Numerical Experiments}\label{sec:num}
 
-In this section, we provide numerical evidence for the feasibility of our proposal on state of the art NISQ devices. The simulations were done using Google's 'cirq\_google' python package running on Google's cloud computing platform 'Google Colab'. This package executes the quantum trajectory simulation of the circuit using the Kraus operators obtained from the direct Pauli Transfer Matrix tomography on various single and two qubit gates on the Sycamore chip \cite{}.
+In this section, we provide numerical evidence for the feasibility of our proposal on state of the art NISQ devices. We performed simulations using Google's 'cirq\_google' python package on Google's cloud computing platform 'Google Colab'. This package executes the quantum trajectory simulation of the circuit using the Kraus operators obtained from the direct Pauli transfer matrix tomography on various single and two qubit gates on the Sycamore chip \cite{}.
 
-Knowing the characteristics of the two-qubit gates, single-qubit gates and single- and multi-qubit readout performances of the chip \cite{} we have chosen a suitable part of the chip for our simulations. A similar setup would be suitable for an actual experiment on the Sycamore chip. However, the optimal allocation of recourses (gauge field degrees of freedom, ribbon ancillaries, control and other) will be chip depended. The layout we used is shown in Figure \ref{}.
+Knowing the characteristics of the single and two-qubit gates, and single- and multi-qubit readout performances of the chip \cite{} we have chosen a suitable part of the chip for our simulations. A similar setup would be suitable for an actual experiment on the Sycamore chip. However, the optimal allocation of recourses will be chip depended. The layout we used is shown in Figure \ref{}.
 
-\caro{[move that to a bit further down the line]
-Given that we argue for feasibility of these experiments, i.e. will the signals we expect be detectable given the noise, we have to take into account how well does this numerical scheme, quantum trajectories with noisy one- and two-qubit gates, will reproduce the actual measurements.
-Heuristics shows that it is in fact a good approximation of what we expect to see from the actual experiment \cite{}, even if it neglects any cross-talk between qubits that are not directly coupled by the circuit.}
+Given that we argue for feasibility of these experiments, we need to ask how well this numerical scheme, will reproduce the actual measurements.
+\caro{which heuristics?} Heuristics shows that it is in fact a good approximation of what we expect to see from the actual experiment \cite{}, even if it neglects any cross-talk between qubits that are not directly coupled by the circuit.
 
-It is also important to note that, we are further limited by the number of qubits we can simulate classically.
-Indeed, for the case of $D_4$ which is a solvable group, only a few operations are non-Clifford hence the ideal circuits are from the computational point of view simple, close to classical. 
-\caro{[not sure that noise automatically means one can no longer get speed ups if the gates are clifford, better double check that]
-Clifford gate means that it takes maps a Pauli string into a Pauli string, but this would imply a very simple Pauli transfer matrix, i.e. only one Krauss operator, hence it cannot be noisy (non-unitary).
-If we are interested in Noisy simulations we are automatically outside Clifford group and we cannot get around doing a quantum circuit simulation in-full.}
+The number of qubits we could simulate classically using this software is limited to 30 qubits, which is less than the number of qubits currently available on an actual machine. To see how this comes about, let us note that even though in our protocols there are only a few non-Clifford gates, we can not exploit the advantage of Clifford simulators because we simulate \emph{noisy circuits}. 
+%A Clifford gate maps a Pauli string into a Pauli string, which implies a simple Pauli transfer matrix, i.e., only one Krauss operator. Hence it cannot be noisy (non-unitary).
+%If we are interested in Noisy simulations we are automatically outside Clifford group and we cannot get around doing a quantum circuit simulation in-full.}
 
 
 \subsection{Elemental Protocols}
 
-In this section, we present the results of our simulations of our fusion and braiding experiments.
+In this section, we present the simulation results for the fusion and braiding experiments.
 
 \textbf{Circuit Characteristics.} However, before we present the results, we need report on the qubit layout used for the fusion and braiding experiments as well as circuits depths achieved, in order to put the noise observed in a useful context.
 
-\emph{Fusion.} The exact ribbon operators used in the fusion experiment is shown in Figure \ref{fig:fusion_setup} (Top) while the layout of the qubits on the Sycamore chip is shown in the bottom of the same Figure.
+\emph{Fusion.} 
+The exact ribbon operators used in the fusion experiment is shown in Figure \ref{fig:fusion_setup} (Top) while the layout of the qubits on the Sycamore chip is shown in the bottom of the same Figure.
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Figures/basket_fusion.pdf}
