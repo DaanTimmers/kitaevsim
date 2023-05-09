@@ -1142,6 +1142,10 @@ The circuit depths achieved for braiding the $\Psi_m$ fluxes is 23 and 25 for th
 
 Once compiled to only use CZ as the two-qubit gate we get 60 and 68 for the two cases respectively.
 
+\emph{Ground state.} As mentioned, we prepare the ground state directly. On the braiding ladder that procedure is depth 2, prepare the bits on all the bottom edges in an equal superposition via Hadamard gates and then CNOT the qubit above controlled by the one below. 
+
+On a planar graph in Figure \ref{fig:basketball}, this process is more complicated. Repeating the process as for the braiding ladder gives us the following state $\ket{\Psi} = \sum_{g_{12},g_{34}}\ket{g_{12},g_{12}, g_{34}, g_{34}}$. We then apply the full controlled multiply circuit from qubits of the second edge onto the qubits of the third edge. This procedure gives us the state defined in Figure \ref{fig:basketball}, up a simple relabelling.
+
 \textbf{Results.}
 The results for the four experiments are shown in Figure \ref{fig:red_charge_res}.
 \begin{figure*}
