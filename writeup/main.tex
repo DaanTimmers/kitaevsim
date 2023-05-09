@@ -981,22 +981,24 @@ The result is illustrated in Fig.~\ref{fig:flavCond}.
     \label{fig:intef_example}
 \end{subfigure}\hfill
 \begin{subfigure}{0.47\textwidth}
+    \includegraphics[width=\linewidth]{Figures/intefEx.pdf}
+    \caption{Conditioning the existence of the ribbon. The ribbon $\Psi_m$ is only applied, if the state of the control qubit is $\ket{1}_c$. Equivalently, conditioning whether to apply $\Psi_m$ or the reducible representation $0\oplus 0$. \jovan{Fix the caption.}}
+    \label{fig:cond_ex}
+\end{subfigure}
+%\begin{subfigure}{0.47\textwidth}
+%    \includegraphics[width=\linewidth]{Figures/phaseCheck.pdf}
+%    \caption{Phase check. Making sure to remove any phase that is due to the application of the closed ribbon $\Psi_m$ itself.}
+%    \label{fig:phase_check}
+%\end{subfigure} MOVE TO THE SOME APPS
+
+\vspace{15pt}
+
+\begin{subfigure}{0.47\textwidth}
     \includegraphics[width=\linewidth]{Figures/intefFlav.pdf}
     \caption{Conditioning the flavour of the ribbon, if the state of the control bit is $\ket{0}_c$ then the flavour is the reducible representation $0\oplus\tilde{0}$ and $\Psi_m$ otherwise. This is the shallowest protocol in terms of total compiled circuit depth.}
     \label{fig:cond_flav}
 \end{subfigure}
-\vspace{15pt}
 
-\begin{subfigure}{0.47\textwidth}
-    \includegraphics[width=\linewidth]{Figures/intefEx.pdf}
-    \caption{Conditioning the existence of the ribbon. The ribbon $\Psi_m$ is only applied, if the state of the control qubit is $\ket{1}_c$. Equivalently, conditioning whether to apply $\Psi_m$ or the reducible representation $0\oplus 0$.}
-    \label{fig:cond_ex}
-\end{subfigure}\hfill
-\begin{subfigure}{0.47\textwidth}
-    \includegraphics[width=\linewidth]{Figures/phaseCheck.pdf}
-    \caption{Phase check. Making sure to remove any phase that is due to the application of the closed ribbon $\Psi_m$ itself.}
-    \label{fig:phase_check}
-\end{subfigure}
 \caption{The interference protocols used for phase sensitive measurement of the (normalized) S-matrix elements  $\tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b)$\caro{general b? adjust figures?, for
 $S(a, \Psi_m)$ for $a\in\{\Psi_m, \tilde{\Psi}_m, \Psi_r\}$.}}
 \label{fig:S-mat}
