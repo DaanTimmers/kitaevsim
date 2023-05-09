@@ -1285,8 +1285,16 @@ With a reasonable improvement in hardware the experiments we propose are doable 
 Given the noise levels present in the simulator we have sticked with using simpler $m$-dyon for most parts. However, the twist phase interferometry experiment we did have to resort to the most complicated anyon, the $\Phi_r$ semion or its antisemion, in order to demonstrate nontrivial twist phase.
 
 The depths of the circuits used in the various interference protocols are:\begin{itemize}
-	\item[i)] for measuring $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$, 58 once completely compiled
-	\item[ii)] for measuring $S(\Psi_m, \Psi_r)$, 64 once completely compiled, due to the more complex $\mathcal{C}_r$-controlled multiplication
+	\item[i)] Flavour conditioning: \begin{enumerate}
+		\item[a)] for measuring $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$, 58 once completely compiled
+		\item[b)] for measuring $S(\Psi_m, \Psi_r)$, 64 once completely compiled, due to the more complex $\mathcal{C}_r$-controlled multiplication
+	\end{enumerate}
+	
+	\item[ii)] Full conditioning will be considerably deeper due to the extra Toffoli gate in conditional $C$-controlled multiplication: \begin{enumerate}
+		\item[a)] for measuring $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$, 84 once completely compiled
+		\item[b)] for measuring $S(\Psi_m, \Psi_r)$, 90 once completely compiled
+	\end{enumerate}  
+	
 	\item[iii)] for measuring $T(\tilde{\Phi}_r, \tile{\Phi}_r)$, 89 once completely compiled, due to the more complicated $\mathcal{C}_r$-controlled multiplication and generalised conjugation 
 \end{itemize}
 
