@@ -1019,22 +1019,24 @@ The result is illustrated in Fig.~\ref{fig:flavCond}.
     \label{fig:intef_example}
 \end{subfigure}\hfill
 \begin{subfigure}{0.47\textwidth}
+    \includegraphics[width=\linewidth]{Figures/intefEx.pdf}
+    \caption{Conditioning the existence of the ribbon. The ribbon $\Psi_m$ is only applied, if the state of the control qubit is $\ket{1}_c$. Equivalently, conditioning whether to apply $\Psi_m$ or the reducible representation $0\oplus 0$. \jovan{Fix the caption.}}
+    \label{fig:cond_ex}
+\end{subfigure}
+%\begin{subfigure}{0.47\textwidth}
+%    \includegraphics[width=\linewidth]{Figures/phaseCheck.pdf}
+%    \caption{Phase check. Making sure to remove any phase that is due to the application of the closed ribbon $\Psi_m$ itself.}
+%    \label{fig:phase_check}
+%\end{subfigure} MOVE TO THE SOME APPS
+
+\vspace{15pt}
+
+\begin{subfigure}{0.47\textwidth}
     \includegraphics[width=\linewidth]{Figures/intefFlav.pdf}
     \caption{Conditioning the flavour of the ribbon, if the state of the control bit is $\ket{0}_c$ then the flavour is the reducible representation $0\oplus\tilde{0}$ and $\Psi_m$ otherwise. This is the shallowest protocol in terms of total compiled circuit depth.}
     \label{fig:cond_flav}
 \end{subfigure}
-\vspace{15pt}
 
-\begin{subfigure}{0.47\textwidth}
-    \includegraphics[width=\linewidth]{Figures/intefEx.pdf}
-    \caption{Conditioning the existence of the ribbon. The ribbon $\Psi_m$ is only applied, if the state of the control qubit is $\ket{1}_c$. Equivalently, conditioning whether to apply $\Psi_m$ or the reducible representation $0\oplus 0$.}
-    \label{fig:cond_ex}
-\end{subfigure}\hfill
-\begin{subfigure}{0.47\textwidth}
-    \includegraphics[width=\linewidth]{Figures/phaseCheck.pdf}
-    \caption{Phase check. Making sure to remove any phase that is due to the application of the closed ribbon $\Psi_m$ itself.}
-    \label{fig:phase_check}
-\end{subfigure}
 \caption{The interference protocols used for phase sensitive measurement of the (normalized) S-matrix elements  $\tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b)$\caro{general b? adjust figures?, for
 $S(a, \Psi_m)$ for $a\in\{\Psi_m, \tilde{\Psi}_m, \Psi_r\}$.}}
 \label{fig:S-mat}
@@ -1136,11 +1138,8 @@ Once compiled to only use CZ as the two-qubit gate we get 60 and 68 for the two 
 
 \textbf{Results.}
 The results for the four experiments are shown in Figure \ref{fig:red_charge_res}.
-
-
 \begin{figure*}
 \centering
-
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width = \linewidth]{Figures/fusion_glasses.png}
     \caption{The reduced charge-flux measurement after fusing two $\Psi_m$ pure fluxes on the site of fusion. The reduced charge was done with $H_{mr}$ subgroup, and the geometry was that of the braiding ladder, Figure \ref{fig:gen_geom}.}
@@ -1152,7 +1151,6 @@ The results for the four experiments are shown in Figure \ref{fig:red_charge_res
     \label{fig:fusion_basketball}
 \end{subfigure}
 \vspace{15pt}
-
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width=\linewidth]{Figures/braid_fusion.png}
     \caption{The braiding on a braiding ladder: the reduced charge-flux measurement after performing the braiding protocol in $\sigma_{12}\sigma_{23}$ order, Figure \ref{fig:flux_braid} (left), where $\sigma_{ii+1}$ is a braid group generator. The anyons used are the pure fluxes $\Psi_m$. The reduced charge measurement was done with respect to $H_{mr}$ subgroup.} 
@@ -1166,7 +1164,7 @@ The results for the four experiments are shown in Figure \ref{fig:red_charge_res
 \caption{The reduced topological charge measurements for the fusion and braiding protocols.}
 \label{fig:red_charge_res}
 \end{figure*}
-
+\jovan{ToDo: Comment on the result and Noise.}
 
 
 \subsection{Linking and Twist Matrices}
@@ -1306,9 +1304,37 @@ The exact ribbon operators involved in the protocol are shown in Figure \ref{fig
 \end{figure}
 Note that the application or the flavour of the blue (equal-time) ribbon is conditioned on the state of the control bit.
 
-The layout on the chip is chosen to reduce the number of two-qubit gates acting on the control bit.
+The layout on the chip is chosen to reduce the number of two-qubit gates acting on the control bit, which is a more relevant heuristic in this case.
 
-\jovan{ToDo.}
+As for the fusion and braiding not all anyons are made equal in term of difficulty to manipulate.
+
+The act of conditioning the application of the ribbon or it's flavour makes this protocol significantly more complex in terms of number of multi-qubit gates.
+
+The two main factors is the flux of the dyon. The $r-$dyons are much more difficult to implement conditionally since they are much more difficult to implement unconditionally. The $\mathbb{Z}_4$ $r$-multiplication necessitates a Toffoli gate upon conditioning.
+
+The second difficulty arrises from the charge. If the irreducible representation of the dyon assigns $-1$ to the nontrivial element of the group's centre, $r^2$, the linear representation formed by $A^{(g)}$ is faithful. Therefore a circuit that implements the generalised conjugation is significantly more complex even before conditioning it.
+
+However, it is important to note that difference in circuits is not  substantial between different types of anyons. The circuit depth are always of the same order of magnitude and involve the same number of qubits. 
+
+With a reasonable improvement in hardware the experiments we propose are doable with all anyons of the $D_4$ theory. 
+
+Given the noise levels present in the simulator we have sticked with using simpler $m$-dyon for most parts. However, the twist phase interferometry experiment we did have to resort to the most complicated anyon, the $\Phi_r$ semion or its antisemion, in order to demonstrate nontrivial twist phase.
+
+The depths of the circuits used in the various interference protocols are:\begin{itemize}
+	\item[i)] Flavour conditioning: \begin{enumerate}
+		\item[a)] for measuring $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$, 58 once completely compiled
+		\item[b)] for measuring $S(\Psi_m, \Psi_r)$, 64 once completely compiled, due to the more complex $\mathcal{C}_r$-controlled multiplication
+	\end{enumerate}
+	
+	\item[ii)] Full conditioning will be considerably deeper due to the extra Toffoli gate in conditional $C$-controlled multiplication: \begin{enumerate}
+		\item[a)] for measuring $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$, 84 once completely compiled
+		\item[b)] for measuring $S(\Psi_m, \Psi_r)$, 90 once completely compiled
+	\end{enumerate}  
+	
+	\item[iii)] for measuring $T(\tilde{\Phi}_r, \tile{\Phi}_r)$, 89 once completely compiled, due to the more complicated $\mathcal{C}_r$-controlled multiplication and generalised conjugation 
+\end{itemize}
+
+Note that the twist phase experiment has the best agreement with the theoretical prediction even though it is the deepest protocol.
 
 \section{Other Gauge Groups}
 
