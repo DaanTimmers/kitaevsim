@@ -86,7 +86,7 @@ For some anyons such as the Fibonacci anyons braiding alone allows one to perfor
 
 Having identified a reasonable phase, i.e., $D(D_4)$ in our case, the next task is to find a suitable microscopic realization of the model and to prepare its ground state. Here, our protocol differs drastically from that presented in Ref.~\cite{iqbal2023creation}. First of all, the Hamiltonian chosen in Ref.~\cite{iqbal2023creation} is that of $D_\alpha(\mathbb Z_2^3)$. This means, its degrees of freedom (dof) are valued in $G=Z_2^3$, while for us the dof are $G=D_4$-valued. In fact, the Hamiltonian in Ref.~\cite{iqbal2023creation} is best understood as a gauged version of a symmetry protected topological phase and the ground state preparation reflects that. 
 
-To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but Abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasize that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines. \caro{needs citations} 
+To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^3$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but Abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasize that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines. \caro{needs citations} 
 
 Therefore, in our protocol we refrain from using any feed-forward protocols and prepare the ground state directly via a unitary circuit. This has the disadvantage of limiting the achievable lattice size. However, we note, that in order to demonstrate signatures of non-Abelian braiding, it is not necessary to use a lattice which is fully two-dimensional. In fact, it is sufficient to consider a quasi-one dimensional geometry, which we refer to as \emph{braiding ladder} shown in Fig.~\ref{fig:latticeG}. For this geometry, we can prepare the ground state with a depth-two circuit. Of course, this ground state does not feature long-range entanglement, however this is not needed for the demonstration of non-Abelian braiding as we will show explicitly in section \ref{sec:}. We also consider a small truly two-dimensional lattice, just for the sake of proving that a direct unitary circuit preparation of the ground state is feasible and feed-forward protocols are not mandatory for the preparation of non-Abelian topological order.
 
@@ -1160,8 +1160,8 @@ The results for the four experiments are shown in Figure \ref{fig:red_charge_res
 \begin{figure*}
 \centering
 \begin{subfigure}{0.47\textwidth}
-    \includegraphics[width = \linewidth]{Figures/fusion_glasses.png}
-    \caption{The reduced charge-flux measurement after fusing two $\Psi_m$ pure fluxes on the site of fusion. The reduced charge was done with $H_{mr}$ subgroup, and the geometry was that of the braiding ladder, Figure \ref{fig:gen_geom}.}
+    \includegraphics[width = \linewidth]{Figures/fusion_on_glasses.png}
+    \caption{The reduced charge-flux measurement after fusing two $\Psi_m$ pure fluxes on the site of fusion. The reduced charge was done with $H_{mr}$ subgroup, and the geometry was that of the braiding ladder, Figure \ref{fig:latticeGS.}
     \label{fig:fusion_glass}
 \end{subfigure}\hfill
 \begin{subfigure}{0.47\textwidth}
@@ -1191,8 +1191,7 @@ with the difference coming as the larger background noise in the case of the sma
 
 The number of runs for the fusion on the braiding ladder was $16000$. The expected post-selection probability for the two ribbons is $1/16$, while the actual number of successes was $1807$, due to the circuit noise and measurement readout bias. The four main bins count $270(16)$ with the biggest noise peak being $77(8)$. 
 
-The number of runs for the fusion on the small planar graph was $XXX$. The expected post-selection probability for the two ribbons is $1/16$, while the actual number of successes was $XXX$, due to the circuit noise and measurement readout bias. The four main bins count $XXX$ with the biggest noise peak being $XXX$. \jovan{I lost the data, rerunning the experiment.}
-
+The number of runs for the fusion on the small planar graph was $64000$. The expected post-selection probability for the two ribbons is $1/16$, while the actual number of successes was $5289$, due to the circuit noise and measurement readout bias. The four main bins count $450(20)$ with the biggest noise peak being $242(15)$.
 \emph{Braiding.}
 Looking at the results of the charge measurement for the two braiding protocols we clearly see what we expected. The first braiding protocol leaves multiple fusion outcomes at the site of stitching while the second braiding protocol leaves it in the vacuum.
 
