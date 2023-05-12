@@ -22,7 +22,7 @@
 
 
 
-\title{non-Abelian Braiding of Lattice Gauge Theory excitations on NISQ hardware}
+\title{non-abelian Braiding of Lattice Gauge Theory excitations on NISQ hardware}
 \author{Jovan Jovanovi\'c, Carolin Wille, Daan Timmers and Steve H. Simon}
 \date{February 2023}
 
@@ -47,69 +47,69 @@
 \end{itemize}
 }
 
-In 1982 Frank Wilczek explored the idea of \emph{anyons} -- quasiparticles with fractional statistics that are neither Bosons nor Fermions. Simultaneously, Tsui and Stoermer discovered the fractional quantum Hall effect. Since then, the investigation of topological order and its signature -- anyonic excitation -- has become a major topic in modern condensed matter physics, culminating in the 2016 noble prize. 
+In 1982 Frank Wilczek\cite{Wilczek} explored the idea of \emph{anyons} -- quasiparticles with fractional statistics that are neither Bosons nor Fermions. Simultaneously, Tsui and Stoermer discovered the fractional quantum Hall effect. Since then, the investigation of topological order and its signature -- anyonic excitation -- has become a major topic in modern condensed matter physics, culminating in the 2016 noble prize\cite{nobel}. 
 
 
 
 Beyond the study of unconventional phases of matter, topological order has been explored and praised for its potential applications in quantum computation and the study of its underlying rather sophisticated mathematical structure has received a lot of interested from the mathematical community. 
 
 
-Today, almost half a century later one may say that the theoretical understanding is slowly approaching completion. However, unambiguous experimental evidence of anyons in 'natural' physical systems is still scarce. This is in particular true for the more complex types of anyons, so called \emph{non-Abelian anyons} for which  braiding two particles changes the wave-function by a unitary rotation instead of just a phase factor.
+Today, almost half a century later one may say that the theoretical understanding is slowly approaching completion. However, unambiguous experimental evidence of anyons in 'natural' physical systems is still scarce. This is in particular true for the more complex types of anyons, so called \emph{non-abelian anyons} for which  braiding two particles changes the wave-function by a unitary rotation instead of just a phase factor.
 
 
 %
 %
-%In Kitaev's toric code the topological ground state degeneracy is used to protect quantum information against noise. The topological phase needed for that is relatively simple, its excitations are Abelian and 
+%In Kitaev's toric code the topological ground state degeneracy is used to protect quantum information against noise. The topological phase needed for that is relatively simple, its excitations are abelian and 
 %
 %as is done in Kitaev's toric code, the idea of performing computations via the braiding of anyons is referred to 
 %
 %
-% \emph{non-Abelian anyons}
+% \emph{non-abelian anyons}
 %
 %
 %, particles that change the state of the system by a unitary operation instead of just a phase
 %
 %
-%However, almost half a century later unambiguous experimental evidence for demonstrating non-Abelian anyons in 'natural' physical systems is still scarce.
+%However, almost half a century later unambiguous experimental evidence for demonstrating non-abelian anyons in 'natural' physical systems is still scarce.
 
-On that grounds, one may argue that the majority of topological phases of matter is just too complicated to exist in nature and is thus more of a mathematical curiosity than an actual physical phenomenon, however, a series of striking experiments \cite{iqbal2023creation,xu2022digital,andersen2022observation} performed recently on noisy intermediate scale quantum computers (NISQ) strongly refutes such  criticism. Two experiments performed on superconducting qubits \cite{xu2022digital,andersen2022observation} demonstrated the non-Abelian braiding of mobile lattice defects which behave like Ising anyons embedded into an Abelian phase. Another experiment performed on trapped ions \cite{iqbal2023creation} prepared the topologically ordered ground state of a non-Abelian phase and detected an intrinsically non-Abelian braiding processes (Borromean rings) via anyon interferometry. 
+On that grounds, one may argue that the majority of topological phases of matter is just too complicated to exist in nature and is thus more of a mathematical curiosity than an actual physical phenomenon, however, a series of striking experiments \cite{iqbal2023creation,xu2022digital,andersen2022observation} performed recently on noisy intermediate scale quantum computers (NISQ) strongly refutes such  criticism. Two experiments performed on superconducting qubits \cite{xu2022digital,andersen2022observation} demonstrated the non-abelian braiding of mobile lattice defects which behave like Ising anyons embedded into an abelian phase. Another experiment performed on trapped ions \cite{iqbal2023creation} prepared the topologically ordered ground state of a non-abelian phase and detected an intrinsically non-abelian braiding processes (Borromean rings) via anyon interferometry. 
 
-All three experiments indicate that today's quantum computers are capable of simulating states of matter whose complexity exceeds that of Abelian topological order and can be seen as one more significant step towards topologically protected quantum computation. While open questions of the scalability and the improvement of noise levels are left for the future to decide, it is clear that by now non-Abelian anyons have descended from the somewhat esoteric mathematical realm to the concrete and tangible.
+All three experiments indicate that today's quantum computers are capable of simulating states of matter whose complexity exceeds that of abelian topological order and can be seen as one more significant step towards topologically protected quantum computation. While open questions of the scalability and the improvement of noise levels are left for the future to decide, it is clear that by now non-abelian anyons have descended from the somewhat esoteric mathematical realm to the concrete and tangible.
 
-Motivated by these findings, we propose an alternative scheme to realize non-Abelian anyons on a NISQ device. Our proposal focuses on Kitaev's quantum double models -- a discrete realization of lattice gauge theory -- and in particular the topological phase $D(D_4)$. This phase is equivalent to the phase realized in Ref.~\cite{iqbal2023creation}. However, its microscopic Hamiltonian and the protocols we propose to demonstrate non-Abelian braiding are quite different from the ones in Ref.~\cite{iqbal2023creation}. 
+Motivated by these findings, we propose an alternative scheme to realize non-abelian anyons on a NISQ device. Our proposal focuses on Kitaev's quantum double models -- a discrete realization of lattice gauge theory -- and in particular the topological phase $D(D_4)$. This phase is equivalent to the phase realized in Ref.~\cite{iqbal2023creation}. However, its microscopic Hamiltonian and the protocols we propose to demonstrate non-abelian braiding are quite different from the ones in Ref.~\cite{iqbal2023creation}. 
 
-The main challenge that needs to be overcome in any experiment that realizes non-Abelian topological order on a NISQ device is an intrinsic and a profound one. Both by definition, a NISQ device is noisy meaning that beyond a certain circuit depth quantum information is scrambled beyond recognition, likewise, the preparation of a topological ordered states requires a relatively deep circuit. By definition, the depth scales linearly with the system size. In addition to that, moving anyons on a topological background requires operators whose circuit depth again scale with the length of the paths. Thus, realizing non-Abelian anyons on a NISQ device becomes a challenging game of finding ways to circumvent these rather daunting limitations. 
+The main challenge that needs to be overcome in any experiment that realizes non-abelian topological order on a NISQ device is an intrinsic and a profound one. Both by definition, a NISQ device is noisy meaning that beyond a certain circuit depth quantum information is scrambled beyond recognition, likewise, the preparation of a topological ordered states requires a relatively deep circuit. By definition, the depth scales linearly with the system size. In addition to that, moving anyons on a topological background requires operators whose circuit depth again scale with the length of the paths. Thus, realizing non-abelian anyons on a NISQ device becomes a challenging game of finding ways to circumvent these rather daunting limitations. 
 
-There are three levels on which to tackle this problem. The first and most important is to identify a suitable type of order. It is reasonable to refine the classification into simple, i.e. Abelian, and complicated, i.e., non-Abelian anyons, a little further. Non-Abelian anyons in particular, can be classified by their computational power which, perhaps unsurprisingly, seems to coincide with the difficulty of realizing them. 
+There are three levels on which to tackle this problem. The first and most important is to identify a suitable type of order. It is reasonable to refine the classification into simple, i.e. abelian, and complicated, i.e., non-abelian anyons, a little further. Non-abelian anyons in particular, can be classified by their computational power which, perhaps unsurprisingly, seems to coincide with the difficulty of realizing them. 
 
-For some anyons such as the Fibonacci anyons braiding alone allows one to perform universal quantum computation. In contrast, all anyons obtained from quantum double models, are not universal for braiding alone, however, some of them can be used for quantum computation when assisted with measurements, like the anyons of $D(S_3)$. One step lower on that hierarchy, we find the anyons of $D(G)$, where $G$ is a non-Abelian, but nilpotent group. For those, measurement assisted protocols do not suffice to generate computational universality. One may argue that nilpotent non-Abelian groups are the simplest non-Abelian groups. In particular, we found that $D_4$, the dihedral group of order eight, and $Q_8$, the quaternion group, also of order eight, are both nilpotent and the realization of their quantum double models is of similar complexity. In particular, they are easier to implement then the double models for $S_3$ which is not nilpotent and of order six and thus less amendable for a qubit-based implementation. For concreteness, we will focus on $D(D_4)$. In Ref.~\cite{iqbal2023creation} the topological phase chosen is $D_\alpha(\mathbb Z_2^3)$, i.e. a \emph{twisted} quantum double model of the Abelian group $\mathbb Z_2$. This phase is identical to $D(D_4)$, which further indicates that $D(D_4)$ is just of the right complexity, simple enough to be realized on a NISQ device, and complex enough to host non-Abelian anyons.
+For some anyons such as the Fibonacci anyons braiding alone allows one to perform universal quantum computation. In contrast, all anyons obtained from quantum double models, are not universal for braiding alone, however, some of them can be used for quantum computation when assisted with measurements, like the anyons of $D(S_3)$. One step lower on that hierarchy, we find the anyons of $D(G)$, where $G$ is a non-abelian, but nilpotent group. For those, measurement assisted protocols do not suffice to generate computational universality. One may argue that nilpotent non-abelian groups are the simplest non-abelian groups. In particular, we found that $D_4$, the dihedral group of order eight, and $Q_8$, the quaternion group, also of order eight, are both nilpotent and the realization of their quantum double models is of similar complexity. In particular, they are easier to implement then the double models for $S_3$ which is not nilpotent and of order six and thus less amendable for a qubit-based implementation. For concreteness, we will focus on $D(D_4)$. In Ref.~\cite{iqbal2023creation} the topological phase chosen is $D_\alpha(\mathbb Z_2^3)$, i.e. a \emph{twisted} quantum double model of the abelian group $\mathbb Z_2$. This phase is identical to $D(D_4)$, which further indicates that $D(D_4)$ is just of the right complexity, simple enough to be realized on a NISQ device, and complex enough to host non-abelian anyons.
 
 Having identified a reasonable phase, i.e., $D(D_4)$ in our case, the next task is to find a suitable microscopic realization of the model and to prepare its ground state. Here, our protocol differs drastically from that presented in Ref.~\cite{iqbal2023creation}. First of all, the Hamiltonian chosen in Ref.~\cite{iqbal2023creation} is that of $D_\alpha(\mathbb Z_2^3)$. This means, its degrees of freedom (dof) are valued in $G=Z_2^3$, while for us the dof are $G=D_4$-valued. In fact, the Hamiltonian in Ref.~\cite{iqbal2023creation} is best understood as a gauged version of a symmetry protected topological phase and the ground state preparation reflects that. 
 
-To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but Abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasize that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines. \caro{needs citations} 
+To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasize that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines. \caro{needs citations} 
 
-Therefore, in our protocol we refrain from using any feed-forward protocols and prepare the ground state directly via a unitary circuit. This has the disadvantage of limiting the achievable lattice size. However, we note, that in order to demonstrate signatures of non-Abelian braiding, it is not necessary to use a lattice which is fully two-dimensional. In fact, it is sufficient to consider a quasi-one dimensional geometry, which we refer to as \emph{braiding ladder} shown in Fig.~\ref{fig:latticeG}. For this geometry, we can prepare the ground state with a depth-two circuit. Of course, this ground state does not feature long-range entanglement, however this is not needed for the demonstration of non-Abelian braiding as we will show explicitly in section \ref{sec:}. We also consider a small truly two-dimensional lattice, just for the sake of proving that a direct unitary circuit preparation of the ground state is feasible and feed-forward protocols are not mandatory for the preparation of non-Abelian topological order.
+Therefore, in our protocol we refrain from using any feed-forward protocols and prepare the ground state directly via a unitary circuit. This has the disadvantage of limiting the achievable lattice size. However, we note, that in order to demonstrate signatures of non-abelian braiding, it is not necessary to use a lattice which is fully two-dimensional. In fact, it is sufficient to consider a quasi-one dimensional geometry, which we refer to as \emph{braiding ladder} shown in Fig.~\ref{fig:latticeG}. For this geometry, we can prepare the ground state with a depth-two circuit. Of course, this ground state does not feature long-range entanglement, however this is not needed for the demonstration of non-abelian braiding as we will show explicitly in section \ref{sec:}. We also consider a small truly two-dimensional lattice, just for the sake of proving that a direct unitary circuit preparation of the ground state is feasible and feed-forward protocols are not mandatory for the preparation of non-abelian topological order.
 
 With the ground state preparation in place we lastly turn to the operators which allow us to create and move anyons and to the measurement. All of these operations need comparably short circuits. It is in this area where we think that our work contributes the most and provides results that can be generalized to other quantum double models. To elucidate our achievements we need to briefly review the basics of quantum double models, however, a full recap of the latter is deferred to the main text. The dof in a quantum double model are $G$-valued and group multiplication is an operation as elemental as a spin-flip in a spin-1/2 system. Unfortunately, a single group multiplication requires several Toffoli gates which are non-Clifford and quite costly on most architectures. To be concrete, a single Toffoli gate translates to a depth-12 circuit of elemental gates on google's Sycamore chip, which we took as the benchmark for current state NISQ devices. However, a careful investigation reveals that full group multiplications can be entirely avoided for the creation, manipulation and measurements of anyons. 
 
-To see this, we remind the reader that in a quantum double model for each anyon there is a so-called \emph{ribbon operator} which creates an anyon pair at its end-points. As the name suggest, a ribbon operator is quasi-one dimensional operator that can be defined for any path and has a finite $\mathcal O(1)$-width. The ribbon operator corresponding to a non-Abelian anyon is non-unitary and is most conveniently implemented with ancilla qubits which are measured at the end of the protocol. In applying the ribbon operators, a sequence entangling operations between the ancillas and the dof on the lattice are performed giving rise to states that 'know' about the presence of anyons. These entangling operations depend on the anyon type. While they formally involve group multiplication and are as such costly, closer inspection reveals that for all anyon types drastic simplifications of the circuits can be performed once we tailor the circuits to the anyon type in question rather than applying a 'one size fits all' protocol. The key here is to make use of the structure of the excitations in the quantum double model. In particular each anyon corresponds to a pair $(\mathcal C,\chi)$, where $\mathcal C$ is a conjugacy class of $G$ and $\chi$ is an irreducible representation of the centralizer $Z_c$, $c \in \mathcal C$. The group multiplication involved in the ribbon operators needs to be performed only for elements of the respective conjugacy class. We show, that exploiting this property drastically reduces the circuit depth and removes all Toffoli gates. Such a complexity reduction for the ribbon operators generalizes to other groups, in particular to solvable groups including $S_3$\caro{substantiate this claim in the main text?}. 
+To see this, we remind the reader that in a quantum double model for each anyon there is a so-called \emph{ribbon operator} which creates an anyon pair at its end-points. As the name suggest, a ribbon operator is quasi-one dimensional operator that can be defined for any path and has a finite $\mathcal O(1)$-width. The ribbon operator corresponding to a non-abelian anyon is non-unitary and is most conveniently implemented with ancilla qubits which are measured at the end of the protocol. In applying the ribbon operators, a sequence entangling operations between the ancillas and the dof on the lattice are performed giving rise to states that 'know' about the presence of anyons. These entangling operations depend on the anyon type. While they formally involve group multiplication and are as such costly, closer inspection reveals that for all anyon types drastic simplifications of the circuits can be performed once we tailor the circuits to the anyon type in question rather than applying a 'one size fits all' protocol. The key here is to make use of the structure of the excitations in the quantum double model. In particular each anyon corresponds to a pair $(\mathcal C,\chi)$, where $\mathcal C$ is a conjugacy class of $G$ and $\chi$ is an irreducible representation of the centralizer $Z_c$, $c \in \mathcal C$. The group multiplication involved in the ribbon operators needs to be performed only for elements of the respective conjugacy class. We show, that exploiting this property drastically reduces the circuit depth and removes all Toffoli gates. Such a complexity reduction for the ribbon operators generalizes to other groups, in particular to solvable groups including $S_3$\caro{substantiate this claim in the main text?}. 
 
-At last, we aim to design a protocol which can detect and measure non-Abelian charge. This is a non-trivial task and has so far not been demonstrated. In the experiments performed recently, non-Abelian braiding has been demonstrated either by measuring stabilizers \cite{andersen2022observation} or by anyon interferometry showing a phase. However, no direct measurement of non-Abelian charges, i.e. a state with a superposition of several charges that is created from fusion has been demonstrated. This might be due to the inherent difficulty in measuring non-Abelian charge. In the quantum double model the operators needed to measure general charges are explicitly known, however, they require full group multiplications on several lattice-dof and are therefore prohibiteverly costly. To circumvent this we propose a \emph{partial charge measurement}. \caro{explain more and make sure the other groups really didn't do any direct non-abelian charge measurements}.
+At last, we aim to design a protocol which can detect and measure non-abelian charge. This is a non-trivial task and has so far not been demonstrated. In the experiments performed recently, non-abelian braiding has been demonstrated either by measuring stabilizers \cite{andersen2022observation} or by anyon interferometry showing a phase. However, no direct measurement of non-abelian charges, i.e. a state with a superposition of several charges that is created from fusion has been demonstrated. This might be due to the inherent difficulty in measuring non-abelian charge. In the quantum double model the operators needed to measure general charges are explicitly known, however, they require full group multiplications on several lattice-dof and are therefore prohibiteverly costly. To circumvent this we propose a \emph{partial charge measurement}. \caro{explain more and make sure the other groups really didn't do any direct non-abelian charge measurements}.
 
 
-With these simplification in place we argue that it is possible to demonstrate the non-Abelian anyons of $D(D_4)$ on a NISQ device. In particular we propose two elemental protocols, anyon fusion and anyon braiding, demonstrating the existence of multiple fusion outcomes and non-commutativity of exchange operations, respectively. We furthermore propose protocols for anyon interferometry that allow us to measure the entries of the S- and T-matrices, which fully characterizes the anyon content of $D(D_4)$. For the protocols proposed we provide numerical simulations using google's realistic noisy quantum circuit simulator. All protocols proposed are ready to be run on the actual Sycamore chip and the results obtained from the simulations are representative of the actual experiments if they were performed on a chip with similar lay-out and noise levels. 
+With these simplification in place we argue that it is possible to demonstrate the non-abelian anyons of $D(D_4)$ on a NISQ device. In particular we propose two elemental protocols, anyon fusion and anyon braiding, demonstrating the existence of multiple fusion outcomes and non-commutativity of exchange operations, respectively. We furthermore propose protocols for anyon interferometry that allow us to measure the entries of the S- and T-matrices, which fully characterizes the anyon content of $D(D_4)$. For the protocols proposed we provide numerical simulations using google's realistic noisy quantum circuit simulator. All protocols proposed are ready to be run on the actual Sycamore chip and the results obtained from the simulations are representative of the actual experiments if they were performed on a chip with similar lay-out and noise levels. 
 
 We find...
 
 
 
 \caro{until here, previous text that can be integrated later:
-%We have developed a framework of manipulating non-Abelian excitations on top of a lattice gauge theory ground state realized on a digital quantum simulator.
+%We have developed a framework of manipulating non-abelian excitations on top of a lattice gauge theory ground state realized on a digital quantum simulator.
 %
 %The way braiding is implemented via local unitary gates is by keeping the copy of the non-local logical Hilbert space $\mathcal{H}_{\text{fusion}}$, alongside the Gauge Field degrees of freedom $\mathcal{H}_{\text{gauge}}$. The protocol is meant to couple the two systems such that once a specific measurement is preformed on the copy of the logical space and hence becoming disentangled from the gauge field, the gauge field is in the state that correspond to an appropriate space-time braiding of our anyons. The resulting state has: correct charge content, charges are in the correct fusion channel and the overall state is in the correct phase (in comparison to the vacuum).
-Using this framework, we examine a couple of braiding experiments. The question we address is the plausibility of detecting the non-Abelian braiding signatures given the levels of noise of current digital quantum simulators, Google's Sycamore chip in particular.
+Using this framework, we examine a couple of braiding experiments. The question we address is the plausibility of detecting the non-abelian braiding signatures given the levels of noise of current digital quantum simulators, Google's Sycamore chip in particular.
 The reason for this choice is the suitable geometry of Sycamore for implementing surface codes and the availability of noise models. Also, this chip in particular has been instrumental in a number of recent experimental breakthroughs including, realization of toric code ground state \cite{}, nonabelina braiding of defected toric code anyons \cite{}; similar chips were also used to realize symmetry protected topological edge modes in Floquet driven circuits \cite{}.
-In the next chapter, we will discuss the general framework of manipulating the non-Abelian anyons of the quantum double model, with a brief overview of the model itself. Afterwards, we will propose a series of experiments one can compile for a digital quantum processor that showcase the non-Abelian nature of these particles: non-unique fusion, non-Abelian nature of the braid group represented by these particles and the non-trivial linking matrix. Following that, we will present the results of our noisy simulations, the goal of which are to show that these signatures are indeed measurable on the current quantum hardware. The last chapter will be dedicated to the discussion of future research in quantum simulation, having now ways to prepare arbitrary lattice gauge theory states.}
+In the next chapter, we will discuss the general framework of manipulating the non-abelian anyons of the quantum double model, with a brief overview of the model itself. Afterwards, we will propose a series of experiments one can compile for a digital quantum processor that showcase the non-abelian nature of these particles: non-unique fusion, non-abelian nature of the braid group represented by these particles and the non-trivial linking matrix. Following that, we will present the results of our noisy simulations, the goal of which are to show that these signatures are indeed measurable on the current quantum hardware. The last chapter will be dedicated to the discussion of future research in quantum simulation, having now ways to prepare arbitrary lattice gauge theory states.}
 
 \section{Quantum double models}
 
@@ -118,7 +118,7 @@ In this section we will review Kitaev's quantum double models\cite{Kitaev_2003} 
 Kitaev's quantum double models are Hamiltonian formulations of lattice gauge theory for finite gauge groups. Gauss' law is enforced energetically at each vertex by a Hamiltonian term and the model is at the deconfinement fixed point, where there are no electric field terms.
 The Hamiltonian, therefore, has two sets of terms -- the gauge-invariant (magnetic) plaquette terms and the Gauss' law vertex terms\cite{cui2018topological, Kitaev_2003}. 
 
-Quantum double models can also be understood as a subclass of the more general string-net models\cite{Levin_2005}, which describe all non-chiral topological phases of matter, or as a generalisation of Kitaev's toric code\cite{Kitaev_2003} for which the gauge group is $\mathbb Z_2$ to general groups $G$. While all quantum double models have anyonic excitations, the anyons for models with Abelian gauge group are themselves Abelian. In order to obtain non-Abelian anyons, it is necessary to consider non-Abelian gauge groups $G$. While the models for the latter are conceptually still very similar to the toric code, their definitions require slightly more care and notation, which we will introduce in the following. 
+Quantum double models can also be understood as a subclass of the more general string-net models\cite{Levin_2005}, which describe all non-chiral topological phases of matter, or as a generalisation of Kitaev's toric code\cite{Kitaev_2003} for which the gauge group is $\mathbb Z_2$ to general groups $G$. While all quantum double models have anyonic excitations, the anyons for models with abelian gauge group are themselves abelian. In order to obtain non-abelian anyons, it is necessary to consider non-abelian gauge groups $G$. While the models for the latter are conceptually still very similar to the toric code, their definitions require slightly more care and notation, which we will introduce in the following. 
 
 %\footnote{It is worth noting that there exist an even more general class of models, known as Levin-Wen string-net model\cite{Levin_2005}.}.
 \textbf{Hamiltonian.}
@@ -198,7 +198,7 @@ In the following we will discuss the anyonic excitations in quantum double model
 \end{equation}
 for all $v \in V$, $p \in P$ and $g \in G$. Therefore, the elementary excitation above the ground state will violate one or more of the equations above and are characterized by how the operators $B_v(h)$ and $A_p(g)$ act on them. More precisely, these operators form an algebra\cite{cui2018topological, Kitaev_2003} (the quantum double algebra $D(G)$), which contains the full information about the anyonic excitations. In particular its irreducible representations label the anyons.
 
-For the toric code model, the $A$ and $B$ operators always commute and their algebras can be investigated independently. One finds the well-known $e$ (for electric) and $m$ (for magnetic) particles associated to vertex and plaquette violations, respectively, and their combination, the fermionic $(e,m)$-particle. However, for non-Abelian gauge-groups the operators $A_p(g)$ and $B_v(g)$ whose plaquette and vertex overlap, do no longer commute. To discuss their joint algebra, we consider \emph{sites}
+For the toric code model, the $A$ and $B$ operators always commute and their algebras can be investigated independently. One finds the well-known $e$ (for electric) and $m$ (for magnetic) particles associated to vertex and plaquette violations, respectively, and their combination, the fermionic $(e,m)$-particle. However, for non-abelian gauge-groups the operators $A_p(g)$ and $B_v(g)$ whose plaquette and vertex overlap, do no longer commute. To discuss their joint algebra, we consider \emph{sites}
 %\footnote{Either some vertices or some plaquettes will be left over depending on the exact geometry of the lattice.} 
  $s_i = (v_i, p_i)$ of adjacent vertices and plaquettes.
 %
@@ -209,7 +209,7 @@ For the toric code model, the $A$ and $B$ operators always commute and their alg
 %These are electric, magnetic and fermionic excitations. The state with an electric excitation at a site $s$ is odd under the action of $A_s^{(1)}$, but is fixed by $B_s^{(0)}$. The state with a magnetic excitation at a site $s$ is annihilated by $B_s^{(0)}$, but fixed under both $A_s^{(g)}$ and by $B_s^{(1)}$. Finally, the state with the fermion at a site $s$ breaks both $A$- and $B$-type conditions, in fact, it is just an electric and a magnetic excitation populating the plaquette and vertex of the site respectively.
 
 %
-%In the case of Non-Abelian gauge groups, this notion of breaking an $A$-type or a $B$-type condition becomes much more involved due to the more complicated operator algebra being induced by the more complicated group multiplication.
+%In the case of Non-abelian gauge groups, this notion of breaking an $A$-type or a $B$-type condition becomes much more involved due to the more complicated operator algebra being induced by the more complicated group multiplication.
  
 Operators on different sites commute trivially, while on the same site we have\footnote{We remark, that the algebraic relations in Eq.~\eqref{eqn:alg} do not depend on the exact grouping of plaquettes and vertices into sites.} 
 \begin{equation}
@@ -232,9 +232,9 @@ We will now discuss its irreducible representations. However, we will refrain fr
 
 The irreducible representations are labelled by two objects, a conjugacy class $C$ of the group $G$ and an irreducible representation $\chi$ of the centralizer, $Z(r)$, of the class representative $r \in C$. The vector space on which $(C, \chi)$ acts is spanned by a basis $\ket{\mu} = \ket{c, i}$, where $c \in C$ and $i \in \{1, 2, \ldots, \text{dim}\chi\}$, i.e. the first index goes over the conjugacy class elements while the second goes over the vector indices of the irreducible representation $\chi$.
 
-Note, that in the case of Abelian groups, in particular the toric code, the conjugacy classes are trivial and identical to the group elements themselves. Their center is $G$, which has $|G|$ one-dimensional representations. Hence, the irreducible representations factorize as indicated above. 
+Note, that in the case of abelian groups, in particular the toric code, the conjugacy classes are trivial and identical to the group elements themselves. Their center is $G$, which has $|G|$ one-dimensional representations. Hence, the irreducible representations factorize as indicated above. 
 
-In the general, non-Abelian case the irreducible representations do not factorize as can be seen from the action of the algebra generators on the vector space spanned by $\ket{\mu}=\ket{c,i}$ %\caro{what happens with $i,i'$ in the first line?} 
+In the general, non-abelian case the irreducible representations do not factorize as can be seen from the action of the algebra generators on the vector space spanned by $\ket{\mu}=\ket{c,i}$ %\caro{what happens with $i,i'$ in the first line?} 
 %\begin{equation}
 %    \begin{split}
 %        B^{(h)}_{\mu\nu}=\bra{c, i} B^{(h)} \ket{c', i'} = \delta_{c, h} \delta_{c, c'}\delta_{i, i'}, \\
@@ -283,12 +283,12 @@ In particular, if we have a gauge field state, $\ket{\chi, p; i}$, where each si
 \begin{equation}
     A_p^{(g)}\ket{\chi, p; i} = \sum_{i'} \Gamma^\chi_{ii'}(g)\ket{\chi, p; i'},\label{eqn:tranfs}
 \end{equation}
-where $i$ and $i'$ are the internal degrees of freedom of the charge\footnote{Note that the charge can be vector valued for non-Abelian symmetry groups.}.
+where $i$ and $i'$ are the internal degrees of freedom of the charge\footnote{Note that the charge can be vector valued for non-abelian symmetry groups.}.
 This is the way a charged state transforms under gauge transformations in gauge field theory. Hence, we say that the plaquette terms generate gauge transformations.
 
 All other excitations are called dyons. They violate vertex and plaquette terms simultaneously, meaning they have a flux component associated with a vertex of the site $(v,p)$ and a charge component associated with its plaquette, but unlike the toric code fermion cannot be broken down to a combination of pure charge and pure flux sitting next to one another.
 
-\textbf{Non-Abelian anyons} To understand the distinction between Abelian and non-Abelian anyons we will focus on the physical meaning of the dimension $d = \text{dim}(C, \chi) = |C|\text{dim}(\chi)$ of the irreducible representations.
+\textbf{Non-abelian anyons} To understand the distinction between abelian and non-abelian anyons we will focus on the physical meaning of the dimension $d = \text{dim}(C, \chi) = |C|\text{dim}(\chi)$ of the irreducible representations.
 
 If we have a gauge field state with an anyon of type $(C, \chi)$ at a site $s$, the plaquette and vertex terms of that site will transform this state in accordance with that algebra representation. This implies that specifying the type and location of this anyon does not uniquely fix the gauge field state. Instead, there is a $d$-dimensional subspace $\mathcal H_s(C,\chi)$ of the total Hilbert space associated with this anyon occupying this site. This $d$-fold degeneracy can be interpreted as a spin-like internal degree of freedom of the anyon.
 
@@ -318,13 +318,13 @@ How this manifests physically is that if we have two anyons $a$ and $b$ in some 
 
 While the general expression for the $N_{ab}^c$ is cumbersome and can be found in Appendix \ref{app:fusion}, for pure charge anyons $(\{e\}, \chi_i)$ it readily reduces to the well-known  decomposition of tensors products of group irreps into direct sums of irreps $\chi_i\otimes\chi_j = \bigoplus_k n^k_{ij} \chi_k$.
 
-If the gauge group is Abelian all algebra representations are one-dimensional and there is no degeneracy once the charge content of a gauge field is specified. The fusion is unambiguous. 
+If the gauge group is abelian all algebra representations are one-dimensional and there is no degeneracy once the charge content of a gauge field is specified. The fusion is unambiguous. 
 We can see that by looking at the dimensions of the LHS and RHS of Eq.~\eqref{eqn:fuse}. For every $a$ and $b$ there is only one $c$ for which $N_{ab}^c$ is nonzero, i.e. one.
 
-The Hilbert space associated with the presence of multiple non-Abelian anyons is the stage on which all striking phenomena of non-Abelianess are played out. Besides the possibility of multiple fusion outcomes discussed above,  also moving anyons around one another (braiding) acts non-trivially on this space and corresponds to a unitary operation. In such a braiding process the order of exchanges matter as in general the unitary matrices associated to the individual exchanges do not commute. The full theory that describes the braiding and fusion of anyons is a so-called unitary modular tensor category (UMTC)\cite{Kitaev_2003} and the UMTC for the anyons of quantum double models is reviewed in Appendix \ref{app:umtc}.
+The Hilbert space associated with the presence of multiple non-abelian anyons is the stage on which all striking phenomena of non-abelianess are played out. Besides the possibility of multiple fusion outcomes discussed above,  also moving anyons around one another (braiding) acts non-trivially on this space and corresponds to a unitary operation. In such a braiding process the order of exchanges matter as in general the unitary matrices associated to the individual exchanges do not commute. The full theory that describes the braiding and fusion of anyons is a so-called unitary modular tensor category (UMTC)\cite{Kitaev_2003} and the UMTC for the anyons of quantum double models is reviewed in Appendix \ref{app:umtc}.
 
 %
-%As an example, let us take the charge content of the gauge field to be four Non-Abelian anyons of the same type $a$ occupying four sites and look at the form of the degenerate subspace $\mathcal H_{\text{deg.}}$.
+%As an example, let us take the charge content of the gauge field to be four Non-abelian anyons of the same type $a$ occupying four sites and look at the form of the degenerate subspace $\mathcal H_{\text{deg.}}$.
 %Using the algebra of Eq.~\eqref{eqn:fuse} to simplify the form of the subspace we get 
 %\begin{equation}
 %	\mathcal{H}_{\text{deg.}} = \bigoplus_{c, d, f} N_{aa}^c N_{ca}^d N_{da}^ff,\label{eqn:decomp} 
@@ -339,7 +339,7 @@ The Hilbert space associated with the presence of multiple non-Abelian anyons is
 %Also note that addition of sites occupied by the vacuum doesn't change anything since vacuum fuses trivially with other representations, $a\otimes0 = a$.
 %
 %\jovan{assumed def in the intro}
-%Finally, to answer why studying the space $\mathcal{H}_{\text{fusion}}$ is important in the first place, we look at the action of \emph{anyon braiding}. Braiding doesn't change the charge content, hence, it must transform states only within this degenerate space. Therefore, the degeneracy must be non-trivial, i.e. anyons Non-Abelian for their braiding to have any computational power. 
+%Finally, to answer why studying the space $\mathcal{H}_{\text{fusion}}$ is important in the first place, we look at the action of \emph{anyon braiding}. Braiding doesn't change the charge content, hence, it must transform states only within this degenerate space. Therefore, the degeneracy must be non-trivial, i.e. anyons Non-abelian for their braiding to have any computational power. 
 %
 %The braiding action is best described in the global fusion tree basis in terms of topological variables such as the $F$- and $R$-symbols \cite{cui2018topological, Kitaev_2003}. See Appendix \ref{app:braid} for the treatment of braiding of quantum double anyons in both local spin-like and fusion tree basis. \jovan{Needs reform.}
 %
@@ -366,7 +366,7 @@ However, even though the braid group itself is universal its image on this plana
 The ribbon operators are not unitary in general. If the anyons have a dimension larger than one, the operators that create and manipulate them are non-local projectors. To simulate them on a digital quantum computer requires ancillas and measurements. 
 
 \caro{%skip or turn footnote 
-In Ref. \cite{andersen2022observation} the group overcame this issue by means of unitary lattice deformations, unitarily transforming from a state with a set of non-Abelian anyons on one graph to another state with the same anyon content but defined on a different graph, hence they were able to move the Non-Abelian Majorana fermions unitarily. However, these are extrinsic and static lattice defects on top of a theory that is an Abelian $\mathbb Z_2$ gauge theory, hence, the nature of their non-Abelian anyons is different from intrinsic gauge field excitations.}
+In Ref. \cite{andersen2022observation} the group overcame this issue by means of unitary lattice deformations, unitarily transforming from a state with a set of non-abelian anyons on one graph to another state with the same anyon content but defined on a different graph, hence they were able to move the Non-abelian Majorana fermions unitarily. However, these are extrinsic and static lattice defects on top of a theory that is an abelian $\mathbb Z_2$ gauge theory, hence, the nature of their non-abelian anyons is different from intrinsic gauge field excitations.}
 
 %\subsubsection{Application Scheme}
 
@@ -444,7 +444,7 @@ Since we work in a basis where projectors onto a given $G$-valued flux through a
 The result of such measurement is a labelling of all edges by group elements from which we can compute the flux through any vertex. 
 
 However, in order to measure the charge component, one needs to implement a controlled $A^{(g)}_s$ operator which needs a controlled group multiplication applied to all edges of $s$'s plaquette, i.e. $\ket{g}\ket{g_i} \rightarrow \ket{g}\ket{gg_i}$ for all $\ket{g_i}$ around the plaquette.
-This requires circuits which, in the case of non-Abelian groups such as $D_4$ which we will study in more detail, are prohibitively expensive. 
+This requires circuits which, in the case of non-abelian groups such as $D_4$ which we will study in more detail, are prohibitively expensive. 
 
 The main idea to circumvent this problem is to instead use partial charge measurements that have a substantially reduced circuit depth. Such partial measurements do not determine the charge completely. However, when we combine a set of different partial measurements we are able to deduce the full charge content from the measurement outcomes.
 
@@ -497,7 +497,7 @@ The group law is defined by following identities
 	\end{split}
 \end{equation}
 
-This group is solvable and all of its proper subgroups are Abelian. It can be decomposed as $D_4 = \mathbb{Z}^m_2 \ltimes \mathbb{Z}^r_4$.
+This group is solvable and all of its proper subgroups are abelian. It can be decomposed as $D_4 = \mathbb{Z}^m_2 \ltimes \mathbb{Z}^r_4$.
 This decomposition is not unique, $D_4 = \mathbb{Z}_2^m\ltimes(\mathbb{Z}_2^{r^2}\times\mathbb{Z}^{mr}_2)$ is also a valid decomposition.\footnote{The superscripts in $\mathbb{Z}_n^x$ label the group generator.}
 %, $\mathbb{Z}_n^x = \{x, x^2, \ldots, x^{n-1}, x^n = e\}$.}
 
@@ -529,7 +529,7 @@ There are five conjugacy classes, which implies that there are also five irreduc
     \caption{Character table of $D_4$.}\label{tab:char}
 \end{table}
 
-When labelling the representations of the algebra $D(D_4)$ we will also need the irreducible representations of the centres of the conjugacy classes. The centres of the three non-trivial conjugacy classes are Abelian and have four elements. Hence, they have four one-dimensional irreducible representations. Their character tables are shown in Table~\ref{tab:char_sub}.
+When labelling the representations of the algebra $D(D_4)$ we will also need the irreducible representations of the centres of the conjugacy classes. The centres of the three non-trivial conjugacy classes are abelian and have four elements. Hence, they have four one-dimensional irreducible representations. Their character tables are shown in Table~\ref{tab:char_sub}.
 \begin{table}[h]
 \centering
 \begin{tabular}{|l|llll|}\hline
@@ -552,7 +552,7 @@ $(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                    
 
 The task of listing all of the irreducible representations of $D(D_4)$ and their dimensions from this data is straightforward. There are $2 \times 5  + 3 \times 4 = 22$ irreducible representations, i.e., types of anyons in the $D_4$ quantum double model.
 
-Eight of them are one-dimensional, i.e. Abelian, while the rest are two-dimensional. Other than the vacuum, four of them are pure charges and four are pure fluxes. For dyons with the $\mathcal{C}_{r^2}$ flux component we say that they have a trivial flux. The flux can be factored out, just like in the case of the toric code fermion. This comes from the fact that $r^2$ commutes with all group elements, just like the identity. 
+Eight of them are one-dimensional, i.e. abelian, while the rest are two-dimensional. Other than the vacuum, four of them are pure charges and four are pure fluxes. For dyons with the $\mathcal{C}_{r^2}$ flux component we say that they have a trivial flux. The flux can be factored out, just like in the case of the toric code fermion. This comes from the fact that $r^2$ commutes with all group elements, just like the identity. 
 
 \textbf{Anyon content of $D(D_4)$.} We label the vacuum and the trivial flux as $0 \equiv (\mathcal{C}_e, 1)$ and $\tilde 0 \equiv (\mathcal{C}_{r^2}, 1)$, respectively. Likewise, the pure charges and dyons with trivial flux are labelled as $\Sigma_{\chi} \equiv (\mathcal{C}_e, \chi)$ and $\tilde{\Sigma}_{\chi} \equiv (\mathcal{C}_{r^2}, \chi)$, with $\chi$ being one of the nontrivial irreducible representations of $D_4$.
 Nontrivial pure fluxes are labelled $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ being one of the nontrivial conjugacy classes of $D_4$. The rest of the dyons have less informative labels such as $\{\tilde{\Psi}_x, \Phi_x, \tilde{\Phi}_x\}$ and can be found in Appendix \ref{app:reps}.
@@ -607,21 +607,21 @@ Now imagine we have performed all three measurement and obtained the set of labe
 
 \section{Probing Non-Abelions}
 
-In this chapter, we will present a set of protocols that allow us to demonstrate the non-Abelian character of the anyons of $D(D_4)$ on realistic to-date quantum hardware. The main obstacle to overcome here is the noise which limits the depth of the circuits. In this section we will show how low circuit depths can be achieved for all protocols. A benchmark of the proposed experiments is presented in the next section showing numerical simulation results for a realistic noise model.
+In this chapter, we will present a set of protocols that allow us to demonstrate the non-abelian character of the anyons of $D(D_4)$ on realistic to-date quantum hardware. The main obstacle to overcome here is the noise which limits the depth of the circuits. In this section we will show how low circuit depths can be achieved for all protocols. A benchmark of the proposed experiments is presented in the next section showing numerical simulation results for a realistic noise model.
 
 
-The main experiments showcasing the non-Abelian nature of the excitations we propose are the following.
+The main experiments showcasing the non-abelian nature of the excitations we propose are the following.
 \begin{itemize}
 
-\item[i)] Anyon fusion. Here, the non-Abelian nature is signalled by non-unique fusion outcomes.
+\item[i)] Anyon fusion. Here, the non-abelian nature is signalled by non-unique fusion outcomes.
 
-\item[ii)] Non-Abelian braiding. The order of the braids does not commute.
+\item[ii)] Non-abelian braiding. The order of the braids does not commute.
 
 \item[iii)] S- and T-matrix measurements. This data describes the amplitudes of links and twists and almost uniquely\footnote{There are some exceptions, where the anyon theory, i.e., the UMTC is not determined uniquely by the $S$-and $T$-matrices alone\cite{notdetermined2021}.} characterises the full anyon theory.
 %Technically speaking, the UMTC data is not captured by S and T matrix alone
 \end{itemize}
 
-%It is easy to obtain the results of the first two experiments from the result of the last one, however it is useful to consider the two foundational phenomenological facts pertaining to the non-Abelian anyons in separate points.
+%It is easy to obtain the results of the first two experiments from the result of the last one, however it is useful to consider the two foundational phenomenological facts pertaining to the non-abelian anyons in separate points.
 
 \subsection{Achieving low circuit depth \caro{still unsure about subsection title}}\label{subsec:enc}
 
@@ -693,7 +693,7 @@ Let us move on to the generalized conjugation. The circuit depths for the latter
     \label{tab:somereps}
 \end{table}
 %
-%These two representations are two-dimensional, anyons are non-Abelian and have an internal state space spanned by vectors: $\{\ket{m; ++}, \ket{mr^2; ++}\}$ for $\Psi_m$ and $\{\ket{m; --}, \ket{mr^2; --}\}$ for $\tilde{\Phi}_m$.
+%These two representations are two-dimensional, anyons are non-abelian and have an internal state space spanned by vectors: $\{\ket{m; ++}, \ket{mr^2; ++}\}$ for $\Psi_m$ and $\{\ket{m; --}, \ket{mr^2; --}\}$ for $\tilde{\Phi}_m$.
 %This space is encodable with a single auxiliary qubit for each anyon, $\ket{a}_{\text{aux}} \equiv \ket{m(r^2)^a; \sigma\sigma}$.
 %
 %The matter will act on this space every time an anyon crosses some edge $i$ via $U_{\text{GC}}: \ket{a}\ket{g}_i \rightarrow (A^{(g)}\ket{a})\ket{g}_i$, which we need to compile.
@@ -870,14 +870,14 @@ We also examine fusion on a small two-dimensional graph, as shown in Figure \ref
 
 \subsection{Elemental protocols}
 \textbf{Anyon fusion}
-is the first and most basic protocol that can demonstrate Non-Abelianness. 
+is the first and most basic protocol that can demonstrate Non-abelianness. 
 
 After preparing the ground state, we apply two ribbon operators. One between sites $s_1$ and $s_2$, and the other between sites $s_2$ and $s_3$.
 This creates two pairs of anyons and fuses them on site $s_2$. We then perform a partial charge measurement and flux readout for this site.
 This experiment can be performed on both the braiding ladder and the two-dimensional small graph.
 
-We can do this experiment for any anyon type. Here, we will give an example for the case of fusing the pure flux, $\Psi_m$ with itself. In contrast to the Abelian case, this fusion is not restricted to yield vacuum. Instead we have
-$$\Psi_m \times \Psi_m = 0 + \tilde{0} + \Sigma_m + \tilde{\Sigma}_m,$$ where $0$ is the vacuum, $\tilde{0}$ is the Abelian flux corresponding to the other element of the centre of $D_4$, $r^2$ and the other two anyons are pure charge associated with the $\alpha_m$ representation of $D_4$ and the dyon of this pure charge and the Abelian flux.
+We can do this experiment for any anyon type. Here, we will give an example for the case of fusing the pure flux, $\Psi_m$ with itself. In contrast to the abelian case, this fusion is not restricted to yield vacuum. Instead we have
+$$\Psi_m \times \Psi_m = 0 + \tilde{0} + \Sigma_m + \tilde{\Sigma}_m,$$ where $0$ is the vacuum, $\tilde{0}$ is the abelian flux corresponding to the other element of the centre of $D_4$, $r^2$ and the other two anyons are pure charge associated with the $\alpha_m$ representation of $D_4$ and the dyon of this pure charge and the abelian flux.
 
 All four of these outcomes can be differentiated by reading out the flux and performing the partial charge measurement using $H_r$ or $H_{mr}$. For concreteness, we choose $H_r$. A discussion of this protocol implemented on a realistic hard-ware device and the numerical simulation of the latter are shown in Section \ref{sec:num:fusion}.
 
@@ -889,7 +889,7 @@ All four of these outcomes can be differentiated by reading out the flux and per
 %Here we see the four peaks corresponding to the four fusion outcomes for both geometries.
 %For further discussion of the numerical results, see Section \ref{sec:num}.
 
-\textbf{Anyon Braiding.} The second phenomenon that gives the non-Abelian anyons their name is the fact that the image of the braid group, as represented by physically braiding these anyons, is non-Abelian. 
+\textbf{Anyon Braiding.} The second phenomenon that gives the non-abelian anyons their name is the fact that the image of the braid group, as represented by physically braiding these anyons, is non-abelian. 
 This means that the order of interchanges matter, i.e. $\sigma_{12}\sigma_{23} \neq \sigma_{23}\sigma_{12}$, where $\sigma_{ii+1}$ are clockwise interchange of particle $i$ and $i+1$, the generators of the braid group.
 
 
@@ -950,7 +950,7 @@ However, in this protocol every single qubit gate of the ribbon operator becomes
 
 A smarter alternative is to condition the anyon type of the ribbon (see Figure \ref{fig:cond_flav}). In this case we identify where the ribbon operators for the two anyon types differ, and condition only those operations. The circuit for this can be much shorter, see Fig. \ref{fig:cond_flav} for an example. In particular, for the case of $D(D_4)$, it turns out, that it is easier to compare the linking of anyons $a$ and $b$ to the linking of $a$ and $0 \oplus \tilde 0$, then comparing it to the linking of $a$ with vacuum. Thus, we condition whether we apply the ribbon $b$ or the ribbon corresponding to $0 \oplus \tilde 0$. 
 
-However, this protocol requires additional knowledge of the theory. Concretely, if we are interested in the S-matrix element $S_{ab}$, we need the additional knowledge of  $S(a, 0)$ and $S(a, \tilde{0})$. Both can in fact be measured directly with a simple protocol since $0$ and $\tilde{0}$ are Abelian, see Appendix \ref{app:abl}.
+However, this protocol requires additional knowledge of the theory. Concretely, if we are interested in the S-matrix element $S_{ab}$, we need the additional knowledge of  $S(a, 0)$ and $S(a, \tilde{0})$. Both can in fact be measured directly with a simple protocol since $0$ and $\tilde{0}$ are abelian, see Appendix \ref{app:abl}.
 Since $S(a, 0) = S(a, \tilde{0}) = 1$, we can just read off $S(a,b)$ after tomographing the control qubit.
 
 In our example, we will fix $b$ to be pure flux $\Psi_m$ again due to the relative simplicity of its ribbon operators. For the other anyon we will choose one of the following $a\in\{\Psi_m,\tilde{\Psi}_m, \Phi_r \}$ which gives us all three possible values of the S-matrix elements for the $D_4$ theory, $\{1, -1, 0\}$.
@@ -1258,7 +1258,6 @@ Tomography protocol consists of two scans:\begin{enumerate}
 \end{enumerate}
 From the scans we extract, by fitting Eq. \ref{eqn:estim}, $\phi_{max}$ and $\theta_{max}$, angles where polarization was maximal in the two scans respectively. 
 The two angles then fix the value of $\tilde{S}_{ab}$: $$\tilde{S}_{ab} = \sqrt{\frac{1-\cos{\theta_{max}}}{1+\cos{\theta_{max}}}}e^{i\phi_{max}}.$$
-\caro{Looks like this formula only works for $r_y=0$}
 Other, two parameters, the amplitude and the offset of the polarization do not convey any physics, but only determine the effective readout biases $\bar{\epsilon}$ and $\Delta\epsilon$.
 
 Everything remains the same for $T_{aa}$.
@@ -1361,7 +1360,7 @@ The anyons in the $D_4$ lattice gauge theory are not universal.
 When looking at compiled circuits for our experiments, they are Clifford or close to Clifford circuits.
 They are efficiently classically simulatable, given we keep the number of Toffoli gates low.
 The image of the braid group onto the transformations of the wavefunction as we braid anyons is finite, hence highly non-universal \cite{}.
-This is all due to the simple structure of $D_4$, all of its subgroups are Abelian and the group is solvable.
+This is all due to the simple structure of $D_4$, all of its subgroups are abelian and the group is solvable.
 However, if the gauge group in question is $S_3$ for example and if we allow measurements, we achieve computational universality.
 
 In this section, we will discuss what carries over from our study further onto the case of the general group $G$ and in particular $S_3$
@@ -1503,7 +1502,7 @@ The consequence of this geometrical fact on our protocol is that once the first 
 
 \section{Circuits for $D_4$-related operations}\label{app:cirqs}
 
-\section{Abelian anyons of $D_4$ gauge theory}\label{app:abl}
+\section{abelian anyons of $D_4$ gauge theory}\label{app:abl}
 
 \section{Postsellection and one-qubit marginals}\label{app:marg}
 
