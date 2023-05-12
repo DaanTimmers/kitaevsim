@@ -57,21 +57,6 @@ Beyond the study of unconventional phases of matter, topological order has been 
 Today, almost half a century later one may say that the theoretical understanding is slowly approaching completion. However, unambiguous experimental evidence of anyons in 'natural' physical systems is still scarce. This is in particular true for the more complex types of anyons, so called \emph{non-abelian anyons} for which  braiding two particles changes the wave-function by a unitary rotation instead of just a phase factor.
 
 
-%
-%
-%In Kitaev's toric code the topological ground state degeneracy is used to protect quantum information against noise. The topological phase needed for that is relatively simple, its excitations are abelian and 
-%
-%as is done in Kitaev's toric code, the idea of performing computations via the braiding of anyons is referred to 
-%
-%
-% \emph{non-abelian anyons}
-%
-%
-%, particles that change the state of the system by a unitary operation instead of just a phase
-%
-%
-%However, almost half a century later unambiguous experimental evidence for demonstrating non-abelian anyons in 'natural' physical systems is still scarce.
-
 On that grounds, one may argue that the majority of topological phases of matter is just too complicated to exist in nature and is thus more of a mathematical curiosity than an actual physical phenomenon, however, a series of striking experiments \cite{iqbal2023creation,xu2022digital,andersen2022observation} performed recently on noisy intermediate scale quantum computers (NISQ) strongly refutes such  criticism. Two experiments performed on superconducting qubits \cite{xu2022digital,andersen2022observation} demonstrated the non-abelian braiding of mobile lattice defects which behave like Ising anyons embedded into an abelian phase. Another experiment performed on trapped ions \cite{iqbal2023creation} prepared the topologically ordered ground state of a non-abelian phase and detected an intrinsically non-abelian braiding processes (Borromean rings) via anyon interferometry. 
 
 All three experiments indicate that today's quantum computers are capable of simulating states of matter whose complexity exceeds that of abelian topological order and can be seen as one more significant step towards topologically protected quantum computation. While open questions of the scalability and the improvement of noise levels are left for the future to decide, it is clear that by now non-abelian anyons have descended from the somewhat esoteric mathematical realm to the concrete and tangible.
@@ -86,7 +71,7 @@ For some anyons such as the Fibonacci anyons braiding alone allows one to perfor
 
 Having identified a reasonable phase, i.e., $D(D_4)$ in our case, the next task is to find a suitable microscopic realization of the model and to prepare its ground state. Here, our protocol differs drastically from that presented in Ref.~\cite{iqbal2023creation}. First of all, the Hamiltonian chosen in Ref.~\cite{iqbal2023creation} is that of $D_\alpha(\mathbb Z_2^3)$. This means, its degrees of freedom (dof) are valued in $G=Z_2^3$, while for us the dof are $G=D_4$-valued. In fact, the Hamiltonian in Ref.~\cite{iqbal2023creation} is best understood as a gauged version of a symmetry protected topological phase and the ground state preparation reflects that. 
 
-To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasize that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines. \caro{needs citations} 
+To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^3$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasize that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines. \caro{needs citations} 
 
 Therefore, in our protocol we refrain from using any feed-forward protocols and prepare the ground state directly via a unitary circuit. This has the disadvantage of limiting the achievable lattice size. However, we note, that in order to demonstrate signatures of non-abelian braiding, it is not necessary to use a lattice which is fully two-dimensional. In fact, it is sufficient to consider a quasi-one dimensional geometry, which we refer to as \emph{braiding ladder} shown in Fig.~\ref{fig:latticeG}. For this geometry, we can prepare the ground state with a depth-two circuit. Of course, this ground state does not feature long-range entanglement, however this is not needed for the demonstration of non-abelian braiding as we will show explicitly in section \ref{sec:}. We also consider a small truly two-dimensional lattice, just for the sake of proving that a direct unitary circuit preparation of the ground state is feasible and feed-forward protocols are not mandatory for the preparation of non-abelian topological order.
 
@@ -104,9 +89,9 @@ We find...
 
 
 \caro{until here, previous text that can be integrated later:
-%We have developed a framework of manipulating non-abelian excitations on top of a lattice gauge theory ground state realized on a digital quantum simulator.
-%
-%The way braiding is implemented via local unitary gates is by keeping the copy of the non-local logical Hilbert space $\mathcal{H}_{\text{fusion}}$, alongside the Gauge Field degrees of freedom $\mathcal{H}_{\text{gauge}}$. The protocol is meant to couple the two systems such that once a specific measurement is preformed on the copy of the logical space and hence becoming disentangled from the gauge field, the gauge field is in the state that correspond to an appropriate space-time braiding of our anyons. The resulting state has: correct charge content, charges are in the correct fusion channel and the overall state is in the correct phase (in comparison to the vacuum).
+%%We have developed a framework of manipulating non-abelian excitations on top of a lattice gauge theory ground state realized on a digital quantum simulator.
+%%
+%%The way braiding is implemented via local unitary gates is by keeping the copy of the non-local logical Hilbert space $\mathcal{H}_{\text{fusion}}$, alongside the Gauge Field degrees of freedom $\mathcal{H}_{\text{gauge}}$. The protocol is meant to couple the two systems such that once a specific measurement is preformed on the copy of the logical space and hence becoming disentangled from the gauge field, the gauge field is in the state that correspond to an appropriate space-time braiding of our anyons. The resulting state has: correct charge content, charges are in the correct fusion channel and the overall state is in the correct phase (in comparison to the vacuum).
 Using this framework, we examine a couple of braiding experiments. The question we address is the plausibility of detecting the non-abelian braiding signatures given the levels of noise of current digital quantum simulators, Google's Sycamore chip in particular.
 The reason for this choice is the suitable geometry of Sycamore for implementing surface codes and the availability of noise models. Also, this chip in particular has been instrumental in a number of recent experimental breakthroughs including, realization of toric code ground state \cite{}, nonabelina braiding of defected toric code anyons \cite{}; similar chips were also used to realize symmetry protected topological edge modes in Floquet driven circuits \cite{}.
 In the next chapter, we will discuss the general framework of manipulating the non-abelian anyons of the quantum double model, with a brief overview of the model itself. Afterwards, we will propose a series of experiments one can compile for a digital quantum processor that showcase the non-abelian nature of these particles: non-unique fusion, non-abelian nature of the braid group represented by these particles and the non-trivial linking matrix. Following that, we will present the results of our noisy simulations, the goal of which are to show that these signatures are indeed measurable on the current quantum hardware. The last chapter will be dedicated to the discussion of future research in quantum simulation, having now ways to prepare arbitrary lattice gauge theory states.}
@@ -1363,7 +1348,7 @@ The depths of the circuits used in the various interference protocols are:\begin
 		\item[b)] for measuring $S(\Psi_m, \Psi_r)$, 90 once completely compiled
 	\end{enumerate}  
 	
-	\item[iii)] for measuring $T(\tilde{\Phi}_r, \tile{\Phi}_r)$, 89 once completely compiled, due to the more complicated $\mathcal{C}_r$-controlled multiplication and generalised conjugation 
+	\item[iii)] for measuring $T(\tilde{\Phi}_r, \tilde{\Phi}_r)$, 89 once completely compiled, due to the more complicated $\mathcal{C}_r$-controlled multiplication and generalised conjugation 
 \end{itemize}
 
 Note that the twist phase experiment has the best agreement with the theoretical prediction even though it is the deepest protocol.
