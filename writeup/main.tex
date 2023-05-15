@@ -923,8 +923,9 @@ To measure the S-matrix elements, we create a superposition of two states by con
 
 Note that the S-matrix appearing in Figure is normalized:
 \begin{equation}
-    \tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b),
+    \tilde{S}(a,b) = \frac{\mathcal D}{d_a d_b}S(a,b),
 \end{equation}
+where $\mathcal D=\sqrt{\sum_i d_i^2}=|G|$ is the total quantum dimension,
 which makes $|\tilde{S}(a,b)| \leq 1$.
 
 
@@ -1195,27 +1196,48 @@ For the detailed discussion of the post-selection probabilities see Appendix \re
 
 \subsection{Linking and Twist Matrices}
 
-In this section, we present the results of our simulations of our interference protocols for measuring the magnitude and the phase of the $S-$ and $T-$matrix elements. 
+In this section, we present the results of simulating the interference protocols for measuring the magnitude and the phase of the $S-$ and $T-$matrix elements. 
+
+
+\textbf{Circuit Characteristics.}
+Figure \ref{fig:intef_setup} depicts the qubit layout and the exact ribbon operators used for the $S$-matrix protocol.
+\caro{what about T matrix layout and ribbons?}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.75\linewidth]{Figures/intef_setup_new.pdf}
+	\caption{(Top) The ribbon operators applied in the simulation of the $S$-matrix protocol. The application or the type of the blue (equal-time) ribbon is conditioned on the state of the control qubit. (Bottom) The qubit layout for the interference protocols.}
+	\label{fig:intef_setup}
+\end{figure}
+The application or the flavour of the blue (equal-time) ribbon is conditioned on the state of the control qubit.
+The layout on the chip is chosen such as to reduce the number of two-qubit gates acting on the control qubit, avoiding an accumulation of errors. This turned out to be more relevant for obtaining reliable estimates than the overall circuit depth. 
+
+
+As for the fusion and braiding not all anyons are equal in terms of their difficulty to manipulate. The act of conditioning the application of the equal time ribbon or its type makes this protocol significantly more complex in terms of the number of multi-qubit gates. The two main factors to consider are the following. The first concerns the flux of the dyon. The $r-$dyons are more difficult to implement conditionally since they are more difficult to implement unconditionally. The $\mathbb{Z}_4$ $r$-multiplication necessitates a Toffoli gate upon conditioning.
+
+The second difficulty arrises from the charge. If the irreducible representation of the dyon assigns $-1$ to the nontrivial element of the group's centre, $r^2$, the linear representation formed by $A^{(g)}$ is faithful. Therefore a circuit that implements the generalised conjugation is significantly more complex even before conditioning it.
+
+\caro{However, it is important to note that difference in circuits is not substantial between different types of anyons. The circuit depth are always of the same order of magnitude and involve the same number of qubits. 
+With a reasonable improvement in hardware the experiments we propose are doable with all anyons of the $D_4$ theory.
+%let's just give numbers instead of saying it's different and then saying not so much and then saying it's fine without any 'proof'
+} 
+
+Given the noise levels present in the simulator we resorted to the more simple $m$-dyons for most parts. However, the twist phase interferometry experiment was performed for the most complicated anyon, the $\Phi_r$ semion or its antisemion, in order to demonstrate a nontrivial twist phase.
+
+The depths of the device-ready circuits used in the interference protocols are:\begin{itemize}
+	\item[i)] Conditioning the ribbon type \begin{itemize}
+		\item 58 for $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$		\item 64  for $S(\Psi_m, \Psi_r)$
+	\end{itemize}
+	\item[ii)] Conditioning the existence of the ribbon \begin{itemize}
+		\item 84 for $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$
+		\item 90 for $S(\Psi_m, \Psi_r)$	\end{itemize}  
+	\item[iii)] 89 for measuring $T(\tilde{\Phi}_r, \tilde{\Phi}_r)$
+\end{itemize}
+
 
 \textbf{Interference and Tomography.}
-\caro{Need to discuss that we are dealing with a mixed state and that we have entanglement between control and gauge field bc of errors}
+In Section \ref{subsec:Intef}, we proposed an interference scheme that entangles an auxiliary qubit with the space-time history of the gauge field excitations in such a way that by the end of the protocol the qubit and the field are disentangled and the qubit is left in a state that depends only on the topological properties of the said spacetime history of the anyons, the $S-$ and $T-$matrix elements.
 
-In Section \ref{subsec:Intef}, we have proposed an interference scheme that entangles an auxiliary qubit with the space-time history of the gauge field excitations, in such a way that by the end of the protocol the qubit and the field are disentangled and the qubit is left in a state that depends only on the topological properties of the said spacetime history of the anyons, the $S-$ and $T-$matrix elements.
-
-The fact that the qubit is meant to be disentangled from the gauge field and any additional ancillas implies that the qubit is ideally left in a pure state, hence easy to tomograph and extract the aforementioned topological properties.  
-
-However the noise in the gates alone will, in addition to decohering the full many-qubit state, result in the final state still being entangled with the gauge field, hence the single qubit state of the auxiliary qubit will be a mixed density matrix
-\begin{equation}
-    \rho_c = \frac{\mathbb{1} + \vec{r} \cdot \vec{\sigma}}{2},
-\end{equation}
-where $\vec{r}$ is the Bloch vector and $\vec{\sigma} = (\sigma_x, \sigma_y, \sigma_z)$ is the vector of Pauli matrices. The Bloch vector lives inside a unit sphere, $|\vec{r}|< 1$.
-
-If the state was pure the length of the Bloch vector would be unity.
-
-It is here where we assume that the noise will only shorten the Bloch vector, which is a strong assumption given that the generic dephasing process usually pulls the Bloch vector towards the Z-axis. This is done in order to make the problem tractable without additional machine specific information.
-
-We assume this because it is the direction of the Bloch vector that encodes the result of the interference protocol, the magnitude and the phase of the measured matrix element.
-
+The fact that the qubit is meant to be disentangled from the gauge field and any additional ancillas implies that the qubit is ideally left in a pure state. Hence, it is easy to tomograph and to extract the aforementioned topological properties. The noise in the system alters the situation. For conceptual clarity, we will thus first discuss the ideal case and subsequently comment on the effect of the noise.
 
 The final pure state of the auxiliary qubit after the ideal protocol is
 \begin{equation}
@@ -1224,154 +1246,138 @@ The final pure state of the auxiliary qubit after the ideal protocol is
     \rho_c = \frac{1}{1+|\tilde{S}_{ab}|^2}\begin{pmatrix}
     1 & \tilde{S}_{ab}^* \\
     \tilde{S}_{ab} & |\tilde{S}_{ab}|^2
-    \end{pmatrix},
+    \end{pmatrix}.
 \end{split}
 \end{equation}
-which once projected onto the Pauli basis gives us our Bloch vector components: $r_i = \text{Tr}(\sigma_i\rho_c)$,
+We write this density matrix in its Pauli basis 
+\begin{equation}
+    \rho_c = \frac{\mathbb{1} + \vec{r} \cdot \vec{\sigma}}{2},
+\end{equation}
+where  $r_i = \text{Tr}(\sigma_i\rho_c)$ is the Bloch vector and $\vec{\sigma} = (\sigma_x, \sigma_y, \sigma_z)$ is the vector of Pauli matrices and find
 \begin{equation}
     \vec{r} = \left( \frac{2 \text{Re}\tilde{S}_{ab}}{1+|\tilde{S}_{ab}|^2}, \frac{2 \text{Im}\tilde{S}_{ab}}{1+|\tilde{S}_{ab}|^2}, \frac{1 - |\tilde{S}_{ab}|^2}{1+|\tilde{S}_{ab}|^2} \right).\label{eqn:bloch}
 \end{equation}
+Note that $|\vec{r}| = 1$ as expected for the pure state. The only relevant parameter for our measurement is the orientation of the Bloch vector from which we can read off the phase and the magnitude of $\tilde S_{ab}$. This becomes important when we discuss the effect of noise.
 
-Note that $|\vec{r}| = 1$ as expected for the pure state and the only relevant parameter for our measurement is the orientation of the Bloch vector. 
+The noise in the gates will cause entanglement between the control auxiliary qubit $c$ and the gauge field. Hence, when we tomograph the control qubit, we probe a mixed state whose Bloch vector is $|\vec{r}|< 1$. We will assume, that the noise only shortens this Bloch vector, i.e. it acts uniformly across all channels. Under this assumption, we can still read off the S-matrix elements as they only depend on the direction of the Bloch vector. Note, that this assumption is rather strong given that the generic dephasing process usually pulls the Bloch vector towards the Z-axis. Nevertheless, the assumption is used in order to make the problem tractable without additional machine specific information. In an actual experiment, more elaborate error mitigation techniques and data about the noise bias could be used to replace this simple model.
+
+
 
 \emph{Tomography.} In order to determine the orientation of the Bloch vector we measure in a set of different bases. Each basis is parametrised by a vector $\vec{s}_i$ with $\sigma_{s_i} = \vec{s}_i \cdot \vec{\sigma}$ being the associated Hermitian operator.
 
 Given a basis $\vec{s}_i$ and a Bloch vector of a mixed state $\vec{r}$, the quantum mechanical probabilities for the two measurement outcomes are
-$$p_{QM}(1|\vec{s}_i, \vec{r}) = \frac{1}{2}(1+\vec{r}\cdot\vec{s}_i)$$ and 
-$$p_{QM}(0|\vec{s}_i, \vec{r}) = \frac{1}{2}(1-\vec{r}\cdot\vec{s}_i).$$
+\begin{equation}\label{eqn:probs}
+\begin{split}
+p_{QM}(1|\vec{s}_i, \vec{r}) = \frac{1}{2}(1+\vec{r}\cdot\vec{s}_i)\,,\\
+p_{QM}(0|\vec{s}_i, \vec{r}) = \frac{1}{2}(1-\vec{r}\cdot\vec{s}_i)\,.
+\end{split}
+\end{equation}
 
-This probability is, however, modulate by the readout bias:
+This probability is, however, modulate by the readout bias
 \begin{equation}
     p(b|\vec{s}_i, \vec{r}) = (1-\epsilon_b)p_{QM}(b|\vec{s}_i, \vec{r}) + \epsilon_{\bar{b}} p_{QM}(\bar{b}|\vec{s}_i, \vec{r}), \label{eqn:marg}
 \end{equation}
 where $\epsilon_b$ is the probability to measure the qubit in state $\bar{b}$ ($\equiv 1-b$) even though it is in the state $b$, these values are known through calibration \cite{}.
 
-Unfortunately, the picture is further complicated by the fact that we do not trace out the additional ancillas for the ribbon application, but we post-select on their biased measurement outcomes. 
-The full analysis of this problem is discussed in Appendix \ref{app:marg}, but the takeaway is that the unwanted entanglement coupled with the post-selection on the biased measurement results manifests nontrivially on our auxiliary qubit tomography, i.e. $$p_{\text{True}}(b) \neq p(b|\vec{s}_i, \vec{r}).$$ For example, we find that the observed readout biases, $\epsilon_b$, depend on the full manybody state. 
 
-We will neglect this effect since it depends on the setup specific details of the noise and biases.
-
-Assuming that $p(b|\vec{s}_i, \vec{r})$ is in fact correct and given a measurement outcome as two counts, $(n_0, n_1)$, summing to the total number of shots, $n_0 + n_1 = N$, we construct the following estimator
+We perform the measurement $N=n_0 + n_1$ times and record the measurement outcomes $(n_0, n_1)$ and define the estimator 
 \begin{equation}
-    P(\vec{s}_i) = \frac{n_1-n_0}{n_1+n_0},
+    P(\vec{s}_i) = \frac{n_1-n_0}{N},
 \end{equation}
-which we call polarisation.
-
-The estimator is unbiased in a way that 
-\begin{equation}
-    \lim_{N \rightarrow \infty} \frac{n_1-n_0}{n_1+n_0} = (1-2\bar\epsilon)\vec{s}_i \cdot \vec{r} + \Delta\epsilon,\label{eqn:estim}
+which we call \emph{polarisation}.
+Introducing $\bar \epsilon = (\epsilon_1+\epsilon_0)/2, \Delta \epsilon = \epsilon_1-\epsilon_0$ and using that 
+$$p(b|\vec{s}_i, \vec{r})=\lim_{N\to \infty} \frac{n_b}{N},$$
+we find \begin{equation}
+\lim_{N \to \infty} P(\vec{s}_i)=(1-2\bar\epsilon)\vec{s}_i \cdot \vec{r} + \Delta\epsilon.\label{eqn:estim}
 \end{equation}
-with $\bar\epsilon$ the mean value of two readout biases with their difference being $\Delta\epsilon$ (note: $2\bar\epsilon \geq \Delta\epsilon$).
-
-Repeating the measurements for different bases $\vec{s}_i$ allows us to extract $\vec{r}$, up to a multiplicative constant, by fitting.
-Ignoring the aforementioned noise effects then allows us to determine the amplitude and phase of the measured matrix elements from Eq.~\eqref{eqn:bloch}\footnote{With an additional multiplicative constant to fix the length of the Bloch vector to the observed one.}.
+ %(note: $2\bar\epsilon \geq \Delta\epsilon$).
+ 
+Performing a sequence of measurements for different bases $\vec{s}_i$ allows us to extract $\vec{r}$, up to a multiplicative constant, i.e., we determine its direction.
+%Ignoring the aforementioned noise effects then allows us to determine the amplitude and phase of the measured matrix elements from Eq.~\eqref{eqn:bloch}\footnote{With an additional multiplicative constant to fix the length of the Bloch vector to the observed one.}.
 
 For the sake of concreteness we chose the following sets of measurements bases  \begin{enumerate}
     \item \emph{Equatorial Scan.} Fixing the value of the polar angle to $\theta = \pi/2$ we vary the azimuthal angle $\phi \in [0, 2\pi)$. From this scan we extract $\phi_{\text{max}}$ which has the largest polarisation.
     \item \emph{Meridian Scan.} Fixing the value of the azimuthal angle to $\phi = \phi_{\text{max}}$ we scan the polar angle $\theta \in [0, 2\pi)$\footnote{The domain is extended on purpose.} From this scan we extract $\theta_{\text{max}}$ which has the largest polarisation.
 \end{enumerate}
-The extraction of the relevant angles is done by fitting Eq. \ref{eqn:estim}.
-The two angles then fix the value of $\tilde{S}_{ab}$: $$\tilde{S}_{ab} = \sqrt{\frac{1-\cos{\theta_{\text{max}}}}{1+\cos{\theta_{\text{max}}}}}e^{i\phi_{\text{max}}}.$$
-Other, two parameters, the amplitude and the offset of the polarization do not convey any physics. The offset determines the difference of the effective readout biases, $\Delta\epsilon$ and the amplitude determines the combination of the mean readout bias and the length of the Bloch vector, $(1-2\bar{\epsilon})|\vec{r}|$.
+The extraction of the relevant angles is done by fitting Eq.~\eqref{eqn:estim}.
+The two angles then fix the value of $\tilde{S}_{ab}$ via $$\tilde{S}_{ab} = \sqrt{\frac{1-\cos{\theta_{\text{max}}}}{1+\cos{\theta_{\text{max}}}}}e^{i\phi_{\text{max}}}.$$
+The other two parameters, the amplitude and the offset of the polarization, do not convey any physical information. The offset determines the difference of the effective readout biases, $\Delta\epsilon$, and the amplitude determines the product of the mean readout bias and the length of the Bloch vector, $(1-2\bar{\epsilon})|\vec{r}|$.
 
+
+In the discussion above, we have neglected the fact, that in addition to the measurement of the control qubit, we measure the ribbon ancillas and post-select on their biased measurement outcomes. This causes an increased observed effective readout bias $\Delta \epsilon$, obtained from the fitting procedure described in the last section, which exceeds the $\Delta \epsilon$ estimate from calibration data. A more detailed discussion of this issue is given in Appendix \ref{app:marg}. 
+
+\caro{
 Everything remains the same for $T_{aa}$.
+[Do you mean
+\begin{equation}
+    \vec{r} = \left( \frac{2 \text{Re}\tilde{T}_{aa}}{1+|\tilde{T}_{aa}|^2}, \frac{2 \text{Im}\tilde{T}_{aa}}{1+|\tilde{T}_{aa}|^2}, \frac{1 - |\tilde{T}_{aa}|^2}{1+|\tilde{T}_{aa}|^2} \right).\label{eqn:bloch}
+\end{equation}
+what about normalization here?}
+
+
 
 \emph{Results.}
-The numerical results for our interference protocols are shown in Figures \ref{fig:flav_cond_res}, \ref{fig:ex_cond_res} and \ref{fig:t_mat_results}.
+
 
 \begin{figure*}
     \centering
     \begin{subfigure}{\textwidth}
         \centering
-        \includegraphics[width=0.85\linewidth]{Figures/flav_s_plus.pdf}
-        \caption{The tomography of the control qubit's state after the interference protocol for measuring $S(\Psi_m, \Psi_m) = 1$. The measurement basis was scanned across two planes, see the Bloch sphere diagram (blue dotted circles), and the polarization $P$ was estimated from these measurements, fitting the Eq. \ref{eqn:estim} we have extracted the Bloch vector (orange arrow), from which we have made the estimate: $\tilde{S}(\Psi_m, \Psi_m) = 0.89(1) e^{i\pi 0.004(4)}$. Here the second ribbon's flavour was conditioned, Figure \ref{fig:cond_flav}.}
+        \includegraphics[width=0.7\linewidth]{Figures/flav_s_plus.pdf}
+        \caption{$\tilde{S}(\Psi_m, \Psi_m) = 0.89(1) e^{i\pi 0.004(4)}$ measured, $\tilde S(\Psi_m, \Psi_m) = 1$ predicted.}
         \label{fig:flav_cond_res_plus}
     \end{subfigure}
         \begin{subfigure}{\textwidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{Figures/flav_s_minus.pdf}
-        \caption{The tomography of the control qubit's state after the interference protocol for measuring $S(\Psi_m, \tilde{\Psi}_m) = -1$. The measurement basis was scanned across two planes, see the Bloch sphere diagram (blue dotted circles), and the polarization $P$ was estimated from these measurements, fitting the Eq. \ref{eqn:estim} we have extracted the Bloch vector (orange arrow), from which we have made the estimate: $\tilde{S}(\Psi_m, \tilde{\Psi}_m) = 0.88(1)e^{i\pi 0.998(5)}$. Here the second ribbon's flavour was conditioned, Figure \ref{fig:cond_flav}.}
+        \includegraphics[width=0.7\linewidth]{Figures/flav_s_minus.pdf}
+        \caption{$\tilde{S}(\Psi_m, \tilde{\Psi}_m) = 0.88(1)e^{i\pi 0.998(5)}$ measured, $\tilde S(\Psi_m, \tilde{\Psi}_m) = -1$ predicted.}
         \label{fig:flav_cond_res_minus}
     \end{subfigure}
     \begin{subfigure}{\textwidth}
         \centering
-        \includegraphics[width=0.4\linewidth]{Figures/flav_s_zero.pdf}
-        \caption{The tomography of the control qubit's state after the interference protocol for measuring $S(\Psi_m, \Psi_r) = 0$. The measurement basis was scanned across two planes, see the Bloch sphere diagram (blue dotted circles), and the polarization $P$ was estimated from these measurements, fitting the Eq. \ref{eqn:estim} we have extracted the Bloch vector (orange arrow), from which we have made the estimate: $\tilde{S}(\Psi_m, \Psi_r) = 0.02(2)$. Here the second ribbon's flavour was conditioned, Figure \ref{fig:cond_flav}.}
+        \includegraphics[width=0.35\linewidth]{Figures/flav_s_zero.pdf}
+        \caption{$\tilde{S}(\Psi_m, \Psi_r) = 0.02(2)$ measured, $\tilde S(\Psi_m, \Psi_r) = 0$ predicted. $\phi$-scan omitted, since $\theta=\pi$.}
         \label{fig:flav_cond_res_zero}
     \end{subfigure}
-    \caption{Numerical simulation of the S-matrix interference protocol and control qubit tomography.}
-    \label{fig:flav_cond_res}
+        \begin{subfigure}{\textwidth}
+     \centering
+        \includegraphics[width=0.7\linewidth]{Figures/exist_s_minus.pdf}
+        \caption{$\tilde{S}(\Psi_m, \tilde{\Psi}_m) = 0.58(1)e^{i\pi 1.002(8)}$ measured, $\tilde{S}(\Psi_m, \tilde{\Psi}_m)=1$ predicted.}
+        \label{fig:ex_cond_res_zero}
+    \end{subfigure}
+    \caption{Numerical results of the control qubit tomography for the S-matrix interference protocol (a)-(c) conditioning the type of the equal time ribbon (cf. Figure \ref{fig:cond_flav}) and (d) conditioning its existence (cf. Figure \ref{fig:cond_ex}). The measurement basis was scanned across two planes, see the Bloch sphere diagram (blue dotted circles). The polarisation $P$ was estimated from these measurements by fitting Eq.~\eqref{eqn:estim}. It yields the Bloch vector of $\rho_c$ (green arrow) and $\tilde S_{ab}$.}
+    \label{fig:S_res}
 \end{figure*}
 
-\begin{figure*}
-        \centering
-        \includegraphics[width=\textwidth]{Figures/exist_s_minus.pdf}
-        \caption{Numerical simulation of the S-matrix interference protocol and control qubit tomography: The tomography of the control qubit's state after the interference protocol for measuring $S(\Psi_m, \tilde{\Psi}_m) = -1$. The measurement basis was scanned across two planes, see the Bloch sphere diagram (blue dotted circles), and the polarization $P$ was estimated from these measurements, fitting the Eq. \ref{eqn:estim} we have extracted the Bloch vector (orange arrow), from which we have made the estimate: $\tilde{S}(\Psi_m, \tilde{\Psi}_m) = 0.58(1)e^{i\pi 1.002(8)}$. Here the second ribbon was fully conditioned, Figure \ref{fig:cond_ex}.}
-        \label{fig:ex_cond_res}
-\end{figure*}
+%\begin{figure*}
+%        \centering
+%        \includegraphics[width=\textwidth]{Figures/exist_s_minus.pdf}
+%        \caption{Numerical simulation of the S-matrix interference protocol and control qubit tomography: The tomography of the control qubit's state after the interference protocol for measuring $\tilde S(\Psi_m, \tilde{\Psi}_m) = -1$. The measurement basis was scanned across two planes, see the Bloch sphere diagram (blue dotted circles), and the polarization $P$ was estimated from these measurements, fitting the Eq. \ref{eqn:estim} we have extracted the Bloch vector (orange arrow), from which we have made the estimate: $\tilde{S}(\Psi_m, \tilde{\Psi}_m) = 0.58(1)e^{i\pi 1.002(8)}$. Here the second ribbon was fully conditioned, Figure \ref{fig:cond_ex}.}
+%        \label{fig:ex_cond_res}
+%\end{figure*}
 
 \begin{figure*}
     \centering
     \includegraphics[width=\textwidth]{Figures/t_j_minus.pdf}
-    \caption{Numerical simulation of the T-matrix interference protocol and control qubit tomography: The tomography of the control qubit's state after the interference protocol for measuring $T(\tilde{\Phi}_r, \tilde{\Phi}_r) = -i$. The measurement basis was scanned across two planes, see the Bloch sphere diagram (blue dotted circles), and the polarization $P$ was estimated from these measurements, fitting the Eq. \ref{eqn:estim} we have extracted the Bloch vector (orange arrow), from which we have made the estimate: $T(\tilde{\Phi}_r, \tilde{\Phi}_r) = 1.04(1)e^{i\pi 1.496(4)}$. Here the ribbon's path was conditioned, Figure \ref{fig:Tmat}.}
+    \caption{Numerical results of the control qubit tomography for the T-matrix interference protocol where the paths of the ribbon was conditioned (cf. Figure \ref{fig:Tmat}). Tomography performed as for the S-matrix (cf. Fig.\ref{fig:S_res}).  $T(\tilde{\Phi}_r, \tilde{\Phi}_r) = 1.04(1)e^{i\pi 1.496(4)}$ measured, $T(\tilde{\Phi}_r, \tilde{\Phi}_r) = -i$ predicted.}
     \label{fig:t_mat_results}
 \end{figure*}
 
-In Figures \ref{fig:flav_cond_res} and \ref{fig:ex_cond_res} we have the numerical results of our simulations of the S-matrix interference protocols. We have limited ourselves to a demonstrative selection of cases. Figure \ref{fig:ex_cond_res} shows the results of the protocol in which the existence of the second ribbon is conditioned on the state of the auxiliary qubit, Figure \ref{fig:cond_ex}. The systematic drift of the Bloch vector due to the effects of noise and readout bias are responsible for the underestimate of magnitude of the $\tilde{S}(\Psi_m, \tilde{\Psi}_m)$. Remember that the magnitude of the S-matrix element is dictated by the angle that the Bloch vector makes with respect to the z-axis, not the magnitude of the vector itself which is determined by the effective noise and readout.
 
-The systematic drift is significantly less dramatic in the case of flavour conditioning protocol, Figure \ref{fig:flav_cond_res} for the results and Figure \ref{fig:cond_flav} for the protocol. Hence, the estimate of the magnitudes of the S-matrix elements is much closer to the theoretical value. This is due to the fact that the circuit implementing this protocol is much shallower due to the simpler forms of the conditional ribbon operators, one less Toffoli gate in the conditional multiplication circuit, Figure \ref{fig:flavCond}.
+The numerical results for the interference protocols determining $S_{ab}$ with $a=\Psi_m$ and $b=\Psi_m,\tilde \Psi_m, \Psi_r$ are shown in Fig.~
+%our interference protocols are shown in Figures \ref{fig:flav_cond_res}, \ref{fig:ex_cond_res} and \ref{fig:t_mat_results}.
+%In Figures 
+\ref{fig:S_res}. The first three panels show the results of the protocol in which the type of the second ribbon is conditioned to be $\Psi_b$ or $0 \oplus \tilde 0$ (cf. Fig.~\ref{fig:cond_flav}), while the last one shows the results for conditioning the existence of the ribbon (cf. Fig.~\ref{fig:cond_ex}). In both cases we note a systematic drift of the Bloch vector towards the $z$-axis. The magnitude of the S-matrix element is dictated by the angle of the Bloch vector with the z-axis and hence this drift leads to an underestimation of $|\tilde S_{ab}|$. The systematic drift is significantly less dramatic in the case of the first protocol, i.e., conditioning on $\Psi_b$ or $0 \oplus \tilde 0$ in Figure \ref{fig:flav_cond_res}.  Hence, the estimate of the magnitudes of the S-matrix elements is much closer to the theoretical value. 
+ This is due to the fact that the circuit implementing this protocol is much shallower due to the simpler forms of the conditional ribbon operators, one Toffoli gate less in the conditional multiplication circuit, cf. Figure \ref{fig:flavCond}. The phases of all measured $\tilde S_{ab}$ are estimated well and agree with the theoretically predicted values.
 
-Furthermore, the T-matrix is remarkably well estimated by the path conditioning protocol, Figure \ref{fig:t_mat_results} for the results and Figure \ref{fig:Tmat} for the protocol.
 
-The phases of all values are also estimated remarkably well.
+The result for the T-matrix element $T(\tilde \phi_r, \tilde \phi_r)$ determined by the path conditioning protocol in Figure \ref{fig:Tmat} is shown in Figure \ref{fig:t_mat_results} and agrees with the theoretical value.
+\caro{say something about all other S and T entries}
 
-\textbf{Circuit Characteristics.}
-In the following text, we report on exact layout used in our simulations of phase sensitive $S-$ and $T-$matrix element measurements.
 
-The exact ribbon operators involved in the protocol are shown in Figure \ref{fig:intef_setup} (Top) while the qubit layout on the Sycamore chip is shown in the bottom of the same Figure.
-\begin{figure}
-	\centering
-	\includegraphics[width=0.75\linewidth]{Figures/intef_setup_new.pdf}
-	\caption{(Top) The ribbons operators applied in the simulation. Note that the application or the flavour of the blue (equal-time) ribbon is conditioned on the state of the control bit.  (Bottom) The qubit layout of the interference protocol simulation done via Google Colab platform. The chip simulated is the Google's Sycamore chip and the layout was chosen to occupy a part of the chip with low noise two qubit connections, also this layout reduces the overall number of two qubit gates used int the final circuit.}
-	\label{fig:intef_setup}
-\end{figure}
-Note that the application or the flavour of the blue (equal-time) ribbon is conditioned on the state of the control bit.
 
-The layout on the chip is chosen to reduce the number of two-qubit gates acting on the control bit, which is a more relevant heuristic in this case.
-
-As for the fusion and braiding not all anyons are made equal in term of difficulty to manipulate.
-
-The act of conditioning the application of the ribbon or it's flavour makes this protocol significantly more complex in terms of number of multi-qubit gates.
-
-The two main factors is the flux of the dyon. The $r-$dyons are much more difficult to implement conditionally since they are much more difficult to implement unconditionally. The $\mathbb{Z}_4$ $r$-multiplication necessitates a Toffoli gate upon conditioning.
-
-The second difficulty arrises from the charge. If the irreducible representation of the dyon assigns $-1$ to the nontrivial element of the group's centre, $r^2$, the linear representation formed by $A^{(g)}$ is faithful. Therefore a circuit that implements the generalised conjugation is significantly more complex even before conditioning it.
-
-However, it is important to note that difference in circuits is not  substantial between different types of anyons. The circuit depth are always of the same order of magnitude and involve the same number of qubits. 
-
-With a reasonable improvement in hardware the experiments we propose are doable with all anyons of the $D_4$ theory. 
-
-Given the noise levels present in the simulator we have sticked with using simpler $m$-dyon for most parts. However, the twist phase interferometry experiment we did have to resort to the most complicated anyon, the $\Phi_r$ semion or its antisemion, in order to demonstrate nontrivial twist phase.
-
-The depths of the circuits used in the various interference protocols are:\begin{itemize}
-	\item[i)] Flavour conditioning: \begin{enumerate}
-		\item[a)] for measuring $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$, 58 once completely compiled
-		\item[b)] for measuring $S(\Psi_m, \Psi_r)$, 64 once completely compiled, due to the more complex $\mathcal{C}_r$-controlled multiplication
-	\end{enumerate}
-	
-	\item[ii)] Full conditioning will be considerably deeper due to the extra Toffoli gate in conditional $C$-controlled multiplication: \begin{enumerate}
-		\item[a)] for measuring $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$, 84 once completely compiled
-		\item[b)] for measuring $S(\Psi_m, \Psi_r)$, 90 once completely compiled
-	\end{enumerate}  
-	
-	\item[iii)] for measuring $T(\tilde{\Phi}_r, \tilde{\Phi}_r)$, 89 once completely compiled, due to the more complicated $\mathcal{C}_r$-controlled multiplication and generalised conjugation 
-\end{itemize}
-
-Note that the twist phase experiment has the best agreement with the theoretical prediction even though it is the deepest protocol.
-
-\emph{Uncertainty.} In the experiment we have used 1000 shots per measurement basis for S-matrix measurements and 5000 for T-matrix measurements.
-
-The uncertainty was estimated by assuming the standard binomial distribution for individual measurement outcome of each shot.
+\emph{Uncertainty.} In the experiment we used 1000 shots per measurement basis for the S-matrix measurements and 5000 for the T-matrix measurements. The uncertainty was estimated by assuming the standard binomial distribution for individual measurement outcomes of each shot.
+\caro{$sqrt((1+pol)(1-pol)/n_{tot})$}
 
 The expected post-selection probability is $1/4$ for all T-matrix protocols and S-matrix protocols with measured $|S| \neq 0$. For the case of measured $|S| = 0$ the probability drops to $1/8$. These probabilities were observed in the numerical experiment.
 
