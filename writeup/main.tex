@@ -400,7 +400,7 @@ Moving anyons means appending elementary triangles onto a ribbon. Each triangle 
         \item[I)] Multiply on the coincidng edge\\  $\ket{c, i}\ket{g}_\text{phys} \rightarrow \ket{c, i}\ket{cg}_\text{phys}$.
        \item[II)] Generalised-conjugate by the crossed edge\\ $\ket{c,i}\ket{h}_\text{phys} \rightarrow \ket{gcg^{-1}} \Gamma^\chi_c(h) \ket{i} \ket{h}_\text{phys}$.
     \end{itemize}
-    \item Project the ancillary qudits to the Bell state $\bra{\Phi^+} = \frac{1}{\sqrt{d}}\sum_\nu \bra{\nu; \nu}$. The projection is done by measurement and post-selection
+    \item Project the ancillary qudits to the Bell state $\bra{\Phi^+} = \frac{1}{\sqrt{d}}\sum_\nu \bra{\nu; \nu}$. The projection is done by measurement and post-selection.
 \end{enumerate}
 For the other variants of step 2, for different edge orientations etc., consult the Figure \ref{fig:all_triang} in Appendix \ref{app:ribs}. 
 
@@ -1081,9 +1081,10 @@ The control qubit is in a pure state (assuming there is no noise) that we can to
 
 \section{Numerical Experiments}\label{sec:num}
 
-In this section, we provide numerical evidence for the feasibility of our proposal on state of the art NISQ devices. We performed simulations using Google's 'cirq\_google' python package on Google's cloud computing platform 'Google Colab'. This package executes the quantum trajectory simulation of the circuit using the Kraus operators obtained from the direct Pauli transfer matrix tomography on various single and two qubit gates on the Sycamore chip \cite{}.
+In this section, we provide numerical evidence for the feasibility of our proposal on state of the art NISQ devices. We performed simulations using Google's 'cirq\_google' python package on Google's cloud computing platform 'Google Colab'. This package executes the quantum trajectory simulation of the circuit using the Kraus operators obtained from the direct Pauli transfer matrix tomography on various single and two qubit gates on the Sycamore chip \cite{weber}. This chip comes with two principle constraints. First, we can only perform two-qubit gates between adjacent qubits. Second, there is a limited set of gates that can be implemented. 
 
-Knowing the characteristics of the single and two-qubit gates, and single- and multi-qubit readout performances of the chip \cite{} we have chosen a suitable part of the chip for our simulations. A similar setup would be suitable for an actual experiment on the Sycamore chip. However, the optimal allocation of recourses will be chip depended. The layout we used is shown in Figure \ref{}.
+
+Knowing the characteristics of the single and two-qubit gates, and single- and multi-qubit readout performances of the chip \cite{weber} we have chosen a suitable part of the chip for our simulations. A similar setup would be suitable for an actual experiment on the Sycamore chip. However, the optimal allocation of recourses will be chip depended. The layout we used is shown in Figure \ref{fig:fusion_setup}.
 
 Given that we argue for feasibility of these experiments, we need to ask how well this numerical scheme, will reproduce the actual measurements.
 \caro{which heuristics?} Heuristics shows that it is in fact a good approximation of what we expect to see from the actual experiment \cite{}, even if it neglects any cross-talk between qubits that are not directly coupled by the circuit.
@@ -1097,51 +1098,49 @@ The number of qubits we could simulate classically using this software is limite
 
 In this section, we present the simulation results for the fusion and braiding experiments.
 
-\textbf{Circuit Characteristics.} However, before we present the results, we need report on the qubit layout used for the fusion and braiding experiments as well as circuits depths achieved, in order to put the noise observed in a useful context.
+\textbf{Circuit Characteristics.} However, before we present the results, we report on the qubit layout used for the fusion and braiding experiments, as well as circuits depths achieved, in order to put the noise observed in a useful context.
 
 \emph{Fusion.} 
-The exact ribbon operators used in the fusion experiment is shown in Figure \ref{fig:fusion_setup} (Top) while the layout of the qubits on the Sycamore chip is shown in the bottom of the same Figure.
+The exact ribbon operators and the layout of the qubits on the Sycamore chip used in the fusion experiment is shown in Fig.~\ref{fig:fusion_setup}.
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Figures/basket_fusion.pdf}
-	\caption{(Top) The ribbon operators involved in fusion of two $\Psi_m$ anyons on a small planar graph. Blue circle marks the plaquette on which we perform the $H_{mr}$-reduced charge measurement with the red circle marking the vertex on which we measure the flux, together they form the site on which fusion occurs. (Bottom) The circuit layout on the Sycamore chip we used to simulate the fusion experiment.}
+	\caption{(Top) The ribbon operators for the fusion of two $\Psi_m$ anyons on a small planar graph. The purple circle marks the plaquette on which we perform the $H_{mr}$-partial charge measurement. The red circle marks the vertex on which we measure the flux, together they form the site on which fusion occurs. (Bottom) The circuit layout on the Sycamore chip we used to simulate the fusion experiment.}
 	\label{fig:fusion_setup}
 \end{figure}
 
-Using the circuits listed in Section \ref{subsec:enc} to implement the ribbon operators defined in Section \ref{sec:ribbon_ops} generates a unitary circuit that is not implementable on the surface code geometry of the Sycamore chip.
+Using the circuits listed in Sec.~\ref{subsec:enc} to implement the ribbon operators defined in Sec.~\ref{sec:ribbon_ops} generates a circuit that is not directly implementable on the Sycamore chip due to the constraints mentioned above. We first need to implement swap gates such that all the multi-qubit gates appearing in the original circuit are acting on adjacent qubits. In addition, we need to compile multi-qubit gates into native single- and two-qubit coupler gates. In our case we chose the CZ gate as the coupler (two-qubit) gate. The single qubit gates are unrestriced.  
 
-There are two sets of operations one needs to perform to get a circuit that can be ran on the chip. First is to implement all the needed swaps that puts the adequate ancillary qubits next to adequate gauge field qubits for all the multi-qubit gates appearing in our original circuit. Second is to compile these multi-qubit gates into single-qubit gates and two-qubit coupler gates the Sycamore-simulator can implement, in our case the coupler of choice was the CZ gate. 
+The additional swaps make up a considerable portion of all coupling gates used in the numerical experiments and hence the positioning of qubit is one of the key factors in minimising the circuit depth.
 
-The additional swaps make up a considerable portion of all coupling gates used in the experiments and hence the positioning of qubit is one of the key factor in minimizing the circuit depth.
+It is also worth noting that not all anyons are equal in complexity. The $r-$dyons ribbon require considerably deeper circuits since the group multiplication controlled by the elements of the $\mathcal{C}_r$ conjugacy class always involve at least one Toffoli gate. Let us recall that the Toffoli gate needs to be compiled into a depth-6 circuit using the CZ as the two qubit coupler, however this neglects any swaps needed to place the qubits acted on by the CZ gates adjacent to one another. Hence, reducing the number of Toffoli gates is the main heuristic approach when designing the experiments while keeping the depth minimal.
 
-In is also worth noting that not all anyons are equal in complexity. The $r-$dyons ribbon are considerably more difficult since the group multiplication controlled by the elements of $\mathcal{C}_r$ conjugacy class always involve at least one Toffoli gate.
+\caro{maybe move to next section: However, minimising the circuit depth at all costs is not always the best heuristic approach for circuit design. In the interference protocols discussed in the next section, it is paramount to reduce the number of gates acting on the control qubit even if it leads to deeper circuits.} 
 
-When on the topic of Toffoli gates, we note that the Toffoli gate needs to be compiled into a depth-6 circuit using the CZ as the two qubit coupler, however this neglects any swaps needed to place the qubits acted on by the CZ gates adjacent to one another. Hence, reducing the number of Toffoli gates is the main heuristic approach when designing the experiments while keeping the depth minimal.
+For the fusion of $\Psi_m$-fluxes on the small planar graph, we obtained a device-ready circuit of depth 70. This circuit prepares the ground state, implements the ribbon operators and performs a partial charge measurement. 
+%For the fusion of $\Psi_m$-fluxes on the small planar graph, we obtained a circuit of depth 17. This circuit prepares the ground state, implements the ribbon operators and perform a partial charge measurement. In this depth the auxiliary swaps are included. The circuit once compiled into one that only uses CZ reaches the depth of 70.
+On the braiding ladder the same protocol leads to a much shorter circuit of depth 37. This is due to a significantly simpler ground state preparation.\caro{comment on layout and ribbons}
 
-However, the circuit depth is not always the best heuristic approach for circuit design. In the interference protocols it is paramount to reduce the number of gates acting on the control bit even if it leads to deeper circuits.
-
-For the fusion of the $\Psi_m$ fluxes on the small planar graph, we have a circuit of depth of 17 for a circuit that prepares the ground state, implements the ribbons and the reduced charge measurement. In this depth the auxiliary swaps are included. The circuit once compiled into one that only uses CZ reaches the depth of 70.
-
-On the braiding ladder this number is far lower, the depth is 37. This is due to a significantly simpler ground state preparation.
-
-\emph{Braiding.} The ribbon operators that implement the two braiding protocols are shown in Figure \ref{fig:braiding_setup} (Top) while the qubit layout on the Sycamore chip is shown in the bottom of the same Figure.
+\emph{Braiding.} The ribbon operators for the two braiding protocols and the qubit layout on the Sycamore chip are shown in Fig.~\ref{fig:braiding_setup}.
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Figures/braiding_setup.pdf}
-	\caption{(Top) The ribbon operators involved in two braiding experiments. On the last step we also label around which plaquette we perform the $H_{mr}$-reduced charge measurement. Note that we are on a sphere so the outside plaquette that we labelled twice for clarity should be identified, this is best seen in the diagram for $\sigma_{12}$ exchange. (Bottom) The circuit layout on the Sycamore chip we used to simulate the braiding experiment.}
+	\caption{(Top) The ribbon operators for the two braiding experiments. On the last step we also label around which plaquette we perform the $H_{mr}$-partial charge measurement. Note that we are on a sphere so the outside plaquette that we labelled twice for clarity should be identified. This is best seen in the diagram for the $\sigma_{12}$-exchange. (Bottom) The circuit layout on the Sycamore chip we used to simulate the braiding experiment.}
 	\label{fig:braiding_setup}
 \end{figure}
 
-The circuit depths achieved for braiding the $\Psi_m$ fluxes is 23 and 25 for the cases of $\sigma_{23}\sigma_{12}$ and $\sigma_{12}\sigma_{23}$, respectively. We note that we did these experiments on the double braiding ladder, making the sites 2 and 3 share the vertex. This is done due to constraints of the simulation, adding 6 extra qubits dramatically slows down the run times to the points of impracticality. On a real quantum device this is not a problem.
+%The circuit depths achieved for braiding the $\Psi_m$ fluxes are 23 and 25 
 
-Once compiled to only use CZ as the two-qubit gate we get 60 and 68 for the two cases respectively.
+The circuit depths achieved for braiding the $\Psi_m$ fluxes are 60 and 68 for the cases of $\sigma_{23}\sigma_{12}$ and $\sigma_{12}\sigma_{23}$, respectively. We note that we did these experiments on the double braiding ladder, \caro{making the sites 2 and 3 share the vertex.} This is due to constraints of the simulation. Adding 6 extra qubits needed for a triple-ladder, dramatically slows down the run times to the point of impracticality. On a real quantum device this problem would not occur.
 
-\emph{Ground state.} As mentioned, we prepare the ground state directly. On the braiding ladder that procedure is depth 2, prepare the bits on all the bottom edges in an equal superposition via Hadamard gates and then CNOT the qubit above controlled by the one below. 
+%Once compiled to only use CZ as the two-qubit gate we get 60 and 68 for the two cases respectively.
 
-On a planar graph in Figure \ref{fig:basketball}, this process is more complicated. Repeating the process as for the braiding ladder gives us the following state $\ket{\Psi} = \sum_{g_{12},g_{34}}\ket{g_{12},g_{12}, g_{34}, g_{34}}$. We then apply the full controlled multiply circuit from qubits of the second edge onto the qubits of the third edge. This procedure gives us the state defined in Figure \ref{fig:basketball}, up a simple relabelling.
+\emph{Ground state.} As mentioned, we prepare the ground state directly. On the braiding ladder that procedure is depth 2. We prepare the qubits on all the bottom edges in an equal superposition via Hadamard gates and then CNOT the qubits above controlled by the one below. 
+
+On the planar graph in Figure \ref{fig:basketball} this process is more complicated. Repeating the process as for the braiding ladder gives us the following state $\ket{\Psi} = \sum_{g_{12},g_{34}}\ket{g_{12},g_{12}, g_{34}, g_{34}}$. We then apply the full controlled multiply circuit from qubits of the second edge onto the qubits of the third edge. This procedure gives us the state defined in Figure \ref{fig:basketball}, up to a simple relabelling\caro{what relabelling?}.
 
 \textbf{Results.}
-The results for the four experiments are shown in Figure \ref{fig:red_charge_res}.
+The results of the fusion experiments on the ladder and the planar graph, as well as the braiding on the ladder are shown in Figure \ref{fig:red_charge_res}.
 \begin{figure*}
 \centering
 \begin{subfigure}{0.47\textwidth}
@@ -1170,23 +1169,28 @@ The results for the four experiments are shown in Figure \ref{fig:red_charge_res
 \end{figure*}
 
 \emph{Fusion.} 
-On both lattices we see the signatures of four fusion outcomes
+On both lattices we measure the charge after fusion and see the signatures of four fusion outcomes
 $$\Psi_m \otimes \Psi_m = 0 \oplus \tilde 0 \oplus \Sigma_m \oplus \tilde{\Sigma}_m.$$
-with the difference coming as the larger background noise in the case of the small planar graph, due to a significantly deeper circuit due to the ground state preparation.
+In the case of the small planar graph we see a significantly 
+increased background noise due the deeper circuit used in the ground state preparation.
 
-The number of runs for the fusion on the braiding ladder was $16000$. The expected post-selection probability for the two ribbons is $1/16$, while the actual number of successes was $1807$, due to the circuit noise and measurement readout bias. The four main bins count $270(16)$ with the biggest noise peak being $77(8)$. 
+%while the actual number of successes was $1807$, 
+The number of runs for the fusion on the braiding ladder was $16000$. The expected post-selection probability for the projection of the two ribbon ancilla pairs is $1/4^2=0.0625$, while the actual rate of success was $0.113$, due to the circuit noise and measurement readout bias. The four main bins count $270(16)$ with the biggest noise peak being $77(8)$. \caro{what do the numbers in brackets mean?}
 
-The number of runs for the fusion on the small planar graph was $64000$. The expected post-selection probability for the two ribbons is $1/16$, while the actual number of successes was $5289$, due to the circuit noise and measurement readout bias. The four main bins count $450(20)$ with the biggest noise peak being $242(15)$.
+The number of runs for the fusion on the small planar graph was $64000$. The expected post-selection probability for projection of the two ribbon ancilla pairs is again $0.0625$, while the actual number of successes was $0.0826$. The four main bins count $450(20)$ with the biggest noise peak being $242(15)$.
 
 \emph{Braiding.}
-Looking at the results of the charge measurement for the two braiding protocols we clearly see what we expected. The first braiding protocol leaves multiple fusion outcomes at the site of stitching while the second braiding protocol leaves it in the vacuum.
+Looking at the results of the charge measurement for the two braiding protocols we clearly see what we expected. The first braiding protocol results in multiple fusion outcomes while for the second braiding protocol the resulting fusion outcome is only vacuum.
 
-The number of runs for both protocol was $16000$. The expected post-selection probabilities for the two protocols are $1/16$ for $\sigma_{12}\sigma_{23}$ and $1/2$ for $\sigma_{23}\sigma_{12}$, while the actual number of successes was $1977$ for $\sigma_{12}\sigma_{23}$ and $5036$ for $\sigma_{23}\sigma_{12}$, due to the circuit noise and measurement readout bias.
+
+The number of runs for both protocol was $16000$. The expected post-selection probabilities for the two protocols are $1/16$ for $\sigma_{12}\sigma_{23}$ and $1/2$ for $\sigma_{23}\sigma_{12}$, while the actual rates of successes were $0.123$ for $\sigma_{12}\sigma_{23}$ and $0.315$ for $\sigma_{23}\sigma_{12}$, respectively.
+%while the actual number of successes was $1977$ for $\sigma_{12}\sigma_{23}$ and $5036$ for $\sigma_{23}\sigma_{12}$, due to the circuit noise and measurement readout bias.
+\caro{why 1/2?}
 
 In the case of the first braiding we see the four main peaks counting 255(16) with the biggest peak coming from the noise counting 109(10). In the second case the peak corresponding to the vacuum counts 1890(40) with the largest peak coming from the noise counting 450(20).
 
 For the detailed discussion of the post-selection probabilities see Appendix \ref{app:postsel}.
-
+\caro{comment on other anyons? repeated partial charge measurement? how about we just state values of bins individually and then give a signal to noise ratio.}
 
 
 \subsection{Linking and Twist Matrices}
@@ -1215,7 +1219,7 @@ where $\epsilon_s$ is the probability to measure the qubit in state $\bar{s}$ ev
 
 If we wanted to construct an unbiased estimator for $\vec{r}$ given a set of measurements, in terms of counts, estimating $p(s|\vec{s}_i, \vec{r})$ we should be done here, the process is straightforward.
 
-However, we must remember that in the protocol for applying the ribbon operators, we need to project all the auxiliary bits into appropriate Bell pair states $\ket{\Phi^+}$.
+However, we must remember that in the protocol for applying the ribbon operators, we need to project all the auxiliary qubits into appropriate Bell pair states $\ket{\Phi^+}$.
 This is done by post-selection, which is susceptible to single qubit readout bias as well.
 
 We can construct a post-selected marginal probability of getting a specific outcome $s \in \{0, 1\}$ on measuring the control bit in basis $\vec{s}_i$, $$p_M(s |\{m_i\}; \vec{s}_i) \neq p(s|\vec{s}_i, \vec{r}) ,$$ where $\{m_i\}$ is a set of measurements on the gauge-field and ribbon-auxiliary degrees of freedom and outcomes we are selecting for.
