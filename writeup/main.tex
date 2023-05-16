@@ -1531,14 +1531,48 @@ The consequence of this geometrical fact on our protocol is that once the first 
 \end{equation}
 
 \section{Representation Theory of $D_4$ and $D(D_4)$}\label{app:reps}
-\jovan{$\ldots$}
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|l||l|l|l|l|l|l|l|l|}
+    \hline
+  $A_g$ & $e$ &   $r$ & $r^2$ & $r^3$ &  $m$ & $mr$ & $mr^2$ & $mr^3$ \\
+\hline\hline
+  $O$ & 1 &   1 &  1 &   1 &  1 &  1 &   1 &    1 \\\hline
+ $\tilde{O}$ & 1 &   1 &  1 &   1 &  1 &  1 &   1 &    1 \\\hline
+  $\Sigma_{r}$ & 1 &   1 &  1 &   1 & -1 & -1 &  -1 &   -1 \\\hline
+ $\Sigma_{mr}$ & 1 &  -1 &  1 &  -1 & -1 &  1 &  -1 &    1 \\\hline
+  $\Sigma_{m}$ & 1 &  -1 &  1 &  -1 &  1 & -1 &   1 &   -1 \\\hline
+ $\tilde{\Sigma}_{r}$ & 1 &   1 &  1 &   1 & -1 & -1 &  -1 &   -1 \\\hline
+$\tilde{\Sigma}_{mr}$ & 1 &  -1 &  1 &  -1 & -1 &  1 &  -1 &    1 \\\hline
+ $\tilde{\Sigma}_{m}$ & 1 &  -1 &  1 &  -1 &  1 & -1 &   1 &   -1 \\\hline
+  $\Sigma_{\epsilon}$ &$\mathbb{1}$&$-i\sigma_y$ &$-\mathbb{1}$& $i\sigma_y$ & $\sigma_z$ &$-\sigma_x$ & $-\sigma_z$ &   $\sigma_x$ \\\hline
+ $\tilde{\Sigma}_{\epsilon}$ &$\mathbb{1}$&$-i\sigma_y$ &$-\mathbb{1}$& $i\sigma_y$ & $\sigma_z$ &$-\sigma_x$ & $-\sigma_z$ &   $\sigma_x$ \\\hline
+$\Psi_{r}$ &$\mathbb{1}$&  $\mathbb{1}$& $\mathbb{1}$&  $\mathbb{1}$& $\sigma_x$ & $\sigma_x$ &  $\sigma_x$ &   $\sigma_x$ \\\hline
+$\Phi_{r}$ &$\mathbb{1}$& $i\sigma_z$ &$-\mathbb{1}$&$-i\sigma_z$ & $\sigma_x$ & $\sigma_y$ & $-\sigma_x$ &  $-\sigma_y$ \\\hline
+$\tilde{\Psi}_{r}$ &$\mathbb{1}$& $-\mathbb{1}$& $\mathbb{1}$& $-\mathbb{1}$& $\sigma_x$ &$-\sigma_x$ &  $\sigma_x$ &  $-\sigma_x$ \\\hline
+$\tilde{\Phi}_{r}$ &$\mathbb{1}$&$-i\sigma_z$ &$-\mathbb{1}$& $i\sigma_z$ & $\sigma_x$ &$-\sigma_y$ & $-\sigma_x$ &   $\sigma_y$ \\\hline
+ $\Psi_{m}$ &$\mathbb{1}$&  $\sigma_x$ & $\mathbb{1}$&  $\sigma_x$ & $\mathbb{1}$& $\sigma_x$ &  $\mathbb{1}$&   $\sigma_x$ \\\hline
+ $\tilde{\Psi}_{m}$ &$\mathbb{1}$&  $\sigma_x$ & $\mathbb{1}$&  $\sigma_x$ &$-\mathbb{1}$&$-\sigma_x$ & $-\mathbb{1}$&  $-\sigma_x$ \\\hline
+ $\Phi_{m}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ & $\sigma_z$ & $\sigma_x$ & $-\sigma_z$ &  $-\sigma_x$ \\\hline
+ $\tilde{\Phi}_{m}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ &$-\sigma_z$ &$-\sigma_x$ &  $\sigma_z$ &   $\sigma_x$ \\\hline
+$\Psi_{mr}$ &$\mathbb{1}$&  $\sigma_x$ & $\mathbb{1}$&  $\sigma_x$ & $\sigma_x$ & $\mathbb{1}$&  $\sigma_x$ &   $\mathbb{1}$\\\hline
+$\tilde{\Psi}_{mr}$ &$\mathbb{1}$&  $\sigma_x$ & $\mathbb{1}$&  $\sigma_x$ &$-\sigma_x$ &$-\mathbb{1}$& $-\sigma_x$ &  $-\mathbb{1}$\\\hline
+$\Phi_{mr}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ &$-\sigma_x$ & $\sigma_z$ &  $\sigma_x$ &  $-\sigma_z$ \\\hline
+$\tilde{\Phi}_{mr}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ & $\sigma_x$ &$-\sigma_z$ & $-\sigma_x$ &   $\sigma_z$ \\\hline
+\end{tabular}
+    \caption{$A_g$ matrices for every representation of $D(D_4)$}
+    \label{tab:reps}
+\end{table}
 
 \section{Circuits for $D_4$-related operations}\label{app:cirqs}
 
-\section{abelian anyons of $D_4$ gauge theory}\label{app:abl}
+\section{Abelian anyons of $D_4$ gauge theory}\label{app:abl}
 
 \section{Post-selection probabilities}\label{app:postsel}
+In this appendix, we will elaborate on the post-selection probabilities quoted in the main text.
 
+Any quantum algorithm that includes post-selection invokes a justified concern  
 \section{Post-selection and one-qubit marginals}\label{app:marg}
 We investigate the effect of post selecting on biased measurement outcomes for the paradigmatic example of two qubits. We consider a general two-qubit density matrix
 \begin{equation}
@@ -1593,6 +1627,5 @@ For a general setting, where we have $n$ qubits, post-select on the biased measu
 	P=\vec s \cdot (\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}) + \tilde \epsilon_+ \;,
 \end{equation}
 where $\tilde \epsilon_\pm$ are effective errors that depend on $\rho$. In our experiment we are only interested in the direction of the vector $\vec b$ which contains the information of the $S$- or $T$-matrix entry. The offset is purely due to read-out errors and is discarded. In the tomography, we determine $\vec b^\text{observed}=\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}$ and do not try to distinguish between the two contributions, since we are dealing with an unknown density matrix.
-
 
 \end{document}
