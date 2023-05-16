@@ -1539,7 +1539,60 @@ The consequence of this geometrical fact on our protocol is that once the first 
 
 \section{Post-selection probabilities}\label{app:postsel}
 
-\section{Post-sellection and one-qubit marginals}\label{app:marg}
+\section{Post-selection and one-qubit marginals}\label{app:marg}
+We investigate the effect of post selecting on biased measurement outcomes for the paradigmatic example of two qubits. We consider a general two-qubit density matrix
+\begin{equation}
+	\rho=\frac{1}{4} r_{\alpha \beta} \sigma_\alpha \tau_\beta,\quad r_{00}=1,\quad \alpha,\beta=0,\ldots,4\;,
+\end{equation} that represents the state after applying a noisy circuit. We tomograph the first qubit while post-selecting on the measurement outcome $0$ in the $z$-basis of the second qubit. The bias to measure $a$ while the outcome should be $\bar a$ is $\epsilon_a$ and assumed to be the same for both qubits. 
+
+After measuring $0$ we obtain with probability $\epsilon_0$  the false positive state
+\begin{equation}
+	\tilde \rho_{01}=\frac{r_{\alpha0}-r_{\alpha3}}{4} \sigma_\alpha \ket{1}\bra{1}
+\end{equation}
+and with probability $1-\epsilon_1$ the true state
+\begin{equation}
+	\tilde \rho_{00}=\frac{r_{\alpha0}+r_{\alpha3}}{4} \sigma_\alpha \ket{0}\bra{0}\;.
+\end{equation}
+We now perform a measurement of the first qubit in the $\vec s$-basis, which amounts to a full tomography of the first qubit, if we choose several different bases $\vec s$. The probability to measure $0$ is given again by a combination of true and false positive outcomes and reads
+\begin{equation}
+	p_0=\epsilon_0 \operatorname{tr} \tilde \rho S_1  +(1-\epsilon_1) \operatorname{tr} \tilde \rho S_0  , \quad \tilde \rho=\epsilon_0 \tilde \rho_{01}+(1-\epsilon_1) \tilde \rho_{00} , \quad S_0=\frac{1+\vec S \cdot \vec \sigma}{2}, \;\quad S_1=\frac{1-\vec S \cdot \vec \sigma}{2}\;.
+	\end{equation} 
+	Similarly,
+	\begin{equation}
+		p_1=\epsilon_1 \operatorname{tr} \tilde \rho S_0 + (1-\epsilon_0)\operatorname{tr} \tilde \rho S_1
+	\end{equation}
+	More explicitly, we introduce $s^\pm_\alpha$ with $s_0=\pm 1, s^\pm_i=\vec s_i$ and $r_\alpha^\pm=r_{\alpha0}\pm r_{\alpha 3})$ and obtain
+\begin{equation}
+\begin{aligned}
+p_0=&	\frac{1}{4} [\epsilon_0s^+_\alpha (\epsilon_0r^-_{\alpha}+(1-\epsilon_1)r^+_{\alpha})  
+-(1-\epsilon_1) s^-_\alpha(\epsilon_0r^-_{\alpha}+(1-\epsilon_1)r^+_{\alpha})  ]\;.
+\end{aligned}
+\end{equation}
+Likewise the probability to measure $1$ is
+\begin{equation}
+\begin{aligned}
+p_1=&	\frac{1}{4} [-\epsilon_1 s^-_\alpha(\epsilon_0r^-_{\alpha}+(1-\epsilon_1)r^+_{\alpha})
++(1-\epsilon_0) s^+_\alpha (\epsilon_0r^-_{\alpha}+(1-\epsilon_1)r^+_{\alpha})   ]\;.
+\end{aligned}
+\end{equation}
+This yields the polarization 
+\begin{equation}
+	P=p_0-p_1= a+ \vec s \cdot \vec b \;,
+\end{equation}
+where $a,\vec b$ are polynomials in $\epsilon_{0/1}$ and $r_\alpha^\pm$, in particular
+\begin{equation}
+\begin{aligned}
+	a&=(\epsilon_0-\epsilon_1) \frac{r^+_0}{2} +\epsilon_0^2 \frac{r^-_0}{2} -\epsilon_0 \epsilon_1 \frac{r^+_0+r^-_0}{2} +\epsilon_1^2 \frac{r_0^+}{2}\;,\\
+	b_j&=\frac{r^+_j}{2}+ \epsilon_0 \frac{r^-_j-r^+_j}{2} -\epsilon_1 r^+_j -\epsilon_0^2 \frac{r^-_j}{2} +\epsilon_0 \epsilon_1 \frac{r^+_j-r^-_j}{2} + \epsilon_1^2 \frac{r_j^+}{2}
+	\end{aligned}\;.
+\end{equation}
+We see that to leading order in $\epsilon$, the offset is proportional to $\Delta \epsilon=\epsilon_1-\epsilon_0$, while the vector $\vec b$ is dominated by terms $\mathcal O(1)$.
+
+For a general setting, where we have $n$ qubits, post-select on the biased measurement outcomes of $k$ qubits and tomograph one qubit, the polarization will have the same structure, just that $a$ and $b_j$ are higher polynomials in $\epsilon$, with the coefficients depending on the full density matrix. The polarization can be written as 
+\begin{equation}
+	P=\vec s \cdot (\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}) + \tilde \epsilon_+ \;,
+\end{equation}
+where $\tilde \epsilon_\pm$ are effective errors that depend on $\rho$. In our experiment we are only interested in the direction of the vector $\vec b$ which contains the information of the $S$- or $T$-matrix entry. The offset is purely due to read-out errors and is discarded. In the tomography, we determine $\vec b^\text{observed}=\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}$ and do not try to distinguish between the two contributions, since we are dealing with an unknown density matrix.
 
 
 \end{document}
