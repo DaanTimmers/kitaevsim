@@ -1435,15 +1435,15 @@ Another main distinction is between triangles that are appended to the front and
 \includegraphics[width=0.12\linewidth]{Figures/ILib.pdf} &   $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{c'^{-1}g_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/ILgb.pdf}           &       $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i c'}_{\text{phys}}$                  \\  
 \end{tabular}\vspace{10pt}
 
-\caption*{$U_{GC}\ket{c', i'}_{a_b} \ket{c, i}_{a_f}\ket{h_i}_{\text{phys}} = $}
+\caption*{$U_{GC}\ket{\alpha'}_{a_b} \ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}} = $}
 \vspace{10pt}
 	\begin{tabular}{llll}
- \includegraphics[width=0.12\linewidth]{Figures/IIRgf.pdf} &   $\ket{c', i'}_{a_b}\ket{h_i c h_i^{-1}} \Gamma^{\chi}_c(h_i)\ket{i}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IIRif.pdf}           &       $\ket{c', i'}_{a_b}\ket{h_i^{-1} c h_i} \Gamma^{\chi}_c(h_i^{-1})\ket{i}_{a_f}\ket{h_i}_{\text{phys}}$                  \\ 
-\includegraphics[width=0.12\linewidth]{Figures/IILif.pdf} &   $\ket{c', i'}_{a_b}\ket{h_i^{-1} c h_i} \Gamma^{\chi}_c(h_i^{-1})\ket{i}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IILgf.pdf}           &       $\ket{c', i'}_{a_b}\ket{h_i c h_i^{-1}} \Gamma^{\chi}_c(h_i)\ket{i}_{a_f}\ket{h_i}_{\text{phys}}$                  \\  
- \includegraphics[width=0.12\linewidth]{Figures/IIRgb.pdf} &   $\ket{h_ic'h_i^{-1}}\Gamma_c^{\chi}(h_i)\ket{i'}_{a_b}\ket{c, i}_{a_f}\ket{h_i}_{\text{phys}}$  &  \includegraphics[width=0.12\linewidth]{Figures/IIRib.pdf}           &       $\ket{h_i^{-1}c'h_i}\Gamma_c^{\chi}(h_i^{-1})\ket{i'}_{a_b}\ket{c, i}_{a_f}\ket{h_i}_{\text{phys}}$                  \\ 
-\includegraphics[width=0.12\linewidth]{Figures/IILib.pdf} &   $\ket{h_i^{-1}c'h_i}\Gamma_c^{\chi}(h_i^{-1})\ket{i'}_{a_b}\ket{c, i}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IILgb.pdf}           &       $\ket{h_ic'h_i^{-1}}\Gamma_c^{\chi}(h_i)\ket{i'}_{a_b}\ket{c, i}_{a_f}\ket{h_i}_{\text{phys}}$                  \\  
+ \includegraphics[width=0.12\linewidth]{Figures/IIRgf.pdf} &   $\ket{\alpha'}_{a_b}A^T(h_i)\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IIRif.pdf}           &       $\ket{\alpha'}_{a_b}A^T(h_i^{-1})\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$                  \\ 
+\includegraphics[width=0.12\linewidth]{Figures/IILif.pdf} &   $\ket{\alpha'}_{a_b}A^T(h_i^{-1})\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IILgf.pdf}           &       $\ket{\alpha'}_{a_b}A^T(h_i)\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$                  \\  
+ \includegraphics[width=0.12\linewidth]{Figures/IIRgb.pdf} &   $A(h_i)\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$  &  \includegraphics[width=0.12\linewidth]{Figures/IIRib.pdf}           &       $A(h_i^{-1})\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$               \\ 
+\includegraphics[width=0.12\linewidth]{Figures/IILib.pdf} &   $A(h_i^{-1})\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IILgb.pdf}           &       $A(h_i)\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$                  \\  
 \end{tabular}\vspace{10pt}
-\caption{The variants of the ribbon application algorithm for different kinds of Type I and II elementary triangles. \jovan{Type II rules for backwards triangles are wrong because one needs to apply $A^{T}(g)$, which I need to figure out how it is written in our new convention.}}
+\caption{The variants of the ribbon application algorithm for different kinds of Type I and II elementary triangles. \jovan{Add: to the caption add how the two ways of indexing are related and how are Gammas related to A(g)!}\jovan{Note: To my best understanding, I have no reason to doubt it currently!}}
 \label{fig:al_trigs}
 \end{figure}
 The ability to append to the backend helps in halving the circuit depth of the ribbon application, since, both ends can be grown in parallel, see Figure \ref{fig:both_ends}. In this example the ribbon in Figure \ref{fig:rib_exampl} can be applied in four sequential steps instead of seven if we only grew it by appending the triangles to the frontend.
@@ -1528,6 +1528,10 @@ The consequence of this geometrical fact on our protocol is that once the first 
 \end{equation}
 
 \section{Representation Theory of $D_4$ and $D(D_4)$}\label{app:reps}
+
+In this appendix, we cover the representation theory of the Quantum Double Algebra of $D_4$.
+
+Table \ref{tab:reps} lists all the representations of $D(D_4)$ alongside their representation matrices $A^{(g)}$, $B-$matrices being trivial. 
 
 \begin{table}[]
     \centering
