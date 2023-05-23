@@ -1518,7 +1518,13 @@ $-1$ & 0   & 2            & 2                              \\
 Table \ref{tab:red_ch_S3} shows the partial orthogonality of character tables of $S_3$ and it's two proper subgroups. The fact that given the results of both $H_m$- and $H_r$-reduced charge measurements we can uniquely determine the charge still holds for this group as well. 
 
 \textbf{Summary.}
-The computational universality of the $D(S_3)$ theory complemented with measurements comes with a great cost of significantly longer elementary circuit of our protocols. This comes out, mainly, from a unnatural way we encode the group elements, unnatural in a way that doesn't respect the group structure ($\mathbb{Z}_2 \ltimes \mathbb{Z}_3$). A more suitable encoding is achieved by introducing qutrits alongside the full one-qutrit control and ability to condition arbitrary one-qutrit gates. In this encoding all of the elementary circuits become even shallower than in the case of $D_4$. However, assuming such 
+The computational universality of the $D(S_3)$ theory complemented with measurements comes with a great cost of significantly longer elementary circuit of our protocols. 
+
+The elementary circuits are about ten times deeper once compiled into native gates that the Sycamore can perform, neglecting the SWAPs needed to place the relevant qubits into appropriate proximity to one another.
+
+This comes out, mainly, from a unnatural way we encode the group elements, unnatural in a way that doesn't respect the group structure ($\mathbb{Z}_2 \ltimes \mathbb{Z}_3$). A more suitable encoding is achieved by introducing qutrits alongside the full one-qutrit control and ability to condition arbitrary one-qutrit gates. In this encoding all of the elementary circuits become even shallower than in the case of $D_4$. 
+
+However, assuming such a resource is unreasonable, hence, using this protocols to study the braiding properties of the $D(S_3)$ anyons is beyond what NISQ can do.
 
 
 \section{Conclusions and Outlook} \label{sec:outlook}
