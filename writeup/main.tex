@@ -1393,18 +1393,27 @@ The first obstacle we face is the fact that the qubit encoding of elements of $S
 
 We assume the same encoding as for the case of $D_4$. However, since $r^3 = e$ in $S_3$ we need to project out the states $\ket{0,1,1}$ and $\ket{1,1,1}$.
 
-This alone complicates the $\mathbb{Z}_3$ multiplication of the $S_3 = \mathbb{Z}_2 \ltimes \mathbb{Z}_3$. In Figure
+This alone complicates the $\mathbb{Z}_3$ multiplication of the $S_3 = \mathbb{Z}_2 \ltimes \mathbb{Z}_3$. In Figure \ref{fig:S3mult}, we show the general controlled left $S_3$-multiplication circuit. The controlled SWAP gates implement the defining commutation rule between the two generators, $mr = r^2m$, while the middle portion the $\mathbb{Z}_3$-multiplication. The circuit contains 8 Toffoli gates, once the SWAPs are decomposed. The circuit for the right multiplication is simpler, containing 6 Toffoli gates.
+
+There are two reasons for this complication, one is the aforementioned unnatural encoding, while the second is the fact that $S_3$ has trivial center. In the case of $D_4$ the commutation of the two generators amounts to multiplying the expresion by $r^2 \in Z(G)$ which is a cheap operation.
+
+The situation is simplified significantly if we encode the group elements by a qubit and a qutrit, assuming that we have a full one-qutrit control as one has for qubits in current devices. 
 
  
 \begin{figure}
 \begin{equation*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
-& \qw & \ctrl{2} & \qw & \qw\\
-\lstick{\psi_1} & \qw \link{1}{1} & & \link{1}{-1} & \rstick{\psi_2} \qw \\
-& & \\
-\lstick{\psi_2} & \qw \link{-1}{1} & & \link{-1}{-1} & \rstick{\psi_1} \qw}
+\lstick{m} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{5} & \qw \\
+\lstick{R} & \qw \link{1}{1}& &\link{1}{-1}&\qw & \ctrl{5} & \qw & \ctrl{5} & \qw & \qw & \qw  & \qw & \qw\link{1}{1}& &\link{1}{-1} & \qw & \qw & \qw \\
+&&&&&&&&&&&&&&\\
+\lstick{R^2} & \qw \link{-1}{1}& &\link{-1}{-1}& \qw & \qw & \qw & \qw & \qw & \ctrl{4} & \qw & \ctrl{4}  & \qw \link{-1}{1}& &\link{-1}{-1} & \qw & \qw & \qw \\
+\\
+\lstick{m} & \qw & \ctrl{-3} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{-3} & \qw  & \qw & \targ & \qw \\
+\lstick{R} & \qw & \qw & \qw & \qw & \ctrl{1} & \qw & \targ & \qw & \targ & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+\lstick{R^2} & \qw & \qw & \qw & \qw & \targ & \qw  & \qw & \qw & \ctrl{-1} & \qw & \targ & \qw & \qw & \qw  & \qw & \qw & \qw 
+}
 \end{equation*}
-\caption{Test}
+\caption{The general controlled multiplication circuit for the group $S_3$: $\ket{g,h} \rightarrow \ket{g, gh}$. The first three qubits encode the first group element and the second three the second group element.}
 \label{fig:S3mult}
 \end{figure}
 
