@@ -1389,7 +1389,7 @@ However, if the gauge group in question is $S_3$ for example and if we allow mea
 
 In this section, we will discuss what carries over from our study further onto the case of the general group $G$ and in particular $S_3$
 
-The first obstacle we face is the fact that the qubit encoding of elements of $S_3$ is not trivial, i.e. some states of the encoding bits will not be allowed.
+\textbf{Encoding and Basic Circuits.} The first obstacle we face is the fact that the qubit encoding of elements of $S_3$ is not trivial, i.e. some states of the encoding bits will not be allowed.
 
 We assume the same encoding as for the case of $D_4$. However, since $r^3 = e$ in $S_3$ we need to project out the states $\ket{0,1,1}$ and $\ket{1,1,1}$.
 
@@ -1416,6 +1416,30 @@ The situation is simplified significantly if we encode the group elements by a q
 \caption{The general controlled multiplication circuit for the group $S_3$: $\ket{g,h} \rightarrow \ket{g, gh}$. The first three qubits encode the first group element and the second three the second group element.}
 \label{fig:S3mult}
 \end{figure}
+
+The circuit defined in Figure \ref{fig:S3mult} then becomes a depth-4 circuit involving only two qubit, qubit-qutrit and two qutrit gates.
+
+\textbf{Anyon Content.} The $S_3$ group has three conjugacy classes: $\mathcal{C}_e = \{e\}$, $\mathcal{C}_r = \{r, r^2\}$ and $\mathcal{C}_m = \{m, mr, mr^2\}$, with the two nontrivial conjugacy classes having Abelian centres. 
+
+The anyons of this theory alongside their braiding properties have been completely studies in the Ref. \cite{}. In this section we just note that there are: two abelian, four two dimensional and two three dimensional anyons flavours.
+
+In our ribbon application protocol we rely on two operations, $C$-controlled multiplication and generalised conjugation.
+
+When restricted to the conjugacy class the controlled multiplication circuit simplifies significantly for two-dimensional anyons, those with $\mathcal{C}_r$ flux as a base. Moreover they are naturally encoded by a qubit. 
+
+The $\mathcal{C}_r$-controlled multiplication circuit has only one Toffoli gate for both left and right multiplication.
+
+In the case of three dimensional anyons, the one with $\mathcal{C}_m$-flux base, we can reduce the number of Toffoli gates to 5 in the case of right and 2 in the case of left controlled multiplication. The conjugacy class is encoded with two qubits with one disallowed state, same as for the general group element.
+
+Having access to qutrits again trivialises the problem.
+
+The generalised conjugations 
+
+\textbf{Ground State.}
+
+\textbf{Charge Measurement.}
+
+
 
 
 \section{Conclusions and Outlook} \label{sec:outlook}
