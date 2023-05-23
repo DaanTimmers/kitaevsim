@@ -1471,6 +1471,14 @@ The generalised conjugations
 
 \jovan{Start after the main text.}
 
+
+
+\section{\caro{s3 gs prep (to be moved to section above)}}
+The ground state preparation requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
+
+% 
+
+
 %\usepackage[style=phys]{biblatex}
 
 
