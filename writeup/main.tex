@@ -1190,6 +1190,7 @@ In the case of the first braiding we see the four main peaks corresponding to th
 
 For the detailed discussion of the post-selection probabilities see Appendix \ref{app:postsel}.
 \caro{comment on other anyons? repeated partial charge measurement? how about we just state values of bins individually or average plus minus max/min and then give a signal to noise ratio.}
+\jovan{Important: need more results.}
 
 
 \subsection{Linking and Twist Matrices}\label{sec:num:intef}
@@ -1371,6 +1372,7 @@ The numerical results for the interference protocols determining $S_{ab}$ with $
 
 The result for the T-matrix element $T(\tilde \phi_r, \tilde \phi_r)$ determined by the path conditioning protocol in Figure \ref{fig:Tmat} is shown in Figure \ref{fig:t_mat_results} and agrees with the theoretical value.
 \caro{say something about all other S and T entries}
+\jovan{Extra: compile experiments for one S matrix elem from each "difficulty class".}
 
 
 
@@ -1456,25 +1458,22 @@ The $\mathcal{C}_r$-controlled multiplication circuit has only one Toffoli gate 
 
 In the case of three dimensional anyons, the one with $\mathcal{C}_m$-flux base, we can reduce the number of Toffoli gates to 5 in the case of right and 2 in the case of left controlled multiplication. The conjugacy class is encoded with two qubits with one disallowed state, same as for the general group element. Figure \ref{fig:C_S3mult} shows these circuits.
 
-Having access to qutrits again trivialises the problem.
+The generalised conjugations are also derived form the form of the representation matrices $A^{(g)}$ for each of the anyon flavour and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
 
-The generalised conjugations 
+Having access to qutrits again trivialises both problems. 
 
 \textbf{Ground State.}
+Our ground state preparation protocol requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
 
 \textbf{Charge Measurement.}
 
-
+Arguably, where we
 
 
 \section{Conclusions and Outlook} \label{sec:outlook}
 
 \jovan{Start after the main text.}
 
-
-
-\section{\caro{s3 gs prep (to be moved to section above)}}
-The ground state preparation requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
 
 % 
 
