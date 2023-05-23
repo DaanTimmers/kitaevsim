@@ -1405,17 +1405,28 @@ The situation is simplified significantly if we encode the group elements by a q
 \begin{figure}
 \begin{equation*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{m} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{5} & \qw \\
-\lstick{R} & \qw \link{1}{1}& &\link{1}{-1}&\qw & \ctrl{5} & \qw & \ctrl{5} & \qw & \qw & \qw  & \qw & \qw\link{1}{1}& &\link{1}{-1} & \qw & \qw & \qw \\
+\lstick{m} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw  & \ctrl{5} & \qw \\
+\lstick{R} & \qw \link{1}{1}& &\link{1}{-1} & \ctrl{5} & \ctrl{5} & \qw    & \qw & \qw\link{1}{1}& &\link{1}{-1} & \qw  & \qw \\
 &&&&&&&&&&&&&&\\
-\lstick{R^2} & \qw \link{-1}{1}& &\link{-1}{-1}& \qw & \qw & \qw & \qw & \qw & \ctrl{4} & \qw & \ctrl{4}  & \qw \link{-1}{1}& &\link{-1}{-1} & \qw & \qw & \qw \\
+\lstick{R^2} & \qw \link{-1}{1}& &\link{-1}{-1} & \qw & \qw  & \ctrl{4} & \ctrl{4}  & \qw \link{-1}{1}& &\link{-1}{-1} & \qw  & \qw \\
 \\
-\lstick{m} & \qw & \ctrl{-3} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{-3} & \qw  & \qw & \targ & \qw \\
-\lstick{R} & \qw & \qw & \qw & \qw & \ctrl{1} & \qw & \targ & \qw & \targ & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
-\lstick{R^2} & \qw & \qw & \qw & \qw & \targ & \qw  & \qw & \qw & \ctrl{-1} & \qw & \targ & \qw & \qw & \qw  & \qw & \qw & \qw 
+\lstick{m} & \qw & \ctrl{-3}  & \qw & \qw & \qw  & \qw & \qw & \qw  & \ctrl{-3} & \qw  & \targ & \qw \\
+\lstick{R} & \qw & \qw & \qw & \ctrl{1}  & \targ & \targ & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+\lstick{R^2} & \qw & \qw & \qw & \targ  & \qw  & \ctrl{-1} & \targ & \qw & \qw & \qw  & \qw & \qw 
+}
+\quad\quad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{m} & \qw & \ctrl{6} & \qw & \ctrl{4} & \qw & \qw & \qw  & \qw & \qw \\
+\lstick{R} & \qw  & \qw & \qw & \qw & \ctrl{4} & \ctrl{4} & \qw & \qw & \qw \\
+\lstick{R^2} & \qw  & \qw & \qw  & \qw & \qw & \qw & \ctrl{3} & \ctrl{5} & \qw \\
+\\
+\lstick{m} & \qw & \qw  & \qw & \targ & \qw & \qw & \qw & \qw & \qw \\
+\lstick{R} & \qw \link{1}{1}& &\link{1}{-1} & \qw & \ctrl{2} & \targ & \targ & \qw & \qw \\
+&&&&&&&&&&&&&&&\\
+\lstick{R^2} & \qw \link{-1}{1}& &\link{-1}{-1}& \qw & \targ & \qw & \ctrl{-2} & \targ & \qw 
 }
 \end{equation*}
-\caption{The general controlled multiplication circuit for the group $S_3$: $\ket{g,h} \rightarrow \ket{g, gh}$. The first three qubits encode the first group element and the second three the second group element.}
+\caption{The general controlled multiplication circuit for the group $S_3$. The left circuit is the left multiplication, $\ket{g,h} \rightarrow \ket{g, gh}$, and the circuit on the right is the right multiplication, $\ket{g,h} \rightarrow \ket{g, hg}$. The first three qubits encode the first group element and the second three the second group element.}
 \label{fig:S3mult}
 \end{figure}
 
@@ -1466,8 +1477,34 @@ Having access to qutrits again trivialises both problems.
 Our ground state preparation protocol requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
 
 \textbf{Charge Measurement.}
+Arguably, where we loose out the most is with the reduced charge measurement. The group $S_3$ has only two proper subgroups, $H_r = \mathbb{Z}_3^r$ and $H_m = \mathbb{Z}_2^m$.
 
-Arguably, where we
+In general, sets of group elements onto which we reduce the domain of the controlled multiply maps such that the circuit simplifies significantly is scarce for such a small group. 
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{l|lll}
+  $\braket{\chi_{H_r}, \chi}$ & $1$ & $-1$ & $\epsilon$  \\ \hline
+$1$ & 3   & 3            & 0                             \\ 
+$\omega$ & 0   & 0            & 3                              \\ 
+$\bar{\omega}$ & 0   & 0            & 3                          \\ 
+\end{tabular}
+
+\begin{tabular}{l|lll}
+  $\braket{\chi_{H_m}, \chi}$ & $1$ & $-1$ & $\epsilon$  \\ \hline
+$1$ & 2   & 0            & 2                             \\ 
+$-1$ & 0   & 2            & 2                              \\ 
+
+\end{tabular}
+\caption{Partial orthogonality of $S_3$ with respect to its two proper.}
+\label{tab:red_ch_S3}
+\end{table}
+
+Table \ref{tab:red_ch_S3} shows the partial orthogonality of character tables of $S_3$ and it's two proper subgroups. The fact that given the results of both $H_m$- and $H_r$-reduced charge measurements we can uniquely determine the charge still holds for this group as well. 
+
+\textbf{Summary.}
+The computational universality of the $D(S_3)$ theory complemented with measurements comes with a great cost of significantly longer elementary circuit of our protocols. This comes out, mainly, from a unnatural way we encode the group elements, unnatural in a way that doesn't respect the group structure ($\mathbb{Z}_2 \ltimes \mathbb{Z}_3$). A more suitable encoding is achieved by introducing qutrits alongside the full one-qutrit control and ability to condition arbitrary one-qutrit gates. In this encoding all of the elementary circuits become even shallower than in the case of $D_4$. However, assuming such 
 
 
 \section{Conclusions and Outlook} \label{sec:outlook}
