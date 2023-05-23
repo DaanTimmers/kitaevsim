@@ -1389,8 +1389,24 @@ However, if the gauge group in question is $S_3$ for example and if we allow mea
 
 In this section, we will discuss what carries over from our study further onto the case of the general group $G$ and in particular $S_3$
 
-\jovan{ToDo.}
+The first obstacle we face is the fact that the qubit encoding of elements of $S_3$ is not trivial, i.e. some states of the encoding bits will not be allowed.
 
+We assume the same encoding as for the case of $D_4$. However, since $r^3 = e$ in $S_3$ we need to project out the states $\ket{0,1,1}$ and $\ket{1,1,1}$.
+
+This alone complicates the $\mathbb{Z}_3$ multiplication of the $S_3 = \mathbb{Z}_2 \ltimes \mathbb{Z}_3$. In Figure
+
+ 
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+& \qw & \ctrl{2} & \qw & \qw\\
+\lstick{\psi_1} & \qw \link{1}{1} & & \link{1}{-1} & \rstick{\psi_2} \qw \\
+& & \\
+\lstick{\psi_2} & \qw \link{-1}{1} & & \link{-1}{-1} & \rstick{\psi_1} \qw}
+\end{equation*}
+\caption{Test}
+\label{fig:S3mult}
+\end{figure}
 
 
 \section{Conclusions and Outlook} \label{sec:outlook}
