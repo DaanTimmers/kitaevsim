@@ -1081,6 +1081,12 @@ Figure \ref{fig:intef_setup} depicts the qubit layout and the exact ribbon opera
 	\caption{(Top) The ribbon operators applied in the simulation of the $S$-matrix protocol. The application or the type of the blue (equal-time) ribbon is conditioned on the state of the control qubit. (Bottom) The qubit layout for the interference protocols.}
 	\label{fig:intef_setup}
 \end{figure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{Figures/t-mat_ribs.pdf}
+	\caption{The two ribbon paths between same sites that differ by one twist used in our path interference protocol.}
+	\label{fig:T_intef_setup}
+\end{figure}
 The application or the flavour of the blue (equal-time) ribbon is conditioned on the state of the control qubit.
 The layout on the chip is chosen such as to reduce the number of two-qubit gates acting on the control qubit, avoiding an accumulation of errors. This turned out to be more relevant for obtaining reliable estimates than the overall circuit depth. 
 
@@ -1264,7 +1270,7 @@ In this section we present the estimation of the diagonal S-matrix elements for 
 
 As mentioned before for the $T$-matrix elements we have already presented the most difficult of the cases, the semions, and it shows excellent agreement with the theoretical expectations.
 
-The biggest determining factor for the difficulty is weather for the representation in question $(C, \chi)$ obeys $\chi(r^2) = \chi(e)$. If this is not the case, points 4., 5. and 6., the representation $A^{(g)}$ is faithful hence very difficult to compile since all group element must be included in the circuit which implies many SWAPs for the surface code layout of qubits. 
+The biggest determining factor for the difficulty is weather for the representation in question $(C, \chi)$ obeys $\chi(r^2) = \chi(e)$. If this is not the case, points 4., 5. and 6., the representation $A^{(g)}$ is faithful hence very difficult to compile since all group element must be included in the circuit which requires many SWAP gates. 
 
 The second is the number of Toffoli gates in the Controlled Multiplication and Generalised Conjugation circuits. The semions are difficult in both regards, hence our interference protocol so poorly estimates the relevant matrix elements. Noting that the phases of the elements are much better estimated than the magnitudes.
 
