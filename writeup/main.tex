@@ -1254,15 +1254,19 @@ The expected post-selection probability is $1/4$ for all T-matrix protocols and 
 As stated above some anyon ribbons are harder to compile than others. The bottleneck of this anyon interference protocol is the difficulty of the conditioned ribbon.
 
 In this section we present the estimation of the diagonal S-matrix elements for representative cases of each difficulty class.\begin{enumerate}
-	\item Conditioning an abelian anyon: $S(\Sigma_m, \Sigma_m) = 0.969(6)e^{i\pi 0.004(2)}$. The total compiled circuit depth is 23 with 0 Toffoli gates.
-	\item Conditioning a $m$- or $mr$-dyon with $\chi(r^2) = 1$: $S(\Psi_m, \Psi_m) = 0.89(1)e^{i\pi 0.004(4)}$. The total compiled circuit depth is 58 with 2 Toffoli gates.
-	\item Conditioning a $r$-dyon with $\chi(r^2) = 1$: $S(\Psi_r, \Psi_r) = 0.82(1)e^{i\pi 0.001(4)}$. The total compiled circuit depth is 77 with 4 Toffoli gates.
-	\item Conditioning a non-abelian charge: $S(\Sigma_\epsilon, \Sigma_\epsilon) = 0.123(8)e^{i\pi 0.01(2)}$. The total compiled circuit depth is 125 with 4 Toffoli gates.
-	\item Conditioning a $m$- or $mr$-dyon with $\chi(r^2) = -1$: $S(\Phi_m, \Phi_m) = 0.19(2)e^{i\pi 0.04(4)}$. The total compiled circuit depth is 133 with 4 Toffoli gates.
-	\item Conditioning a $r$-dyon with $\chi(r^2) = -1$ (semions): $S(\Phi_r, \Phi_r) = 0.06(1)e^{i\pi 1.0(3)}$. The total compiled circuit depth is 171 with 6 Toffoli gates.
+	\item Conditioning an abelian anyon: $\tilde{S}(\Sigma_m, \Sigma_m) = 0.969(6)e^{i\pi 0.004(2)}$. The total compiled circuit depth is 23 with 0 Toffoli gates.
+	\item Conditioning a $m$- or $mr$-dyon with $\chi(r^2) = 1$: $\tilde{S}(\Psi_m, \Psi_m) = 0.89(1)e^{i\pi 0.004(4)}$. The total compiled circuit depth is 58 with 2 Toffoli gates.
+	\item Conditioning a $r$-dyon with $\chi(r^2) = 1$: $\tilde{S}(\Psi_r, \Psi_r) = 0.82(1)e^{i\pi 0.001(4)}$. The total compiled circuit depth is 77 with 4 Toffoli gates.
+	\item Conditioning a non-abelian charge: $\tilde{S}(\Sigma_\epsilon, \Sigma_\epsilon) = 0.123(8)e^{i\pi 0.01(2)}$. The total compiled circuit depth is 125 with 4 Toffoli gates.
+	\item Conditioning a $m$- or $mr$-dyon with $\chi(r^2) = -1$: $\tilde{S}(\Phi_m, \Phi_m) = 0.19(2)e^{i\pi 0.04(4)}$. The total compiled circuit depth is 133 with 4 Toffoli gates.
+	\item Conditioning a $r$-dyon with $\chi(r^2) = -1$ (semions): $\tilde{S}(\Phi_r, \Phi_r) = 0.06(1)e^{i\pi 1.0(3)}$. The total compiled circuit depth is 171 with 6 Toffoli gates.
 \end{enumerate}
 
 As mentioned before for the $T$-matrix elements we have already presented the most difficult of the cases, the semions, and it shows excellent agreement with the theoretical expectations.
+
+The biggest determining factor for the difficulty is weather for the representation in question $(C, \chi)$ obeys $\chi(r^2) = \chi(e)$. If this is not the case, points 4., 5. and 6., the representation $A^{(g)}$ is faithful hence very difficult to compile since all group element must be included in the circuit which implies many SWAPs for the surface code layout of qubits. 
+
+The second is the number of Toffoli gates in the Controlled Multiplication and Generalised Conjugation circuits. The semions are difficult in both regards, hence our interference protocol so poorly estimates the relevant matrix elements. Noting that the phases of the elements are much better estimated than the magnitudes.
 
 In the list above we assume that the first element is the being conditioned and we way cycle through other labels without significant increase in the signal-to-noise ratio. This means that the difficulty is set by the row of the S-matrix, in this framing, and one can use the symmetry of the S-matrix to pick the better of the two interference procedures. For example for measuring $S(\Phi_r, \Sigma_m)$ one would condition the $\Sigma_m$ ribbon and not the semion.
 
