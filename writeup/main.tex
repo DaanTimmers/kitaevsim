@@ -15,6 +15,9 @@
 \usepackage[qm]{qcircuit}
 \usepackage[left=23mm,right=23mm,top=35mm,columnsep=15pt]{geometry}
 
+\usepackage{pgfplotstable}
+\usepackage{array}
+
 \newcommand{\caro}[1]{\textcolor{red}{[#1]}}
 \newcommand{\jovan}[1]{\textcolor{blue}{[#1]}}
 \newcommand{\todo}[1]{\textcolor{orange}{[#1]}}
@@ -393,7 +396,7 @@ To interpret what we have here, let us look at the quantum resources. We have th
 The two types of triangles couple the two spaces in two different ways, for type I the $\mathcal{H}_{\text{ancilas}}$ controls an action on $\mathcal{H}_{\text{matter}}$ and for type II it is the other way around. After the measurement that disentangles, the redundant copy of $\mathcal{H}_{\text{fusion}}$ the $\mathcal{H}_{\text{matter}}$ is left in a state with the ribbon operator imprinted on it as signalled by the topological charge, braiding amplitude and phase.
 
 
-\subsection{Charge Measurements}
+\subsection{Charge Measurements}\label{sec:redchmmt}
 
 In this section, we will explain how we measure the topological charge, i.e., the anyon label. This is the last element of our toolkit for probing topological order. The ideal charge measurement would differentiate any type of excitation on any site, such measurement is associated with the following set of projectors \cite{}:
 \begin{equation}
@@ -1063,9 +1066,21 @@ The number of runs for both protocol was $16000$. The expected post-selection pr
 In the case of the first braiding we see the four main peaks corresponding to the expected topological charges counting $255\pm 5$ with the biggest peak coming from the noise counting $109$ and resulting in a signal to noise ratio of about $2.3$. In the second case the peak corresponding to the vacuum counts $1890\pm x$. The largest peak coming from the noise counts 450 giving a signal to noise ratio of about $4.2$.
 
 For the detailed discussion of the post-selection probabilities see Appendix \ref{app:postsel}.
-\caro{comment on other anyons? repeated partial charge measurement? how about we just state values of bins individually or average plus minus max/min and then give a signal to noise ratio.}
-\jovan{Important: need more results.}
+%\caro{comment on other anyons? repeated partial charge measurement? how about we just state values of bins individually or average plus minus max/min and then give a signal to noise ratio.}
+%\jovan{Important: need more results.}
 
+\textbf{Supplementary Measurements.} In the analysis done above we rely on the knowledge of the fusion outcome to label the peaks in Figure~\ref{fig:red_charge_res}. 
+
+However, we can still determine what charges do the peaks correspond to even if we don't rely on the knowledge of the fusion algebra. This is done by performing reduced charge measurements over other subgroup, as explained in Section \ref{sec:redchmmt}.
+
+Repeating the protocol with a $H_m$-reduced charge measurement we see only two peaks counting $495 \pm 10$ on the braiding ladder and $xxx \pm xx$ on the small planar graph. In both cases the biggest noise peak accounts for a number of shot of the same order as in $H_{mr}$-reduced charge measurement. This is expected since the noise is uncorrelated with what measurement protocol we chose to implement.
+
+The signals doubles because both of the pairs of charges $(0, \Sigma_m)$ and $(\tilde 0, \tilde \Sigma_m)$ are indistinguishable with $H_m$-reduced charge measurement.
+
+Given these outcomes for the two sets of measurement, the trivial flux components and the number of peaks in the two reduced charge measurements, the only compatible charge content is the quadruple $(0, \Sigma_m, \tilde 0, \tilde \Sigma_m)$.
+
+Similar analysis can be carried out generally.
+ 
 
 \subsection{Linking and Twist Matrices}\label{sec:num:intef}
 
@@ -1247,8 +1262,8 @@ The numerical results for the interference protocols determining $S_{ab}$ with $
 
 
 The result for the T-matrix element $T(\tilde \phi_r, \tilde \phi_r)$ determined by the path conditioning protocol in Figure \ref{fig:Tmat} is shown in Figure \ref{fig:t_mat_results} and agrees with the theoretical value.
-\caro{say something about all other S and T entries}
-\jovan{Extra: compile experiments for one S matrix elem from each "difficulty class".}
+%\caro{say something about all other S and T entries}
+%\jovan{Extra: compile experiments for one S matrix elem from each "difficulty class".}
 
 
 
@@ -1281,7 +1296,7 @@ We observe that the magnitude of the $S$-matrix in the simulation results decays
 
 
 
-
+\jovan{No, comment on T-mat?}
 %As mentioned before for the $T$-matrix elements we have already presented the most difficult of the cases, the semions, and it shows excellent agreement with the theoretical expectations.
 
 
@@ -1597,6 +1612,16 @@ $\tilde{\Phi}_{mr}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ & $\s
     \caption{$A_g$ matrices for every representation of $D(D_4)$}
     \label{tab:reps}
 \end{table}
+
+\begin{table}
+\centering
+\pgfplotstabletypeset[dec sep align,
+   fixed zerofill,
+   precision=0,
+   col sep=space]{S_ranked_diff.csv}
+\caption{The S matrix elements, anyons arranged in the order of difficulty of ribbon operator application. \jovan{FIX the formating and put it where it belongs.}}
+\end{table}
+
 
 \section{Circuits for $D_4$-related operations}\label{app:cirqs}
 
