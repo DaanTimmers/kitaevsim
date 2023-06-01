@@ -1254,12 +1254,19 @@ The result for the T-matrix element $T(\tilde \phi_r, \tilde \phi_r)$ determined
 
 \emph{Uncertainty.} In the experiment we used 1000 shots per measurement basis for the S-matrix measurements and 5000 for the T-matrix measurements. The uncertainty was estimated by assuming the standard binomial distribution for individual measurement outcomes of each shot and standard error mitigation.
 
-The expected post-selection probability is $1/4$ for all T-matrix protocols and S-matrix protocols with measured $|S| \neq 0$. For the case of measured $|S| = 0$ the probability drops to $1/8$. These probabilities were observed in the numerical experiment.
+The expected $1/4$ for all T-matrix protocols and S-matrix protocols with measured $|S| \neq 0$. For the case of measured $|S| = 0$ the probability drops to $1/8$. These probabilities were observed in the numerical experiment.
 
 \textbf{Other S-Matrix Elements.}
-As stated above some anyon ribbons are harder to compile than others. The bottleneck of this anyon interference protocol is the difficulty of the conditioned ribbon.
+As stated above some anyon ribbons are harder to compile than others. The bottleneck of this anyon interference protocol is the difficulty of the conditioned ribbon. 
 
-In this section we present the estimation of the diagonal S-matrix elements for representative cases of each difficulty class.\begin{enumerate}
+We can divide the $S$-matrix protocols into six different difficulty classes measured by the depth of the required circuits. The biggest factor determining the latter is weather for the anyon in question $(C, \chi)$ obeys $\chi(r^2) = \chi(e)$. If this is not the case, the representation $A^{(g)}$ is faithful. This means that all group elements must be included in the circuit which requires many SWAP gates and increases the circuit depth significantly.
+
+The second factor to consider is the number of Toffoli gates in the controlled multiplication and generalised conjugation circuits. The semions \caro{XY} are difficult in both regards.
+
+
+In the list below we present the circuit depths and numerical simulation results for the diagonal S-matrix elements for representative cases of each difficulty class. 
+
+\begin{enumerate}
 	\item Conditioning an abelian anyon: $\tilde{S}(\Sigma_m, \Sigma_m) = 0.969(6)e^{i\pi 0.004(2)}$. The total compiled circuit depth is 23 with 0 Toffoli gates.
 	\item Conditioning a $m$- or $mr$-dyon with $\chi(r^2) = 1$: $\tilde{S}(\Psi_m, \Psi_m) = 0.89(1)e^{i\pi 0.004(4)}$. The total compiled circuit depth is 58 with 2 Toffoli gates.
 	\item Conditioning a $r$-dyon with $\chi(r^2) = 1$: $\tilde{S}(\Psi_r, \Psi_r) = 0.82(1)e^{i\pi 0.001(4)}$. The total compiled circuit depth is 77 with 4 Toffoli gates.
@@ -1267,37 +1274,47 @@ In this section we present the estimation of the diagonal S-matrix elements for 
 	\item Conditioning a $m$- or $mr$-dyon with $\chi(r^2) = -1$: $\tilde{S}(\Phi_m, \Phi_m) = 0.19(2)e^{i\pi 0.04(4)}$. The total compiled circuit depth is 133 with 4 Toffoli gates.
 	\item Conditioning a $r$-dyon with $\chi(r^2) = -1$ (semions): $\tilde{S}(\Phi_r, \Phi_r) = 0.06(1)e^{i\pi 1.0(3)}$. The total compiled circuit depth is 171 with 6 Toffoli gates.
 \end{enumerate}
+We assume that the first element is conditioned and largely determines the circuit depth while the second, equal time and unconditioned ribbon operator only mildly influences the latter. This means that the difficulty is set by the row of the S-matrix and one can use the symmetry of the S-matrix to pick the better of the two interference procedures. For example for measuring $S(\Phi_r, \Sigma_m)$ one would condition the $\Sigma_m$ ribbon and not the semion $\Phi_r$.
 
-As mentioned before for the $T$-matrix elements we have already presented the most difficult of the cases, the semions, and it shows excellent agreement with the theoretical expectations.
+We observe that the magnitude of the $S$-matrix in the simulation results decays strongly with the circuit depth. This is due to accumulating errors on the control qubit which drive it to a more and more mixed state. However, the errors seem to be uniformly shrinking the Bloch vector and thus do not affect the phase which agree with the theoretical predictions even for the deepest circuits.
 
-The biggest determining factor for the difficulty is weather for the representation in question $(C, \chi)$ obeys $\chi(r^2) = \chi(e)$. If this is not the case, points 4., 5. and 6., the representation $A^{(g)}$ is faithful hence very difficult to compile since all group element must be included in the circuit which requires many SWAP gates. 
 
-The second is the number of Toffoli gates in the Controlled Multiplication and Generalised Conjugation circuits. The semions are difficult in both regards, hence our interference protocol so poorly estimates the relevant matrix elements. Noting that the phases of the elements are much better estimated than the magnitudes.
 
-In the list above we assume that the first element is the being conditioned and we way cycle through other labels without significant increase in the signal-to-noise ratio. This means that the difficulty is set by the row of the S-matrix, in this framing, and one can use the symmetry of the S-matrix to pick the better of the two interference procedures. For example for measuring $S(\Phi_r, \Sigma_m)$ one would condition the $\Sigma_m$ ribbon and not the semion.
+
+
+%As mentioned before for the $T$-matrix elements we have already presented the most difficult of the cases, the semions, and it shows excellent agreement with the theoretical expectations.
+
+
+
+ 
+
+
 
 \jovan{(Maybe) A figure schematically showing the various S-matrix elements difficulty.}
 
-\section{Other Gauge Groups}\label{sec:other_gauge}
+\section{Extension to $S_3$}\label{sec:other_gauge}
 
-The anyons in the $D_4$ lattice gauge theory are not universal. 
-When looking at compiled circuits for our experiments, they are Clifford or close to Clifford circuits.
-They are efficiently classically simulatable, given we keep the number of Toffoli gates low.
-The image of the braid group onto the transformations of the wavefunction as we braid anyons is finite, hence highly non-universal \cite{}.
-This is all due to the simple structure of $D_4$, all of its subgroups are abelian and the group is solvable.
-However, if the gauge group in question is $S_3$ for example and if we allow measurements, we achieve computational universality.
+The anyons of $D_4$ lattice gauge theory are not suitable for universal topological quantum computation.
+% and 
+%when looking at the circuits for our experiments, we note that they are Clifford or close to Clifford circuits. 
+%They are efficiently classically simulatable, given we keep the number of Toffoli gates low.
+%The image of the braid group onto the transformations of the wavefunction as we braid anyons is finite, hence highly non-universal \cite{}.
+This is due to the simple structure of $D_4$. All of its subgroups are abelian and the group is nilpotent and solvable. 
 
-In this section, we will discuss what carries over from our study further onto the case of the general group $G$ and in particular $S_3$
+%It is an interesting question to consider how simplification
 
-\textbf{Encoding and Basic Circuits.} The first obstacle we face is the fact that the qubit encoding of elements of $S_3$ is not trivial, i.e. some states of the encoding bits will not be allowed.
 
-We assume the same encoding as for the case of $D_4$. However, since $r^3 = e$ in $S_3$ we need to project out the states $\ket{0,1,1}$ and $\ket{1,1,1}$.
+However, the slightly more complex gauge group $S_3$, can be used for universal topological quantum computation, if we allow measurements. Hence, it is interesting to investigate how our schemes carry over to this case. We find that the main tricks we use to achieve a manageable circuit depth for $D_4$, in particular the simplified group multiplication circuits for elements restricted to subgroups or conjugacy classes, would cary over straight forwardly to $S_3$ if the quantum hardware had native \emph{qutrits}. However, for a qubit based hardware implementing $S_3$ is considerably more difficult. In the following we will discuss the difficulties and increase in circuit depth for all steps in detail. 
 
-This alone complicates the $\mathbb{Z}_3$ multiplication of the $S_3 = \mathbb{Z}_2 \ltimes \mathbb{Z}_3$. In Figure \ref{fig:S3mult}, we show the general controlled left $S_3$-multiplication circuit. The controlled SWAP gates implement the defining commutation rule between the two generators, $mr = r^2m$, while the middle portion the $\mathbb{Z}_3$-multiplication. The circuit contains 8 Toffoli gates, once the SWAPs are decomposed. The circuit for the right multiplication is simpler, containing 6 Toffoli gates.
+\textbf{Encoding and Basic Circuits.} The first obstacle we face is the fact that the qubit encoding of elements of $S_3$ is not trivial, i.e. some states of the encoding qubits will not be allowed.
 
-There are two reasons for this complication, one is the aforementioned unnatural encoding, while the second is the fact that $S_3$ has trivial center. In the case of $D_4$ the commutation of the two generators amounts to multiplying the expresion by $r^2 \in Z(G)$ which is a cheap operation.
+We assume the same encoding as for the case of $D_4$, i.e., $\ket{i_1,i_2,i_3} \to \ket{m^{i_1}r^{i_2}r^{2 i_3}}$. However, since $r^3 = e$ in $S_3$ we need to project out the states $\ket{0,1,1}$ and $\ket{1,1,1}$.
 
-The situation is simplified significantly if we encode the group elements by a qubit and a qutrit, assuming that we have a full one-qutrit control as one has for qubits in current devices. 
+This alone complicates the $\mathbb{Z}_3$ multiplication of $S_3 = \mathbb{Z}_2 \ltimes \mathbb{Z}_3$ significantly. In Figure \ref{fig:S3mult}, we show the general controlled left and right $S_3$-multiplication circuit. For the left multiplication the controlled SWAP gates implement the defining commutation rule between the two generators, $mr = r^2m$, while the middle portion implements the $\mathbb{Z}_3$-multiplication. The circuit contains 8 Toffoli gates, once the SWAPs are decomposed. The circuit for the right multiplication is simpler, containing 6 Toffoli gates.
+
+There are two reasons for this complication, one is the aforementioned unnatural encoding, while the second is the fact that $S_3$ has a trivial center. In the case of $D_4$ the commutation of the two generators amounts to multiplying the expression by $r^2 \in Z(G)$ which is a simple operation.
+
+The situation is simplified significantly if we encode the group elements by a qubit and a qutrit, assuming that we have a full one-qutrit control as one has for qubits in current devices. \caro{The circuit defined in Figure \ref{fig:S3mult} then becomes a depth-4 circuit involving only two qubit, qubit-qutrit and two qutrit gates.}
 
  
 \begin{figure}
@@ -1349,35 +1366,30 @@ The situation is simplified significantly if we encode the group elements by a q
 \lstick{R^2} & \qw & \targ & \qw  & \qw & \ctrl{-1} & \targ & \qw & \qw & \qw & \qw & \qw & \qw  
 }
 \end{equation*}
-\caption{The $S_3$ controlled left multiplication with the domain restricted to a single conjugacy class, $\mathcal{C}_r$ on the left and $\mathcal{C}_m$ on the right. Note: the encoding of $\mathcal{C}_r$ elements is lightly different from the encoding of the general group elements.}
+\caption{The $S_3$ controlled left multiplication with the domain restricted to a single conjugacy class, $\mathcal{C}_r$ on the left and $\mathcal{C}_m$ on the right. Note that the encoding of $\mathcal{C}_r$ elements is slightly different from the encoding of the general group elements.}
 \label{fig:C_S3mult}
 \end{figure}
 
-The circuit defined in Figure \ref{fig:S3mult} then becomes a depth-4 circuit involving only two qubit, qubit-qutrit and two qutrit gates.
 
-\textbf{Anyon Content.} The $S_3$ group has three conjugacy classes: $\mathcal{C}_e = \{e\}$, $\mathcal{C}_r = \{r, r^2\}$ and $\mathcal{C}_m = \{m, mr, mr^2\}$, with the two nontrivial conjugacy classes having Abelian centres. 
 
-The anyons of this theory alongside their braiding properties have been completely studies in the Ref. \cite{}. In this section we just note that there are: two abelian, four two dimensional and two three dimensional anyons flavours.
+\textbf{Anyon Content.} The group $S_3$ has three conjugacy classes, $\mathcal{C}_e = \{e\}$, $\mathcal{C}_r = \{r, r^2\}$ and $\mathcal{C}_m = \{m, mr, mr^2\}$. The two nontrivial conjugacy classes have abelian centres. 
+The anyons of this theory alongside their braiding properties have been completely studied in the Ref. \cite{}. In this section we just note that there are two abelian, four two dimensional and two three dimensional anyons.
 
-In our ribbon application protocol we rely on two operations, $C$-controlled multiplication and generalised conjugation.
+In our ribbon application protocol we rely on two operations, $\mathcal C$-controlled multiplication and generalised conjugation. When restricted to a conjugacy class the controlled multiplication circuit simplifies significantly for the two-dimensional anyons with $\mathcal{C}_r$ flux. $\mathcal{C}_r$ is naturally encoded by a qubit and the $\mathcal{C}_r$-controlled multiplication circuit has only one Toffoli gate for both left and right multiplication.
 
-When restricted to the conjugacy class the controlled multiplication circuit simplifies significantly for two-dimensional anyons, those with $\mathcal{C}_r$ flux as a base. Moreover they are naturally encoded by a qubit. 
+For the three dimensional anyons with $\mathcal{C}_m$-flux, we can reduce the number of Toffoli gates to 5 in the case of right and to 2 in the case of left controlled multiplication. The conjugacy class is encoded with two qubits with one disallowed state. Figure \ref{fig:C_S3mult} shows these circuits.
 
-The $\mathcal{C}_r$-controlled multiplication circuit has only one Toffoli gate for both left and right multiplication.
+The generalised conjugations are derived from the representation matrices $A^{(g)}$ and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
 
-In the case of three dimensional anyons, the one with $\mathcal{C}_m$-flux base, we can reduce the number of Toffoli gates to 5 in the case of right and 2 in the case of left controlled multiplication. The conjugacy class is encoded with two qubits with one disallowed state, same as for the general group element. Figure \ref{fig:C_S3mult} shows these circuits.
-
-The generalised conjugations are also derived form the form of the representation matrices $A^{(g)}$ for each of the anyon flavour and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
-
-Having access to qutrits again trivialises both problems. 
+\caro{Having access to qutrits again trivialises both problems.}
 
 \textbf{Ground State.}
-Our ground state preparation protocol requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
+The ground state preparation protocol (without feed forward) requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
 
 \textbf{Charge Measurement.}
 Arguably, where we loose out the most is with the reduced charge measurement. The group $S_3$ has only two proper subgroups, $H_r = \mathbb{Z}_3^r$ and $H_m = \mathbb{Z}_2^m$.
 
-In general, sets of group elements onto which we reduce the domain of the controlled multiply maps such that the circuit simplifies significantly is scarce for such a small group. 
+\caro{In general, sets of group elements onto which we reduce the domain of the controlled multiply maps such that the circuit simplifies significantly is scarce for such a small group. }
 
 
 \begin{table}[h]
@@ -1402,13 +1414,11 @@ $-1$ & 0   & 2            & 2                              \\
 Table \ref{tab:red_ch_S3} shows the partial orthogonality of character tables of $S_3$ and it's two proper subgroups. The fact that given the results of both $H_m$- and $H_r$-reduced charge measurements we can uniquely determine the charge still holds for this group as well. 
 
 \textbf{Summary.}
-The computational universality of the $D(S_3)$ theory complemented with measurements comes with a great cost of significantly longer elementary circuit of our protocols. 
+The computational universality of $D(S_3)$ complemented with measurements comes at the expense of significantly longer elementary circuits for our protocols. The elementary circuits are about ten times deeper once compiled into native gates that the Sycamore chip can perform, neglecting the SWAPs needed to place the relevant qubits into appropriate proximity to one another.
 
-The elementary circuits are about ten times deeper once compiled into native gates that the Sycamore can perform, neglecting the SWAPs needed to place the relevant qubits into appropriate proximity to one another.
+This is mainly a consequence of the unnatural way we encode the group elements, unnatural in the sense that it does not respect the group structure ($\mathbb{Z}_2 \ltimes \mathbb{Z}_3$). A more suitable encoding is achieved by introducing qutrits alongside the full one-qutrit control and ability to condition arbitrary one-qutrit gates. In this encoding all of the elementary circuits become even shallower than in the case of $D_4$. 
 
-This comes out, mainly, from a unnatural way we encode the group elements, unnatural in a way that doesn't respect the group structure ($\mathbb{Z}_2 \ltimes \mathbb{Z}_3$). A more suitable encoding is achieved by introducing qutrits alongside the full one-qutrit control and ability to condition arbitrary one-qutrit gates. In this encoding all of the elementary circuits become even shallower than in the case of $D_4$. 
-
-However, assuming such a resource is unreasonable, hence, using this protocols to study the braiding properties of the $D(S_3)$ anyons is beyond what NISQ can do.
+However, for any qubit based architecture we reckon that realising $D(S_3)$ is beyond the limits of current NISQ technology.
 
 
 \section{Conclusions and Outlook} \label{sec:outlook}
