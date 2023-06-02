@@ -1336,7 +1336,7 @@ This alone complicates the $\mathbb{Z}_3$ multiplication of $S_3 = \mathbb{Z}_2 
 
 There are two reasons for this complication, one is the aforementioned unnatural encoding, while the second is the fact that $S_3$ has a trivial center. In the case of $D_4$ the commutation of the two generators amounts to multiplying the expression by $r^2 \in Z(G)$ which is a simple operation.
 
-The situation is simplified significantly if we encode the group elements by a qubit and a qutrit, assuming that we have a full one-qutrit control as one has for qubits in current devices. \caro{The circuit defined in Figure \ref{fig:S3mult} then becomes a depth-4 circuit involving only two qubit, qubit-qutrit and two qutrit gates.}
+The situation is simplified significantly if we encode the group elements by a qubit and a qutrit, assuming that we have a full one-qutrit control as one has for qubits in current devices. A possible controlled group multiplication circuit utilising this recourse is shown in Figure~\ref{fig:S3mult_qutrit}.%\caro{The circuit defined in Figure \ref{fig:S3mult} then becomes a depth-4 circuit involving only two qubit, qubit-qutrit and two qutrit gates.}
 
  
 \begin{figure}
@@ -1365,6 +1365,26 @@ The situation is simplified significantly if we encode the group elements by a q
 \end{equation*}
 \caption{The general controlled multiplication circuit for the group $S_3$. The left circuit is the left multiplication, $\ket{g,h} \rightarrow \ket{g, gh}$, and the circuit on the right is the right multiplication, $\ket{g,h} \rightarrow \ket{g, hg}$. The first three qubits encode the first group element and the second three the second group element.}
 \label{fig:S3mult}
+\end{figure}
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{m} & \qw & \qw & \qw & \qw & \ctrl{2}& \qw\\
+\lstick{R^*} & \qw & \gate{(23)} & \ctrl{2} & \gate{(23)} & \qw& \qw\\
+\lstick{m} & \qw & \ctrl{-1} & \qw & \ctrl{-1}& \targ& \qw\\
+\lstick{R^*} & \qw & \qw & \gate{\mathbb{Z}_3}& \qw & \qw& \qw
+}
+\quad\quad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{m} & \qw & \ctrl{3} & \qw & \ctrl{2} & \qw\\
+\lstick{R^*} & \qw & \qw & \ctrl{2} & \qw& \qw\\
+\lstick{m} & \qw & \qw & \qw & \targ & \qw\\
+\lstick{R^*} & \qw & \gate{(23)} & \gate{\mathbb{Z}_3}& \qw & \qw 
+}
+\end{equation*}
+\caption{The general controlled multiplication circuit for the group $S_3$. The left circuit is the left multiplication, $\ket{g,h} \rightarrow \ket{g, gh}$, and the circuit on the right is the right multiplication, $\ket{g,h} \rightarrow \ket{g, hg}$. The first qubit-qutrit encode the first group element and the second pair the second group element. The gate $C(23)$ is the controlled permutation implementing the commutation relation of the $S_3$ group and the gate $C(\mathbb{Z}_3)$ is the qutrit-qutrit generalisation of the CX gate, i.e. $\mathbb{Z}_3$-addition.}
+\label{fig:S3mult_qutrit}
 \end{figure}
 
 
@@ -1403,15 +1423,45 @@ For the three dimensional anyons with $\mathcal{C}_m$-flux, we can reduce the nu
 
 The generalised conjugations are derived from the representation matrices $A^{(g)}$ and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
 
-\caro{Having access to qutrits again trivialises both problems.}
+As in the case of the unrestricted controlled multiplication circuit we would see significant reduction in circuit depth if we had access to well controlled qutrits.
 
 \textbf{Ground State.}
 The ground state preparation protocol (without feed forward) requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
 
 \textbf{Charge Measurement.}
-Arguably, where we loose out the most is with the reduced charge measurement. The group $S_3$ has only two proper subgroups, $H_r = \mathbb{Z}_3^r$ and $H_m = \mathbb{Z}_2^m$.
+Arguably, where we loose out the most is with the reduced charge measurement. The group $S_3$ has only few very simple proper subgroups, $H_r = \mathbb{Z}_3^r$, $H_m = \mathbb{Z}_2^m$, $H_{mr^2} = \mathbb{Z}_2^{mr^2}$ and $H_{mr} = \mathbb{Z}_2^{mr}$.
 
-\caro{In general, sets of group elements onto which we reduce the domain of the controlled multiply maps such that the circuit simplifies significantly is scarce for such a small group. }
+The circuits involved in the reduced charge measurement with respect to the subgroups $H_m$ and $H_r$ are shown in Figure~\ref{fig:H_red_S3}. We chose to implement left and right multiplication for the two subgroups respectively because the circuits are significantly shallower. If the orientation of the arrows differs from what we need we can always reverse using the inverse circuit shown in the same figure.
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{m} & \qw & \ctrl{2} & \qw \\
+\\
+\lstick{m} & \qw & \targ & \qw \\
+\lstick{R} & \qw & \qw & \qw \\
+\lstick{R^2} & \qw & \qw & \qw 
+}\quad\quad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R}  & \qw & \qw & \qw & \qw & \ctrl{4} & \ctrl{5} & \qw\\
+\lstick{R^2} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw & \qw & \qw  \\
+\\
+\lstick{m} & \qw & \qw & \qw & \qw &  \qw &  \qw &  \qw \\
+\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw\\
+\lstick{R^2} & \qw & \targ & \qw  & \qw & \ctrl{-1} & \targ & \qw
+}\quad\quad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{m} & \qw & \gate{X} & \ctrl{2} & \gate{X} & \qw \\
+\lstick{R} & \qw & \qw \link{1}{1}& &\link{1}{-1} & \qw\\
+&&&&&\\
+\lstick{R^2} & \qw & \qw \link{-1}{1}& &\link{-1}{-1} & \qw 
+}
+\end{equation*}
+\caption{(Left) The controlled left multiplication circuit, $\ket{g,h} \rightarrow \ket{g, gh}$, for $g \in H_m$. (Middle) The controlled right multiplication circuit, $\ket{g,h} \rightarrow \ket{g, hg^{-1}}$, for $g \in H_r$. (Right) The inverse circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, needed for reversing arrows.}
+\label{fig:H_red_S3}
+\end{figure}
+
+%\caro{In general, sets of group elements onto which we reduce the domain of the controlled multiply maps such that the circuit simplifies significantly is scarce for such a small group. }
 
 
 \begin{table}[h]
@@ -1433,7 +1483,7 @@ $-1$ & 0   & 2            & 2                              \\
 \label{tab:red_ch_S3}
 \end{table}
 
-Table \ref{tab:red_ch_S3} shows the partial orthogonality of character tables of $S_3$ and it's two proper subgroups. The fact that given the results of both $H_m$- and $H_r$-reduced charge measurements we can uniquely determine the charge still holds for this group as well. 
+Table \ref{tab:red_ch_S3} shows the partial orthogonality of character tables of $S_3$ and two of its proper subgroups. The fact that given the results of both $H_m$- and $H_r$-reduced charge measurements we can uniquely determine the charge still holds for this group as well. 
 
 \textbf{Summary.}
 The computational universality of $D(S_3)$ complemented with measurements comes at the expense of significantly longer elementary circuits for our protocols. The elementary circuits are about ten times deeper once compiled into native gates that the Sycamore chip can perform, neglecting the SWAPs needed to place the relevant qubits into appropriate proximity to one another.
