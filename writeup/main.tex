@@ -131,17 +131,17 @@ For a given group $G$ we can define its quantum double model on any arbitrary \e
 \begin{equation}
     H = -  \sum_{v \in V} \mathbf B_v -  \sum_{p  \in  P} \mathbf A_p \label{eqn:ham} \;.
 \end{equation}
-We will now discuss these terms in more detail. As mentioned above, the vertex term enforces Gauss' law. To achieve this we first introduce a general vertex operator $B_v^{(h)}$ for every vertex. This operator projects onto all states for which the group elements assigned to the edges adjacent to the vertex multiply to $h$. To make the product unambiguous we need to order the edges. This ordering has to fulfil additional constraints to be specified momentarily. In addition, a group element $g$ assigned to an incoming (outgoing) edge enter as $g$ ($g^{-1}$). E.g. for the trivalent vertex depicted in Fig.~\ref{eqn:Bs_def} we have 
+We will now discuss these terms in more detail. As mentioned above, the vertex term enforces Gauss' law. To achieve this we first introduce a general vertex operator $B_v{(h)}$ for every vertex. This operator projects onto all states for which the group elements assigned to the edges adjacent to the vertex multiply to $h$. To make the product unambiguous we need to order the edges. This ordering has to fulfil additional constraints to be specified momentarily. In addition, a group element $g$ assigned to an incoming (outgoing) edge enter as $g$ ($g^{-1}$). E.g. for the trivalent vertex depicted in Fig.~\ref{eqn:Bs_def} we have 
 \begin{equation}
-B_v^{(h)} |g_1,g_2,g_3\rangle= \delta_{g_1 g_2 g_3,h} |g_1,g_2,g_3\rangle \;.	
+B_v{(h)} |g_1,g_2,g_3\rangle= \delta_{g_1 g_2 g_3,h} |g_1,g_2,g_3\rangle \;.	
 \end{equation}
-Gauss' law is then enforced by choosing $\mathbf B_v=B^{(e)}_v$, where $e$ denotes the identity element of the group. To ensure that the vertex projector commutes with the plaquette projector introduced below, the ordering of the edges needs to be consistent with the orientation of the latter. This can be done by endowing both with a counter-clockwise orientation. The ordering is then obtained by additionally specifying a starting edge for each vertex.
+Gauss' law is then enforced by choosing $\mathbf B_v=B_v{(e)}$, where $e$ denotes the identity element of the group. To ensure that the vertex projector commutes with the plaquette projector introduced below, the ordering of the edges needs to be consistent with the orientation of the latter. This can be done by endowing both with a counter-clockwise orientation. The ordering is then obtained by additionally specifying a starting edge for each vertex.
 
 The plaquette term 
-	$\mathbf A_p=\frac{1}{|G|} \sum_{g \in G} A^{(g)}_p$
-is defined in terms of operators $A^{(g)}_p$ which shift the labels of the edges forming the plaquette by $g$. As alluded to previously, the plaquettes have an \emph{orientation}. If the edge direction is aligned (anti-aligned) with this orientation, the shift acts as $g_i \rightarrow gg_i$ ($g_i \rightarrow g_ig^{-1}$). E.g. for the plaquette shown in Fig. \ref{eqn:As_def}, we have 
+	$\mathbf A_p=\frac{1}{|G|} \sum_{g \in G} A_p{(g)}$
+is defined in terms of operators $A_p{(g)}$ which shift the labels of the edges forming the plaquette by $g$. As alluded to previously, the plaquettes have an \emph{orientation}. If the edge direction is aligned (anti-aligned) with this orientation, the shift acts as $g_i \rightarrow gg_i$ ($g_i \rightarrow g_ig^{-1}$). E.g. for the plaquette shown in Fig. \ref{eqn:As_def}, we have 
 \begin{equation}
-	A_p^{(g)}\ket{g_1, g_2, \ldots} = \ket{gg_1, g_2g^{-1}, \ldots}.
+	A_p{(g)}\ket{g_1, g_2, \ldots} = \ket{gg_1, g_2g^{-1}, \ldots}.
 \end{equation} 
 
 
@@ -185,11 +185,11 @@ This state is the unique ground state and corresponds to the equal weight superp
 \subsection{Anyon content}\label{sec:anyon}
 In the following we will discuss the anyonic excitations in quantum double models and the algebra describing the latter.
 
-\textbf{The algebra $D(G)$.} The ground state is stabilized\footnote{Meaning, it is the $+1$ eigenstate.} by the projectors in Eq.~\eqref{eqn:ham}. Together with the property $A_p^{(g_1)}A_p^{(g_2)} = A_p^{(g_1 g_2)}$ this implies the stronger condition
+\textbf{The algebra $D(G)$.} The ground state is stabilized\footnote{Meaning, it is the $+1$ eigenstate.} by the projectors in Eq.~\eqref{eqn:ham}. Together with the property $A_p{(g_1)}A_p{(g_2)} = A_p{(g_1 g_2)}$ this implies the stronger condition
 \begin{equation}
 \begin{split}
-    A^{(g)}_p \ket{\psi} = \ket{\psi},\\
-    B^{(e)}_v \ket{\psi} = \ket{\psi},
+    A_p{(g)} \ket{\psi} = \ket{\psi},\\
+    B_v{(e)} \ket{\psi} = \ket{\psi},
 \end{split}\label{eqn:ground_state}
 \end{equation}
 for all $v \in V$, $p \in P$ and $g \in G$. Therefore, the elementary excitation above the ground state will violate one or more of the equations above and are characterized by how the operators $B_v(h)$ and $A_p(g)$ act on them. More precisely, these operators form an algebra\cite{cui2018topological, Kitaev_2003} (the quantum double algebra $D(G)$), which contains the full information about the anyonic excitations. In particular its irreducible representations label the anyons.
@@ -210,9 +210,9 @@ For the toric code model, the $A$ and $B$ operators always commute and their alg
 Operators on different sites commute trivially, while on the same site we have\footnote{We remark, that the algebraic relations in Eq.~\eqref{eqn:alg} do not depend on the exact grouping of plaquettes and vertices into sites.} 
 \begin{equation}
     \begin{split}
-        A_s^{(g)}A_s^{(h)} = A_s^{(gh)}, \\
-        B_s^{(g)}B_s^{(h)} = \delta_{g,h} B_s^{(h)},\\
-        A_s^{(g)}B_s^{(h)} = B_s^{(ghg^{-1})}A_s^{(g)}.
+        A_s{(g)}A_s{(h)} = A_s{(gh)}, \\
+        B_s{(g)}B_s{(h)} = \delta_{g,h} B_s{(h)},\\
+        A_s{(g)}B_s{(h)} = B_s{(ghg^{-1})}A_s{(g)}.
     \end{split}\label{eqn:alg}
 \end{equation}
 This is the on-site representation of the quantum double algebra $D(G)$ 
@@ -229,8 +229,8 @@ Note, that in the case of abelian groups, in particular the toric code, the conj
 In the general, non-abelian case the irreducible representations do not factorize as can be seen from the action of the algebra generators on the vector space spanned by $\ket{\mu}=\ket{c,i}$ %
 \begin{equation}
     \begin{split}
-        B^{(h)}_{\mu\nu}=\bra{c, i} B^{(h)} \ket{c', i'} = \delta_{c, h} \delta_{c, c'}\delta_{i, i'}, \\
-        A^{(g)}_{\mu\nu} = \bra{c, i} A^{(g)} \ket{c', i'} = \delta_{c,gc'g^{-1}} \Gamma^\chi_{c,ii'}(g),
+        B_{\mu\nu}{(h)}=\bra{c, i} B{(h)} \ket{c', i'} = \delta_{c, h} \delta_{c, c'}\delta_{i, i'}, \\
+        A_{\mu\nu}{(g)}= \bra{c, i} A{(g)} \ket{c', i'} = \delta_{c,gc'g^{-1}} \Gamma^\chi_{c,ii'}(g),
     \end{split}
 \end{equation}
 where $\Gamma^\chi_c(g)$ are the $\chi$-representation matrices. The latter are defined for elements of the centraliser $Z$ which are obtained from $g$ via the map $q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$. 
@@ -239,8 +239,8 @@ where $\Gamma^\chi_c(g)$ are the $\chi$-representation matrices. The latter are 
 To get a better understanding of the meaning behind these expressions, we consider three simple examples. Let us start with the vacuum (or trivial) representation, labelled by $(\{e\}, \mathbb{1})$. This representation is one-dimensional and spanned by $\ket{e, 0}$
 \begin{equation}
     \begin{split}
-        B^{(h)}\ket{e, 0} = \delta_{h,e}\ket{e, 0},\\
-        A^{(g)}\ket{e, 0} = \ket{e,0}.
+        B{(h)}\ket{e, 0} = \delta_{h,e}\ket{e, 0},\\
+        A{(g)}\ket{e, 0} = \ket{e,0}.
     \end{split}
 \end{equation}
 Hence, Eq.~\eqref{eqn:ground_state} implies that for the ground state every site houses the trivial representation.
@@ -248,8 +248,8 @@ Hence, Eq.~\eqref{eqn:ground_state} implies that for the ground state every site
 Other important examples are pure charges and pure fluxes. A pure flux is labelled by a conjugacy class and the trivial representation of its centre, $(C, \mathbb{1})$. Its basis vectors are $\ket{c, 0}$ for $c \in C$, with
 \begin{equation}
     \begin{split}
-        B^{(h)}_{\mu\nu}=\bra{c, 0} B^{(h)} \ket{c', 0} = \delta_{c, h} \delta_{c, c'}, \\
-        A^{(g)}_{\mu\nu} = \bra{c, 0} A^{(g)} \ket{c', 0} = \delta_{c,gc'g^{-1}}.
+        B_{\mu\nu}{(h)}=\bra{c, 0} B{(h)} \ket{c', 0} = \delta_{c, h} \delta_{c, c'}, \\
+        A_{\mu\nu}{(g)}= \bra{c, 0} A{(g)} \ket{c', 0} = \delta_{c,gc'g^{-1}}.
     \end{split}
 \end{equation}
 Pure flux excitations only violate the vertex term, the $B$-term.
@@ -257,8 +257,8 @@ Pure flux excitations only violate the vertex term, the $B$-term.
 Pure charge excitations are labelled by the group identity and a representation of the group $G$ itself, $(\{e\}, \chi)$. Its basis vectors are $\ket{e, i}$ for $i \in \{1, 2, \ldots, \text{dim}\chi\}$, with
 \begin{equation}
     \begin{split}
-        B^{(h)}_{\mu\nu}=\bra{e, i} B^{(h)} \ket{e, i'} = \delta_{e, h},\\
-        A^{(g)}_{\mu\nu} = \bra{e, i} A^{(g)} \ket{e, i'} = \Gamma^\chi_{ii'}(g).
+        B_{\mu\nu}{(h)}=\bra{e, i} B{(h)} \ket{e, i'} = \delta_{e, h},\\
+        A_{\mu\nu}{(g)} = \bra{e, i} A{(g)} \ket{e, i'} = \Gamma^\chi_{ii'}(g).
     \end{split}
 \end{equation}
 Pure charge excitations only violate the plaquette term, the $A$-term.
@@ -266,7 +266,7 @@ Pure charge excitations only violate the plaquette term, the $A$-term.
 
 In particular, if we have a gauge field state, $\ket{\chi, p; i}$, where each site houses a trivial representation except for one, $(v, p)$, which is occupied by a pure charge $(\{e\}, \chi)$, this state satisfies all the constraints in Eq.~\eqref{eqn:ground_state} except for
 \begin{equation}
-    A_p^{(g)}\ket{\chi, p; i} = \sum_{i'} \Gamma^\chi_{ii'}(g)\ket{\chi, p; i'},\label{eqn:tranfs}
+    A_p{(g)}\ket{\chi, p; i} = \sum_{i'} \Gamma^\chi_{ii'}(g)\ket{\chi, p; i'},\label{eqn:tranfs}
 \end{equation}
 where $i$ and $i'$ are the internal degrees of freedom of the charge\footnote{Note that the charge can be vector valued for non-abelian symmetry groups.}.
 This is the way a charged state transforms under gauge transformations in gauge field theory. Hence, we say that the plaquette terms generate gauge transformations.
@@ -402,10 +402,10 @@ In this section, we will explain how we measure the topological charge, i.e., th
 \end{equation}
 for each irreducible representation of the $D(G)$.
 
-Since we work in a basis where projectors onto a given $G$-valued flux through a vertex $v$, $B_v^{(h)}$, are diagonal, we can just do a full projective measurement of the gauge field degrees of freedom in that basis. 
+Since we work in a basis where projectors onto a given $G$-valued flux through a vertex $v$, $B_v{(h)}$, are diagonal, we can just do a full projective measurement of the gauge field degrees of freedom in that basis. 
 The result of such measurement is a labelling of all edges by group elements from which we can compute the flux through any vertex. 
 
-However, in order to measure the charge component, one needs to implement a controlled $A^{(g)}_s$ operator which needs a controlled group multiplication applied to all edges of $s$'s plaquette, i.e. $\ket{g}\ket{g_i} \rightarrow \ket{g}\ket{gg_i}$ for all $\ket{g_i}$ around the plaquette.
+However, in order to measure the charge component, one needs to implement a controlled $A_s{(g)}$ operator which needs a controlled group multiplication applied to all edges of $s$'s plaquette, i.e. $\ket{g}\ket{g_i} \rightarrow \ket{g}\ket{gg_i}$ for all $\ket{g_i}$ around the plaquette.
 This requires circuits which, in the case of non-abelian groups such as $D_4$ which we will study in more detail, are prohibitively expensive. 
 
 The main idea to circumvent this problem is to instead use partial charge measurements that have a substantially reduced circuit depth. Such partial measurements do not determine the charge completely. However, when we combine a set of different partial measurements we are able to deduce the full charge content from the measurement outcomes.
@@ -414,7 +414,7 @@ The key idea behind the partial measurement protocol is that controlled $A_s^{(g
 
 With Eq.~\eqref{eqn:tranfs} in mind, we propose the following algorithm for the $H$-reduced charge measurement on a plaquette $p$:\begin{enumerate}
     \item Prepare an auxiliary qudit, $a$, encoding the elements of $H\subset G$, in an equal superposition over all elements, so that the joint total state of the system is: $$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys}. $$
-    \item Apply a $a$-controlled $A$-multiplication onto the edges of the plaquette $p$$$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys} \rightarrow \sum_{h \in H} \ket{h}_a A^{(h)}_p \ket{\psi}_\text{phys}. $$
+    \item Apply a $a$-controlled $A$-multiplication onto the edges of the plaquette $p$$$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys} \rightarrow \sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\psi}_\text{phys}. $$
     \item Apply a unitary $$ U_a = \sum_{\chi_H}\sum_{i', j'}\sum_{h'\in H}  \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a $$ onto the auxiliary qudit $a$. Here the $\chi_H$ labels the irreducible representations of $H \subset G$, $\Gamma^{\chi_H}(h')$ are the representation matrices, with $i'$ and $j'$ being the vector indices for a given representation $\chi_H$.
     \item Measure the auxiliary qudit $a$.
 \end{enumerate}
@@ -422,7 +422,7 @@ With Eq.~\eqref{eqn:tranfs} in mind, we propose the following algorithm for the 
 %Needs a case example
 To see how this protocol works, let us examine the case of a  gauge field with well-defined pure charge on a plaquette  $\ket{\psi}_\text{phys} = \ket{\chi; i}$. Using  Eq.~\eqref{eqn:tranfs} we can write the joint state after step 2 as
 \begin{equation}
-    \sum_{h \in H} \ket{h}_a A^{(h)}_p \ket{\chi; i} = \sum_{h \in H} \ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi; j}.
+    \sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\chi; i} = \sum_{h \in H} \ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi; j}.
 \end{equation}
 
 If $H = G$, the state after step 3 becomes\begin{equation}
@@ -569,7 +569,7 @@ Table \ref{tab:red_ch} is to be interpreted as follows. Imagine we performed a $
 
 Now imagine we have performed all three measurement and obtained the set of labels $\{-1, (1, 1), (1, -1)\}$. This set is only compatible with the charge $\alpha_m$ and hence $\Sigma_m$ must be on a plaquette $p$.
 
-\textbf{Beyond pure charges.} The four main subgroups we consider in the reduced charge measurement are also the centralisers of the respective conjugacy classes, $H_x = Z(x)$. Hence, as mentioned in the last section, if we read-off the flux whose centre is the subgroup we used in the reduced charge measurement, the result uniquely determines the dyon label.
+\emph{Beyond pure charges.} The four main subgroups we consider in the reduced charge measurement are also the centralisers of the respective conjugacy classes, $H_x = Z(x)$. Hence, as mentioned in the last section, if we read-off the flux whose centre is the subgroup we used in the reduced charge measurement, the result uniquely determines the dyon label.
 
 It is only for dyons of trivial flux, $\{e, r^2\}$, that we need to use the repeated reduced charge measurements with different subgroups alongside partial orthogonality of the character tables of $D_4$ and its four element subgroups to uniquely determine the topological charge.
 
@@ -645,12 +645,12 @@ Let us move on to the generalized conjugation. The circuit depths for the latter
     \centering
     \begin{tabular}{|p{0.5cm}||p{0.25cm}|p{0.5cm}|p{0.5cm}|p{0.6cm}|p{0.5cm}|p{0.5cm}|p{0.5cm}|p{0.5cm}|}
     \hline
-  $A^{(g)}$ & $e$ &   $r$ & $r^2$ & $r^3$ &  $m$ & $mr$ & $mr^2$ & $mr^3$ \\
+  $A{(g)}$ & $e$ &   $r$ & $r^2$ & $r^3$ &  $m$ & $mr$ & $mr^2$ & $mr^3$ \\
 \hline\hline
  $\Psi_{m}$ &$\mathbb{1}$&  $\sigma_x$ & $\mathbb{1}$&  $\sigma_x$ & $\mathbb{1}$& $\sigma_x$ &  $\mathbb{1}$&   $\sigma_x$ \\\hline
  $\tilde{\Phi}_{m}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ &$-\sigma_z$ &$-\sigma_x$ &  $\sigma_z$ &   $\sigma_x$ \\\hline
 \end{tabular}
-    \caption{$A^{(g)}$ matrices for $\Psi_m$ and $\tilde{\Phi}_m$ representation of $D(D_4)$.}
+    \caption{$A{(g)}$ matrices for $\Psi_m$ and $\tilde{\Phi}_m$ representation of $D(D_4)$.}
     \label{tab:somereps}
 \end{table}
 
@@ -1134,7 +1134,7 @@ For the $T$-matrix elements we chose to measure $T(\Phi_r,\Phi_r)=\mathrm i$, wh
 
 %The act of conditioning the application of the equal time ribbon or its type makes the $S$-matrix protocol significantly more complex in terms of the number of multi-qubit gates. The two main factors to consider are the following. The first concerns the flux of the dyon. The $r-$dyons are more difficult to implement conditionally since they are more difficult to implement unconditionally. The $\mathbb{Z}_4$ $r$-multiplication necessitates a Toffoli gate upon conditioning.
 %
-%The second difficulty arrises from the charge. If the irreducible representation of the dyon assigns $-1$ to the nontrivial element of the group's centre, $r^2$, the linear representation formed by $A^{(g)}$ is faithful. Therefore a circuit that implements the generalised conjugation is significantly more complex even before conditioning it.
+%The second difficulty arrises from the charge. If the irreducible representation of the dyon assigns $-1$ to the nontrivial element of the group's centre, $r^2$, the linear representation formed by $A{(g)}$ is faithful. Therefore a circuit that implements the generalised conjugation is significantly more complex even before conditioning it.
 
 
 % Given the noise levels present in the simulator we resorted to the more simple $m$-dyons for most parts. 
@@ -1290,7 +1290,7 @@ The expected $1/4$ for all T-matrix protocols and S-matrix protocols with measur
 \textbf{Other S-Matrix Elements.}
 As stated above some anyon ribbons are harder to compile than others. The bottleneck of this anyon interference protocol is the difficulty of the conditioned ribbon. 
 
-We can divide the $S$-matrix protocols into six different difficulty classes measured by the depth of the required circuits. The biggest factor determining the latter is weather for the anyon in question $(C, \chi)$ obeys $\chi(r^2) = \chi(e)$. If this is not the case, the representation $A^{(g)}$ is faithful. This means that all group elements must be included in the circuit which requires many SWAP gates and increases the circuit depth significantly.
+We can divide the $S$-matrix protocols into six different difficulty classes measured by the depth of the required circuits. The biggest factor determining the latter is weather for the anyon in question $(C, \chi)$ obeys $\chi(r^2) = \chi(e)$. If this is not the case, the representation $A{(g)}$ is faithful. This means that all group elements must be included in the circuit which requires many SWAP gates and increases the circuit depth significantly.
 
 The second factor to consider is the number of Toffoli gates in the controlled multiplication and generalised conjugation circuits. The semions $\Phi_r,\tilde \Phi_r$ are difficult in both regards.
 
@@ -1434,7 +1434,7 @@ In our ribbon application protocol we rely on two operations, $\mathcal C$-contr
 
 For the three dimensional anyons with $\mathcal{C}_m$-flux, we can reduce the number of Toffoli gates to 5 in the case of right and to 2 in the case of left controlled multiplication. The conjugacy class is encoded with two qubits with one disallowed state. Figure \ref{fig:C_S3mult} shows these circuits.
 
-The generalised conjugations are derived from the representation matrices $A^{(g)}$ and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
+The generalised conjugations are derived from the representation matrices $A{(g)}$ and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
 
 As in the case of the unrestricted controlled multiplication circuit we would see significant reduction in circuit depth if we had access to well controlled qutrits.
 
@@ -1595,13 +1595,13 @@ The matrices $A_x$ and $B_x$ in the equation above are the representation matric
 
 For this specific reason, the quantum double algebra is by definition equiped with a co-product operator
 \begin{equation}\begin{split}
-	\Delta(A_x^{(g)}) = A_a^{(g)} \otimes A_b^{(g)}\\
-	\Delta(B_x^{(h)}) = \sum_{g \in G} B_a^{(g)}\otimes B_b^{(\bar{g}h)}.
+	\Delta(A_x^{(g)}) = A_a{(g)} \otimes A_b{(g)}\\
+	\Delta(B_x^{(h)}) = \sum_{g \in G} B_a{(g)}\otimes B_b{(\bar{g}h)}.
 \end{split}\end{equation}
 
 After applying the co-product to the $x$-projector we arrive at the form of the projector in the $a\otimes b$ space
 \begin{equation}
-	P_{a \otimes b}^x = P_{ab}^x = \frac{\chi_x(e)}{|Z(r_x)|}\sum_{c \in C_x}\sum_{z \in Z(r_x)}\sum_{g\in G}\chi_x^*(z)B_a^{(g)}A_a^{(q_c z \bar{q}_c)}\otimes B_b^{(\bar{g}c)}A_b^{(q_c z \bar{q}_c)}.
+	P_{a \otimes b}^x = P_{ab}^x = \frac{\chi_x(e)}{|Z(r_x)|}\sum_{c \in C_x}\sum_{z \in Z(r_x)}\sum_{g\in G}\chi_x^*(z)B_a{(g)}A_b{(q_c z \bar{q}_c)}\otimes B_a{(\bar{g}c)}A_b{(q_c z \bar{q}_c)}.
 \end{equation}
  The rank of this projector will be an integer multiple of the dimension of the $x$ representation and that integer is the fusion algebra coefficient $N_{ab}^x$.
  
@@ -1628,7 +1628,7 @@ The action of the exchange of anyons on the product space is  given by
 \begin{equation}
 	\begin{split}
 		\boldmath{\sigma}_{i i+1}: a_1 \otimes \ldots \otimes a_i \otimes a_{i+1} \otimes \ldots \otimes a_n \rightarrow a_1 \otimes \ldots \otimes a_{i+1} \otimes a_{i} \otimes \ldots \otimes a_n,\\
-		\boldmath{\sigma}_{i i+1} = \mathbb{1} \otimes \ldots (\text{Flip } \circ \sum_{h \in G} A_i^{(h)}\otimes B_{i+1}^{(h)}) \otimes \ldots \otimes \mathbb{1},
+		\boldmath{\sigma}_{i i+1} = \mathbb{1} \otimes \ldots (\text{Flip } \circ \sum_{h \in G} A_i{(h)}\otimes B_{i+1}{(h)}) \otimes \ldots \otimes \mathbb{1},
 	\end{split}
 \end{equation}
 with Flip operator denoting the trivial exchange of vector spaced in the tensor product. One can easily check that the exchange operators defined on this space obey the group multiplication rule of the braid group generators
@@ -1641,7 +1641,7 @@ The crossing ribbons share two edges and on these two edges the types of their e
 
 The consequence of this geometrical fact on our protocol is that once the first ribbon traverses the shared edges it will multiply its edge label by it's own flux. And when the second ribbon crosses the edge that the first have had traversed the group action on the auxiliary qudit is shifter by this flux compared to the case where it was traversing the vacuum. This is exactly the required braiding action on the internal space of the anyons
 \begin{equation}
-	\sigma_{i,i+1}\ket{c, i}_i\ket{c', i'}_{i+1} = \sum_{h \in G}B_{i+1}^{(h)}\ket{c',i'}_{i+1} A_i^{(h)}\ket{c,i}_i = \ket{c',i'}_{i+1} A_i^{(c')}\ket{c,i}_{i}. 
+	\sigma_{i,i+1}\ket{c, i}_i\ket{c', i'}_{i+1} = \sum_{h \in G}B_{i+1}{(h)}\ket{c',i'}_{i+1} A_i{(h)}\ket{c,i}_i = \ket{c',i'}_{i+1} A_i{(c')}\ket{c,i}_{i}. 
 \end{equation}
 
 \section{Representation Theory of $D(D_4)$}\label{app:reps}
@@ -1719,7 +1719,7 @@ dim $d$ & 2 & 2 & 2 & 2
     \centering
     \begin{tabular}{|l||l|l|l|l|l|l|l|l|}
     \hline
-  $A_g$ & $e$ &   $r$ & $r^2$ & $r^3$ &  $m$ & $mr$ & $mr^2$ & $mr^3$ \\
+  $A(g)$ & $e$ &   $r$ & $r^2$ & $r^3$ &  $m$ & $mr$ & $mr^2$ & $mr^3$ \\
 \hline\hline
   $O$ & 1 &   1 &  1 &   1 &  1 &  1 &   1 &    1 \\\hline
  $\tilde{O}$ & 1 &   1 &  1 &   1 &  1 &  1 &   1 &    1 \\\hline
@@ -1765,7 +1765,27 @@ $\tilde{\Phi}_{mr}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ & $\s
 \section{Post-selection probabilities}\label{app:postsel}
 In this appendix, we will elaborate on the post-selection probabilities quoted in the main text.
 
-Any quantum algorithm that includes post-selection invokes a justified concern  
+Any quantum algorithm that includes post-selection invokes a justified concern about the post-selection success rates and scaling of the needed number of ruins to build up a valid statistical sample of successful runs.
+
+In the main text we have mentioned that the post-selection on the Bell pair measurements on the ribbon application auxiliary qubits is $1/4$ if the ribbon is open and $1$ if it's closed, and we are applying them on the ground state.
+
+If we apply our protocol on a product state $\ket{\{g\}}$, we get that the probability of the Bell pair measurement succeeding is $$ p = |\frac{1}{2}\text{Tr}A(g_1 g_2 \ldots g_n)|^2,$$ where the group elements $g_i$, for $i \in \{1,\ldots n\}$, are the group element labels of the edges crossed by the ribbon, in the order of crossing, as defined by the product state $\ket{\{g\}}$.
+
+If we wish to apply this analysis for the ground state, we have to trace out the gauge field, expect for this non-trivial degree of freedom $g_t = g_1 g_2 \ldots g_n$.
+
+In terms of the newly acquired density matrix, $\rho_{g_t g_t'}$, the post-selection success probability is $$p = \sum_{g_t g_t'} \rho_{g_t g_t'} \frac{1}{2}\text{Tr}A^*(g_t)\frac{1}{2}\text{Tr}A(g_t').$$
+
+Now, if the ribbon is open, the reduced density matrix is uniform $$\rho_{g_t g_t'} = \frac{1}{8}\delta_{g_t, g_t'},$$ because there are no finite range correlations.
+
+However, if the ribbon is closed, beacuse we are in the ground state, that is a Gauss' law state, we know $g_t = e$. Hence, the reduced density matrix is $$\rho_{g_t g_t'} = \delta_{g_t, g_t'} \delta_{e, g_t}.$$
+
+\jovan{Something is not adding up :(}
+
+
+
+
+
+
 \section{Post-selection and one-qubit marginals}\label{app:marg}
 We investigate the effect of post selecting on biased measurement outcomes for the paradigmatic example of two qubits. We consider a general two-qubit density matrix
 \begin{equation}
