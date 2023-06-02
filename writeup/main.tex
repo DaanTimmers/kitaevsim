@@ -444,7 +444,19 @@ By partial charge information, we mean that the result of the measurement in the
 
 We may repeat the procedure using different subsets $H \in G$ to gather further partial information on the charge in the hope that we will be able to deduce the charge fully. In the considered examples, choosing different subgroups proves to be sufficient. This relies on the partial orthogonality of character tables of a group and its subgroup, and is demonstrated for the example of the group $D_4$ below.
 
-\subsection{Quantum Double of $D_4$}
+\textbf{Beyond pure charges.} One case where this reduced charge measurement scheme is exact is when the subgroup we chose is also the centre of the conjugacy class of an anyon $(C, \chi)$, i.e. $H = Z(r)$ for $r \in C$.
+The label $\chi_H$ in fact is the label of the irreducible representation of the $Z(r)$ labelling the dyon.
+
+The full measurement protocol, in general, then consist of doing a $H$-reduced charge measurement and reading-off the flux of the same site. 
+
+If $H = Z(f)$, where $f \in C_f$ is the measured flux, we are done, the measurement outcome correspond to the label $(C_f, \chi_H)$.
+
+If $H \subset Z(f)$, we need reduced charge measurement results for other subgroups of $G$ that are also subgroups of $Z(f)$. We then combine these results to determine the charge label uniquely (requires partial orthogonality of the character tables, see Section \ref{sec:D4_double} for an example).
+
+If $H \not\subset Z(f)$ the measurement is discarded in post-selection.
+
+
+\subsection{Quantum Double of $D_4$}\label{sec:D4_double}
 
 Throughout the rest of the paper we will focus on the group $D_4$ and its lattice gauge theory.
 Hence in this section, we will describe the group structure of $D_4$, its quantum double algebra, as well as representation theory of both.
@@ -530,27 +542,27 @@ More concretely, we compute $ \braket{\chi_{H_x}, \chi} = \sum_{h\in H_x} \chi_{
 
 \begin{table}[h]
 \centering
-\begin{tabular}{l|lllll}
+\begin{tabular}{|l|lllll|}\hline
   $\braket{\chi_{H_r}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $1$ & 4   & 4            & 0             & 0               & 0                   \\ 
 $-1$ & 0   & 0            & 4             & 4               & 0                   \\ 
 $i$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$-i$ & 0   & 0            & 0             & 0               & 4                   \\ 
+$-i$ & 0   & 0            & 0             & 0               & 4                   \\ \hline
 \end{tabular}
 
-\begin{tabular}{l|lllll}
+\begin{tabular}{|l|lllll|}\hline
   $\braket{\chi_{H_m}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $(1,1)$ & 4   & 0            & 4             & 0               & 0                   \\ 
 $ (1,-1)$ & 0   & 4            & 0             & 4               & 0                   \\ 
 $(-1,1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
+$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ \hline
 \end{tabular}
-\begin{tabular}{l|lllll}
+\begin{tabular}{|l|lllll|}\hline
   $\braket{\chi_{H_{mr}}, \chi}$ & $1$ & $\alpha_{r}$ & $\alpha_{m}$ & $\alpha_{mr}$ & $\alpha_{\epsilon}$ \\ \hline
 $(1,1)$ & 4   & 0            & 0             & 4               & 0                   \\ 
 $ (1,-1)$ & 0   & 4            & 4             & 0               & 0                   \\ 
 $(-1,1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
-$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ 
+$(-1,-1)$ & 0   & 0            & 0             & 0               & 4                   \\ \hline
 \end{tabular}
 \caption{Partial orthogonality of $D_4$ with respect to its three four-element subgroups.}
 \label{tab:red_ch}
@@ -559,6 +571,10 @@ $(-1,-1)$ & 0   & 0            & 0             & 0               & 4            
 Table \ref{tab:red_ch} is to be interpreted as follows. Imagine we performed a $H_m$-partial charge measurement on a plaquette $p$ and obtained the measurement outcome $(1,1)$. This label has a non-vanishing overlap with the trivial charge $1$ and charge $\alpha_m$. Hence, both $0$ and $\Sigma_{\alpha_m}$ can be anyons present on the plaquette.
 
 Now imagine we have performed all three measurement and obtained the set of labels $\{-1, (1, 1), (1, -1)\}$. This set is only compatible with the charge $\alpha_m$ and hence $\Sigma_m$ must be on a plaquette $p$.
+
+\textbf{Beyond pure charges.} The four main subgroups we consider in the reduced charge measurement are also the centralisers of the respective conjugacy classes, $H_x = Z(x)$. Hence, as mentioned in the last section, if we read-off the flux whose centre is the subgroup we used in the reduced charge measurement, the result uniquely determines the dyon label.
+
+It is only for dyons of trivial flux, $\{e, r^2\}$, that we need to use the repeated reduced charge measurements with different subgroups alongside partial orthogonality of the character tables of $D_4$ and its four element subgroups to uniquely determine the topological charge.
 
 \section{Probing Non-Abelions} \label{sec:probing}
 
@@ -1466,17 +1482,17 @@ The circuits involved in the reduced charge measurement with respect to the subg
 
 \begin{table}[h]
 \centering
-\begin{tabular}{l|lll}
+\begin{tabular}{|l|lll|}\hline
   $\braket{\chi_{H_r}, \chi}$ & $1$ & $-1$ & $\epsilon$  \\ \hline
 $1$ & 3   & 3            & 0                             \\ 
 $\omega$ & 0   & 0            & 3                              \\ 
-$\bar{\omega}$ & 0   & 0            & 3                          \\ 
+$\bar{\omega}$ & 0   & 0            & 3                          \\ \hline
 \end{tabular}
 
-\begin{tabular}{l|lll}
+\begin{tabular}{|l|lll|}\hline
   $\braket{\chi_{H_m}, \chi}$ & $1$ & $-1$ & $\epsilon$  \\ \hline
 $1$ & 2   & 0            & 2                             \\ 
-$-1$ & 0   & 2            & 2                              \\ 
+$-1$ & 0   & 2            & 2                              \\ \hline
 
 \end{tabular}
 \caption{Partial orthogonality of $S_3$ with respect to its two proper.}
@@ -1736,12 +1752,13 @@ $\tilde{\Phi}_{mr}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ & $\s
 \end{table}
 
 
-\begin{table}
-\centering
-\caro{needs file}
+%\begin{table}
+%\centering
+%\caro{needs file}
 %\pgfplotstabletypeset[dec sep align,   fixed zerofill,   precision=0,   col sep=space]{S_ranked_diff.csv}
-\caption{The S matrix elements, anyons arranged in the order of difficulty of ribbon operator application. \jovan{FIX the formating and put it where it belongs.}}
-\end{table}
+%\caption{The S matrix elements, anyons arranged in the order of difficulty of ribbon operator application. 
+%\jovan{FIX the formating and put it where it belongs.}}
+%\end{table}
 
 
 %\section{Circuits for $D_4$-related operations}\label{app:cirqs}
