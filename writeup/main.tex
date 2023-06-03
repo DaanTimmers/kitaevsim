@@ -1685,7 +1685,7 @@ The four different kinds of controlled multiplications are:\begin{enumerate}
 	\item $U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h},$
 	\item $U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}},$
 \end{enumerate}
-where we say that the first group element controls the multiplication. It is this first group element that can be restricted to be in one of the following, useful, subsets of the full group $\{G\text{(Unrestricted)}, H_m, H_r, H_{mr}, C_m, C_r, C_{mr}\}$.
+where we say that the first group element controls the multiplication. It is this first group element that can be restricted to be in one of the following, useful, subsets of the full group $\{G\text{(Unrestricted)}, H_m, H_r, H_{mr}, C_m, C_r, C_{mr}\}$. All of these circuits are shown in Figures~\ref{fig:CM_Unres} to ~\ref{fig:CM_Cr}.
 
 \begin{figure}
 \begin{equation*}
@@ -1723,16 +1723,182 @@ where we say that the first group element controls the multiplication. It is thi
 \lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw & \qw & \qw \\
 \lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ  & \targ & \qw & \qw
 }
-
 \end{equation*}
 
-    \caption{Blah.}
-    \label{fig:CM_Unres}
+	\caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)}, U_{CM}^{(2)}, U_{CM}^{(3)}, U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element.}
+	\label{fig:CM_Unres}
 \end{figure}
+
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{m} & \ctrl{2} &  \qw & \qw\\
+\lstick{R^{2}} & \qw  & \ctrl{3} & \qw
+\\
+\lstick{\quad m} &  \targ & \qw & \qw \\
+\lstick{R} & \qw & \qw & \qw\\
+\lstick{R^{2}} & \qw & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{m} & \ctrl{2} &  \qw & \qw & \ctrl{3} & \qw\\
+\lstick{R^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw
+\\
+\lstick{\quad m} &  \targ & \qw & \qw & \qw & \qw\\
+\lstick{R} & \qw & \qw & \qw & \ctrl{1} & \qw\\
+\lstick{R^{2}} & \qw & \targ & \qw & \targ & \qw
+}
+\end{equation*}
+
+    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)} = U_{CM}^{(3)}, U_{CM}^{(2)} = U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $H_m$ subgroup.}
+    \label{fig:CM_Hm}
+\end{figure}
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{mR} & \ctrl{2} &  \ctrl{2} & \ctrl{3} & \ctrl{3} & \qw & \qw\\
+\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
+\lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
+\lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{mR} & \ctrl{2} &  \ctrl{3} & \qw & \qw\\
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw
+\\
+\lstick{\quad m} &  \targ & \qw & \qw & \qw \\
+\lstick{R} & \qw & \targ & \qw & \qw\\
+\lstick{R^{2}} & \qw & \qw & \targ & \qw
+}
+\end{equation*}
+
+    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)} = U_{CM}^{(3)}, U_{CM}^{(2)} = U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $H_{mr}$ subgroup.}
+    \label{fig:CM_Hmr}
+\end{figure}
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R} & \ctrl{2}  & \ctrl{3} & \ctrl{3} & \qw & \qw\\
+\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
+\lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw\\
+\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{R^{2}} & \targ & \targ & \qw & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R} & \ctrl{3} &  \ctrl{3} & \qw & \qw\\
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw
+\\
+\lstick{\quad m} &  \qw & \qw & \qw & \qw \\
+\lstick{R} & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{R^{2}} & \targ & \qw & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R} & \ctrl{2}  & \ctrl{3} & \ctrl{3} & \qw & \ctrl{4} & \qw\\
+\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
+\lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw & \qw\\
+\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw & \qw\\
+\lstick{R^{2}} & \targ & \targ & \qw & \targ & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R} & \ctrl{3} &  \ctrl{3} & \qw & \ctrl{4} & \qw\\
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw & \qw
+\\
+\lstick{\quad m} &  \qw & \qw & \qw & \qw & \qw\\
+\lstick{R} & \ctrl{1} & \targ & \qw & \qw & \qw\\
+\lstick{R^{2}} & \targ & \qw & \targ & \targ & \qw
+}
+\end{equation*}
+
+    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)}, U_{CM}^{(2)}, U_{CM}^{(3)},  U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $H_{r}$ subgroup.}
+    \label{fig:CM_Hr}
+\end{figure}
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R^{2}} & \qw  & \ctrl{3} & \qw
+\\
+\lstick{\quad m} &  \targ & \qw & \qw \\
+\lstick{R} & \qw & \qw & \qw\\
+\lstick{R^{2}} & \qw & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw
+\\
+\lstick{\quad m} &  \targ & \qw & \qw & \qw & \qw\\
+\lstick{R} & \qw & \qw & \qw & \ctrl{1} & \qw\\
+\lstick{R^{2}} & \qw & \targ & \qw & \targ & \qw
+}
+\end{equation*}
+
+    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)} = U_{CM}^{(3)}, U_{CM}^{(2)} = U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $C_m$ conjugacy class.}
+    \label{fig:CM_Cm}
+\end{figure}
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
+\lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
+\lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw
+\\
+\lstick{\quad m} &  \targ & \qw & \qw & \qw \\
+\lstick{R} & \qw & \targ & \qw & \qw\\
+\lstick{R^{2}} & \qw & \qw & \targ & \qw
+}
+\end{equation*}
+
+    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)} = U_{CM}^{(3)}, U_{CM}^{(2)} = U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $C_{mr}$ conjugacy class.}
+    \label{fig:CM_Cmr}
+\end{figure}
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
+\lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw\\
+\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{R^{2}} & \targ & \targ & \qw & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw
+\\
+\lstick{\quad m} &  \qw & \qw & \qw & \qw \\
+\lstick{R} & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{R^{2}} & \targ & \qw & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
+\lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw & \qw\\
+\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw & \qw\\
+\lstick{R^{2}} & \targ & \targ & \qw & \targ & \targ & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw & \qw
+\\
+\lstick{\quad m} &  \qw & \qw & \qw & \qw & \qw\\
+\lstick{R} & \ctrl{1} & \targ & \qw & \qw & \qw\\
+\lstick{R^{2}} & \targ & \qw & \targ & \targ & \qw
+}
+\end{equation*}
+
+    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)}, U_{CM}^{(2)}, U_{CM}^{(3)},  U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $C_{r}$ conjugacy class.}
+    \label{fig:CM_Cr}
+\end{figure}
+
+%
 
 \textbf{Generalised Conjugation.}
 
 \textbf{Basis Changes and Inverses.}
+
+
 
 \section{Post-selection and one-qubit marginals}\label{app:marg}
 We investigate the effect of post selecting on biased measurement outcomes for the paradigmatic example of two qubits. We consider a general two-qubit density matrix
