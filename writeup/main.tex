@@ -1679,13 +1679,13 @@ In this Appendix, we present all of the relevant operations compiled onto the en
 
 The controlled multiplication in the three different protocols differs in weather one of the group valued inputs into the map is unrestricted, restricted to be in one of the four element subgroups or restricted to be in one of the two element conjugacy classes.
 
-The four different kinds of controlled multiplications are:\begin{enumerate}
-	\item $U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh},$
-	\item $U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
-	\item $U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h},$
-	\item $U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}},$
-\end{enumerate}
-where we say that the first group element controls the multiplication. It is this first group element that can be restricted to be in one of the following, useful, subsets of the full group $\{G\text{(Unrestricted)}, H_m, H_r, H_{mr}, C_m, C_r, C_{mr}\}$. All of these circuits are shown in Figures~\ref{fig:CM_Unres} to ~\ref{fig:CM_Cr}.
+The four different kinds of controlled multiplications are:
+$U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh},$
+$U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
+$U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$ and 
+$U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$.
+
+Here we say that the first group element controls the multiplication, while the second is the target. It is this controlling group element that can be restricted to be in one of the following, useful, subsets of the full group $\{G\text{(Unrestricted)}, H_m, H_r, H_{mr}, C_m, C_r, C_{mr}\}$. All of these circuits are shown in Figures~\ref{fig:CM_Unres} to ~\ref{fig:CM_Cr}.
 
 \begin{figure}
 \begin{equation*}
@@ -1897,7 +1897,7 @@ where we say that the first group element controls the multiplication. It is thi
 \textbf{Generalised Conjugation.}
 Another building block of our $(C, \chi)$-ribbon operator application protocol is the what we call generalised conjugation map, $U_{GC}\ket{g}\ket{c,i} = \ket{g}\ket{gcg^{-1}}\Gamma_c\ket{i}$. Written like this it is clear why we call it generalised conjugation, however, it is more naturally defined via the algebra representation matrices $U_{GC}\ket{g}\ket{\alpha} = \ket{g}A^T(g)\ket{\alpha}$, where $\alpha$ is the combined index going over both the conjugacy class and the $\chi$-representation index. These matrices in the case of $D(D_4)$ are shown in Appendix~\ref{app:reps}.
 
-In the Appendix~\ref{app:ribs} we see that we need four variants of the map, applying one of the controlled operations $\{A^{(T)}(g^{\pm 1})\}$. Figure~\ref{fig:GConj_scheme} schematically shows the form of the relevant circuits, though they are to be supplemented by appropriate unitaries from Table~\ref{tab:reps} depending on the label of the ribbon.
+In the Appendix~\ref{app:ribs} we see that we need four variants of the map, applying one of the controlled operations: $A(g)$, $A(g^{- 1})$, $A^T(g)$ or $A^T(g^{-1})$. Figure~\ref{fig:GConj_scheme} schematically shows the form of the relevant circuits, though they are to be supplemented by appropriate unitaries from Table~\ref{tab:reps} depending on the label of the ribbon.
 
 \begin{figure}
 \begin{gather*}
