@@ -1895,8 +1895,61 @@ where we say that the first group element controls the multiplication. It is thi
 %
 
 \textbf{Generalised Conjugation.}
+Another building block of our $(C, \chi)$-ribbon operator application protocol is the what we call generalised conjugation map, $U_{GC}\ket{g}\ket{c,i} = \ket{g}\ket{gcg^{-1}}\Gamma_c\ket{i}$. Written like this it is clear why we call it generalised conjugation, however, it is more naturally defined via the algebra representation matrices $U_{GC}\ket{g}\ket{\alpha} = \ket{g}A^T(g)\ket{\alpha}$, where $\alpha$ is the combined index going over both the conjugacy class and the $\chi$-representation index. These matrices in the case of $D(D_4)$ are shown in Appendix~\ref{app:reps}.
 
-\textbf{Basis Changes and Inverses.}
+In the Appendix~\ref{app:ribs} we see that we need four variants of the map, applying one of the controlled operations $\{A^{(T)}(g^{\pm 1})\}$. Figure~\ref{fig:GConj_scheme} schematically shows the form of the relevant circuits, though they are to be supplemented by appropriate unitaries from Table~\ref{tab:reps} depending on the label of the ribbon.
+
+\begin{figure}
+\begin{gather*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{\quad m} &  \ctrl{3} & \qw & \qw & \qw\\
+\lstick{R} & \qw & \ctrl{2} & \qw & \qw\\
+\lstick{R^{2}} & \qw & \qw & \ctrl{1} & \qw \\
+\lstick{a_i} & \gate{A^T(m)} & \gate{A^T(r)} & \gate{A^T(r^2)}  & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{\quad m} &  \qw & \qw & \ctrl{3} & \qw\\
+\lstick{R} & \qw & \ctrl{2} & \qw & \qw\\
+\lstick{R^{2}} & \ctrl{1} & \qw & \qw & \qw \\
+\lstick{a_i} & \gate{A^*(r^2)} & \gate{A^*(r)} & \gate{A^*(m)}  & \qw
+}\\
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{\quad m} &  \ctrl{3} & \qw & \qw & \qw\\
+\lstick{R} & \qw & \ctrl{2} & \qw & \qw\\
+\lstick{R^{2}} & \qw & \qw & \ctrl{1} & \qw \\
+\lstick{a_i} & \gate{A^\dag(m)} & \gate{A^\dag(r)} & \gate{A^\dag(r^2)}  & \qw
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{\quad m} &  \qw & \qw & \ctrl{3} & \qw\\
+\lstick{R} & \qw & \ctrl{2} & \qw & \qw\\
+\lstick{R^{2}} & \ctrl{1} & \qw & \qw & \qw \\
+\lstick{a_i} & \gate{A(r^2)} & \gate{A(r)} & \gate{A(m)}  & \qw
+}
+\end{gather*}
+
+    \caption{The generalised conjugation circuits. The four variants apply: $A^T(g)$, $A^T(g^{-1})$, $A(g^{-1})$ and $A(g)$ onto the ancillary qubit $a_i$ respectively. Depending on the label of the ribbon one determines the appropriate unitaries from Table~\ref{tab:reps}.}
+    \label{fig:GConj_scheme}
+\end{figure}
+
+\textbf{Miscellaneous.} In Section~\ref{sec:D4_double} we have already listed all the decoupling circuits used in the reduced charge measurement protocol in the case of $D(D_4)$. Some other useful circuits are shown in Figure~\ref{fig:Misc_cirq}.
+
+\begin{figure}
+\begin{equation*}
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{\quad m} &  \targ & \ctrl{1} & \targ & \qw\\
+\lstick{R} & \qw & \ctrl{1} & \qw & \qw\\
+\lstick{R^{2}} & \qw & \targ & \qw & \qw 
+}\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{\quad m} &  \qw & \qw & \ctrl{1} & \qw & {\qquad mR}\\
+\lstick{R} & \qw & \targ & \ctrl{1} & \qw & {\qquad R}\\
+\lstick{R^{2}} & \qw & \qw & \targ & \qw  & {\qquad R^2}
+}
+\end{equation*}
+
+    \caption{(Left) The inversion circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, used when reversing the arrow direction of the edges. (Right) The basis change circuit, $\ket{g}_{mRR^2} \rightarrow \ket{g}_{(mR)RR^2}$, can be used to simplify $mr$-based ribbon application protocol by making them analogous to $m$-ribbon application protocols.}
+    \label{fig:Misc_cirq}
+\end{figure}
 
 
 
