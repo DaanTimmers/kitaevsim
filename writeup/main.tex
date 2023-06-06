@@ -1531,6 +1531,10 @@ There are sixteen kinds of elementary triangles, which can be understood as comi
 
 The various different rules for the sixteen cases are shown in Figure \ref{fig:al_trigs}. The main actions are controlled multiplication $U_{CM}$ that is controlled by the ancillary qudits and done on the gauge fields degrees of freedom and the generalised conjugation $U_{GC}$ that acts conversely, from the gauge filed onto the ancillary qudits.
 
+We note that in the main text in Section~\ref{sec:ribbon_ops} we have defined the generalised conjugation as $U_{GC}^{(C, \chi)}: \ket{g}\ket{c,i} \rightarrow \ket{g}\ket{g c g^{-1}}\Gamma_c(g)\ket{i}$, where $\Gamma_c(g)$ are matrices whose form is well defined by the representation of the algebra $(C, \chi)$ spanned by basis vectors $\ket{c,i}$. In this form it is obvious why we call this operation generalised conjugation, however, this operaton is more naturally defined by the $(C, \chi)$-representation matrices, defined in Section \ref{sec:anyon}, themselves. 
+
+To make the point concrete, we first unify the two indices of the $(C, \chi)$-representation into one multi index $\ket{c, i} \leftrightarrow \ket{\alpha}$. In terms of this index, we have, in Section~\ref{sec:anyon}, defined the form of the representation matrices $A^{(C,\chi)}_{\alpha\beta}$. The generalised conjugation is hence also defined by $U_{GC}^{(C, \chi)}: \ket{g}\ket{\alpha} \rightarrow \ket{g}A^{(C, \chi)}(g)\ket{\alpha}$. It is this convention that we use in this and other appendicies, superscripts being dropped.
+
 Another main distinction is between triangles that are appended to the front and the back of the ribbon, one set involving the forward ancilla, $a_f$, and the other backwards ancilla, $a_b$, respectively. 
 \begin{figure}
 \centering
@@ -1551,9 +1555,10 @@ Another main distinction is between triangles that are appended to the front and
  \includegraphics[width=0.12\linewidth]{Figures/IIRgb.pdf} &   $A(h_i)\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$  &  \includegraphics[width=0.12\linewidth]{Figures/IIRib.pdf}           &       $A(h_i^{-1})\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$               \\ 
 \includegraphics[width=0.12\linewidth]{Figures/IILib.pdf} &   $A(h_i^{-1})\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IILgb.pdf}           &       $A(h_i)\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$                  \\  
 \end{tabular}\vspace{10pt}
-\caption{The variants of the ribbon application algorithm for different kinds of Type I and II elementary triangles. \jovan{Add: to the caption add how the two ways of indexing are related and how are Gammas related to A(g)!}\jovan{Note: To my best understanding, I have no reason to doubt it currently!}}
+\caption{The variants of the ribbon application algorithm for different kinds of Type I and II elementary triangles. In this figure, the generalised conjugation is defined via the algebra representation matrices $A^{(C,\chi)}(g)$ defined in Section~\ref{sec:anyon}, superscripts being dropped.}
 \label{fig:al_trigs}
 \end{figure}
+
 The ability to append to the backend helps in halving the circuit depth of the ribbon application, since, both ends can be grown in parallel, see Figure \ref{fig:both_ends}. In this example the ribbon in Figure \ref{fig:rib_exampl} can be applied in four sequential steps instead of seven if we only grew it by appending the triangles to the frontend.
 \begin{figure}
 	\centering
@@ -1895,7 +1900,7 @@ Here we say that the first group element controls the multiplication, while the 
 %
 
 \textbf{Generalised Conjugation.}
-Another building block of our $(C, \chi)$-ribbon operator application protocol is the what we call generalised conjugation map, $U_{GC}\ket{g}\ket{c,i} = \ket{g}\ket{gcg^{-1}}\Gamma_c\ket{i}$. Written like this it is clear why we call it generalised conjugation, however, it is more naturally defined via the algebra representation matrices $U_{GC}\ket{g}\ket{\alpha} = \ket{g}A^T(g)\ket{\alpha}$, where $\alpha$ is the combined index going over both the conjugacy class and the $\chi$-representation index. These matrices in the case of $D(D_4)$ are shown in Appendix~\ref{app:reps}.
+Another building block of our $(C, \chi)$-ribbon operator application protocol is the what we call generalised conjugation map, $U_{GC}\ket{g}\ket{\alpha}_{a_i} = \ket{g}A^T(g)\ket{\alpha}_{a_i}$, where $\alpha$ is the combined index going over both the conjugacy class and the $\chi$-representation index. These matrices, in the case of $D(D_4)$, are shown in Appendix~\ref{app:reps}.
 
 In the Appendix~\ref{app:ribs} we see that we need four variants of the map, applying one of the controlled operations: $A(g)$, $A(g^{- 1})$, $A^T(g)$ or $A^T(g^{-1})$. Figure~\ref{fig:GConj_scheme} schematically shows the form of the relevant circuits, though they are to be supplemented by appropriate unitaries from Table~\ref{tab:reps} depending on the label of the ribbon.
 
