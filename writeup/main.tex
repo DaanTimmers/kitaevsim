@@ -34,20 +34,13 @@
 
 \maketitle
 \begin{abstract}
-\jovan{Start after the main text.}
+In this work we present a proposal to realizing non-Abelian anyons on a NISQ device. In particular we explore the feasibility of implementing the quantum double model $D(D_4)$. We propose techniques to drastically simplify the circuits for the manipulation and measurements of anyons. Numerical simulations with realistic noise models suggest that current NISQ technology is capable of probing signatures of non-Abelian anyons far beyond elemental properties such as the non-commutativity of braids. In particular, we conclude that determining the full modular data of the model is feasible.   
 \end{abstract}
 \tableofcontents
 
 
 
 \section{Introduction}
-\caro{Todo: \begin{itemize}
-	\item writing: discussion and outlook, abstract
-	\item numerical results: fusion and braiding results error bar question
-	\item cleaning up figures and captions
-	\item appendices
-\end{itemize}
-}
 
 In 1977 Leinaas and Myrheim\cite{Leinaas1977OnTT} 
 explored the idea of \emph{anyons}\footnote{The term was later invented by Frank Wilczek\cite{Wilczek}.} -- quasiparticles with fractional statistics that are neither Bosons nor Fermions. Shortly later, Tsui and Stormer\cite{Tsui} discovered the fractional quantum Hall effect. Since then, the investigation of topological order and its signature -- anyonic excitation -- has become a major topic in modern condensed matter physics, culminating in the 2016 noble prize\cite{nobel}. 
@@ -87,7 +80,8 @@ To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of
 
 Therefore, in our protocol we refrain from using any feed-forward protocols and prepare the ground state directly via a unitary circuit. This has the disadvantage of limiting the achievable lattice size. However, we note, that in order to demonstrate signatures of non-abelian braiding, it is not necessary to use a lattice which is fully two-dimensional. In fact, it is sufficient to consider a quasi-one dimensional geometry, which we refer to as \emph{braiding ladder} shown in Fig.~\ref{fig:latticeGS}. For this geometry, we can prepare the ground state with a depth-two circuit. Of course, this ground state does not feature long-range entanglement, however this is not needed for the demonstration of non-abelian braiding as we will show explicitly in section \ref{sec:num}. We also consider a small truly two-dimensional lattice, just for the sake of proving that a direct unitary circuit preparation of the ground state is feasible and feed-forward protocols are not mandatory for the preparation of non-abelian topological order.
 
-\caro{(4) In section 2.2 maybe at the end of the section we should say that our protocols for braiding etc are going to be interesting and useful independent of the method of ground state preparation.    We (maybe) can also comment again that once syndrome measurements and error correction are possible, then depth is not going to be an issue.}
+The brading protocols we propose in the following are independent form the specific method of ground state preparation and can be applied on any lattice.
+
 
 \subsection{Manipulating anyons}
 With the ground state preparation in place we lastly turn to the operators which allow us to create and move anyons and to the measurement. All of these operations need comparably short circuits. It is in this area where we think that our work contributes the most and provides results that can be generalized to other quantum double models. To elucidate our achievements we need to briefly review the basics of quantum double models, however, a full recap of the latter is deferred to the main text. The dof in a quantum double model are $G$-valued and group multiplication is an operation as elemental as a spin-flip in a spin-1/2 system. Unfortunately, a single group multiplication requires several Toffoli gates which are non-Clifford and quite costly on most architectures. To be concrete, a single Toffoli gate translates to a depth-12 circuit of elemental gates on google's Sycamore chip, which we took as the benchmark for current state NISQ devices. However, a careful investigation reveals that full group multiplications can be entirely avoided for the creation, manipulation and measurements of anyons. 
@@ -95,14 +89,11 @@ With the ground state preparation in place we lastly turn to the operators which
 To see this, we remind the reader that in a quantum double model for each anyon there is a so-called \emph{ribbon operator} which creates an anyon pair at its end-points. As the name suggest, a ribbon operator is quasi-one dimensional operator that can be defined for any path and has a finite $\mathcal O(1)$-width. The ribbon operator corresponding to a non-abelian anyon is non-unitary and is most conveniently implemented with ancilla qubits which are measured at the end of the protocol. In applying the ribbon operators, a sequence entangling operations between the ancillas and the dof on the lattice are performed giving rise to states that 'know' about the presence of anyons. These entangling operations depend on the anyon type. While they formally involve group multiplication and are as such costly, closer inspection reveals that for all anyon types drastic simplifications of the circuits can be performed once we tailor the circuits to the anyon type in question rather than applying a 'one size fits all' protocol. The key here is to make use of the structure of the excitations in the quantum double model. In particular each anyon corresponds to a pair $(\mathcal C,\chi)$, where $\mathcal C$ is a conjugacy class of $G$ and $\chi$ is an irreducible representation of the centralizer $Z_c$, $c \in \mathcal C$. The group multiplication involved in the ribbon operators needs to be performed only for elements of the respective conjugacy class. We show, that exploiting this property drastically reduces the circuit depth and removes all Toffoli gates. Such a complexity reduction for the ribbon operators generalises to other groups, in particular to solvable groups including $S_3$. 
 
 \subsection{Charge measurements}
-At last, we aim to design a protocol which can detect and measure non-abelian charge. This is a non-trivial task and has so far not been demonstrated. In the experiments performed recently, non-abelian braiding has been demonstrated either by measuring stabilisers \cite{andersen2022observation} or by anyon interferometry showing a phase. However, no direct measurement of non-abelian charges, i.e. a state with a superposition of several charges that is created from fusion has been demonstrated. This might be due to the inherent difficulty in measuring non-abelian charge. In the quantum double model the operators needed to measure general charges are explicitly known, however, they require full group multiplications on several lattice-dof and are therefore prohibitively costly. To circumvent this we propose a \emph{partial charge measurement}. To determine the total charge, one needs to evaluate how a given state transforms under the full group. However, one can instead measure how it transforms under a subgroup. Due to partial orthogonality of the characters of a subgroup with those of the group, a measurement outcome reveals partial information about the charge. In the case of $D(D_4)$ one finds that a certain outcome is only compatible with at most two different charges. Repeating the measurement for two different subgroups, we can unambiguously infer the charge. This procedure avoids costly multiplications with the full group and removes unfavourable Toffoli gates from the circuit at the cost of repeating the protocol twice.
+At last, we aim to design a protocol which can detect and uniquely determine topological charges. This is a non-trivial task and has so far not been demonstrated. In the experiments performed recently, the existence of multiple fusion channels and the action of non-abelian braiding on the latter has been demonstrated indirectly by measuring Abelian charges before and after the braid via stabiliser measurements. However, no experiment directly probed a state where a superposition of several charges had been created from fusion and identified the anyon content. 
 
-\caro{make sure the other groups really didn't do any direct non-abelian charge measurements.}
+This might be due to the inherent difficulty of uniquely determining non-abelian charge content. In the quantum double model the operators needed to measure general charges are explicitly known, however, they require full group multiplications on several lattice-dof and are therefore prohibitively costly. To circumvent this we propose a \emph{partial charge measurement}. To determine the total charge, one needs to evaluate how a given state transforms under the full group. However, one can instead measure how it transforms under a subgroup. Due to partial orthogonality of the characters of a subgroup with those of the group, a measurement outcome reveals partial information about the charge. In the case of $D(D_4)$ one finds that a certain outcome is only compatible with at most two different charges. Repeating the measurement for two different subgroups, we can unambiguously infer the charge. This procedure avoids costly multiplications with the full group and removes unfavourable Toffoli gates from the circuit at the cost of repeating the protocol twice.
 
-\caro{
-(5) At end of section 2.4 you have a question of whether topological charge is measured.  Certainly in the Google/China experiment, yes they measure whether you have vacuum or psi at the end of a braid.  Yes?    By the way, these experiments have now both been published.   Google in Nature and the China experiment in Chinese Physics Letters (I gather Nature eventually rejected them).}
 
-\caro{[i mean, they don't have a situation where different outcomes of the charge are possible bc the state is in a superposition of different charges. will check and clarify}
 
 
 \subsection{Probing non-abelian signatures}
@@ -412,7 +403,7 @@ The main idea to circumvent this problem is to instead use partial charge measur
 
 The key idea behind the partial measurement protocol is that controlled $A_s^{(g)}$ becomes significantly simpler to perform once we restrict ourselves to a proper subset of the full group, i.e. $g \in H \subset G$.
 
-With Eq.~\eqref{eqn:tranfs} in mind, we propose the following algorithm for the $H$-reduced charge measurement on a plaquette $p$:\begin{enumerate}
+With Eq.~\eqref{eqn:tranfs} in mind, we propose the following algorithm for the $H$-partial charge measurement on a plaquette $p$:\begin{enumerate}
     \item Prepare an auxiliary qudit, $a$, encoding the elements of $H\subset G$, in an equal superposition over all elements, so that the joint total state of the system is: $$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys}. $$
     \item Apply a $a$-controlled $A$-multiplication onto the edges of the plaquette $p$$$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys} \rightarrow \sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\psi}_\text{phys}. $$
     \item Apply a unitary $$ U_a = \sum_{\chi_H}\sum_{i', j'}\sum_{h'\in H}  \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a $$ onto the auxiliary qudit $a$. Here the $\chi_H$ labels the irreducible representations of $H \subset G$, $\Gamma^{\chi_H}(h')$ are the representation matrices, with $i'$ and $j'$ being the vector indices for a given representation $\chi_H$.
@@ -441,14 +432,14 @@ By partial charge information, we mean that the result of the measurement in the
 
 We may repeat the procedure using different subsets $H \in G$ to gather further partial information on the charge in the hope that we will be able to deduce the charge fully. In the considered examples, choosing different subgroups proves to be sufficient. This relies on the partial orthogonality of character tables of a group and its subgroup, and is demonstrated for the example of the group $D_4$ below.
 
-\textbf{Beyond pure charges.} One case where this reduced charge measurement scheme is exact is when the subgroup we chose is also the centre of the conjugacy class of an anyon $(C, \chi)$, i.e. $H = Z(r)$ for $r \in C$.
+\textbf{Beyond pure charges.} The partial charge measurement scheme is exact, i.e., unambiguous, when the chosen subgroup coincides with the centre of the conjugacy class of an anyon $(C, \chi)$, i.e., $H = Z(r)$ for $r \in C$.
 The label $\chi_H$ in fact is the label of the irreducible representation of the $Z(r)$ labelling the dyon.
 
-The full measurement protocol, in general, then consist of doing a $H$-reduced charge measurement and reading-off the flux of the same site. 
+The full measurement protocol, in general, then consist of performing a $H$-partial charge measurement and reading-off the flux $f$ on the same site. 
 
-If $H = Z(f)$, where $f \in C_f$ is the measured flux, we are done, the measurement outcome correspond to the label $(C_f, \chi_H)$.
+If $H = Z(f)$, where $f \in C_f$ is the measured flux, the protocol is complete, since the measurement outcome correspond to the label $(C_f, \chi_H)$.
 
-If $H \subset Z(f)$, we need reduced charge measurement results for other subgroups of $G$ that are also subgroups of $Z(f)$. We then combine these results to determine the charge label uniquely (requires partial orthogonality of the character tables, see Section \ref{sec:D4_double} for an example).
+If $H \subset Z(f)$, we need to perform partial charge measurement results for other subgroups of $G$ that are also subgroups of $Z(f)$. We then combine these results to determine the charge label uniquely. This requires partial orthogonality of the character tables, see Section \ref{sec:D4_double} for an example.
 
 If $H \not\subset Z(f)$ the measurement is discarded in post-selection.
 
@@ -529,7 +520,7 @@ Nontrivial pure fluxes are labelled $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ be
 
 \textbf{Charge Measurements Reprise.}
 Let us review the partial charge measurements for $D(D_4)$.
-We choose the subgroups $\{H_r, H_m, H_{mr}\}$ for the measurement protocol. All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional, this means that the measurement outcome of the reduced charge measurement is just the irrep label $(\chi_{H_x})$. Looking at their character tables, we note the partial orthogonality with the characters of the irreps of $G$. 
+We choose the subgroups $\{H_r, H_m, H_{mr}\}$ for the measurement protocol. All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional, this means that the measurement outcome of the partial charge measurement is just the irrep label $(\chi_{H_x})$. Looking at their character tables, we note the partial orthogonality with the characters of the irreps of $G$. 
 
 %The character table of $D_4$ is given in Table \ref{tab:char}, while the character tables of relevant subgroups are given in Table \ref{tab:char_sub}. Note, the subgroups $\{H_r, H_m, H_{mr}\}$ were mentioned in the context of centres of relevant conjugacy classes, but they also prove to be a great choice of subgroups to be used in the reduced charge measurement protocol, in this case. \jovan{word better}
 
@@ -569,9 +560,9 @@ Table \ref{tab:red_ch} is to be interpreted as follows. Imagine we performed a $
 
 Now imagine we have performed all three measurement and obtained the set of labels $\{-1, (1, 1), (1, -1)\}$. This set is only compatible with the charge $\alpha_m$ and hence $\Sigma_m$ must be on a plaquette $p$.
 
-\emph{Beyond pure charges.} The four main subgroups we consider in the reduced charge measurement are also the centralisers of the respective conjugacy classes, $H_x = Z(x)$. Hence, as mentioned in the last section, if we read-off the flux whose centre is the subgroup we used in the reduced charge measurement, the result uniquely determines the dyon label.
+\textbf{Beyond pure charges.} The four main subgroups we consider in the partial charge measurement are also the centralisers of the respective conjugacy classes, $H_x = Z(x)$. Hence, as mentioned in the last section, if we read-off the flux whose centre is the subgroup we used in the partial charge measurement, the result uniquely determines the dyon label.
 
-It is only for dyons of trivial flux, $\{e, r^2\}$, that we need to use the repeated reduced charge measurements with different subgroups alongside partial orthogonality of the character tables of $D_4$ and its four element subgroups to uniquely determine the topological charge.
+It is only for dyons of trivial flux, $\{e, r^2\}$, that we need to use the repeated partial charge measurements with different subgroups alongside partial orthogonality of the character tables of $D_4$ and its four element subgroups to uniquely determine the topological charge.
 
 \section{Probing Non-Abelions} \label{sec:probing}
 
@@ -919,7 +910,7 @@ The exact method of tomography will be presented alongside the numerical result 
 
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width=\linewidth]{Figures/intefFlav.pdf}
-    \caption{Conditioning the type of the $b$-ribbon. If the state of the control qubit is $\ket{1}_c$, apply ribbon $b$. If it is $\ket{0}_c$, apply the ribbon for the reducible representation $0\oplus\tilde{0}$.\caro{change $\Psi_m$ to $b$ in the figure.}}
+    \caption{Conditioning the type of the $b$-ribbon. If the state of the control qubit is $\ket{1}_c$, apply ribbon $b$. If it is $\ket{0}_c$, apply the ribbon for the reducible representation $0\oplus\tilde{0}$.}
     \label{fig:cond_flav}
 \end{subfigure}
 
@@ -983,11 +974,11 @@ In this section, we present the simulation results for the fusion and braiding e
 \textbf{Circuit Characteristics.} Before we present the results, we report on the qubit layout used for the fusion and braiding experiments, as well as circuits depths achieved, in order to put the noise observed in a useful context.
 
 \emph{Fusion.} 
-The exact ribbon operators and the layout of the qubits on the Sycamore chip used in the fusion experiment is shown in Fig.~\ref{fig:fusion_setup}.
+The exact ribbon operators and the layout of the qubits on the Sycamore chip used in the fusion experiment are shown in Fig.~\ref{fig:fusion_setup}.
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Figures/basket_fusion.pdf}
-	\caption{(Top) The ribbon operators for the fusion of two $\Psi_m$ anyons on a small planar graph. The purple circle marks the plaquette on which we perform the $H_{mr}$-partial charge measurement. The red circle marks the vertex on which we measure the flux, together they form the site on which fusion occurs. (Bottom) The circuit layout on the Sycamore chip we used to simulate the fusion experiment.}
+	\caption{Ribbon operators and qubit layout for the fusion of two $\Psi_m$ anyons on the braiding ladder (top) and a small planar graph (bottom). Purple circle mark the plaquette on which we perform the $H_{mr}$-partial charge measurement. Red circles mark the vertex on which we measure the flux.}
 	\label{fig:fusion_setup}
 \end{figure}
 
@@ -1000,13 +991,12 @@ It is also worth noting that not all anyons are equal in complexity. The $r-$dyo
 
 For the fusion of $\Psi_m$-fluxes on the small planar graph, we obtained a device-ready circuit of depth 70. This circuit prepares the ground state, implements the ribbon operators and performs a partial charge measurement. 
 %For the fusion of $\Psi_m$-fluxes on the small planar graph, we obtained a circuit of depth 17. This circuit prepares the ground state, implements the ribbon operators and perform a partial charge measurement. In this depth the auxiliary swaps are included. The circuit once compiled into one that only uses CZ reaches the depth of 70.
-On the braiding ladder the same protocol leads to a much shorter circuit of depth 37. This is due to a significantly simpler ground state preparation.\caro{comment on layout and ribbons}
-
-\emph{Braiding.} The ribbon operators for the two braiding protocols and the qubit layout on the Sycamore chip are shown in Fig.~\ref{fig:braiding_setup}.
+On the braiding ladder the same protocol leads to a much shorter circuit of depth 37. This is due to a significantly simpler ground state preparation.
+\emph{Braiding.} The ribbon operators for the two braiding protocols are shown in Fig.~\ref{fig:braiding_setup}. The qubit layout on the Sycamore chip is the same as for the fusion protocol on the ladder geometry (see Fig.~\ref{fig:fusion_setup}).
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Figures/braiding_setup.pdf}
-	\caption{(Top) The ribbon operators for the two braiding experiments. On the last step we also label around which plaquette we perform the $H_{mr}$-partial charge measurement. Note that we are on a sphere so the outside plaquette that we labelled twice for clarity should be identified. This is best seen in the diagram for the $\sigma_{12}$-exchange. (Bottom) The circuit layout on the Sycamore chip we used to simulate the braiding experiment.}
+	\caption{Ribbon operators for the two braiding experiments. On the last step we also label around which plaquette we perform the $H_{mr}$-partial charge measurement. Note that the lattice is embedded into a sphere, so the outside plaquette that we labelled twice for clarity should be identified.}
 	\label{fig:braiding_setup}
 \end{figure}
 
@@ -1026,26 +1016,26 @@ The results of the fusion experiments on the ladder and the planar graph, as wel
 \centering
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width = \linewidth]{Figures/fusion_on_glasses.png}
-    \caption{The reduced charge-flux measurement after fusing two $\Psi_m$ pure fluxes on the site of fusion. The reduced charge was done with $H_{mr}$ subgroup, and the geometry was that of the braiding ladder, Figure \ref{fig:latticeGS}.}
+    \caption{The partial charge-flux measurement after fusing two $\Psi_m$ pure fluxes on the site of fusion. The partial charge was done with $H_{mr}$ subgroup, and the geometry was that of the braiding ladder, Figure \ref{fig:latticeGS}.}
     \label{fig:fusion_glass}
 \end{subfigure}\hfill
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width=\linewidth]{Figures/fusion_on_basketball.png}
-    \caption{The reduced charge-flux measurement after fusing two $\Psi_m$ pure fluxes on the site of fusion. The reduced charge was done with $H_{mr}$ subgroup, and the geometry was that of the small two-dimensional graph, Figure \ref{fig:basketball}.}
+    \caption{The partial charge-flux measurement after fusing two $\Psi_m$ pure fluxes on the site of fusion. The partial charge was done with $H_{mr}$ subgroup, and the geometry was that of the small two-dimensional graph, Figure \ref{fig:basketball}.}
     \label{fig:fusion_basketball}
 \end{subfigure}
 \vspace{15pt}
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width=\linewidth]{Figures/braid_fusion.png}
-    \caption{The braiding on a braiding ladder: the reduced charge-flux measurement after performing the braiding protocol in $\sigma_{12}\sigma_{23}$ order, Figure \ref{fig:flux_braid} (left), where $\sigma_{ii+1}$ is a braid group generator. The anyons used are the pure fluxes $\Psi_m$. The reduced charge measurement was done with respect to $H_{mr}$ subgroup.} 
+    \caption{The braiding on a braiding ladder: the partial charge-flux measurement after performing the braiding protocol in $\sigma_{12}\sigma_{23}$ order, Figure \ref{fig:flux_braid} (left), where $\sigma_{ii+1}$ is a braid group generator. The anyons used are the pure fluxes $\Psi_m$. The partial charge measurement was done with respect to $H_{mr}$ subgroup.} 
     \label{fig:braid_fuse}
 \end{subfigure}\hfill
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width=\linewidth]{Figures/braid_link.png}
-    \caption{The braiding on a braiding ladder: the reduced charge-flux measurement after performing the braiding protocol in $\sigma_{23}\sigma_{12}$ order, Figure \ref{fig:flux_braid} (right), where $\sigma_{ii+1}$ is a braid group generator. The anyons used are the pure fluxes $\Psi_m$.The reduced charge measurement was done with respect to $H_{mr}$ subgroup.}
+    \caption{The braiding on a braiding ladder: the partial charge-flux measurement after performing the braiding protocol in $\sigma_{23}\sigma_{12}$ order, Figure \ref{fig:flux_braid} (right), where $\sigma_{ii+1}$ is a braid group generator. The anyons used are the pure fluxes $\Psi_m$. The partial charge measurement was done with respect to $H_{mr}$ subgroup.}
     \label{fig:braid_link}
 \end{subfigure}
-\caption{The reduced topological charge measurements for the fusion and braiding protocols.}
+\caption{The partial topological charge measurements for the fusion and braiding protocols.}
 \label{fig:red_charge_res}
 \end{figure*}
 
@@ -1071,7 +1061,7 @@ The number of runs for both protocol was $16000$. The expected post-selection pr
 In the case of the first braiding we see the four main peaks corresponding to the expected topological charges counting $255\pm 5$ with the biggest peak coming from the noise counting $109$ and resulting in a signal to noise ratio of about $2.3$. In the second case the peak corresponding to the vacuum counts $1890\pm x$. The largest peak coming from the noise counts 450 giving a signal to noise ratio of about $4.2$.
 
 For the detailed discussion of the post-selection probabilities see Appendix \ref{app:postsel}.
-\caro{what exactly do we want to say about that and do we really need an appendix?}
+\caro{this is still work in construction}
 
 
 \textbf{Supplementary Measurements.} In the analysis above we relied on the knowledge of the fusion outcomes to match the observed measurement outcomes of the $H_{mr}$-partial charge measurement with the corresponding charges. 
@@ -1312,7 +1302,6 @@ We observe that the magnitude of the $S$-matrix in the simulation results decays
 
 
 
-\jovan{No, comment on T-mat?}
 %As mentioned before for the $T$-matrix elements we have already presented the most difficult of the cases, the semions, and it shows excellent agreement with the theoretical expectations.
 
 
@@ -1442,9 +1431,9 @@ As in the case of the unrestricted controlled multiplication circuit we would se
 The ground state preparation protocol (without feed forward) requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
 
 \textbf{Charge Measurement.}
-Arguably, where we loose out the most is with the reduced charge measurement. The group $S_3$ has only few very simple proper subgroups, $H_r = \mathbb{Z}_3^r$, $H_m = \mathbb{Z}_2^m$, $H_{mr^2} = \mathbb{Z}_2^{mr^2}$ and $H_{mr} = \mathbb{Z}_2^{mr}$.
+Arguably, where we loose out the most is with the partial charge measurement. The group $S_3$ has only few very simple proper subgroups, $H_r = \mathbb{Z}_3^r$, $H_m = \mathbb{Z}_2^m$, $H_{mr^2} = \mathbb{Z}_2^{mr^2}$ and $H_{mr} = \mathbb{Z}_2^{mr}$.
 
-The circuits involved in the reduced charge measurement with respect to the subgroups $H_m$ and $H_r$ are shown in Figure~\ref{fig:H_red_S3}. We chose to implement left and right multiplication for the two subgroups respectively because the circuits are significantly shallower. If the orientation of the arrows differs from what we need we can always reverse using the inverse circuit shown in the same figure.
+The circuits involved in the partial charge measurement with respect to the subgroups $H_m$ and $H_r$ are shown in Figure~\ref{fig:H_red_S3}. We chose to implement left and right multiplication for the two subgroups respectively because the circuits are significantly shallower. If the orientation of the arrows differs from what we need we can always reverse using the inverse circuit shown in the same figure.
 
 \begin{figure}
 \begin{equation*}
@@ -1496,7 +1485,7 @@ $-1$ & 0   & 2            & 2                              \\ \hline
 \label{tab:red_ch_S3}
 \end{table}
 
-Table \ref{tab:red_ch_S3} shows the partial orthogonality of character tables of $S_3$ and two of its proper subgroups. The fact that given the results of both $H_m$- and $H_r$-reduced charge measurements we can uniquely determine the charge still holds for this group as well. 
+Table \ref{tab:red_ch_S3} shows the partial orthogonality of character tables of $S_3$ and two of its proper subgroups. The fact that given the results of both $H_m$- and $H_r$-partial charge measurements we can uniquely determine the charge still holds for this group as well. 
 
 \textbf{Summary.}
 The computational universality of $D(S_3)$ complemented with measurements comes at the expense of significantly longer elementary circuits for our protocols. The elementary circuits are about ten times deeper once compiled into native gates that the Sycamore chip can perform, neglecting the SWAPs needed to place the relevant qubits into appropriate proximity to one another.
@@ -1507,11 +1496,10 @@ However, for any qubit based architecture we reckon that realising $D(S_3)$ is b
 
 
 \section{Conclusions and Outlook} \label{sec:outlook}
+In this work we explored the feasibility of realizing the quantum double model $D(D_4)$ on current NISQ technology, in particular Google's Sycamore chip. We demonstrated that by exploiting the structure of the group one can achieve moderate circuit depths for the creation and manipulation of anyons with ribbon operators and proposed a partial charge measurement to uniquely determine the anyon content without relying on prohibitively costly full group multiplications. Our numerical results suggest that current NISQ technology is capable of probing the full modular data of $D(D_4)$ on a quasi-one dimensional lattice architecture and that ground state preparation without feed-forward protocols are possible on small two-dimensional lattices. 
 
-\jovan{Start after the main text.}
-
-
-% 
+We investigated how the circuit simplifications carry over to the group $S_3$ which is more powerful for topological quantum computation and found that for a qubit-qutrit setting, the circuit depth would be even shorter as compared to the qubit implementation of $D(D_4)$. In contrast, for a qubit-based architecture, the circuit depths we could achieve lie outside of the range currently accessible by roughly one order of magnitude. However, given the steady improvement in quantum technologies, the implementation of $D(S_3)$ might soon be possible. 
+\caro{ran out of steam, discussion and outlook can be improved}
 
 
 \FloatBarrier
