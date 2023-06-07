@@ -93,7 +93,7 @@ At last, we aim to design a protocol which can detect and uniquely determine top
 
 This might be due to the inherent difficulty of uniquely determining non-abelian charge content. In the quantum double model the operators needed to measure general charges are explicitly known, however, they require full group multiplications on several lattice-dof and are therefore prohibitively costly. To circumvent this we propose a \emph{partial charge measurement}. To determine the total charge, one needs to evaluate how a given state transforms under the full group. However, one can instead measure how it transforms under a subgroup. Due to partial orthogonality of the characters of a subgroup with those of the group, a measurement outcome reveals partial information about the charge. In the case of $D(D_4)$ one finds that a certain outcome is only compatible with at most two different charges. Repeating the measurement for two different subgroups, we can unambiguously infer the charge. This procedure avoids costly multiplications with the full group and removes unfavourable Toffoli gates from the circuit at the cost of repeating the protocol twice.
 
-
+\caro{Steve's comment: when is it true that measuring subgroups is enough to unambiguously determine charge}
 
 
 \subsection{Probing non-abelian signatures}
@@ -106,10 +106,10 @@ Our numerical findings indicate that current NISQ technology is ready to demonst
 
 In this section we will review Kitaev's quantum double models\cite{Kitaev_2003} and discuss their ground states and anyonic excitations. We will also present our protocols for creating and manipulating anyons, and for measuring topological charge. 
 
-Kitaev's quantum double models are Hamiltonian formulations of lattice gauge theory for finite gauge groups. Gauss' law is enforced energetically at each vertex by a Hamiltonian term and the model is at the deconfinement fixed point, where there are no electric field terms.
+Kitaev's quantum double models are (2+1d) Hamiltonian formulations of lattice gauge theory for finite gauge groups. Gauss' law is enforced energetically at each vertex by a Hamiltonian term and the model is at the deconfinement fixed point, where there are no electric field terms.
 The Hamiltonian, therefore, has two sets of terms -- the gauge-invariant (magnetic) plaquette terms and the Gauss' law vertex terms\cite{cui2018topological, Kitaev_2003}. 
 
-Quantum double models can also be understood as a subclass of the more general string-net models\cite{Levin_2005}, which describe all non-chiral topological phases of matter, or as a generalisation of Kitaev's toric code\cite{Kitaev_2003} for which the gauge group is $\mathbb Z_2$ to general groups $G$. While all quantum double models have anyonic excitations, the anyons for models with abelian gauge group are themselves abelian. In order to obtain non-abelian anyons, it is necessary to consider non-abelian gauge groups $G$. While the models for the latter are conceptually still very similar to the toric code, their definitions require slightly more care and notation, which we will introduce in the following. 
+Quantum double models can also be understood as a subclass of the more general string-net models\cite{Levin_2005}, which describe all non-chiral (2+1d) topological phases of matter, or as a generalisation of Kitaev's toric code\cite{Kitaev_2003} for which the gauge group $\mathbb Z_2$ is generalized to an arbitrary discrete group $G$. While all quantum double models have anyonic excitations, the anyons for models with abelian gauge group are themselves abelian. In order to obtain non-abelian anyons, it is necessary to consider non-abelian gauge groups $G$. While the models for the latter are conceptually still very similar to the toric code, their definitions require slightly more care and notation, which we will introduce in the following. 
 
 %\footnote{It is worth noting that there exist an even more general class of models, known as Levin-Wen string-net model\cite{Levin_2005}.}.
 \textbf{Hamiltonian.}
@@ -122,6 +122,7 @@ For a given group $G$ we can define its quantum double model on any arbitrary \e
 \begin{equation}
     H = -  \sum_{v \in V} \mathbf B_v -  \sum_{p  \in  P} \mathbf A_p \label{eqn:ham} \;.
 \end{equation}
+Note, that we will here use a formulation of the theory on the \emph{dual} lattice compared to the lattice of the original work in Ref.~\cite{Kitaev_2003}.
 We will now discuss these terms in more detail. As mentioned above, the vertex term enforces Gauss' law. To achieve this we first introduce a general vertex operator $B_v{(h)}$ for every vertex. This operator projects onto all states for which the group elements assigned to the edges adjacent to the vertex multiply to $h$. To make the product unambiguous we need to order the edges. This ordering has to fulfil additional constraints to be specified momentarily. In addition, a group element $g$ assigned to an incoming (outgoing) edge enter as $g$ ($g^{-1}$). E.g. for the trivalent vertex depicted in Fig.~\ref{eqn:Bs_def} we have 
 \begin{equation}
 B_v{(h)} |g_1,g_2,g_3\rangle= \delta_{g_1 g_2 g_3,h} |g_1,g_2,g_3\rangle \;.	
@@ -156,7 +157,7 @@ is defined in terms of operators $A_p{(g)}$ which shift the labels of the edges 
 \end{figure*}
 
 \textbf{Ground state.}
-It is not hard to verify that all terms in the Hamiltonian commute, Hence we can diagonalize it term-by-term. One can show that the leftover degeneracy depends only on the genus of the surface the graph is embedded in\cite{Kitaev_2003, cui2018topological}. However, we will work on a sphere-topology, where the ground state is unique.
+It is not hard to verify that all terms in the Hamiltonian commute, Hence we can diagonalize it term-by-term. One can show that the leftover degeneracy depends only on the genus of the surface the graph is embedded in\cite{Kitaev_2003, cui2018topological}. However, we will work on a sphere-topology, where the ground state is unique.\caro{steve's comment on topology difficulty in experiment bc global connections}
 
 % Used to be a Subsection "Ground State"
 
@@ -174,7 +175,7 @@ This state is the unique ground state and corresponds to the equal weight superp
 
 
 \subsection{Anyon content}\label{sec:anyon}
-In the following we will discuss the anyonic excitations in quantum double models and the algebra describing the latter.
+In the following we will discuss the anyonic excitations in quantum double models and the algebra describing them.
 
 \textbf{The algebra $D(G)$.} The ground state is stabilized\footnote{Meaning, it is the $+1$ eigenstate.} by the projectors in Eq.~\eqref{eqn:ham}. Together with the property $A_p{(g_1)}A_p{(g_2)} = A_p{(g_1 g_2)}$ this implies the stronger condition
 \begin{equation}
@@ -185,7 +186,7 @@ In the following we will discuss the anyonic excitations in quantum double model
 \end{equation}
 for all $v \in V$, $p \in P$ and $g \in G$. Therefore, the elementary excitation above the ground state will violate one or more of the equations above and are characterized by how the operators $B_v(h)$ and $A_p(g)$ act on them. More precisely, these operators form an algebra\cite{cui2018topological, Kitaev_2003} (the quantum double algebra $D(G)$), which contains the full information about the anyonic excitations. In particular its irreducible representations label the anyons.
 
-For the toric code model, the $A$ and $B$ operators always commute and their algebras can be investigated independently. One finds the well-known $e$ (for electric) and $m$ (for magnetic) particles associated to vertex and plaquette violations, respectively, and their combination, the fermionic $(e,m)$-particle. However, for non-abelian gauge-groups the operators $A_p(g)$ and $B_v(g)$ whose plaquette and vertex overlap, do no longer commute. To discuss their joint algebra, we consider \emph{sites}
+For the toric code model, the $A$ and $B$ operators always commute and their algebras can be investigated independently. One finds the well-known $e$ (for electric) and $m$ (for magnetic) particles associated to vertex and plaquette violations, respectively, and their combination, the fermionic $(e,m)$-particle. However, for non-abelian gauge-groups the operators $A_p(g)$ and $B_v(g)$ no longer commute if the vertex $v$ intersects the plaquette $p$. To discuss their joint algebra, we consider \emph{sites}
 %\footnote{Either some vertices or some plaquettes will be left over depending on the exact geometry of the lattice.} 
  $s_i = (v_i, p_i)$ of adjacent vertices and plaquettes.
 %
@@ -198,7 +199,7 @@ For the toric code model, the $A$ and $B$ operators always commute and their alg
 %
 %In the case of Non-abelian gauge groups, this notion of breaking an $A$-type or a $B$-type condition becomes much more involved due to the more complicated operator algebra being induced by the more complicated group multiplication.
  
-Operators on different sites commute trivially, while on the same site we have\footnote{We remark, that the algebraic relations in Eq.~\eqref{eqn:alg} do not depend on the exact grouping of plaquettes and vertices into sites.} 
+On the same site we have the following algebraic relations %\footnote{We remark, that the algebraic relations in Eq.~\eqref{eqn:alg} do not depend on the exact grouping of plaquettes and vertices into sites.} 
 \begin{equation}
     \begin{split}
         A_s{(g)}A_s{(h)} = A_s{(gh)}, \\
@@ -215,7 +216,7 @@ We will now discuss its irreducible representations. However, we will refrain fr
 
 The irreducible representations are labelled by two objects, a conjugacy class $C$ of the group $G$ and an irreducible representation $\chi$ of the centralizer, $Z(r)$, of the class representative $r \in C$. The vector space on which $(C, \chi)$ acts is spanned by a basis $\ket{\mu} = \ket{c, i}$, where $c \in C$ and $i \in \{1, 2, \ldots, \text{dim}\chi\}$, i.e. the first index goes over the conjugacy class elements while the second goes over the vector indices of the irreducible representation $\chi$.
 
-Note, that in the case of abelian groups, in particular the toric code, the conjugacy classes are trivial and identical to the group elements themselves. Their center is $G$, which has $|G|$ one-dimensional representations. Hence, the irreducible representations factorise as indicated above. 
+Note, that in the case of abelian groups, in particular the toric code, the conjugacy classes are trivial and identical to the group elements themselves. Their center is $G$, which has $|G|$ one-dimensional representations isomorphic to $G$ itsel. Hence, the irreducible representations are given by $|G|^2$ tuples $(g,\rho_i)$, where any group element is paired with any irreducible representation $\rho_i$, $i=1,\ldots, |G|$.
 
 In the general, non-abelian case the irreducible representations do not factorize as can be seen from the action of the algebra generators on the vector space spanned by $\ket{\mu}=\ket{c,i}$ %
 \begin{equation}
@@ -224,7 +225,7 @@ In the general, non-abelian case the irreducible representations do not factoriz
         A_{\mu\nu}{(g)}= \bra{c, i} A{(g)} \ket{c', i'} = \delta_{c,gc'g^{-1}} \Gamma^\chi_{c,ii'}(g),
     \end{split}
 \end{equation}
-where $\Gamma^\chi_c(g)$ are the $\chi$-representation matrices. The latter are defined for elements of the centraliser $Z$ which are obtained from $g$ via the map $q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$. 
+where $\Gamma^\chi_c(g)$ are the $\chi$-representation matrices. The latter are defined for elements of the centraliser $Z(r)$ which are obtained from $g$ via the map $q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$. 
 
 
 To get a better understanding of the meaning behind these expressions, we consider three simple examples. Let us start with the vacuum (or trivial) representation, labelled by $(\{e\}, \mathbb{1})$. This representation is one-dimensional and spanned by $\ket{e, 0}$
@@ -297,7 +298,8 @@ While the general expression for the $N_{ab}^c$ is cumbersome and can be found i
 If the gauge group is abelian all algebra representations are one-dimensional and there is no degeneracy once the charge content of a gauge field is specified. The fusion is unambiguous. 
 We can see that by looking at the dimensions of the LHS and RHS of Eq.~\eqref{eqn:fuse}. For every $a$ and $b$ there is only one $c$ for which $N_{ab}^c$ is nonzero, i.e. one.
 
-The Hilbert space associated with the presence of multiple non-abelian anyons is the stage on which all striking phenomena of non-abelianess are played out. Besides the possibility of multiple fusion outcomes discussed above,  also moving anyons around one another (braiding) acts non-trivially on this space and corresponds to a unitary operation. In such a braiding process the order of exchanges matter as in general the unitary matrices associated to the individual exchanges do not commute. The full theory that describes the braiding and fusion of anyons is a so-called unitary modular tensor category (UMTC)\cite{Kitaev_2003} and the UMTC for the anyons of quantum double models is reviewed in Appendix \ref{app:umtc}.
+The Hilbert space associated with the presence of multiple non-abelian anyons is the stage on which all striking phenomena of non-abelianess are played out. Besides the possibility of multiple fusion outcomes discussed above,  also moving anyons around one another (braiding) acts non-trivially on this space and corresponds to a unitary operation. In such a braiding process the order of exchanges matter as in general the unitary matrices associated to the individual exchanges do not commute. The full theory that describes the braiding and fusion of anyons is a so-called unitary modular tensor category (UMTC)\cite{Kitaev_2003}.
+% and the UMTC for the anyons of quantum double models is reviewed in Appendix \ref{app:umtc}.
 
 %
 %As an example, let us take the charge content of the gauge field to be four Non-abelian anyons of the same type $a$ occupying four sites and look at the form of the degenerate subspace $\mathcal H_{\text{deg.}}$.
@@ -322,7 +324,7 @@ The Hilbert space associated with the presence of multiple non-abelian anyons is
 %
 \subsection{Ribbon Operators}\label{sec:ribbon_ops}
 
-In the following, we will explain how to create and move anyons. Anyons are always created in pairs from the vacuum. 
+In the following, we will explain how to create and move anyons. Anyons can always be created in pairs from the vacuum. 
 %
 %To see why, imagine we take the ground state on a 2-sphere, the state is a superposition of all assignments of group elements to edges that do not violate the Gauss' law. Now we shift the label of one of the edges, $e_0$, by some constant group element. The superposition is now made up from different assignments, which only differ on the edge $e_0$. This action disturbs two vertex operators on each end of the edge $e_0$, i.e. a pair of pure fluxes have been created.
 %
@@ -339,11 +341,11 @@ We will not explain the derivation of the ribbon operators themselves, see Ref \
 %\jovan{General, add to introduction: These operators represent a planar diagram algebra, i.e. a braiding group representation generated by a specific Braiding Tensor Category (BTC) and hence were conceived as a model of a system that can perform fault-tolerant quantum computing by the means of braiding anyons.
 %However, even though the braid group itself is universal its image on this planar diagram algebra is finite, hence non-universal \cite{cui2018topological}. For some gauge groups it can be made universal by the addition of measurements \cite{Cui_2015}.}
 %
-The ribbon operators are not unitary in general. If the anyons have a dimension larger than one, the operators that create and manipulate them are non-local projectors. To simulate them on a digital quantum computer requires ancillas and measurements. 
+The ribbon operators are not unitary in general. If the anyons have a dimension larger than one, the operators that create and manipulate them are non-local projectors. To simulate them on a digital quantum computer requires ancillas and measurements\cite{Cirac}. 
 
-In Ref. \cite{andersen2022observation} the group overcame this issue by means of unitary lattice deformations, unitarily transforming from a state with a set of non-abelian anyons on one graph to another state with the same anyon content but defined on a different graph, hence they were able to move the Non-abelian Majorana fermions unitarily. However, these are extrinsic and static lattice defects on top of a theory that is an abelian $\mathbb Z_2$ gauge theory, hence, the nature of their non-abelian anyons is different from intrinsic gauge field excitations.
+In Ref. \cite{andersen2022observation} the group overcame this issue by means of unitary lattice deformations, unitarily transforming from a state with a set of non-abelian anyons on one graph to another state with the same anyon content but defined on a different graph, hence they were able to move the non-abelian Majorana fermions unitarily. However, these are extrinsic and static lattice defects on top of a theory that is an abelian $\mathbb Z_2$ gauge theory, hence, the nature of their non-abelian anyons is different from intrinsic gauge field excitations.
 
-As we mentioned, the pair of $d$-dimensional anyons define a $d^2$-dimensional degenerate subspace of the gauge field Hilbert space that encodes the outcomes of their fusion. This encoding is increasingly non-local as we separate the anyons, this being the main idea of topological quantum computation with anyons. We, however, require accessing this information locally to move the anyons. To this end, we keep one auxiliary qudit per end of the ribbon.
+As we mentioned, the pair of $d$-dimensional anyons define a $d^2$-dimensional degenerate subspace of the gauge field Hilbert space that encodes the outcomes of their fusion. This encoding is increasingly non-local as we separate the anyons, this being the main idea of topological quantum computation with anyons. We, however, require accessing this information locally to move the anyons. To this end, we keep one auxiliary $d$-dimensional qudit per end of the ribbon.
 
 Every ribbon (cf. Fig.~\ref{fig:rib_exampl}) is made up from two types of elementary triangles
 \begin{itemize}
@@ -358,14 +360,14 @@ Moving anyons means appending elementary triangles onto a ribbon. Each triangle 
 \begin{figure}
     \centering
     \includegraphics[width= \linewidth]{Figures/ribbon_exampl.pdf}
-    \caption{An example of a ribbon, $R = \{t_1, t_2, \ldots, t_7\}$, between site $s_1$ and $s_2$. The ribbon is made up from four Type I elementary triangles and three Type II elementary triangles, they are labelled.}
+    \caption{An example of a ribbon, $R = \{t_1, t_2, \ldots, t_7\}$, between site $s_1$ and $s_2$. The black lines are the edges of the graph. The ribbon is made up from four Type I elementary triangles and three Type II elementary triangles, they are labelled.}
     \label{fig:rib_exampl}
 \end{figure}
 
 \textbf{The algorithm} that creates two anyons of type $(C,\chi)$ along a ribbon path $R$ in the internal state $\ket{\alpha; \beta} = \ket{c', i'; c, i}$ is the following
 \begin{enumerate}
-    \item Initialise two auxiliary qudits in the states $\ket{\alpha; \beta} = \ket{c', i'; c, i}$  We will think of the first qudit as the ribbon's back end and the second as its front end.
-    \item For each triangle in the ribbon, sequentially apply one of the following unitaries depending on the triangle \textit{type} (and the edge orientations) 
+    \item Initialise two $d=|C| \operatorname{dim} \chi$ dimensional auxiliary qudits in the states $\ket{\alpha; \beta} = \ket{c', i'; c, i}$  We will think of the first qudit as the ribbon's back end and the second as its front end.
+    \item For each triangle in the ribbon, depending on the triangle \textit{type} (and the edge orientations), sequentially apply one of the following unitaries acting on auxilliary qudits $\ket{c, i}$ and qudits encoding the group element $g$ associated to the edge of the lattice $\ket{g}_\text{phys}$  
     \begin{itemize}
         \item[I)] Multiply on the coincidng edge\\  $\ket{c, i}\ket{g}_\text{phys} \rightarrow \ket{c, i}\ket{cg}_\text{phys}$.
        \item[II)] Generalised-conjugate by the crossed edge\\ $\ket{c,i}\ket{h}_\text{phys} \rightarrow \ket{gcg^{-1}} \Gamma^\chi_c(h) \ket{i} \ket{h}_\text{phys}$.
@@ -374,7 +376,7 @@ Moving anyons means appending elementary triangles onto a ribbon. Each triangle 
 \end{enumerate}
 For the other variants of step 2, for different edge orientations etc., consult the Figure \ref{fig:al_trigs} in Appendix \ref{app:ribs}. 
 
-In the way presented above, we have started building up the ribbon from start-to-finish using only forward-type elementary triangles. Similarly, we could have started in the middle and extend in parallel both forward and backwards with appropriate types of elementary triangles, see Appendix \ref{app:ribs}. Backwards-type elementary triangles, analogously to Step \textbf{2.} stated above, act with the backwards auxiliary qudit.
+In the way presented above, we have started building up the ribbon from start-to-finish using only forward-type elementary triangles. Similarly, we could have started in the middle and extend in parallel both forward and backwards with appropriate types of elementary triangles, see Appendix \ref{app:ribs}. Backwards-type elementary triangles, analogously to Step \textbf{2.} stated above, act on the backwards auxiliary qudit.
 
 As we can see the operation is sequential so at best the depth of a circuit implementing this is $\mathcal{O}(|R|)$, with the best depth achieved by starting at the middle and growing it both ways.
 
@@ -387,7 +389,7 @@ The two types of triangles couple the two spaces in two different ways, for type
 
 \subsection{Charge Measurements}\label{sec:redchmmt}
 
-In this section, we will explain how we measure the topological charge, i.e., the anyon label. This is the last element of our toolkit for probing topological order. The ideal charge measurement would differentiate any type of excitation on any site, such measurement is associated with the following set of projectors \cite{}:
+In this section, we will explain how we measure the topological charge, i.e., the anyon label. This is the last element of our toolkit for probing topological order. The ideal charge measurement would differentiate any type of excitation on any site, such measurement is associated with the following set of projectors \caro{Cui?}\cite{}:
 \begin{equation}
     P_s^{(C, \chi)} = \frac{\chi(e)}{|Z(r)|}\sum_{c \in C}\sum_{z \in Z(r)}\chi^*(z)B_s^{(c)}A_s^{(q_c z \bar{q}_c)},
 \end{equation}
@@ -401,7 +403,7 @@ This requires circuits which, in the case of non-abelian groups such as $D_4$ wh
 
 The main idea to circumvent this problem is to instead use partial charge measurements that have a substantially reduced circuit depth. Such partial measurements do not determine the charge completely. However, when we combine a set of different partial measurements we are able to deduce the full charge content from the measurement outcomes.
 
-The key idea behind the partial measurement protocol is that controlled $A_s^{(g)}$ becomes significantly simpler to perform once we restrict ourselves to a proper subset of the full group, i.e. $g \in H \subset G$.
+The key idea behind the partial measurement protocol is that controlled $A_s^{(g)}$ becomes significantly simpler to perform once we restrict ourselves to a proper subgroup of the full group, i.e. $g \in H \subset G$.
 
 With Eq.~\eqref{eqn:tranfs} in mind, we propose the following algorithm for the $H$-partial charge measurement on a plaquette $p$:\begin{enumerate}
     \item Prepare an auxiliary qudit, $a$, encoding the elements of $H\subset G$, in an equal superposition over all elements, so that the joint total state of the system is: $$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys}. $$
@@ -430,23 +432,23 @@ In the case above, the result of the measurement in step 4 is a label $(\chi, i,
 If we, however, take $H \subset G$, then the charge information is partial.
 By partial charge information, we mean that the result of the measurement in the last step, the label $(\chi_H, i, j)$ is no longer compatible with only one charge but a set of charges, i.e. the charge is not fully determined.
 
-We may repeat the procedure using different subsets $H \in G$ to gather further partial information on the charge in the hope that we will be able to deduce the charge fully. In the considered examples, choosing different subgroups proves to be sufficient. This relies on the partial orthogonality of character tables of a group and its subgroup, and is demonstrated for the example of the group $D_4$ below.
+We may repeat the procedure using different subgroups $H \in G$ to gather further partial information on the charge in the hope that we will be able to deduce the charge fully. In the considered examples, choosing different subgroups proves to be sufficient. This relies on the partial orthogonality of character tables of a group and its subgroup, and is demonstrated for the example of the group $D_4$ below.
 
 \textbf{Beyond pure charges.} The partial charge measurement scheme is exact, i.e., unambiguous, when the chosen subgroup coincides with the centre of the conjugacy class of an anyon $(C, \chi)$, i.e., $H = Z(r)$ for $r \in C$.
 The label $\chi_H$ in fact is the label of the irreducible representation of the $Z(r)$ labelling the dyon.
 
-The full measurement protocol, in general, then consist of performing a $H$-partial charge measurement and reading-off the flux $f$ on the same site. 
+The full measurement protocol, in general, then consist of performing a $H$-partial charge measurement and then reading-off the flux $f$ on the same site. 
 
 If $H = Z(f)$, where $f \in C_f$ is the measured flux, the protocol is complete, since the measurement outcome correspond to the label $(C_f, \chi_H)$.
 
 If $H \subset Z(f)$, we need to perform partial charge measurement results for other subgroups of $G$ that are also subgroups of $Z(f)$. We then combine these results to determine the charge label uniquely. This requires partial orthogonality of the character tables, see Section \ref{sec:D4_double} for an example.
 
 If $H \not\subset Z(f)$ the measurement is discarded in post-selection.
-
+\caro{steve's bias comment}
 
 \subsection{Quantum Double of $D_4$}\label{sec:D4_double}
 
-Throughout the rest of the paper we will focus on the group $D_4$ and its lattice gauge theory.
+Throughout the rest of the paper (except for section \ref{sec:other_gauge}) we will focus on the group $D_4$ and its lattice gauge theory.
 Hence in this section, we will describe the group structure of $D_4$, its quantum double algebra, as well as representation theory of both.
 
 The dihedral group of order 8 is the symmetry group of a square. It is generated by a $\pi/2$-rotation $r$ and a reflection  $m$ along a diagonal.
@@ -493,14 +495,14 @@ There are five conjugacy classes, which implies that there are also five irreduc
 When labelling the representations of the algebra $D(D_4)$ we will also need the irreducible representations of the centres of the conjugacy classes. The centres of the three non-trivial conjugacy classes are abelian and have four elements. Hence, they have four one-dimensional irreducible representations. Their character tables are shown in Table~\ref{tab:char_sub}.
 \begin{table}[h]
 \centering
-\begin{tabular}{|l|llll|}\hline
+\begin{tabular}{|r|rrrr|}\hline
   $H_r$ & $e$ & $r$ & $r^2$ & $r^3$ \\ \hline
 $1$ & $1$   & $1$            & $1$             & $1$                                  \\ 
 $i$ & $1$   & $i$            & $-1$             & $-i$                                  \\ 
 $-1$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
 $-i$ & $1$   & $i$            & $-1$             & $i$                                  \\ \hline
 \end{tabular}
-\begin{tabular}{|l|llll|}\hline
+\begin{tabular}{|r|rrrr|}\hline
   $H_m (H_{mr})$ & $e$ & $m(mr)$ & $r^2$ & $mr^2(mr^3)$ \\ \hline
 $(1,1)$ & $1$   & $1$            & $1$             & $1$                                  \\ 
 $(1,-1)$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
@@ -513,14 +515,15 @@ $(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                    
 
 The task of listing all of the irreducible representations of $D(D_4)$ and their dimensions from this data is straightforward. There are $2 \times 5  + 3 \times 4 = 22$ irreducible representations, i.e., types of anyons in the $D_4$ quantum double model.
 
-Eight of them are one-dimensional, i.e. abelian, while the rest are two-dimensional. Other than the vacuum, four of them are pure charges and four are pure fluxes. For dyons with the $\mathcal{C}_{r^2}$ flux component we say that they have a trivial flux. The flux can be factored out, just like in the case of the toric code fermion. This comes from the fact that $r^2$ commutes with all group elements, just like the identity. 
+Eight of them are one-dimensional, i.e. abelian, while the rest are two-dimensional. Other than the vacuum, four of them are pure charges and four are pure fluxes. For dyons with the $\mathcal{C}_{r^2}$ flux component we say that they have a trivial flux even though it is not the vacuum flux. The flux can be factored out, just like in the case of the toric code fermion. This comes from the fact that $r^2$ commutes with all group elements, just like the identity. 
 
-\textbf{Anyon content of $D(D_4)$.} We label the vacuum and the trivial flux as $0 \equiv (\mathcal{C}_e, 1)$ and $\tilde 0 \equiv (\mathcal{C}_{r^2}, 1)$, respectively. Likewise, the pure charges and dyons with trivial flux are labelled as $\Sigma_{\chi} \equiv (\mathcal{C}_e, \chi)$ and $\tilde{\Sigma}_{\chi} \equiv (\mathcal{C}_{r^2}, \chi)$, with $\chi$ being one of the nontrivial irreducible representations of $D_4$.
+\textbf{Anyon content of $D(D_4)$.} We label the vacuum and the trivial flux as $0 \equiv (\mathcal{C}_e, 1)$ and $\tilde 0 \equiv (\mathcal{C}_{r^2}, 1)$, respectively. Likewise, the pure charges and dyons with vacuum and trivial flux are labelled as $\Sigma_{\chi} \equiv (\mathcal{C}_e, \chi)$ and $\tilde{\Sigma}_{\chi} \equiv (\mathcal{C}_{r^2}, \chi)$, with $\chi$ being one of the nontrivial irreducible representations of $D_4$.
 Nontrivial pure fluxes are labelled $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ being one of the nontrivial conjugacy classes of $D_4$. The rest of the dyons have less informative labels such as $\{\tilde{\Psi}_x, \Phi_x, \tilde{\Phi}_x\}$ and can be found in Appendix \ref{app:reps}.
 
 \textbf{Charge Measurements Reprise.}
 Let us review the partial charge measurements for $D(D_4)$.
-We choose the subgroups $\{H_r, H_m, H_{mr}\}$ for the measurement protocol. All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional, this means that the measurement outcome of the partial charge measurement is just the irrep label $(\chi_{H_x})$. Looking at their character tables, we note the partial orthogonality with the characters of the irreps of $G$. 
+We choose the subgroups $\{H_r, H_m, H_{mr}\}$ for the measurement protocol. All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional, this means that the measurement outcome of the partial charge measurement is just the irrep label $(\chi_{H_x})$. Looking at their character tables, we find a partial orthogonality with the characters of the irreps of $G$. 
+\caro{steve's comment 26}
 
 %The character table of $D_4$ is given in Table \ref{tab:char}, while the character tables of relevant subgroups are given in Table \ref{tab:char_sub}. Note, the subgroups $\{H_r, H_m, H_{mr}\}$ were mentioned in the context of centres of relevant conjugacy classes, but they also prove to be a great choice of subgroups to be used in the reduced charge measurement protocol, in this case. \jovan{word better}
 
@@ -556,7 +559,7 @@ $(-1,-1)$ & 0   & 0            & 0             & 0               & 4            
 \label{tab:red_ch}
 \end{table}
 
-Table \ref{tab:red_ch} is to be interpreted as follows. Imagine we performed a $H_m$-partial charge measurement on a plaquette $p$ and obtained the measurement outcome $(1,1)$. This label has a non-vanishing overlap with the trivial charge $1$ and charge $\alpha_m$. Hence, both $0$ and $\Sigma_{\alpha_m}$ can be anyons present on the plaquette.
+For example, imagine we performed a $H_m$-partial charge measurement on a plaquette $p$ and obtained the measurement outcome $(1,1)$. This label has a non-vanishing overlap with the trivial charge $1$ and charge $\alpha_m$. Hence, both $0$ and $\Sigma_{\alpha_m}$ can be anyons present on the plaquette.
 
 Now imagine we have performed all three measurement and obtained the set of labels $\{-1, (1, 1), (1, -1)\}$. This set is only compatible with the charge $\alpha_m$ and hence $\Sigma_m$ must be on a plaquette $p$.
 
@@ -576,7 +579,7 @@ The main experiments showcasing the non-abelian nature of the excitations we pro
 
 \item[ii)] Non-abelian braiding. The order of the braids does not commute.
 
-\item[iii)] S- and T-matrix measurements. This data describes the amplitudes of links and twists and almost uniquely\footnote{There are some exceptions, where the anyon theory, i.e., the UMTC is not determined uniquely by the $S$-and $T$-matrices alone\cite{notdetermined2021}.} characterises the full anyon theory.
+\item[iii)] S- and T-matrix measurements. This data describes the amplitudes of links and twists and almost uniquely\footnote{There are some exceptions, where the anyon theory, i.e., the UMTC is not determined uniquely by the $S$-and $T$-matrices alone\cite{notdetermined2021}. The smallest known example where this is the case has 49 particle types.} characterises the full anyon theory.
 %Technically speaking, the UMTC data is not captured by S and T matrix alone
 \end{itemize}
 
@@ -622,15 +625,15 @@ and for $H_{r}$ we use
 \end{enumerate} 
 
 %The full list of circuits for all variants of the above-mentioned operations are presented in Appendix \ref{app:cirqs}.
-We will focus on a set of examples illustrating the expected circuit depths. The full domain group multiplication (see Fig. \ref{fig:restMult}) consists of three Toffoli and 2 CNOT gates. Note, that on most hardwares a 3-qubit Toffoli gate must be decomposed into 2-qubit gates. Hence, each Toffoli gate should be seen as a depth-6 circuit in itself. With this in mind, the circuit depth for a single group multiplication is 22. Current noise levels limit the circuit depth to about 100 gates. Therefore, a naive protocol based on full domain group multiplication is doomed to fail. 
+We will focus on a set of examples illustrating the expected circuit depths. The full domain group multiplication (see Fig. \ref{fig:restMult}) consists of three Toffoli and 2 CNOT gates. Note, that on most hardwares a 3-qubit Toffoli gate must be decomposed into 2-qubit gates. \caro{Hence, each Toffoli gate should be seen as a depth-6 circuit in itself. [Steve's comment: depth 12?]}. With this in mind, the circuit depth for a single group multiplication is 22. Current noise levels limit the circuit depth to about 100 gates. Therefore, a naive protocol based on full domain group multiplication is doomed to fail. 
 
-We now contrast this with the reduced domain multiplication, wehre the control qubits are restricted do a certain conjugacy class. A representative example is shown in Fig.~\ref{fig:restMult}. The circuit is reduced to three CNOT gates. We can appreciate a dramatic reduction of circuit depth achieved by restricting the domain of the controlled multiplication circuit.
+We now contrast this with the reduced domain multiplication, where the control qubits are restricted to a certain conjugacy class. A representative example is shown in Fig.~\ref{fig:restMult}. The circuit is reduced to a depth-1 circuit with only one CNOT gate. We can appreciate a dramatic reduction of circuit depth achieved by restricting the domain of the controlled multiplication circuit.
 
-This is one of the main facts that allows us to greatly simplify many circuits related to ribbon operators and partial charge measurements. However, the direct ground state preparation does not benefit from these simplifications. We will discuss the ground state preparation separetely in the next section.
+This is one of the main facts that allows us to greatly simplify many circuits related to ribbon operators and partial charge measurements. However, the direct ground state preparation does not benefit from these simplifications. We will discuss the ground state preparation separately in the next section.
 
 
 
-Let us move on to the generalized conjugation. The circuit depths for the latter heavily depends on the type of anyon. For a pure flux the representation matrix $\Gamma$ is trivial and the generalized conjugation simplifies to a conventional conjugation which can be implemented by a circuit of depth one or two (see Fig.~\ref{fig:genConj} for an example). In contrast for a dyon with a one-dimensional but non-trivial irrep of the center, the circuit is more involved. Since the irrep is one dimensional, it corresponds to a phase factor and does not need to be encoded in an additional vector space. I.e., we can still use $\ket{c}$ instead of $\ket{c,i}$. However, the conjugation of $c$ has to be accompanied by appropriate phase factors implementing the action of $\Gamma^\chi_c(g)$. A circuit showing such a generalized conjugation for the $m$-dyon $\tilde{\Phi}_m \equiv (C_m, (-1, -1))$ is shown in Fig.~\ref{fig:genConj}. We note, that there is still no need for Toffoli gates, however, the circuit is more complex than for pure fluxes. The full list of circuits for generalised conjugations is discussed in Appendix \ref{app:reps}.
+Let us move on to the generalized conjugation. The circuit depths for this heavily depends on the type of anyon. For a pure flux the representation matrix $\Gamma$ is trivial and the generalized conjugation simplifies to a conventional conjugation which can be implemented by a circuit of depth one or two (see Fig.~\ref{fig:genConj} for an example). In contrast for a dyon with a one-dimensional but non-trivial irrep of the center, the circuit is more involved. Since the irrep is one dimensional, it corresponds to a phase factor and does not need to be encoded in an additional vector space. I.e., we can still use $\ket{c}$ instead of $\ket{c,i}$. However, the conjugation of $c$ has to be accompanied by appropriate phase factors implementing the action of $\Gamma^\chi_c(g)$. A circuit showing such a generalized conjugation for the $m$-dyon $\tilde{\Phi}_m \equiv (C_m, (-1, -1))$ is shown in Fig.~\ref{fig:genConj}. We note, that there is still no need for Toffoli gates, however, the circuit is more complex than for pure fluxes. The full list of circuits for generalised conjugations is discussed in Appendix \ref{app:reps}.
 
 \begin{table}[]
     \centering
@@ -674,7 +677,7 @@ Let us move on to the generalized conjugation. The circuit depths for the latter
 }
 \end{equation*}
 
-    \caption{Circuits for controlled group multiplication $\ket{g,h} \rightarrow \ket{g,gh}$. Left: Both $g$ (first three qubits) and $h$ are unrestricted, i.e., $g,h\in G$. Center: $g \in H_{m}$ is encoded by just the first two qubits. Right: $g \in C_m$ is encoded by just the first qubit.}
+    \caption{Circuits for controlled group multiplication $\ket{g,h} \rightarrow \ket{g,gh}$. Left: Both $g$ (first three qubits) and $h$ are unrestricted, i.e., $g,h\in G$. Center: $g \in H_{m}$ is encoded by just the first two qubits. Right: $g \in C_m$ is encoded by just the first qubit.\caro{calling it $r^2$ is misleading, maybe just call it $C_m$ and say in the caption that $\ket{0}$ is identified with $m$ and $\ket{1}$ with $mr^2$.}}
     \label{fig:restMult}
 \end{figure}
 
