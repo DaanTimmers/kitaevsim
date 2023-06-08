@@ -1678,27 +1678,28 @@ $U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
 $U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$ and 
 $U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$.
 
-Here we say that the first group element controls the multiplication, while the second is the target. It is this controlling group element that can be restricted to be in one of the following, useful, subsets of the full group $\{G\text{(Unrestricted)}, H_m, H_r, H_{mr}, C_m, C_r, C_{mr}\}$. All of these circuits are shown in Figures~\ref{fig:CM_Unres} to ~\ref{fig:CM_Cr}.
+Here we say that the first group element controls the multiplication, while the second is the target. It is this controlling group element that can be restricted to be in one of the following, useful, subsets of the full group $\{G\text{(Unrestricted)}, H_m, H_r, H_{mr}, C_m, C_r, C_{mr}\}$. All of these circuits are shown in Figure~\ref{fig:CM}.
 
 \begin{figure}
-\begin{equation*}
+\begin{gather*}
+\bold{G}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{3} & \qw & \qw & \qw & \qw\\
 \lstick{R} & \ctrl{2} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw
-\\
+\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw
+\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
+\qquad\qquad\qquad\quad U_{CM}^{(1)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \ctrl{4} & \ctrl{3} & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw
-\\
+\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \qw & \targ & \qw & \qw & \qw & \qw\\
 \lstick{R} & \ctrl{1} & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw
+\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
+\qquad\qquad\qquad\quad U_{CM}^{(2)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{3} & \qw & \qw & \targ & \ctrl{1} & \targ & \qw \\
@@ -1706,7 +1707,8 @@ Here we say that the first group element controls the multiplication, while the 
 \lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3}  & \qw & \qw & \qw \\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw & \qw & \qw \\
 \lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw & \qw & \qw \\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ  & \targ & \qw & \qw
+\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ  & \targ & \qw & \qw\\
+\qquad\qquad\qquad\qquad U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{3} & \qw & \qw & \targ & \ctrl{1} & \targ & \qw \\
@@ -1714,85 +1716,68 @@ Here we say that the first group element controls the multiplication, while the 
 \lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3}  & \qw & \qw & \qw \\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw & \qw & \qw \\
 \lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw & \qw & \qw \\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ  & \targ & \qw & \qw
-}
-\end{equation*}
-
-	\caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)}, U_{CM}^{(2)}, U_{CM}^{(3)}, U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element.}
-	\label{fig:CM_Unres}
-\end{figure}
-
-
-\begin{figure}
-\begin{equation*}
+\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ  & \targ & \qw & \qw\\
+\qquad\qquad\qquad\qquad U_{CM}^{(4)}
+}\\
+\\
+\\ \bold{H_m}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \ctrl{2} &  \qw & \qw\\
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw
-\\
+\lstick{R^{2}} & \qw  & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw \\
 \lstick{R} & \qw & \qw & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw
+\lstick{R^{2}} & \qw & \targ & \qw\\
+\qquad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \ctrl{2} &  \qw & \qw & \ctrl{3} & \qw\\
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw
-\\
+\lstick{R^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \qw & \qw & \ctrl{1} & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw & \targ & \qw
-}
-\end{equation*}
-
-    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)} = U_{CM}^{(3)}, U_{CM}^{(2)} = U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $H_m$ subgroup.}
-    \label{fig:CM_Hm}
-\end{figure}
-
-\begin{figure}
-\begin{equation*}
+\lstick{R^{2}} & \qw & \targ & \qw & \targ & \qw\\
+\qquad\qquad U_{CM}^{(2)} = U_{CM}^{(4)}
+}\qquad\bold{H_{mr}}:\qquad\quad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{mR} & \ctrl{2} &  \ctrl{2} & \ctrl{3} & \ctrl{3} & \qw & \qw\\
 \lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw
+\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
+\qquad\qquad\qquad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{mR} & \ctrl{2} &  \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw
-\\
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw \\
 \lstick{R} & \qw & \targ & \qw & \qw\\
-\lstick{R^{2}} & \qw & \qw & \targ & \qw
-}
-\end{equation*}
-
-    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)} = U_{CM}^{(3)}, U_{CM}^{(2)} = U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $H_{mr}$ subgroup.}
-    \label{fig:CM_Hmr}
-\end{figure}
-
-\begin{figure}
-\begin{equation*}
+\lstick{R^{2}} & \qw & \qw & \targ & \qw\\
+\qquad\quad U_{CM}^{(2)} = U_{CM}^{(4)}
+}\\
+\\
+\\ \bold{H_r}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{R} & \ctrl{2}  & \ctrl{3} & \ctrl{3} & \qw & \qw\\
 \lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \targ & \qw & \targ & \qw
+\lstick{R^{2}} & \targ & \targ & \qw & \targ & \qw\\
+\qquad\qquad U_{CM}^{(1)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{R} & \ctrl{3} &  \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw
-\\
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw \\
 \lstick{R} & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw
+\lstick{R^{2}} & \targ & \qw & \targ & \qw\\
+\qquad\qquad U_{CM}^{(2)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{R} & \ctrl{2}  & \ctrl{3} & \ctrl{3} & \qw & \ctrl{4} & \qw\\
 \lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw & \qw\\
-\lstick{R^{2}} & \targ & \targ & \qw & \targ & \targ & \qw
+\lstick{R^{2}} & \targ & \targ & \qw & \targ & \targ & \qw\\
+\qquad\qquad\qquad\quad U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{R} & \ctrl{3} &  \ctrl{3} & \qw & \ctrl{4} & \qw\\
@@ -1800,89 +1785,77 @@ Here we say that the first group element controls the multiplication, while the 
 \\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw & \qw\\
 \lstick{R} & \ctrl{1} & \targ & \qw & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \targ & \qw
-}
-\end{equation*}
-
-    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)}, U_{CM}^{(2)}, U_{CM}^{(3)},  U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $H_{r}$ subgroup.}
-    \label{fig:CM_Hr}
-\end{figure}
-
-\begin{figure}
-\begin{equation*}
-\Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw
+\lstick{R^{2}} & \targ & \qw & \targ & \targ & \qw\\
+\qquad\qquad\quad U_{CM}^{(4)}
+}\\
 \\
+\\ \bold{C_m}:\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{R^{2}} & \qw  & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw \\
 \lstick{R} & \qw & \qw & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw
+\lstick{R^{2}} & \qw & \targ & \qw\\
+\qquad\quad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw
-\\
+\lstick{R^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \qw & \qw & \ctrl{1} & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw & \targ & \qw
-}
-\end{equation*}
-
-    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)} = U_{CM}^{(3)}, U_{CM}^{(2)} = U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $C_m$ conjugacy class.}
-    \label{fig:CM_Cm}
-\end{figure}
-
-\begin{figure}
-\begin{equation*}
+\lstick{R^{2}} & \qw & \targ & \qw & \targ & \qw\\
+\qquad \qquad U_{CM}^{(2)} = U_{CM}^{(4)} 
+}\qquad \bold{C_{mr}}: \qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw
+\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
+\qquad\qquad\qquad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw
-\\
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw \\
 \lstick{R} & \qw & \targ & \qw & \qw\\
-\lstick{R^{2}} & \qw & \qw & \targ & \qw
-}
-\end{equation*}
-
-    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)} = U_{CM}^{(3)}, U_{CM}^{(2)} = U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $C_{mr}$ conjugacy class.}
-    \label{fig:CM_Cmr}
-\end{figure}
-
-\begin{figure}
-\begin{equation*}
+\lstick{R^{2}} & \qw & \qw & \targ & \qw\\
+\qquad \qquad U_{CM}^{(2)} = U_{CM}^{(4)} 
+}\\
+\\
+\\ \bold{C_r}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \targ & \qw & \targ & \qw
+\lstick{R^{2}} & \targ & \targ & \qw & \targ & \qw\\
+\qquad\qquad\qquad U_{CM}^{(1)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw
-\\
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw \\
 \lstick{R} & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw
+\lstick{R^{2}} & \targ & \qw & \targ & \qw\\
+\qquad\qquad U_{CM}^{(2)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw & \qw\\
-\lstick{R^{2}} & \targ & \targ & \qw & \targ & \targ & \qw
+\lstick{R^{2}} & \targ & \targ & \qw & \targ & \targ & \qw\\
+\qquad\qquad\qquad U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw & \qw
-\\
+\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw & \qw\\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw & \qw\\
 \lstick{R} & \ctrl{1} & \targ & \qw & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \targ & \qw
+\lstick{R^{2}} & \targ & \qw & \targ & \targ & \qw\\
+\qquad\qquad\qquad U_{CM}^{(4)}
 }
-\end{equation*}
+\end{gather*}
 
-    \caption{The controlled multiplication circuits implementing the maps $\{U_{CM}^{(1)}, U_{CM}^{(2)}, U_{CM}^{(3)},  U_{CM}^{(4)}\}$ from left to right. The first three qubits encode the control group element and the second three the target group element. The first element is restricted to be in the $C_{r}$ conjugacy class.}
-    \label{fig:CM_Cr}
+    \caption{The circuits implementing four different kinds of controlled multiplication:
+$U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh},$
+$U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
+$U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$ and 
+$U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$, for all the domain restrictions of the controlling group element $g \in X$, for $X \in \{G\text{(Unrestricted)}, H_m, H_r, H_{mr}, C_m, C_r, C_{mr}\}$.}
+    \label{fig:CM}
 \end{figure}
 
 %
@@ -1937,10 +1910,14 @@ In the Appendix~\ref{app:ribs} we see that we need four variants of the map, app
 \lstick{\quad m} &  \qw & \qw & \ctrl{1} & \qw & {\qquad mR}\\
 \lstick{R} & \qw & \targ & \ctrl{1} & \qw & {\qquad R}\\
 \lstick{R^{2}} & \qw & \qw & \targ & \qw  & {\qquad R^2}
+}\qquad\qquad\qquad
+\Qcircuit @C=0.4em @R=0.7em @!R{
+\lstick{\quad c} & \targ & \ctrl{1} & \targ & \qw \\
+\lstick{a_{f(b)}} & \qw & \ctrl{-1} & \qw & \qw
 }
 \end{equation*}
 
-    \caption{(Left) The inversion circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, used when reversing the arrow direction of the edges. (Right) The basis change circuit, $\ket{g}_{mRR^2} \rightarrow \ket{g}_{(mR)RR^2}$, can be used to simplify $mr$-based ribbon application protocol by making them analogous to $m$-ribbon application protocols.}
+    \caption{(Left) The inversion circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, used when reversing the arrow direction of the edges. (Middle) The basis change circuit, $\ket{g}_{mRR^2} \rightarrow \ket{g}_{(mR)RR^2}$, can be used to simplify $mr$-based ribbon application protocol by making them analogous to $m$-ribbon application protocols. (Right) The $\tilde{S}(\tilde{0}, a) = -1$ fix for the flavour conditioning protocol.}
     \label{fig:Misc_cirq}
 \end{figure}
 
