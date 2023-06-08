@@ -1571,7 +1571,24 @@ The ability to append to the backend helps in halving the circuit depth of the r
 
 \section{Representation Theory of $D(D_4)$}\label{app:reps}
 
-In this appendix, we cover the representation theory of the quantum double algebra of $D_4$. Tab.~\ref{tab:anyons} below shows the naming convention of the anyons and Tab.~\ref{tab:reps} lists the corresponding representation matrices. 
+In this appendix, we cover the representation theory of the quantum double algebra of $D_4$. Tab.~\ref{tab:anyons} below shows the naming convention of the anyons and Tab.~\ref{tab:reps} lists the corresponding representation matrices.
+
+The fusion algebra of the excitations of this theory is highly symmetrical and can be broken down into the following set of rules:\begin{enumerate}
+	\item $0 \otimes a = a$, for all $a \in \mathcal{A}$, (Vacuum representation is the neutral of the fusion algebra)
+	\item Rules relating to the trivial flux $\tilde{0}$:\begin{enumerate}
+		\item $\tilde{0} \otimes \tilde{0} = 0$,
+		\item $\tilde{0} \otimes \Sigma_x = \tilde\Sigma_x$, for all $x \in \{m, r, mr, \epsilon\}$,
+		\item $\tilde{0} \otimes \tilde\Sigma_x = \Sigma_x$, for all $x \in \{m, r, mr, \epsilon\}$, 
+		\item $\tilde{0} \otimes \Psi_x = \Psi_x$, for all $x \in \{m, r, mr\}$,
+		\item $\tilde{0} \otimes \tilde\Psi_x = \tilde\Psi_x$, for all $x \in \{m, r, mr\}$,
+		\item $\tilde{0} \otimes \tilde\Phi_x = \Phi_x$, for all $x \in \{m, r, mr\}$,
+		\item $\tilde{0} \otimes \Phi_x = \tilde\Phi_x$, for all $x \in \{m, r, mr\}$,
+	\end{enumerate}
+	\item Rules relating to Abelian charges $\Sigma_x$, for $x \in\{m, r, mr\}$:\begin{enumerate}
+		\item $\Sigma_x \otimes \Sigma_y = \Sigma_{\lfloor xy \rfloor}$, for $ y \in \{m, r, mr\}$ and where the $\lfloor \rfloor: G \rightarrow \{m , r, mr\}$ divides out $r^2$ when necessary,
+		\item $\Sigma_x \otimes \tilde\Sigma_y = \tilde\Sigma_{\lfloor xy \rfloor}$, for $ y \in \{m, r, mr\}$ and where the $\lfloor \rfloor: G \rightarrow \{m , r, mr\}$ divides out $r^2$ when necessary,
+	\end{enumerate}
+\end{enumerate}
 
 
 \begin{table}
