@@ -1231,7 +1231,7 @@ The two angles then fix the value of $\tilde{S}_{ab}$ via $$\tilde{S}_{ab} = \sq
 The other two parameters, the amplitude and the offset of the polarization, do not convey any physical information. The offset determines the difference of the effective readout biases, $\Delta\epsilon$, and the amplitude determines the product of the mean readout bias and the length of the Bloch vector, $(1-2\bar{\epsilon})|\vec{r}|$.
 
 
-In the discussion above, we have neglected the fact that in addition to the measurement of the control qubit, we measure the ribbon ancillas and post-select on their biased measurement outcomes. This causes an increased observed effective readout bias $\Delta \epsilon$, obtained from the fitting procedure described in the last section, which exceeds the $\Delta \epsilon$ estimate from calibration data. A more detailed discussion of this issue is given in Appendix \ref{app:marg}. 
+In the discussion above, we have neglected the fact that in addition to the measurement of the control qubit, we measure the ribbon ancillas and post-select on their biased measurement outcomes. This causes an increased observed effective readout bias $\Delta \epsilon$, obtained from the fitting procedure described in the last section, which exceeds the $\Delta \epsilon$ estimate from calibration data. A more detailed discussion of this issue is given in Appendix \ref{app:DATA_Anl}. 
 
 
 For the $T$-matrix protocol the Bloch vector of the control qubit after performing the ideal circuit reads
@@ -1299,7 +1299,7 @@ The result for the T-matrix element $T(\tilde \phi_r, \tilde \phi_r)$ determined
 
 
 
-\emph{Uncertainty.} In the experiment we used 1000 shots per measurement basis for the S-matrix measurements and 5000 for the T-matrix measurements. The uncertainty was estimated by assuming the standard binomial distribution for individual measurement outcomes of each shot and standard error mitigation. \caro{steve: what did you do here}
+\emph{Uncertainty.} In the experiment we used 1000 shots per measurement basis for the S-matrix measurements and 5000 for the T-matrix measurements. See Appendix~\ref{app:DATA_Anl} to see how we estimated the final uncertainties in the measured braiding amplitudes, i.e. $S$- and $T$-matrix elements, as well as for each datapoint in our plots.
 
 We expected a post selection probability of $1/4$ for all T-matrix protocols and S-matrix protocols with measured $|S| \neq 0$. For the case of measured $|S| = 0$ the probability drops to $1/8$. These probabilities were observed in the numerical experiment.
 
@@ -1969,8 +1969,25 @@ In the Appendix~\ref{app:ribs} we see that we need four variants of the map, app
 
 
 
-\section{Post-selection and one-qubit marginals}\label{app:marg}
-We investigate the effect of post selecting on biased measurement outcomes for the paradigmatic example of two qubits. We consider a general two-qubit density matrix
+\section{Post-selection and one-qubit marginals}\label{app:DATA_Anl}
+
+\textbf{Single Qubit Tomography.} In the following text, we discuss the uncertainty estimations used in our analysis of the interference protocols.
+
+The underlying probability distribution governing the outcome of $N$ single qubit readouts is a biased binomial distribution, $P(n_s) = {N \choose n_s} p_s^{n_s} p_{\bar{s}}^{N-n_s}$, where $n_s$ counts the number of times an outcome $s \in \{0,1\}$($\bar{s} = 1-s$) was achieved after the measurement. 
+
+From a set of $N$ shots we want to estimate a function we called polarisation $P = \frac{p_0 - p_1}{p_0 + p_1}$, that is, by our assumption, related to the parameters defining the single qubit state and read-out characteristics of the machine, $P = P(\vec{b}) = (1-2\bar\epsilon)\vec{r}\cdot\vec{b} + \Delta\epsilon$. 
+
+The unbiased estimator for this quantity is naturally $\hat P = \frac{n_0 - n_1}{n_0 + n_1}$, with $$\text{Mean}(\hat P) =P\text{ and }\text{Var}(\hat{P}) = N\sigma_{P}^2 = P(1-P),$$ where $\sigma_{P}$ is then the error in determining this mean. This error is determines the error bars in Figures~\ref{fig:S_res} and ~\ref{fig:t_mat_results}.
+
+Given the estimates for the function $P(\vec{b})$ for different measurement bases, $\vec{b}$, we extract the relevant quantities $(\vec{r}/|\vec{r}|, \Delta\epsilon, |(1-2\bar\epsilon)\vec{r}|)$ by fitting.
+
+Firstly for the $\phi$-scan we fit the function $f(\phi) = A\cos(\phi - \phi_{\text{max}})+B$, mainly to extract the angle which maximised the polarisation $\phi_{\text{max}}$. Then, fixing $\phi = \phi_{\text{max}}$, we do the $\theta$-scan and to it we fit the more informative function $g(\theta) = |(1-2\bar\epsilon)\vec{r}|\cos(\theta - \theta_{\text{max}}) + \Delta\epsilon$. The two angles define the direction of the Bloch's vector, while the other parameters are gotten from entirely from the second fit.
+
+The two angles define the braiding amplitude we want to extract from the interference protocol $$\mathcal{A} = \left(\sqrt{\frac{1-\cos{\theta_\text{max}}}{1+\cos{\theta_\text{max}}}}\pm \frac{\sigma_{\theta_\text{max}}}{|1 +\cos{\theta_\text{max}|}}\right)e^{i(\phi_\text{max}\pm \sigma_{\phi_\text{max}})},$$
+where the angles and their uncertainty are obtained by the usual $\chi^2$-fitting method.
+ 
+ 
+\textbf{Biased Post-Selection.} We investigate the effect of post selecting on biased measurement outcomes for the paradigmatic example of two qubits. We consider a general two-qubit density matrix
 \begin{equation}
 	\rho=\frac{1}{4} r_{\alpha \beta} \sigma_\alpha \tau_\beta,\quad r_{00}=1,\quad \alpha,\beta=0,\ldots,4\;,
 \end{equation} that represents the state after applying a noisy circuit. We tomograph the first qubit while post-selecting on the measurement outcome $0$ in the $z$-basis of the second qubit. The bias to measure $a$ while the outcome should be $\bar a$ is $\epsilon_a$ and assumed to be the same for both qubits. 
