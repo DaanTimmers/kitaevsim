@@ -858,15 +858,19 @@ where $\mathcal D=\sqrt{\sum_i d_i^2}=|G|$ is the total quantum dimension,
 which makes $|\tilde{S}(a,b)| \leq 1$. To see that note that $S_{ab}=\frac{1}{\mathcal D} N_{ab}^c \frac{\theta_c}{\theta_a \theta_b} d_c$ and $|\theta_a|=1$. We also know that $\sum_c N_{ab}^c d_c = d_a d_b$, so it follows that $|S_{ab}| \leq \frac{1}{\mathcal D} d_a d_b$.
 
 
-\jovan{ToDO: Revisit this paragraph.}
-The straight forward way to do this, is to condition the entire ribbon operator (see Figure \ref{fig:cond_ex}).  \caro{make more precise, remove figure reference} In conjunction with the calibration shown in Figure \ref{fig:phase_check}, this is conceptually the same as the ideal protocol in Figure \ref{fig:intef_example}. 
-The calibration is done to make sure there is no dynamical phase accumulated by applying the $b$ ribbon itself.
-However, in this protocol every single qubit gate of the ribbon operator becomes a two qubit gate (since the ribbon is conditioned on the control $c$) and every two qubit gate becomes a three qubit gate (unitarily similar to a Toffoli gate). Hence, the number of entangling gates grows quickly with the ribbon length.
+\jovan{ToDO: Revisit this paragraph. DONE.}
 
-A smarter alternative is to condition the anyon type of the ribbon (see Figure \ref{fig:cond_flav}). In this case we identify where the ribbon operators for the two anyon types differ, and condition only those operations. The circuit for this can be much shorter, see Fig. \ref{fig:cond_flav} for an example. In particular, for the case of $D(D_4)$, it turns out, that it is easier to compare the linking of anyons $a$ and $b$ to the linking of $a$ and $0 \oplus \tilde 0$, then comparing it to the linking of $a$ with vacuum. Thus, we condition whether we apply the ribbon $b$ or the ribbon corresponding to $0 \oplus \tilde 0$. 
+The conceptually simplest interferometry scheme is shown in Figure~\ref{fig:cond_ex}. Here we apply a ribbon of flavour $a$, then, depending on the state of the controlling qubit, either thread a second ribbon of flavour $b$ around the first ribbon or do nothing. This is very similar to the ideal scheme shown in Figure~\ref{fig:intef_example}.\footnote{Only missing a measurement checking that applying a closed ribbon $b$ on it's own doesn't introduce any phase, which it doesn't.}
 
-However, this protocol requires additional knowledge of the theory. Concretely, if we are interested in the S-matrix element $S_{ab}$, we need the additional knowledge of  $S(a, 0)$ and $S(a, \tilde{0})$. \caro{Both can in fact be measured directly with a simple protocol since $0$ and $\tilde{0}$ are abelian, see Appendix \ref{app:abl}[comment more and remove appendix reference]}.
-Since $\tilde S(a, 0) = \tilde S(a, \tilde{0}) = 1$, we can just read off $\tilde S(a,b)$ after tomographing the control qubit.
+However, in this protocol every single qubit gate of the $b$-ribbon operator becomes a two qubit gate (since the ribbon is conditioned on the control $c$) and every two qubit gate becomes a three qubit gate (unitarily similar to a Toffoli gate). Hence, the number of entangling gates grows quickly with the ribbon length.
+
+A smarter alternative is to condition the ribbon type instead (see Figure \ref{fig:cond_flav}). In this case we identify where the ribbon operators for the two anyon types differ, and condition only those operations. The circuit for this can be much shorter, see Fig. \ref{fig:cond_flav} for an example. In particular, for the case of $D(D_4)$, it turns out, that it is easier to compare the linking of anyons $a$ and $b$ to the linking of anyons $a$ and a reducible charge $0 \oplus \tilde 0$\footnote{Note: It is not a valid anyon label since the representation is reducible.}. Thus, we condition whether we apply the ribbon $b$ or the ribbon corresponding to $0 \oplus \tilde 0$\footnote{The ribbon operator protocol defined for irreducible representations carries over for reducible ones.}. 
+
+However, this protocol requires additional knowledge of the theory. Concretely, if we are interested in the S-matrix element $S_{ab}$, we need the additional knowledge of  $S(a, 0)$ and $S(a, \tilde{0})$.
+In fact, both can be measured easily by the protocol in Figure~\ref{fig:cond_ex} since anyons $0$ and $\tilde{0}$ are abelian and their ribbon operator only have single qubit gates. Similar protocol was used to measure the $S$-matrix in the case of the Toric code\cite{}.
+
+If $\tilde S(a, 0) = \tilde S(a, \tilde{0}) = 1$, we can just read off $\tilde S(a,b)$ after tomographing the control qubit.
+In the case of $\tilde S(a, \tilde{0}) = -1$, there is a two qubit gate we needs to apply between the controlling qubit and one of the ribbon ancillaries before we can simply read off $\tilde S(a,b)$ via tomography.\footnote{See Appendix \ref{app:cirqs}.}
 %In our example, we will fix $b$ to be pure flux $\Psi_m$ again due to the relative simplicity of its ribbon operators. For the other anyon we will choose one of the following $a\in\{\Psi_m,\tilde{\Psi}_m, \Phi_r \}$ which gives us all three possible values of the S-matrix elements for the $D_4$ theory, $\{1, -1, 0\}$.
 The exact method of tomography will be presented alongside the numerical result in Section \ref{sec:num:intef}. 
 
