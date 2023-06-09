@@ -686,7 +686,7 @@ Let us move on to the generalized conjugation. The circuit depths for this heavi
 }
 \end{equation*}
 
-    \caption{Circuits for controlled group multiplication $\ket{g,h} \rightarrow \ket{g,gh}$. Left: Both $g$ (first three qubits) and $h$ are unrestricted, i.e., $g,h\in G$. Center: $g \in H_{m}$ is encoded by just the first two qubits. Right: $g \in C_m$ is encoded by just the first qubit.\caro{calling it $r^2$ is misleading, maybe just call it $C_m$ and say in the caption that $\ket{0}$ is identified with $m$ and $\ket{1}$ with $mr^2$.}}
+    \caption{Circuits for controlled group multiplication $\ket{g,h} \rightarrow \ket{g,gh}$. Left: Both $g$ (first three qubits) and $h$ are unrestricted, i.e., $g,h\in G$. Center: $g \in H_{m}$ is encoded by just the first two qubits. Right: $g \in C_m$ is encoded by just the first qubit.\caro{calling it $r^2$ is misleading, maybe just call it $C_m$ and say in the caption that $\ket{0}$ is identified with $m$ and $\ket{1}$ with $mr^2$.}\caro{fix label of Cm qubit}}
     \label{fig:restMult}
 \end{figure}
 
@@ -1583,7 +1583,7 @@ For type II triangles we need to apply different variants of generalized conjuga
 %	\caption{The ribbon in Figure \ref{fig:rib_exampl}, broken down so that it can be applied in half the depth, by extending it from the middle ($\times$) in both directions. The numbers label in which layer each elementary triangle can be applied.}
 %	\label{fig:both_ends}
 %\end{figure}
-\caro{I removed the grow ribbons in parallel figure because I don't think we need it and we explain in the main text that we can do it and that is is useful.}
+%\caro{I removed the grow ribbons in parallel figure because I don't think we need it and we explain in the main text that we can do it and that is is useful.}
 
 \section{Representation Theory of $D(D_4)$}\label{app:reps}
 
@@ -1708,23 +1708,27 @@ $\tilde{\Phi}_{mr}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ & $\s
 
 \section{Elementary circuits for the case of $D(D_4)$}\label{app:cirqs}
 
-In Appendix~\ref{app:ribs}, we have presented all the elementary operations associated with the application of the ribbon operators defined on the group element basis.
-In Section~\ref{sec:qm_double}, we have done the same for the other elementary operations, charge measurement and ground state preparation.
-In Section~\ref{sec:D4_double} we have compiled some of the above mentioned operations onto the actual encoding used in our simulations of our protocols.
+In Appendix~\ref{app:ribs}, we have presented all the elementary operations associated with the application of the ribbon operators and in Section~\ref{sec:qm_double}, the other elementary operations used for charge measurements and ground state preparation.
+In Section~\ref{sec:D4_double} we have spelled out some of the above mentioned operations for the actual group element-to-qubit encoding used in our simulations of the protocols. In this Appendix, we present the concrete circuit elements for all relevant operations.
 
-In this Appendix, we present all of the relevant operations compiled onto the encoding used in our simulations.
+\textbf{Controlled Multiplication.} 
+There are four kinds of controlled multiplications that appear in all of our elementary protocols
+%\begin{itemize}
+%	\item $U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh}$,
+%\item $U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg}$,
+%\item $U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$, 
+%\item $U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$.
+%\end{itemize}
+\begin{equation}\label{eq:circs}
+U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh}, \quad
+U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg}, \quad
+U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}, \quad
+U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}.	
+\end{equation}
 
-\textbf{Controlled Multiplication.} There are four kinds of controlled multiplications that appear in all of our elementary protocols: ground state preparation, charge measurement and ribbon application.
+Depending on the context in which it appears, i.e., weather the controlled multiplication is a part of the ground state preparation, the partial charge measurement or  the ribbon operator application, the controlling group element $g$ is unrestricted $g \in G$ or is restricted to one of the subgroups $\{H_m, H_r, H_{mr}\}$ or one of the conjugacy classes $\{C_m, C_r, C_{mr}\}$. As mentioned in the main text, the circuits for the latter two cases are drastically simplified compared to the unrestricted case. The circuits for all cases above are shown in Figure~\ref{fig:CM}.
 
-The controlled multiplication in the three different protocols differs in weather one of the group valued inputs into the map is unrestricted, restricted to be in one of the four element subgroups or restricted to be in one of the two element conjugacy classes.
 
-The four different kinds of controlled multiplications are:
-$U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh},$
-$U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
-$U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$ and 
-$U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$.
-
-Here we say that the first group element controls the multiplication, while the second is the target. It is this controlling group element that can be restricted to be in one of the following, useful, subsets of the full group $\{G\text{(Unrestricted)}, H_m, H_r, H_{mr}, C_m, C_r, C_{mr}\}$. All of these circuits are shown in Figure~\ref{fig:CM}.
 
 \begin{figure}
 \begin{gather*}
@@ -1896,20 +1900,20 @@ Here we say that the first group element controls the multiplication, while the 
 }
 \end{gather*}
 
-    \caption{The circuits implementing four different kinds of controlled multiplication:
-$U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh},$
-$U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
-$U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$ and 
-$U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$, for all the domain restrictions of the controlling group element $g \in X$, for $X \in \{G\text{(Unrestricted)}, H_m, H_r, H_{mr}, C_m, C_r, C_{mr}\}$.}
+    \caption{The circuits implementing the controlled group multiplications $U_{CM}$ defined in Eq.~\eqref{eq:circs}
+%    }
+%$U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh},$
+%$U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
+%$U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$ and 
+%$U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$, 
+for $g \in G$ (unrestricted), $g$ restricted to subgroups $H$ and $g$ restricted to conjugacy classes $C$.\caro{fix label for conjugacy class qubit}}
     \label{fig:CM}
 \end{figure}
 
 %
 
 \textbf{Generalised Conjugation.}
-Another building block of our $(C, \chi)$-ribbon operator application protocol is the what we call generalised conjugation map, $U_{GC}\ket{g}\ket{\alpha}_{a_i} = \ket{g}A^T(g)\ket{\alpha}_{a_i}$, where $\alpha$ is the combined index going over both the conjugacy class and the $\chi$-representation index. These matrices, in the case of $D(D_4)$, are shown in Appendix~\ref{app:reps}.
-
-In the Appendix~\ref{app:ribs} we see that we need four variants of the map, applying one of the controlled operations: $A(g)$, $A(g^{- 1})$, $A^T(g)$ or $A^T(g^{-1})$. Figure~\ref{fig:GConj_scheme} schematically shows the form of the relevant circuits, though they are to be supplemented by appropriate unitaries from Table~\ref{tab:reps} depending on the label of the ribbon.
+Another building block of our circuits is the generalised conjugation, $U_{GC}\ket{g}\ket{\alpha}_{a_i} = \ket{g}A^T(g)\ket{\alpha}_{a_i}$. The $A$-matrices for $D(D_4)$, are shown in Appendix~\ref{app:reps}. In Appendix~\ref{app:ribs} we see that we need four variants of the map: $A(g)$, $A(g^{- 1})$, $A^T(g)$, $A^T(g^{-1})$. Figure~\ref{fig:GConj_scheme} shows the corresponding circuits which are to be supplemented by the appropriate unitaries from Table~\ref{tab:reps}.
 
 \begin{figure}
 \begin{gather*}
@@ -1939,11 +1943,11 @@ In the Appendix~\ref{app:ribs} we see that we need four variants of the map, app
 }
 \end{gather*}
 
-    \caption{The generalised conjugation circuits. The four variants apply: $A^T(g)$, $A^T(g^{-1})$, $A(g^{-1})$ and $A(g)$ onto the ancillary qubit $a_i$ respectively. Depending on the label of the ribbon one determines the appropriate unitaries from Table~\ref{tab:reps}.}
+    \caption{The four variants $A^T(g)$, $A^T(g^{-1})$, $A(g^{-1})$, $A(g)$ \caro{(left to right top to bottom)?} of the generalised conjugation circuits. Depending on the label $(C,\chi)$ of the ribbon operator the appropriate single qubit unitaries from Table~\ref{tab:reps} are inserted.}
     \label{fig:GConj_scheme}
 \end{figure}
 
-\textbf{Miscellaneous.} In Section~\ref{sec:D4_double} we have already listed all the decoupling circuits used in the reduced charge measurement protocol in the case of $D(D_4)$. Some other useful circuits are shown in Figure~\ref{fig:Misc_cirq}.
+\textbf{Miscellaneous. \caro{propose to omit}} In Section~\ref{sec:D4_double} we have already listed all the decoupling circuits used in the reduced charge measurement protocol in the case of $D(D_4)$. Some other useful circuits are shown in Figure~\ref{fig:Misc_cirq}.
 
 \begin{figure}
 \begin{equation*}
@@ -1963,7 +1967,7 @@ In the Appendix~\ref{app:ribs} we see that we need four variants of the map, app
 }
 \end{equation*}
 
-    \caption{(Left) The inversion circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, used when reversing the arrow direction of the edges. (Middle) The basis change circuit, $\ket{g}_{mRR^2} \rightarrow \ket{g}_{(mR)RR^2}$, can be used to simplify $mr$-based ribbon application protocol by making them analogous to $m$-ribbon application protocols. (Right) The $\tilde{S}(\tilde{0}, a) = -1$ fix for the flavour conditioning protocol.}
+    \caption{(Left) The inversion circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, used when reversing the arrow direction of the edges. (Middle) The basis change circuit, $\ket{g}_{mRR^2} \rightarrow \ket{g}_{(mR)RR^2}$, can be used to simplify $mr$-based ribbon application protocol by making them analogous to $m$-ribbon application protocols. (Right) The $\tilde{S}(\tilde{0}, a) = -1$ fix for the flavour conditioning protocol. \caro{propose to omit, because the reader will not understand the significance.}}
     \label{fig:Misc_cirq}
 \end{figure}
 
