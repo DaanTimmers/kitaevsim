@@ -374,7 +374,7 @@ Moving anyons means appending elementary triangles onto a ribbon. Each triangle 
     \item For each triangle in the ribbon, depending on the triangle \textit{type} (and the edge orientations), sequentially apply one of the following unitaries acting on auxilliary qudits $\ket{c, i}$ and qudits encoding the group element $g$ associated to the edge of the lattice $\ket{g}_\text{phys}$  
     \begin{itemize}
         \item[I)] Multiply on the coincidng edge\\  $\ket{c, i}\ket{g}_\text{phys} \rightarrow \ket{c, i}\ket{cg}_\text{phys}$.
-       \item[II)] Generalised-conjugate by the crossed edge\\ $\ket{c,i}\ket{h}_\text{phys} \rightarrow \ket{gcg^{-1}} \Gamma^\chi_c(h) \ket{i} \ket{h}_\text{phys}$.
+       \item[II)] Generalised-conjugate by the crossed edge\\ $\ket{c,i}\ket{h}_\text{phys} \rightarrow \ket{hch^{-1}} \Gamma^\chi_c(h) \ket{i} \ket{h}_\text{phys}$.
     \end{itemize}
     \item Project the ancillary qudits to the Bell state $\bra{\Phi^+} = \frac{1}{\sqrt{d}}\sum_\nu \bra{\nu; \nu}$. The projection is done by measurement and post-selection.
 \end{enumerate}
@@ -1535,21 +1535,22 @@ We investigated how the circuit simplifications carry over to the group $S_3$ wh
 \section{Ribbon Types}\label{app:ribs}
 
 
-In this appendix, we will all the variants of the ribbon operator application algorithm introduced in Section \ref{sec:ribbon_ops}.
+In this appendix, we present all variants of the elementary triangles that constitute the ribbon operators introduced in Section \ref{sec:ribbon_ops}. Apart from the main distinction into type I and type II triangles which correspond to controlled group multiplication and controlled generalized conjugation, respectively, there are different variants of the concrete operation which depend on how exactly we couple the ancillary qudit with the gauge field degrees of freedom.
 
-More precisely it is how we couple the ancillary qudit with the gauge field degrees of freedom that depending on the exact type of the elementary triangle that is the source of the great number of variants of the application algorithm. 
+In the main text we have chose one particular case to keep the description of the algorithm readable. In this section we provide an exhaustive list of all sixteen variants (8 per type). All triangles can be freely rotated and we chose to rotate them such that the lattice edge of type I triangles is the bottom edge, and such that type II triangles stand on their tip. The triangles are then further distinguished by whether the triangle is appended to the front end or the back end of the ribbon, i.e., involving the ancilla qubit $a_f$ or $a_b$, by the orientation of the lattice edge and by the direction of extension (being aligned or anti-aligned with the lattice edge orientation). All operators are shown explicitly in Figure \ref{fig:al_trigs}. 
 
-In the main text we have chosen one case to showcase for the sake of brevity, while in this section we provide an exhaustive list of all sixteen variants.
 
-There are sixteen kinds of elementary triangles, which can be understood as coming from four binary descriptors: the main type of the elementary triangle, is the triangle appended to the frontend or the backend of the ribbon, which of the two orientation the edge of the triangle is in, and the handedness of the triangle. The triangle and its mirror image act as inverses of one another.
+The controlled group multiplication $U_{CM}$ of type I triangles is given by --  depending on these specifications -- right or left multiplication with the group element $c$ encoded by the forward or backward ancilla $a_f$ or $a_b$ or its inverse $c^{-1}$. 
 
-The various different rules for the sixteen cases are shown in Figure \ref{fig:al_trigs}. The main actions are controlled multiplication $U_{CM}$ that is controlled by the ancillary qudits and done on the gauge fields degrees of freedom and the generalised conjugation $U_{GC}$ that acts conversely, from the gauge filed onto the ancillary qudits.
+For type II triangles we need to apply different variants of generalized conjugation $U_{GC}$. In the main text in Section~\ref{sec:ribbon_ops} we defined the generalised conjugation as $U_{GC}^{(C, \chi)}: \ket{c,i} \ket{h}_\text{phys}\rightarrow \ket{h c h^{-1}}\Gamma^\chi_c(h)\ket{i} \ket{h}_\text{phys}$, where $\Gamma^\chi_c(g)$ are matrices defined by the representation of the algebra $(C, \chi)$ spanned by basis vectors $\ket{c,i}$. In this form it is obvious why we call this operation generalised conjugation, however, this operator is more conveniently defined by the $(C, \chi)$-representation matrices $A(h)$ defined in Section \ref{sec:anyon}. To make the connection between the two, we unify the two indices of the $(C, \chi)$-representation into one multi index $\ket{c, i} \equiv \ket{\mu}$ and identify $\ket{c,i} \to \ket{hch^{-1}} \Gamma_c^\chi(h) \ket{i}$ with $\ket{\mu} \to A^{(C,\chi)}(h) \ket{\mu}$. The superscript $(C,\chi)$ is dropped, if no confusion arises. The different type II triangle variants then implement $A(h)$ or $A(h^{-1})$ or their transpose to the ancillary qubits $a_f$ or $a_b$.
 
-We note that in the main text in Section~\ref{sec:ribbon_ops} we have defined the generalised conjugation as $U_{GC}^{(C, \chi)}: \ket{g}\ket{c,i} \rightarrow \ket{g}\ket{g c g^{-1}}\Gamma_c(g)\ket{i}$, where $\Gamma_c(g)$ are matrices whose form is well defined by the representation of the algebra $(C, \chi)$ spanned by basis vectors $\ket{c,i}$. In this form it is obvious why we call this operation generalised conjugation, however, this operaton is more naturally defined by the $(C, \chi)$-representation matrices, defined in Section \ref{sec:anyon}, themselves. 
 
-To make the point concrete, we first unify the two indices of the $(C, \chi)$-representation into one multi index $\ket{c, i} \leftrightarrow \ket{\alpha}$. In terms of this index, we have, in Section~\ref{sec:anyon}, defined the form of the representation matrices $A^{(C,\chi)}_{\alpha\beta}$. The generalised conjugation is hence also defined by $U_{GC}^{(C, \chi)}: \ket{g}\ket{\alpha} \rightarrow \ket{g}A^{(C, \chi)}(g)\ket{\alpha}$. It is this convention that we use in this and other appendicies, superscripts being dropped.
 
-Another main distinction is between triangles that are appended to the front and the back of the ribbon, one set involving the forward ancilla, $a_f$, and the other backwards ancilla, $a_b$, respectively. 
+
+
+
+%
+%Another main distinction is between triangles that are appended to the front and the back of the ribbon, one set involving the forward ancilla, $a_f$, and the other backwards ancilla, $a_b$, respectively. 
 \begin{figure}
 \centering
 \caption*{$U_{CM}\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i}_{\text{phys}} = $}
@@ -1569,63 +1570,53 @@ Another main distinction is between triangles that are appended to the front and
  \includegraphics[width=0.12\linewidth]{Figures/IIRgb.pdf} &   $A(h_i)\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$  &  \includegraphics[width=0.12\linewidth]{Figures/IIRib.pdf}           &       $A(h_i^{-1})\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$               \\ 
 \includegraphics[width=0.12\linewidth]{Figures/IILib.pdf} &   $A(h_i^{-1})\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IILgb.pdf}           &       $A(h_i)\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$                  \\  
 \end{tabular}\vspace{10pt}
-\caption{The variants of the ribbon application algorithm for different kinds of Type I and II elementary triangles. In this figure, the generalised conjugation is defined via the algebra representation matrices $A^{(C,\chi)}(g)$ defined in Section~\ref{sec:anyon}, superscripts being dropped.}
+\caption{The 16 variants of the elementary triangles of type I (top) and type II (bottom).}
 \label{fig:al_trigs}
 \end{figure}
 
-The ability to append to the backend helps in halving the circuit depth of the ribbon application, since, both ends can be grown in parallel, see Figure \ref{fig:both_ends}. In this example the ribbon in Figure \ref{fig:rib_exampl} can be applied in four sequential steps instead of seven if we only grew it by appending the triangles to the frontend.
-\begin{figure}
-	\centering
-	\includegraphics[width=0.45\linewidth]{Figures/front_end.pdf}
-	\includegraphics[width=0.45\linewidth]{Figures/both_ends.pdf}
-	\caption{The ribbon in Figure \ref{fig:rib_exampl}, broken down so that it can be applied in half the depth, by extending it from the middle ($\times$) in both directions. The numbers label in which layer each elementary triangle can be applied.}
-	\label{fig:both_ends}
-\end{figure}
+%The ability to append to the backend helps in halving the circuit depth of the ribbon application, since, both ends can be grown in parallel, see Figure \ref{fig:both_ends}. In this example the ribbon in Figure \ref{fig:rib_exampl} can be applied in four sequential steps instead of seven if we only grew it by appending the triangles to the frontend.
 
-
-\section{Quantum Double Algebra}
-\jovan{Not started, would be REMOVED}
-
-\section{Fusion and Braiding of Quantum Double Excitations}\label{app:fusion}\label{app:braid}
-\jovan{Unfinished, REMOVED, see apps.tex}
-
-\section{Representation Theory of $D_4$} \label{app:D4asgroup}
-\jovan{Not started, it's inclusion may be DEBATABLE}
+%\begin{figure}
+%	\centering
+%	\includegraphics[width=0.45\linewidth]{Figures/front_end.pdf}
+%	\includegraphics[width=0.45\linewidth]{Figures/both_ends.pdf}
+%	\caption{The ribbon in Figure \ref{fig:rib_exampl}, broken down so that it can be applied in half the depth, by extending it from the middle ($\times$) in both directions. The numbers label in which layer each elementary triangle can be applied.}
+%	\label{fig:both_ends}
+%\end{figure}
+\caro{I removed the grow ribbons in parallel figure because I don't think we need it and we explain in the main text that we can do it and that is is useful.}
 
 \section{Representation Theory of $D(D_4)$}\label{app:reps}
 
-In this appendix, we cover the representation theory of the quantum double algebra of $D_4$. Tab.~\ref{tab:anyons} below shows the naming convention of the anyons and Tab.~\ref{tab:reps} lists the corresponding representation matrices.
+In this appendix, we cover the representation theory, viz. the anyon content, of the quantum double algebra of $D_4$. Tab.~\ref{tab:anyons} below shows the naming convention of the anyons and Tab.~\ref{tab:reps} lists the corresponding representation matrices used for the generalized conjugation.
 
-The (abelian) fusion algebra of the excitations of this theory is highly symmetrical and can be broken down into the following set of rules:\begin{enumerate}
-	\item $0 \otimes a = a$, for all $a \in \mathcal{A}$ (Vacuum representation is the neutral of the fusion algebra).
-	\item Rules relating to the trivial flux $\tilde{0}$:\begin{enumerate}
+The (abelian) fusion algebra of the excitations of this theory is highly symmetrical and can be broken down into a set of rules listed below. For writing down these rules we introduce the function $\lfloor \rfloor: G \rightarrow \{e, m , r, mr\} \equiv G/Z(G)$ that divides out $r^2$ and use the notation $\Sigma_e \equiv 0$.
+\begin{enumerate}
+	\item Fusion with the vacuum: $0 \otimes a = a$. 
+	\item Fusion with the trivial flux $\tilde{0}$:\begin{enumerate}
 		\item $\tilde{0} \otimes \tilde{0} = 0$,
-		\item $\tilde{0} \otimes \Sigma_x = \tilde\Sigma_x$, for all $x \in \{m, r, mr, \epsilon\}$, 
-		\item $\tilde{0} \otimes \Psi_x = \Psi_x$ and $\tilde{0} \otimes \Phi_x = \tilde\Phi_x$, for all $x \in \{m, r, mr\}$.
+		\item $\tilde{0} \otimes \Sigma_x = \tilde\Sigma_x$, $x \in \{m, r, mr, \epsilon\}$, 
+		\item $\tilde{0} \otimes \Psi_x = \Psi_x$ and $\tilde{0} \otimes \Phi_x = \tilde\Phi_x$,  $x \in \{m, r, mr\}$.
 	\end{enumerate}
-	\item Rules relating to Abelian charges $\Sigma_x$, for $x \in\{m, r, mr\}$:\begin{enumerate}
-		\item $\Sigma_x \otimes \Sigma_y = \Sigma_{\lfloor xy \rfloor}$, for $ y \in \{m, r, mr\}$, \footnote{Where the function $\lfloor \rfloor: G \rightarrow \{e, m , r, mr\} \equiv G/Z(G)$ divides out $r^2$ when needed and $\Sigma_e \equiv 0$.}
+	\item Fusion with abelian charges $\Sigma_x$, $x \in\{m, r, mr\}$:\begin{enumerate}
+		\item $\Sigma_x \otimes \Sigma_y = \Sigma_{\lfloor xy \rfloor}$, $ y \in \{m, r, mr\}$, 
 		\item $\Sigma_x \otimes \Sigma_\epsilon = \Sigma_\epsilon$,
 		\item $\Sigma_x \otimes \Psi_y = \delta_{xy}\Psi_y \oplus(1-\delta_{xy})\tilde\Psi_y$,
 		\item $\Sigma_x \otimes \Phi_y = \delta_{xy}\Phi_y \oplus(1-\delta_{xy})\tilde\Phi_y$,	
 		\end{enumerate}
-	\item Rules for the non-Abelian charge $\Sigma_\epsilon$:\begin{enumerate}
+	\item Fusion with non-abelian charge $\Sigma_\epsilon$:\begin{enumerate}
 		\item $\Sigma_\epsilon \otimes \Sigma_\epsilon = 0 \oplus \Sigma_m \oplus \Sigma_r \oplus \Sigma_{mr}$,
 		\item $\Sigma_\epsilon \otimes \Psi_x = \Phi_x \oplus \tilde\Phi_x$ and $\Sigma_\epsilon \otimes \Phi_x = \Psi_x \oplus \tilde\Psi_x$, for $x \in \{m , r, mr\}$. 
 	\end{enumerate}
-	\item Rules involving dyons of nontrivial flux $x \in \{m, r, mr\}$:\begin{enumerate}
+	\item Fusion with dyons of nontrivial flux $x \in \{m, r, mr\}$:\begin{enumerate}
 		\item $\Psi_x \otimes \Psi_x = \tilde\Psi_x \otimes \tilde\Psi_x = 0 \oplus \tilde 0 \oplus \Sigma_x \oplus \tilde\Sigma_x$ and $\Psi_x \otimes \tilde\Psi_x = \bigoplus_{y\in \{m, r, mr\}}(1-\delta_{xy})\Sigma_y \oplus \tilde \Sigma_y$,
 		\item $\Psi_x \otimes \Phi_x = \Sigma_\epsilon \oplus \tilde\Sigma_\epsilon$,
 		\item $\Phi_x \otimes \Phi_x = 0 \oplus \Sigma_x \oplus (\bigoplus_{y \in \{m, r, mr\}}(1-\delta_{xy})\tilde\Sigma_y)$,
 		\item $\Psi_x \otimes \Psi_y = \Psi_{\lfloor xy \rfloor} \oplus \tilde\Psi_{\lfloor xy \rfloor}$ and $\Psi_x \otimes \Phi_y = \Phi_{\lfloor xy \rfloor} \oplus \tilde\Phi_{\lfloor xy \rfloor}$, for $x \neq y$ and $y \in \{m, r, mr\}$,
 		\item $\Phi_x \otimes \Phi_y  = \Psi_{\lfloor xy \rfloor} \oplus \tilde\Psi_{\lfloor xy \rfloor}$, for $x \neq y$ and $y \in \{m, r, mr\}$.
-	\end{enumerate}
-	\item Any remaining rule can be derived form the ones given by the following transformation:\begin{enumerate}
-		\item Pick one elements on the RHS ($\otimes$-side) and let $X \rightarrow \tilde X$,
-		\item Take all elements on the LHS ($\oplus$-side) and take all $Y \rightarrow \tilde Y$ with $\tilde{\tilde{X}} = X$.
-	\end{enumerate}
-	Note: this is not a symmetry (or a $\mathbb{Z}_2$-graiding) of the algebra, just an observation, it is not true for pairs involving $\Psi_x$ and $\tilde\Psi_x$, for $x \in \{m, r, mr\}$, as reported in point 5.a.
 \end{enumerate}
+\end{enumerate}
+The fusion rules not covered above can be derived by the following prescription. Pick one anyon $X$ on the LHS ($\otimes$-side) and let $X \rightarrow \tilde X$. Take all elements on the RHS ($\oplus$-side) and take all $Y \rightarrow \tilde Y$. Here we use the definition $\tilde{\tilde{X}} = X$. 
+	Note that this prescription is only suitable to derive the rules not explicitly stated above. In particular, it is \emph{not} a symmetry (or a $\mathbb{Z}_2$-grading) of the algebra and is not true for pairs involving $\Psi_x$ and $\tilde\Psi_x$, for $x \in \{m, r, mr\}$, as can be seen from 5(a) above.
 
 
 \begin{table}
@@ -1674,7 +1665,7 @@ dim $d$ & 2 & 2 & 2 & 2
 \end{tabular}
 %\caption{$Z = Z_4$}
 \end{subtable} 
-\caption{  Anyon content of $D(D_4)$ defined by flux-charge pairs $(\mathcal C,\chi)$, listing the topological spin as given by the (diagonal) $T$-matrix entry and the quantum dimension. }\label{tab:anyons}
+\caption{  Anyon content of $D(D_4)$ defined by flux-charge pairs $(\mathcal C,\chi)$, listing the topological spin as given by the (diagonal) $T$-matrix entry and the quantum dimension $d$. }\label{tab:anyons}
 \end{table}
 
 
@@ -1714,8 +1705,6 @@ $\tilde{\Phi}_{mr}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ & $\s
 
 %\section{Abelian anyons of $D_4$ gauge theory}\label{app:abl}
 
-\section{Post-selection probabilities}\label{app:postsel}
-\jovan{Unfinished, REMOVED, see apps.tex}
 
 \section{Elementary circuits for the case of $D(D_4)$}\label{app:cirqs}
 
