@@ -54,7 +54,7 @@ Today, almost half a century later, our theoretical understanding of anyons in 2
 
 On that grounds, one may argue that most topological phases of matter are just too complicated to exist in nature and are thus more of a mathematical curiosity than an actual physical phenomenon, however, a series of striking experiments \cite{iqbal2023creation,xu,andersen2022observation} performed recently on noisy intermediate scale quantum computers (NISQ) strongly refutes such  criticism. Two experiments performed on superconducting qubits \cite{xu,andersen2022observation} demonstrated the non-abelian braiding of mobile lattice defects which behave like Ising anyons embedded into an abelian phase. Another experiment performed on trapped ions \cite{iqbal2023creation} prepared the topologically ordered ground state of a non-abelian phase and detected an intrinsically non-abelian braiding processes (Borromean rings) via anyon interferometry. 
 
-\caro{steve: add sth like gs wave function preparation not the same as realizing a phase (hamiltonian)}
+%\caro{steve: add sth like gs wave function preparation not the same as realizing a phase (hamiltonian) caro: i don't think it is needed}
 
 All three experiments indicate that today's quantum computers are capable of simulating states of matter whose complexity exceeds that of abelian topological order and can be seen as one more significant step towards topologically protected quantum computation. While open questions of the scalability and the improvement of noise levels are left for the future to decide, it is clear that by now non-abelian anyons have descended from the somewhat esoteric mathematical realm to the concrete and tangible.
 
@@ -72,13 +72,13 @@ There are three levels on which to tackle this problem. The first and most impor
 For some anyon theories, such as the Fibonacci anyons, braiding alone allows one to perform universal quantum computation\cite{Freedman2002}. In contrast, all anyons obtained from quantum double models of finite groups, are not universal for braiding alone. However, their computational power can be further divided and is determined by the complexity of the underlying group. In particular, for non-nilpotent groups like $S_3$, universal quantum computation can be performed with additional measurements\cite{Mochon2004} while for nilpotent groups such a scheme does not exist. 
 When it comes to the implementation of quantum double model for a group $G$ on some quantum hardware, we note that the degrees of freedom take values in $G$. Thus, the order of the group needs to be small. For any hardware that relies on qubits, which is the case for most set-ups, $|G|=2^n$ immensely simplifies the design of circuits. Lastly, we note that the property of being solvable is beneficial for the reduction of the circuit depth for certain operations. This will be explored in more detail in the following. 
 With this in mind, we identify $D_4$, the dihedral group and $Q_8$, the quaternion group, both of order eight, which are both solvable and nilpotent groups as the most suitable candidates.
-While $D(S_3)$ would be more desirable due to the fact that one can use it universal topological quantum computation, we find that its order being not divisible by two makes it significantly more difficult to implement on a qubit architecture.\caro{Comment on that paper \cite{goel2023unveiling}!} For an architecture with native qutrits, its implementation would require circuits of similiar depths than the ones used for $D(D_4)$ or $D(Q_8)$.
+While $D(S_3)$ would be more desirable due to the fact that one can use it universal topological quantum computation, we find that its order being not divisible by two makes it significantly more difficult to implement on a qubit architecture. For an architecture with native qutrits, its implementation would require circuits of similiar depths than the ones used for $D(D_4)$ or $D(Q_8)$. An example of an architecture supporting qutrit operations is the photonic simulator featured in Ref.~\cite{goel2023unveiling} on which a proof-of-principle simulation of the fusion rules for $D(S_3)$ on a single lattice site has recently been performed. 
 
 For concreteness, we will focus on $D(D_4)$ in the following. In Ref.~\cite{iqbal2023creation} the topological phase chosen is $D_\alpha(\mathbb Z_2^3)$, i.e. a \emph{twisted} quantum double model of the abelian group $\mathbb Z_2^3$. This phase is (Morita) equivalent to $D(D_4)$\cite{mapping, propitius1995topological}, which further indicates that $D(D_4)$ is just of the right complexity, simple enough to be realised on a NISQ device, and complex enough to host non-abelian anyons.
 \subsection{Ground state preparation}
 Having identified a reasonable phase, i.e., $D(D_4)$ in our case, the next task is to find a suitable microscopic realisation of the model and to prepare its ground state. Here, our protocol differs drastically from that presented in Ref.~\cite{iqbal2023creation}. First of all, the Hamiltonian chosen in Ref.~\cite{iqbal2023creation} is that of $D_\alpha(\mathbb Z_2^3)$. This means, its degrees of freedom (dof) are valued in $G=\mathbb Z_2^3$, while for us the dof are $G=D_4$-valued. In fact, the Hamiltonian in Ref.~\cite{iqbal2023creation} is best understood as a gauged version of a symmetry protected topological phase and the ground state preparation reflects that. 
 
-To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^3$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasise that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines, since with certain architectures measurement is expensive -- requiring as much depth a tens of gates. \caro{needs citations} 
+To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^3$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasise that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines, since with certain architectures measurement is expensive -- requiring as much depth as tens of gates. \caro{needs citations} 
 
 Therefore, in our protocol we refrain from using any feed-forward protocols and prepare the ground state directly via a unitary circuit. This has the disadvantage of limiting the achievable lattice size. However, we note, that in order to demonstrate signatures of non-abelian braiding, it is not necessary to use a lattice which is fully two-dimensional. In fact, it is sufficient to consider a quasi-one dimensional geometry, which we refer to as a \emph{braiding ladder} as shown in Fig.~\ref{fig:latticeGS}. For this geometry, we can prepare the ground state with a depth-two circuit. While this ground state does not feature long-range entanglement, this is not needed for the demonstration of non-abelian braiding as we will show explicitly in section \ref{sec:num}. We also consider a small truly two-dimensional lattice, just for the sake of proving that a direct unitary circuit preparation of the ground state is feasible and feed-forward protocols are not mandatory for the preparation of non-abelian topological order.
 
@@ -161,7 +161,9 @@ is defined in terms of operators $A_p{(g)}$ which shift the labels of the edges 
 \end{figure*}
 
 \textbf{Ground state.}
-It is not hard to verify that all terms in the Hamiltonian commute, Hence we can diagonalize it term-by-term. One can show that the leftover degeneracy depends only on the genus of the surface the graph is embedded in\cite{Kitaev_2003, cui2018topological}. However, we will work on a sphere-topology, where the ground state is unique.\caro{steve's comment on topology difficulty in experiment bc global connections}
+It is not hard to verify that all terms in the Hamiltonian commute, Hence we can diagonalize it term-by-term. One can show that the leftover degeneracy depends only on the genus of the surface the graph is embedded in\cite{Kitaev_2003, cui2018topological}. However, we will work on a sphere-topology, where the ground state is unique. For most quantum computing architectures, interactions need to be local, which limits the accessible topologies. However, for a small system size a sphere topology is accessible.
+
+
 
 % Used to be a Subsection "Ground State"
 
@@ -532,7 +534,7 @@ Nontrivial pure fluxes are labelled $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ be
 \textbf{Charge Measurements Reprise.}
 Let us review the partial charge measurements for $D(D_4)$.
 We choose the subgroups $\{H_r, H_m, H_{mr}\}$ for the measurement protocol. All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional, this means that the measurement outcome of the partial charge measurement is just the irrep label $(\chi_{H_x})$. Looking at their character tables, we find a partial orthogonality with the characters of the irreps of $G$. 
-\caro{steve's comment 26}
+%\caro{steve's comment 26}
 
 %The character table of $D_4$ is given in Table \ref{tab:char}, while the character tables of relevant subgroups are given in Table \ref{tab:char_sub}. Note, the subgroups $\{H_r, H_m, H_{mr}\}$ were mentioned in the context of centres of relevant conjugacy classes, but they also prove to be a great choice of subgroups to be used in the reduced charge measurement protocol, in this case. \jovan{word better}
 
@@ -737,8 +739,9 @@ Lastly, we look at the decoupling unitaries for partial charge measurements. The
 
 
 \textbf{Geometry and Ground State Preparation.}
-Our proposal for ground state preparation does not use any feed-forward protocols. Therefore, it is suitable for an experimental set-up, where measurements terminate the circuit. This comes at the cost of limiting the lattice geometry to either small two-dimensional graphs or quasi one-dimensional graphs in order to keep the circuit depth short.
-\caro{Steve's comment on feed forward (none known) for general string nets}
+Our proposal for ground state preparation does not use any feed-forward protocols. Therefore, it is suitable for an experimental set-up, where measurements terminate the circuit. We also note, that so far that known feed-forward protocols for ground state preparation only cover quantum double models for solvable groups excluding more complex quantum double models and the more general string-net models based on fusion categories beyond groups.
+
+Not using a feed-forward protocol, however, comes at the cost of limiting the lattice geometry to either small two-dimensional graphs or quasi one-dimensional graphs in order to keep the circuit depth short.
 
 For the majority of our result, we will focus on a quasi one-dimensional graph, that we call \emph{braiding ladder}. 
 This geometry is shown in Figure \ref{fig:latticeGS}. 
@@ -1205,7 +1208,8 @@ This probability is, however, modulate by the readout bias
     p(b|\vec{s}_i, \vec{r}) = (1-\epsilon_b)p_{QM}(b|\vec{s}_i, \vec{r}) + \epsilon_{\bar{b}} p_{QM}(\bar{b}|\vec{s}_i, \vec{r}), \label{eqn:marg}
 \end{equation}
 \caro{there was a comment by steve on $\epsilon$ being wrong but I think they are right}
-where $\epsilon_b$ is the probability to measure the qubit in state $\bar{b}$ ($\equiv 1-b$) even though it is in the state $b$, these values are known through \caro{calibration \cite{}}.
+where $\epsilon_b$ is the probability to measure the qubit in state $\bar{b}$ ($\equiv 1-b$) even though it is in the state $b$.
+%, these values are known through \caro{calibration \cite{}}.
 
 
 We perform the measurement $N=n_0 + n_1$ times and record the measurement outcomes $(n_0, n_1)$ and define the estimator 
@@ -1231,7 +1235,7 @@ The two angles then fix the value of $\tilde{S}_{ab}$ via $$\tilde{S}_{ab} = \sq
 The other two parameters, the amplitude and the offset of the polarization, do not convey any physical information. The offset determines the difference of the effective readout biases, $\Delta\epsilon$, and the amplitude determines the product of the mean readout bias and the length of the Bloch vector, $(1-2\bar{\epsilon})|\vec{r}|$.
 
 
-In the discussion above, we have neglected the fact that in addition to the measurement of the control qubit, we measure the ribbon ancillas and post-select on their biased measurement outcomes. This causes an increased observed effective readout bias $\Delta \epsilon$, obtained from the fitting procedure described in the last section, which exceeds the $\Delta \epsilon$ estimate from calibration data. A more detailed discussion of this issue is given in Appendix \ref{app:DATA_Anl}. 
+In the discussion above, we have neglected the fact that in addition to the measurement of the control qubit, we measure the ribbon ancillas and post-select on their biased measurement outcomes. This causes an increased observed effective readout bias $\Delta \epsilon$, obtained from the fitting procedure described in the last section, which exceeds the $\Delta \epsilon$ estimate from calibration data. A more detailed discussion of this issue is given in Appendix \ref{app:bias}. 
 
 
 For the $T$-matrix protocol the Bloch vector of the control qubit after performing the ideal circuit reads
@@ -1299,7 +1303,7 @@ The result for the T-matrix element $T(\tilde \phi_r, \tilde \phi_r)$ determined
 
 
 
-\emph{Uncertainty.} In the experiment we used 1000 shots per measurement basis for the S-matrix measurements and 5000 for the T-matrix measurements. See Appendix~\ref{app:DATA_Anl} to see how we estimated the final uncertainties in the measured braiding amplitudes, i.e. $S$- and $T$-matrix elements, as well as for each datapoint in our plots.
+\emph{Uncertainty.} In the experiment we used 1000 shots per measurement basis for the S-matrix measurements and 5000 for the T-matrix measurements. See Appendix~\ref{app:DATA_Anl} to see how we estimated the final uncertainties in the measured braiding amplitudes, i.e., $S$- and $T$-matrix elements, as well as for each datapoint in our plots.
 
 We expected a post selection probability of $1/4$ for all T-matrix protocols and S-matrix protocols with measured $|S| \neq 0$. For the case of measured $|S| = 0$ the probability drops to $1/8$. These probabilities were observed in the numerical experiment.
 
@@ -1973,25 +1977,23 @@ Another building block of our circuits is the generalised conjugation, $U_{GC}\k
 
 
 
-\section{Post-selection and one-qubit marginals}\label{app:DATA_Anl}
+\section{Uncertainty estimation and measurement bias}
+In this appendix we provide more details on the measurement uncertainty and the effect of the measurement bias relevant in the $S$-and $T$-matrix protocols in section \ref{sec:num:intef}.
+\subsection{Polarization uncertainty} \label{app:DATA_Anl}In the following, we discuss the uncertainty estimations for the polarization $P$ -- the central quantity of interest in the interference protocols in section \ref{sec:num:intef}, and the resulting uncertainty for the amplitude and phase of the $S$-and $T$-matrix elements. The polarization was determined for different measurement bases $\vec b$, but here we focus on a single fixed measurement basis first. To estimate $P$, we performed $N$ measurements and recorded the number of measurement outcomes $n_s$, $s\in \{0,1\}$. From these results we estimated the polarization $P = \frac{p_0 - p_1}{p_0 + p_1}$ via $p_s=n_s/N$. The probability to find the outcome $s$ in $n_s$ of the $N$ shots is given by the binomial distribution, $p(n_s) = {N \choose n_s} p_s^{n_s} p_{\bar{s}}^{N-n_s}$, where $\bar{s} = 1-s$. Thus,
+%
+%From the $N$ measurement outcomes we want to estimate the polarisation $P = \frac{p_0 - p_1}{p_0 + p_1}$.
+%, that is, by our assumption, related to the parameters defining the single qubit state and read-out characteristics of the machine, 
+%
+the unbiased estimator for the polarization is $\hat P = \frac{n_0 - n_1}{n_0 + n_1}$, with $$\text{Mean}(\hat P) =P\text{ and }\text{Var}(\hat{P}) = N\sigma_{P}^2 = P(1-P),$$ where $\sigma_{P}=\sqrt{P(1-P)/N}$ is the error in determining this mean. This procedure of uncertainty estimation was used for all measurement bases and yields the error bars in Figures~\ref{fig:S_res} and ~\ref{fig:t_mat_results}.
 
-\textbf{Single Qubit Tomography.} In the following text, we discuss the uncertainty estimations used in our analysis of the interference protocols.
-
-The underlying probability distribution governing the outcome of $N$ single qubit readouts is a biased binomial distribution, $P(n_s) = {N \choose n_s} p_s^{n_s} p_{\bar{s}}^{N-n_s}$, where $n_s$ counts the number of times an outcome $s \in \{0,1\}$($\bar{s} = 1-s$) was achieved after the measurement. 
-
-From a set of $N$ shots we want to estimate a function we called polarisation $P = \frac{p_0 - p_1}{p_0 + p_1}$, that is, by our assumption, related to the parameters defining the single qubit state and read-out characteristics of the machine, $P = P(\vec{b}) = (1-2\bar\epsilon)\vec{r}\cdot\vec{b} + \Delta\epsilon$. 
-
-The unbiased estimator for this quantity is naturally $\hat P = \frac{n_0 - n_1}{n_0 + n_1}$, with $$\text{Mean}(\hat P) =P\text{ and }\text{Var}(\hat{P}) = N\sigma_{P}^2 = P(1-P),$$ where $\sigma_{P}$ is then the error in determining this mean. This error is determines the error bars in Figures~\ref{fig:S_res} and ~\ref{fig:t_mat_results}.
-
-Given the estimates for the function $P(\vec{b})$ for different measurement bases, $\vec{b}$, we extract the relevant quantities $(\vec{r}/|\vec{r}|, \Delta\epsilon, |(1-2\bar\epsilon)\vec{r}|)$ by fitting.
-
-Firstly for the $\phi$-scan we fit the function $f(\phi) = A\cos(\phi - \phi_{\text{max}})+B$, mainly to extract the angle which maximised the polarisation $\phi_{\text{max}}$. Then, fixing $\phi = \phi_{\text{max}}$, we do the $\theta$-scan and to it we fit the more informative function $g(\theta) = |(1-2\bar\epsilon)\vec{r}|\cos(\theta - \theta_{\text{max}}) + \Delta\epsilon$. The two angles define the direction of the Bloch's vector, while the other parameters are gotten from entirely from the second fit.
-
-The two angles define the braiding amplitude we want to extract from the interference protocol $$\mathcal{A} = \left(\sqrt{\frac{1-\cos{\theta_\text{max}}}{1+\cos{\theta_\text{max}}}}\pm \frac{\sigma_{\theta_\text{max}}}{|1 +\cos{\theta_\text{max}|}}\right)e^{i(\phi_\text{max}\pm \sigma_{\phi_\text{max}})},$$
-where the angles and their uncertainty are obtained by the usual $\chi^2$-fitting method.
+To obtain the amplitude and phase of the $S$- and $T$-matrix entries from the interference protocols we used that the measurement basis dependent polarization $P(\vec b)$ is related to the Bloch vector $\vec r$ of the single qubit density matrix and the read-out biases of the machine via
+$$P(\vec{b}) = (1-2\bar\epsilon)\vec{r}\cdot\vec{b} + \Delta\epsilon.$$ 
+Given the estimates for the function $P(\vec{b})$ we extracted the relevant quantities $(\vec{r}/|\vec{r}|, \Delta\epsilon, |(1-2\bar\epsilon)\vec{r}|)$ by fitting. To this end, we chose two particular sets of bases referred to as $\phi$-scan and $\theta$-scan. For the $\phi$-scan we fitted the function $f(\phi) = A\cos(\phi - \phi_{\text{max}})+B$, to extract the angle which maximises the polarisation $\phi_{\text{max}}$. Then, with fixeed $\phi = \phi_{\text{max}}$, we performed a $\theta$-scan and fitted to it the more informative function $g(\theta) = |(1-2\bar\epsilon)\vec{r}|\cos(\theta - \theta_{\text{max}}) + \Delta\epsilon$. The two angles $\phi_\text{max}$ and $\theta_\text{max}$ then determine the direction of the Bloch vector and via that, the $S$- or $T$-matrix entry denoted $\mathcal A$ via  
+$$\mathcal{A} = \left(\sqrt{\frac{1-\cos{\theta_\text{max}}}{1+\cos{\theta_\text{max}}}}\pm \frac{\sigma_{\theta_\text{max}}}{|1 +\cos{\theta_\text{max}|}}\right)e^{i(\phi_\text{max}\pm \sigma_{\phi_\text{max}})}.$$
+Here, the angles and their uncertainty are obtained by the usual $\chi^2$-fitting method.
  
  
-\textbf{Biased Post-Selection.} We investigate the effect of post selecting on biased measurement outcomes for the paradigmatic example of two qubits. We consider a general two-qubit density matrix
+\subsection{Measurement biased and post selection}\label{app:bias} We investigate the effect of post selecting on biased measurement outcomes for the paradigmatic example of two qubits. We consider a general two-qubit density matrix
 \begin{equation}
 	\rho=\frac{1}{4} r_{\alpha \beta} \sigma_\alpha \tau_\beta,\quad r_{00}=1,\quad \alpha,\beta=0,\ldots,4\;,
 \end{equation} that represents the state after applying a noisy circuit. We tomograph the first qubit while post-selecting on the measurement outcome $0$ in the $z$-basis of the second qubit. The bias to measure $a$ while the outcome should be $\bar a$ is $\epsilon_a$ and assumed to be the same for both qubits. 
