@@ -608,7 +608,12 @@ We chose the following map
 \end{equation}
 where $a,b,c \in \{0,1\}$, $r$ is the $90^{\text{o}}$ rotation and $m$ is the reflection.
 
-When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Similarly the subgroups are encoded with two qubits. For example for $h\in H_r$ we use\begin{equation}
+When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Since the centralizers of these conjugacy classes are abelian and their representations one-dimensional, we can encode the full internal space of the anyon with just one qubit, e.g. for $\Phi_m = (\mathcal{C}_m, (1,-1))$ anyons we have
+\begin{equation}
+	\ket{c, 0} \equiv \ket{a}_{r^2} \iff c = m^1 r^0(r^2)^a \in \{m , mr^2\}.\footnote{In the controlled multiplication circuits we label this bit as $r^2$, i.e. $\ket{a}_{r^2}$, because that is what they represent in the group multiplication. In the generalised conjugation we use either the label $\text{aux}$ (any auxiliary bit), $a_b$ (forward ancilla) or $a_f$ (backwards ancilla), depending on the context.} 
+\end{equation}
+
+Similarly the subgroups are encoded with two qubits. For example for $h\in H_r$ we use\begin{equation}
     \ket{h} \equiv \ket{a}_r\ket{b}_{r^2} \iff h = m^0r^a(r^2)^b.
 \end{equation}
 
