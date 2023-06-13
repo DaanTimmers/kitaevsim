@@ -79,6 +79,7 @@ For concreteness, we will focus on $D(D_4)$ in the following. In Ref.~\cite{iqba
 Having identified a reasonable phase, i.e., $D(D_4)$ in our case, the next task is to find a suitable microscopic realisation of the model and to prepare its ground state. Here, our protocol differs drastically from that presented in Ref.~\cite{iqbal2023creation}. First of all, the Hamiltonian chosen in Ref.~\cite{iqbal2023creation} is that of $D_\alpha(\mathbb Z_2^3)$. This means, its degrees of freedom (dof) are valued in $G=\mathbb Z_2^3$, while for us the dof are $G=D_4$-valued. In fact, the Hamiltonian in Ref.~\cite{iqbal2023creation} is best understood as a gauged version of a symmetry protected topological phase and the ground state preparation reflects that. 
 
 To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^3$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasise that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines, since with certain architectures measurement is expensive -- requiring as much depth as tens of gates. \caro{needs citations} 
+\jovan{I do not know where you found this claim, according to \cite{weber} the readout times (4us) are hundred times longer than duration of gates (35ns)?}
 
 Therefore, in our protocol we refrain from using any feed-forward protocols and prepare the ground state directly via a unitary circuit. This has the disadvantage of limiting the achievable lattice size. However, we note, that in order to demonstrate signatures of non-abelian braiding, it is not necessary to use a lattice which is fully two-dimensional. In fact, it is sufficient to consider a quasi-one dimensional geometry, which we refer to as a \emph{braiding ladder} as shown in Fig.~\ref{fig:latticeGS}. For this geometry, we can prepare the ground state with a depth-two circuit. While this ground state does not feature long-range entanglement, this is not needed for the demonstration of non-abelian braiding as we will show explicitly in section \ref{sec:num}. We also consider a small truly two-dimensional lattice, just for the sake of proving that a direct unitary circuit preparation of the ground state is feasible and feed-forward protocols are not mandatory for the preparation of non-abelian topological order.
 
@@ -92,12 +93,12 @@ To see this, we remind the reader that in a quantum double model for each anyon 
 
 \subsection{Charge measurements}
 At last, we aim to design a protocol which can detect and uniquely determine topological charges. This is a non-trivial task and has so far not been demonstrated. In the experiments performed recently, the existence of multiple fusion channels and the action of non-abelian braiding on the latter has been demonstrated indirectly by measuring Abelian charges before and after the braid via stabiliser measurements. However, no experiment directly probed a state where a superposition of several charges had been created from fusion and identified the anyon content. 
-\caro{steve: be more precise about here bc important}
+\caro{steve: be more precise about here bc important}\jovan{I do not know what would I add here?}
 
 
 This might be due to the inherent difficulty of uniquely determining non-abelian charge content. In the quantum double model the operators needed to measure general charges are explicitly known, however, they require full group multiplications on several lattice-dof and are therefore prohibitively costly. To circumvent this we propose a \emph{partial charge measurement}. To determine the total charge, one needs to evaluate how a given state transforms under the full group. However, one can instead measure how it transforms under a subgroup. Due to partial orthogonality of the characters of a subgroup with those of the group, a measurement outcome reveals partial information about the charge. In the case of $D(D_4)$ one finds that a certain outcome is only compatible with at most two different charges. Repeating the measurement for two different subgroups, we can unambiguously infer the charge. This procedure avoids costly multiplications with the full group and removes unfavourable Toffoli gates from the circuit at the cost of repeating the protocol twice.
 
-\caro{Steve's comment: when is it true that measuring subgroups is enough to unambiguously determine charge}
+\caro{Steve's comment: when is it true that measuring subgroups is enough to unambiguously determine charge}\jovan{Sadly, we never did this analysis. I suspect the partial orthogonality claim is true for any group, but the solvability of the group may imply that the $H$-controlled multiplication is drastically simpler to perform.}
 
 
 \subsection{Probing non-abelian signatures}
@@ -299,7 +300,7 @@ with $a$, $b$ and $c$ going over a set of anyon labels $(C, \chi)$ and $N_{ab}^c
 
 How this manifests physically is that if we have two anyons $a$ and $b$ in some region and measure the topological charge associated to that region we may get any label $c$ for which $N_{ab}^c \neq 0$. This process is referred to as anyon fusion.
 
-While the general expression for the $N_{ab}^c$ is cumbersome and can be found in Appendix \ref{app:fusion}, for pure charge anyons $(\{e\}, \chi_i)$ it readily reduces to the well-known  decomposition of tensors products of group irreps into direct sums of irreps $\chi_i\otimes\chi_j = \bigoplus_k n^k_{ij} \chi_k$.
+While the general expression for the $N_{ab}^c$ is cumbersome\footnote{and can be found in Appendix \ref{app:reps} for the case of $D(D_4)$ anyons \jovan{The original App was removed.}}, for pure charge anyons $(\{e\}, \chi_i)$ it readily reduces to the well-known  decomposition of tensors products of group irreps into direct sums of irreps $\chi_i\otimes\chi_j = \bigoplus_k n^k_{ij} \chi_k$.
 
 If the gauge group is abelian all algebra representations are one-dimensional and there is no degeneracy once the charge content of a gauge field is specified. The fusion is unambiguous. 
 We can see that by looking at the dimensions of the LHS and RHS of Eq.~\eqref{eqn:fuse}. For every $a$ and $b$ there is only one $c$ for which $N_{ab}^c$ is nonzero, i.e. one.
@@ -399,7 +400,7 @@ The two types of triangles couple the two spaces in two different ways, for type
 
 \subsection{Charge Measurements}\label{sec:redchmmt}
 
-In this section, we will explain how we measure the topological charge, i.e., the anyon label. This is the last element of our toolkit for probing topological order. The ideal charge measurement would differentiate any type of excitation on any site, such measurement is associated with the following set of projectors \caro{Cui?}\cite{}:
+In this section, we will explain how we measure the topological charge, i.e., the anyon label. This is the last element of our toolkit for probing topological order. The ideal charge measurement would differentiate any type of excitation on any site, such measurement is associated with the following set of projectors \caro{Cui?}\jovan{Yes.}\cite{cui2018topological}:
 \begin{equation}
     P_s^{(C, \chi)} = \frac{\chi(e)}{|Z(r)|}\sum_{c \in C}\sum_{z \in Z(r)}\chi^*(z)B_s^{(c)}A_s^{(q_c z \bar{q}_c)},
 \end{equation}
@@ -608,9 +609,9 @@ We chose the following map
 \end{equation}
 where $a,b,c \in \{0,1\}$, $r$ is the $90^{\text{o}}$ rotation and $m$ is the reflection.
 
-When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Since the centralizers of these conjugacy classes are abelian and their representations one-dimensional, we can encode the full internal space of the anyon with just one qubit, e.g. for $\Phi_m = (\mathcal{C}_m, (1,-1))$ anyons we have
+When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Moreover, the entire internal space of the anyons with non-trivial flux is spanned by only one qubit e.g. for $\Phi_m = (\mathcal{C}_m, (1,-1))$ anyons we have
 \begin{equation}
-	\ket{c, 0} \equiv \ket{a}_{r^2} \iff c = m^1 r^0(r^2)^a \in \{m , mr^2\}.\footnote{In the controlled multiplication circuits we label this bit as $r^2$, i.e. $\ket{a}_{r^2}$, because that is what they represent in the group multiplication. In the generalised conjugation we use either the label $\text{aux}$ (any auxiliary bit), $a_b$ (forward ancilla) or $a_f$ (backwards ancilla), depending on the context.} 
+	\ket{c, 0} \equiv \ket{a}_{r^2} \iff c = m^1 r^0(r^2)^a \in \{m , mr^2\}.\footnote{In the generalised conjugation circuits we use a different set of labels for this qubit: $\text{aux}$ (any auxiliary bit), $a_b$ (forward ancilla) or $a_f$ (backwards ancilla), depending on the context.\jovan{Maybe rephrase?}} 
 \end{equation}
 
 Similarly the subgroups are encoded with two qubits. For example for $h\in H_r$ we use\begin{equation}
@@ -641,7 +642,7 @@ and for $H_{r}$ we use
 \end{enumerate} 
 
 %The full list of circuits for all variants of the above-mentioned operations are presented in Appendix \ref{app:cirqs}.
-We will focus on a set of examples illustrating the expected circuit depths. The full domain group multiplication (see Fig. \ref{fig:restMult}) consists of three Toffoli and 2 CNOT gates. Note, that on most hardwares a 3-qubit Toffoli gate must be decomposed into 2-qubit gates. \caro{Hence, each Toffoli gate should be seen as a depth-6 circuit in itself. [Steve's comment: depth 12?]}. With this in mind, the circuit depth for a single group multiplication is 22. Current noise levels limit the circuit depth to about 100 gates. Therefore, a naive protocol based on full domain group multiplication is doomed to fail. 
+We will focus on a set of examples illustrating the expected circuit depths. The full domain group multiplication (see Fig. \ref{fig:restMult}) consists of three Toffoli and 2 CNOT gates. Note, that on most hardwares a 3-qubit Toffoli gate must be decomposed into 2-qubit gates. \caro{Hence, each Toffoli gate should be seen as a depth-6 circuit in itself. [Steve's comment: depth 12?]}\jovan{With all-to-all it is 6, with n.n. it is 12.}. With this in mind, the circuit depth for a single group multiplication is 22. Current noise levels limit the circuit depth to about 100 gates. Therefore, a naive protocol based on full domain group multiplication is doomed to fail. 
 
 We now contrast this with the reduced domain multiplication, where the control qubits are restricted to a certain conjugacy class. A representative example is shown in Fig.~\ref{fig:restMult}. The circuit is reduced to a depth-1 circuit with only one CNOT gate. We can appreciate a dramatic reduction of circuit depth achieved by restricting the domain of the controlled multiplication circuit.
 
@@ -669,31 +670,31 @@ Let us move on to the generalized conjugation. The circuit depths for this heavi
 \begin{equation*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{3} & \qw & \qw & \qw & \qw\\
-\lstick{R} & \ctrl{2} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw
+\lstick{r} & \ctrl{2} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw
 \\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw
+\lstick{r} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{r^{2}} & \targ & \qw & \targ & \qw & \targ & \qw
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \ctrl{2} &  \qw & \qw\\
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw
+\lstick{r^{2}} & \qw  & \ctrl{3} & \qw
 \\
 \lstick{\quad m} &  \targ & \qw & \qw \\
-\lstick{R} & \qw & \qw & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw
+\lstick{r} & \qw & \qw & \qw\\
+\lstick{r^{2}} & \qw & \targ & \qw
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw
+\lstick{r^{2}} & \qw  & \ctrl{3} & \qw
 \\
 \lstick{\quad m} &  \gate{X} & \qw & \qw \\
-\lstick{R} & \qw & \qw & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw
+\lstick{r} & \qw & \qw & \qw\\
+\lstick{r^{2}} & \qw & \targ & \qw
 }
 \end{equation*}
 
-    \caption{Circuits for controlled group multiplication $\ket{g,h} \rightarrow \ket{g,gh}$. Left: Both $g$ (first three qubits) and $h$ are unrestricted, i.e., $g,h\in G$. Center: $g \in H_{m}$ is encoded by just the first two qubits. Right: $g \in C_m$ is encoded by just the first qubit.\caro{calling it $r^2$ is misleading, maybe just call it $C_m$ and say in the caption that $\ket{0}$ is identified with $m$ and $\ket{1}$ with $mr^2$.}\caro{fix label of Cm qubit}}
+    \caption{Circuits for controlled group multiplication $\ket{g,h} \rightarrow \ket{g,gh}$. Left: Both $g$ (first three qubits) and $h$ are unrestricted, i.e., $g,h\in G$. Center: $g \in H_{m}$ is encoded by just the first two qubits. Right: $g \in C_m$ is encoded by just the first qubit.\caro{calling it $r^2$ is misleading, maybe just call it $C_m$ and say in the caption that $\ket{0}$ is identified with $m$ and $\ket{1}$ with $mr^2$.}\caro{fix label of Cm qubit}\jovan{Addressed in the main text.}}
     \label{fig:restMult}
 \end{figure}
 
@@ -702,14 +703,14 @@ Let us move on to the generalized conjugation. The circuit depths for this heavi
 \begin{split}
 \Qcircuit @C=0.5em @R=0.7em @!R{
 \lstick{m} & \qw & \qw \\
-\lstick{R} & \ctrl{2}  & \qw \\
-\lstick{R^{2}} & \qw  & \qw \\
+\lstick{r} & \ctrl{2}  & \qw \\
+\lstick{r^{2}} & \qw  & \qw \\
 \lstick{\text{aux}} &  \targ & \qw
 }\qquad\qquad
 \Qcircuit @C=0.5em @R=0.7em @!R{
 \lstick{m} & \ctrl{3} & \qw & \gate{Z} & \qw\\
-\lstick{R} & \qw & \ctrl{2} & \gate{S} & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \gate{Z} & \qw\\
+\lstick{r} & \qw & \ctrl{2} & \gate{S} & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \gate{Z} & \qw\\
 \lstick{\text{aux}} & \gate{Z}  & \gate{Y} & \qw & \qw 
 }
 \end{split}
@@ -761,12 +762,12 @@ This geometry is shown in Figure \ref{fig:latticeGS}.
     \begin{equation*}
     \Qcircuit @C=0.2em @R=0.2em {
 \lstick{m} & \gate{H} &       \ctrl{3} & \qw & \qw &\qw \\
-\lstick{R} & \gate{H} &   \qw & \ctrl{3} & \qw & \qw \\
-\lstick{R^{2}} & \gate{H} &  \qw & \qw & \ctrl{3} & \qw 
+\lstick{r} & \gate{H} &   \qw & \ctrl{3} & \qw & \qw \\
+\lstick{r^{2}} & \gate{H} &  \qw & \qw & \ctrl{3} & \qw 
 \\
 \lstick{\quad m} &  \qw &   \targ & \qw & \qw & \qw \\
-\lstick{R} & \qw&   \qw &  \targ & \qw & \qw \\
-\lstick{R^{2}} & \qw & \qw&   \qw &  \targ & \qw 
+\lstick{r} & \qw&   \qw &  \targ & \qw & \qw \\
+\lstick{r^{2}} & \qw & \qw&   \qw &  \targ & \qw 
 }
 \end{equation*}\vfill
 \end{subfigure}
@@ -819,7 +820,7 @@ This means that the order of interchanges matter, i.e. $\sigma_{12}\sigma_{23} \
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{Figures/fluxBRAID.pdf}
-    \caption{The two braiding protocols, differing only in order of exchange of two anyons. C stands for creation, M for measurements. Protocol a) will have 4 fusion outcomes, while protocol b) can only produce vacuum.\caro{change C to M in figure}}
+    \caption{The two braiding protocols, differing only in order of exchange of two anyons. C stands for creation, M for measurements. Protocol a) will have 4 fusion outcomes, while protocol b) can only produce vacuum.\caro{change C to M in figure}\jovan{Looks like you did it?}}
     \label{fig:flux_braid}
 \end{figure}
 
@@ -872,10 +873,10 @@ The conceptually simplest interferometry scheme is shown in Figure~\ref{fig:cond
 
 However, in this protocol every single qubit gate of the $b$-ribbon operator becomes a two qubit gate (since the ribbon is conditioned on the control $c$) and every two qubit gate becomes a three qubit gate (unitarily similar to a Toffoli gate). Hence, the number of entangling gates grows quickly with the ribbon length.
 
-A smarter alternative is to condition the ribbon type instead (see Figure \ref{fig:cond_flav}). In this case we identify where the ribbon operators for the two anyon types differ, and condition only those operations. The circuit for this can be much shorter, see Fig. \ref{fig:cond_flav} for an example. In particular, for the case of $D(D_4)$, it turns out, that it is easier to compare the linking of anyons $a$ and $b$ to the linking of anyons $a$ and a reducible charge $0 \oplus \tilde 0$\footnote{Note: It is not a valid anyon label since the representation is reducible.}. Thus, we condition whether we apply the ribbon $b$ or the ribbon corresponding to $0 \oplus \tilde 0$\footnote{The ribbon operator protocol defined for irreducible representations carries over for reducible ones.}. 
+A smarter alternative is to condition the ribbon type instead (see Figure \ref{fig:cond_flav}). In this case we identify where the ribbon operators for the two anyon types differ, and condition only those operations. The circuit for this can be much shorter, see Fig. \ref{fig:cond_flav} for an example. In particular, for the case of $D(D_4)$, it turns out, that, if $b$ has a non-trivial flux content\jovan{we missed this previously}, it is easier to compare the linking of anyons $a$ and $b$ to the linking of anyons $a$ and a reducible charge $0 \oplus \tilde 0$\footnote{Note: It is not a valid anyon label since the representation is reducible.}. Thus, we condition whether we apply the ribbon $b$ or the ribbon corresponding to $0 \oplus \tilde 0$\footnote{The ribbon operator protocol defined for irreducible representations carries over for reducible ones.}. 
 
 However, this protocol requires additional knowledge of the theory. Concretely, if we are interested in the S-matrix element $S_{ab}$, we need the additional knowledge of  $S(a, 0)$ and $S(a, \tilde{0})$.
-In fact, both can be measured easily by the protocol in Figure~\ref{fig:cond_ex} since anyons $0$ and $\tilde{0}$ are abelian and their ribbon operator only have single qubit gates. Similar protocol was used to measure the $S$-matrix in the case of the Toric code\cite{}.
+In fact, both can be measured easily by the protocol in Figure~\ref{fig:cond_ex} since anyons $0$ and $\tilde{0}$ are abelian and their ribbon operator only have single qubit gates. Similar protocol was used to measure the $S$-matrix in the case of the Toric code\cite{Satzinger_2021}\jovan{More refs?}.
 
 If $\tilde S(a, 0) = \tilde S(a, \tilde{0}) = 1$, we can just read off $\tilde S(a,b)$ after tomographing the control qubit.
 In the case of $\tilde S(a, \tilde{0}) = -1$, there is a two qubit gate we needs to apply between the controlling qubit and one of the ribbon ancillaries before we can simply read off $\tilde S(a,b)$ via tomography.\footnote{See Appendix \ref{app:cirqs}.}
@@ -890,16 +891,16 @@ The exact method of tomography will be presented alongside the numerical result 
 \Qcircuit @C=0.5em @R=0.7em @!R{
 \lstick{c} & \ctrl{3} & \qw& \ctrl{1}& \qw\\
 \lstick{m} & \qw & \qw & \targ& \qw\\
-\lstick{R} & \qw  & \qw & \qw& \qw\\
-\lstick{R^{2}} & \targ  & \qw & \qw& \qw\\
+\lstick{r} & \qw  & \qw & \qw& \qw\\
+\lstick{r^{2}} & \targ  & \qw & \qw& \qw\\
 \lstick{\text{aux}} &  \ctrl{-1} & \qw& \qw& \qw
 }%
 \qquad \qquad \qquad
 \Qcircuit @C=0.5em @R=0.7em @!R{
 \lstick{c} & \ctrl{1} & \qw\\
 \lstick{m} & \targ & \qw \\
-\lstick{R} & \qw  & \qw \\
-\lstick{R^{2}} & \targ  & \qw \\
+\lstick{r} & \qw  & \qw \\
+\lstick{r^{2}} & \targ  & \qw \\
 \lstick{\text{aux}} &  \ctrl{-1} & \qw
 }
 \end{equation*}
@@ -938,7 +939,7 @@ The exact method of tomography will be presented alongside the numerical result 
     \label{fig:cond_flav}
 \end{subfigure}
 
-\caption{The interference protocols used for phase sensitive measurement of the (normalized) S-matrix elements  $\tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b)$.\caro{steve: why not call $0\oplus 0$ just $0$ and $0 \oplus \tilde 0 $ just $\tilde 0$}}
+\caption{The interference protocols used for phase sensitive measurement of the (normalized) S-matrix elements  $\tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b)$.\caro{steve: why not call $0\oplus 0$ just $0$ and $0 \oplus \tilde 0 $ just $\tilde 0$}\jovan{It is subtle, but our protocol differentiates these two sets of labels, so they are not the same.}}
 \label{fig:S-mat}
 \end{figure*}
 
@@ -981,6 +982,7 @@ The control qubit is in a pure state (assuming there is no noise) so we can tomo
 
 \section{Numerical Experiments}\label{sec:num}
 \caro{Steve: comment somewhere that we did not do error mitigation or decoupling, which google used to greatly improve their results.}
+\jovan{Okay, I think this is something to add in the Outlooks section.}
 
 In this section, we provide numerical evidence for the feasibility of our proposal on state of the art NISQ devices. We performed simulations using Google's 'cirq\_google' python package on Google's cloud computing platform 'Google Colab'. This package executes the quantum trajectory simulation of the circuit using the Kraus operators obtained from the direct Pauli transfer matrix tomography on various single and two qubit gates on the Sycamore chip \cite{weber}. This chip comes with two principle constraints. First, we can only perform two-qubit gates between adjacent qubits. Second, there is a limited set of elementary gates that can be implemented. 
 
@@ -988,16 +990,15 @@ In this section, we provide numerical evidence for the feasibility of our propos
 Knowing the characteristics of the single and two-qubit gates, and single- and multi-qubit readout performances of the chip \cite{weber} we have chosen a suitable part of the chip for our simulations. A similar setup would be suitable for an actual experiment on the Sycamore chip. However, the optimal allocation of recourses will be chip dependent. The layout we used is shown in Figure \ref{fig:fusion_setup}.
 
 Given that we argue for feasibility of these experiments, we need to ask how well this numerical scheme will reproduce the actual measurements.
-\caro{which heuristics?} Heuristics shows that it is in fact a good approximation of what we expect to see from the actual experiment \cite{}, even if it neglects any cross-talk between qubits that are not directly coupled by the circuit.
+\caro{which heuristics?}\jovan{The claim that their simulator is good, is something I only heard from Steve.} Heuristics shows that it is in fact a good approximation of what we expect to see from the actual experiment \cite{}, even if it neglects any cross-talk between qubits that are not directly coupled by the circuit\jovan{This is our observation.}.
 
 The number of qubits we could simulate classically using this software is limited to 30, which is less than the number of qubits currently available on an actual machine. To see how this comes about, let us note that even though in our protocols there are only a few non-Clifford gates, we can not exploit the advantage of Clifford simulators because we simulate \emph{noisy circuits}. 
+
+
 
 \subsection{Elemental Protocols}\label{sec:num:elem}
 
 In this section, we present the simulation results for the fusion and braiding experiments.
-
-
-
 
 \textbf{Circuit Characteristics.} Before we present the results, we report on the qubit layout used for the fusion and braiding experiments, as well as circuits depths achieved, in order to put the noise observed in a useful context.
 
@@ -1007,11 +1008,11 @@ In this section, we present the simulation results for the fusion and braiding e
 On the planar graph in Figure \ref{fig:basketball} this process is more complicated. Repeating the process as for the braiding ladder gives us the following state $\ket{\Psi} = \sum_{g_{12},g_{34}}\ket{g_{12},g_{12}, g_{34}, g_{34}}$. We then apply the full controlled multiply circuit from qubits of the second edge onto the qubits of the third edge. This procedure gives us the state defined in Figure \ref{fig:basketball}.
 
 \emph{Fusion.} 
-The exact ribbon operators and the layout of the qubits on the Sycamore chip used in the fusion experiment are shown in Fig.~\ref{fig:fusion_setup}.\caro{steve: comment that our layout is basically the lattice, whereas quantinuum didnt have that etc}
+The exact ribbon operators and the layout of the qubits on the Sycamore chip used in the fusion experiment are shown in Fig.~\ref{fig:fusion_setup}.\caro{steve: comment that our layout is basically the lattice, whereas quantinuum didnt have that etc}\jovan{I don't get this comment.}
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Figures/basket_fusion.pdf}
-	\caption{Ribbon operators and qubit layout for the fusion of two $\Psi_m$ anyons on the braiding ladder (top) and a small planar graph (bottom). Note that the lattice is embedded into a sphere, so the outside plaquette that we labelled twice in the braiding ladder diagram should be identified. Red and blue shadings denote the two ribbon operators, respectively. Purple circles mark the plaquette on which we perform the $H_{mr}$-partial charge measurement. Red circles mark the vertex on which we measure the flux. \caro{Add circles in ladder diagram.}}
+	\caption{Ribbon operators and qubit layout for the fusion of two $\Psi_m$ anyons on the braiding ladder (top) and a small planar graph (bottom). Note that the lattice is embedded into a sphere, so the outside plaquette that we labelled twice in the braiding ladder diagram should be identified. Red and blue shadings denote the two ribbon operators, respectively. Purple circles mark the plaquette on which we perform the $H_{mr}$-partial charge measurement. Red circles mark the vertex on which we measure the flux. \caro{Add circles in ladder diagram.}\jovan{Added, will retry to make it nicer.}}
 	\label{fig:fusion_setup}
 \end{figure}
 
@@ -1019,7 +1020,7 @@ Using the circuits listed in Sec.~\ref{subsec:enc} to implement the ribbon opera
 
 The additional swaps make up a considerable portion of all coupling gates used in the numerical experiments and hence the positioning of qubits is one of the key factors in minimising the circuit depth.
 
-It is also worth noting that not all anyons are equal in complexity. The $r-$dyons ribbon require considerably deeper circuits since the group multiplication controlled by the elements of the $\mathcal{C}_r$ conjugacy class always involve at least one Toffoli gate. Let us recall that the Toffoli gate needs to be compiled into a \caro{steve: not 12? depth-6} circuit using the CZ as the two qubit coupler, however this neglects any swaps needed to place the qubits acted on by the CZ gates adjacent to one another. Hence, reducing the number of Toffoli gates is the main heuristic approach when designing the experiments while keeping the depth minimal.
+It is also worth noting that not all anyons are equal in complexity. The $r-$dyons ribbon require considerably deeper circuits since the group multiplication controlled by the elements of the $\mathcal{C}_r$ conjugacy class always involve at least one Toffoli gate. Let us recall that the Toffoli gate needs to be compiled into a \caro{steve: not 12? depth-6}\jovan{subtle} circuit using the CZ as the two qubit coupler, however this neglects any swaps needed to place the qubits acted on by the CZ gates adjacent to one another. Hence, reducing the number of Toffoli gates is the main heuristic approach when designing the experiments while keeping the depth minimal.
 
 
 For the fusion of $\Psi_m$-fluxes on the small planar graph, we obtained a device-ready circuit of depth 70. This circuit prepares the ground state, implements the ribbon operators and performs a partial charge measurement. 
@@ -1090,7 +1091,7 @@ Looking at the results of the charge measurement for the two braiding protocols 
 
 The number of runs for both protocol was $16000$. The expected post-selection probabilities for the two protocols are $0.0625$ for $\sigma_{12}\sigma_{23}$ and $0.25$ for $\sigma_{23}\sigma_{12}$, while the actual rates of successes were $0.123$ for $\sigma_{12}\sigma_{23}$ and $0.315$ for $\sigma_{23}\sigma_{12}$, respectively.
 %while the actual number of successes was $1977$ for $\sigma_{12}\sigma_{23}$ and $5036$ for $\sigma_{23}\sigma_{12}$, due to the circuit noise and measurement readout bias.
-\caro{is it clear that the $\pm$ for 4 bins refers to max/min}
+\caro{is it clear that the $\pm$ for 4 bins refers to max/min}\jovan{This part of the data is mostly qualitative anyways.}
 In the case of the first braiding we see the four main peaks corresponding to the expected topological charges counting $255\pm 5$ with the biggest peak coming from the noise counting $109$ and resulting in a signal to noise ratio of about $2.3$. In the second case the peak corresponding to the vacuum counts $1890$. The largest peak coming from the noise counts 450 giving a signal to noise ratio of about $4.2$.
 
 \jovan{Removed the App, the Post-Selection was addressed in the Rib Op section.}
@@ -1101,7 +1102,7 @@ In the case of the first braiding we see the four main peaks corresponding to th
 
 However, we can still determine what charges the outcomes correspond to even if we do not rely on the knowledge of the fusion rules. This is done by repeating the partial charge measurements for another subgroup, as explained in Section \ref{sec:redchmmt}.
 
-Repeating the protocol with a $H_m$-partial charge measurement we see only two peaks corresponding to the charge measurement outcome $(1,1)$ combined with no or $r^2$ flux. This is due to the fact that all anyons that emerge from the fusion carry either no charge or $\alpha_m$ charge, which both correspond to the measurement outcome $(1,1)$ for the $H_m$ subgroup. Given that we observed the outcomes $(1,1)$ and $(1,-1)$ for $H_{mr}$, we can conclude that the charges present are the trivial and the $\alpha_m$ charge (data not shown) \caro{ok to not show data?}.
+Repeating the protocol with a $H_m$-partial charge measurement we see only two peaks corresponding to the charge measurement outcome $(1,1)$ combined with no or $r^2$ flux. This is due to the fact that all anyons that emerge from the fusion carry either no charge or $\alpha_m$ charge, which both correspond to the measurement outcome $(1,1)$ for the $H_m$ subgroup. Given that we observed the outcomes $(1,1)$ and $(1,-1)$ for $H_{mr}$, we can conclude that the charges present are the trivial and the $\alpha_m$ charge (data not shown) \caro{ok to not show data?}\jovan{where would we put it? App?}.
 
 
 
@@ -1212,7 +1213,7 @@ This probability is, however, modulate by the readout bias
 \begin{equation}
     p(b|\vec{s}_i, \vec{r}) = (1-\epsilon_b)p_{QM}(b|\vec{s}_i, \vec{r}) + \epsilon_{\bar{b}} p_{QM}(\bar{b}|\vec{s}_i, \vec{r}), \label{eqn:marg}
 \end{equation}
-\caro{there was a comment by steve on $\epsilon$ being wrong but I think they are right}
+\caro{there was a comment by steve on $\epsilon$ being wrong but I think they are right}\jovan{They are.}
 where $\epsilon_b$ is the probability to measure the qubit in state $\bar{b}$ ($\equiv 1-b$) even though it is in the state $b$.
 %, these values are known through \caro{calibration \cite{}}.
 
@@ -1319,7 +1320,7 @@ We can divide the $S$-matrix protocols into six different difficulty classes mea
 
 The second factor to consider is the number of Toffoli gates in the controlled multiplication and generalised conjugation circuits. The semions $\Phi_r,\tilde \Phi_r$ are difficult in both regards. 
 
-In Fig.~\ref{fig:Smat_diff} we show the $S$-matrix with all its entries color coded according to the difficulty class. In the list below we present the circuit depths and numerical simulation results for the diagonal S-matrix elements for representative cases of each difficulty class. For all protocols we chose to condition ribbon vs $0\oplus \tilde 0$ rather than ribbon vs vacuum.
+In Fig.~\ref{fig:Smat_diff} we show the $S$-matrix with all its entries color coded according to the difficulty class. In the list below we present the circuit depths and numerical simulation results for the diagonal S-matrix elements for representative cases of each difficulty class. For all protocols \jovan{add:(except for 1. and 4.)} we chose to condition ribbon vs $0\oplus \tilde 0$ rather than ribbon vs vacuum.
 
 \begin{enumerate}
 	\item Conditioning an abelian anyon: $\tilde{S}(\Sigma_m, \Sigma_m) = 0.969(6)e^{i\pi 0.004(2)}$, theoretical prediction $\tilde{S}(\Sigma_m, \Sigma_m)=1$. The total compiled circuit depth is 23 with 0 Toffoli gates corresponding to the difficulty class shaded in green in Fig.~\ref{fig:Smat_diff}.
@@ -1347,7 +1348,7 @@ We observe that the magnitude of the $S$-matrix in the simulation results decays
 \begin{figure*}
 	\centering
 	\includegraphics[width=\textwidth]{Figures/S_mat_with_diff.pdf}
-	\caption{The S-matrix of the $D(D_4)$ theory. The color shading represents the difficulty to observe the values experimentally, where green to red denotes increasing difficulty. The entries highlighted in bold face and blue are were numerically and discussed in the text.}
+	\caption{The S-matrix of the $D(D_4)$ theory. The color shading represents the difficulty to observe the values experimentally, where green to red denotes increasing difficulty. \jovan{Rewritten:The entries highlighted in bold face and blue had their values numerically obtained by simulating the phase-sentitive measurement protocols and are discussed in the text.}}
 	\label{fig:Smat_diff}
 \end{figure*}
 
@@ -1380,24 +1381,24 @@ The situation is simplified significantly if we encode the group elements by a q
 \begin{equation*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw  & \ctrl{5} & \qw \\
-\lstick{R} & \qw \link{1}{1}& &\link{1}{-1} & \ctrl{5} & \ctrl{5} & \qw    & \qw & \qw\link{1}{1}& &\link{1}{-1} & \qw  & \qw \\
+\lstick{r} & \qw \link{1}{1}& &\link{1}{-1} & \ctrl{5} & \ctrl{5} & \qw    & \qw & \qw\link{1}{1}& &\link{1}{-1} & \qw  & \qw \\
 &&&&&&&&&&&&&&\\
-\lstick{R^2} & \qw \link{-1}{1}& &\link{-1}{-1} & \qw & \qw  & \ctrl{4} & \ctrl{4}  & \qw \link{-1}{1}& &\link{-1}{-1} & \qw  & \qw \\
+\lstick{r^{2}} & \qw \link{-1}{1}& &\link{-1}{-1} & \qw & \qw  & \ctrl{4} & \ctrl{4}  & \qw \link{-1}{1}& &\link{-1}{-1} & \qw  & \qw \\
 \\
 \lstick{m} & \qw & \ctrl{-3}  & \qw & \qw & \qw  & \qw & \qw & \qw  & \ctrl{-3} & \qw  & \targ & \qw \\
-\lstick{R} & \qw & \qw & \qw & \ctrl{1}  & \targ & \targ & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
-\lstick{R^2} & \qw & \qw & \qw & \targ  & \qw  & \ctrl{-1} & \targ & \qw & \qw & \qw  & \qw & \qw 
+\lstick{r} & \qw & \qw & \qw & \ctrl{1}  & \targ & \targ & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
+\lstick{r^{2}} & \qw & \qw & \qw & \targ  & \qw  & \ctrl{-1} & \targ & \qw & \qw & \qw  & \qw & \qw 
 }
 \quad\quad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{6} & \qw & \ctrl{4} & \qw & \qw & \qw  & \qw & \qw \\
-\lstick{R} & \qw  & \qw & \qw & \qw & \ctrl{4} & \ctrl{4} & \qw & \qw & \qw \\
-\lstick{R^2} & \qw  & \qw & \qw  & \qw & \qw & \qw & \ctrl{3} & \ctrl{5} & \qw \\
+\lstick{r} & \qw  & \qw & \qw & \qw & \ctrl{4} & \ctrl{4} & \qw & \qw & \qw \\
+\lstick{r^{2}} & \qw  & \qw & \qw  & \qw & \qw & \qw & \ctrl{3} & \ctrl{5} & \qw \\
 \\
 \lstick{m} & \qw & \qw  & \qw & \targ & \qw & \qw & \qw & \qw & \qw \\
-\lstick{R} & \qw \link{1}{1}& &\link{1}{-1} & \qw & \ctrl{2} & \targ & \targ & \qw & \qw \\
+\lstick{r} & \qw \link{1}{1}& &\link{1}{-1} & \qw & \ctrl{2} & \targ & \targ & \qw & \qw \\
 &&&&&&&&&&&&&&&\\
-\lstick{R^2} & \qw \link{-1}{1}& &\link{-1}{-1}& \qw & \targ & \qw & \ctrl{-2} & \targ & \qw 
+\lstick{r^{2}} & \qw \link{-1}{1}& &\link{-1}{-1}& \qw & \targ & \qw & \ctrl{-2} & \targ & \qw 
 }
 \end{equation*}
 \caption{The general controlled multiplication circuit for the group $S_3$. The left circuit is the left multiplication, $\ket{g,h} \rightarrow \ket{g, gh}$, and the circuit on the right is the right multiplication, $\ket{g,h} \rightarrow \ket{g, hg}$. The first three qubits encode the first group element and the second three the second group element.}
@@ -1408,16 +1409,16 @@ The situation is simplified significantly if we encode the group elements by a q
 \begin{equation*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \qw & \qw & \qw & \ctrl{2}& \qw\\
-\lstick{R^*} & \qw & \gate{(23)} & \ctrl{2} & \gate{(23)} & \qw& \qw\\
+\lstick{r^*} & \qw & \gate{(23)} & \ctrl{2} & \gate{(23)} & \qw& \qw\\
 \lstick{m} & \qw & \ctrl{-1} & \qw & \ctrl{-1}& \targ& \qw\\
-\lstick{R^*} & \qw & \qw & \gate{\mathbb{Z}_3}& \qw & \qw& \qw
+\lstick{r^*} & \qw & \qw & \gate{\mathbb{Z}_3}& \qw & \qw& \qw
 }
 \quad\quad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{3} & \qw & \ctrl{2} & \qw\\
-\lstick{R^*} & \qw & \qw & \ctrl{2} & \qw& \qw\\
+\lstick{r^*} & \qw & \qw & \ctrl{2} & \qw& \qw\\
 \lstick{m} & \qw & \qw & \qw & \targ & \qw\\
-\lstick{R^*} & \qw & \gate{(23)} & \gate{\mathbb{Z}_3}& \qw & \qw 
+\lstick{r^*} & \qw & \gate{(23)} & \gate{\mathbb{Z}_3}& \qw & \qw 
 }
 \end{equation*}
 \caption{The general controlled multiplication circuit for the group $S_3$. The left circuit is the left multiplication, $\ket{g,h} \rightarrow \ket{g, gh}$, and the circuit on the right is the right multiplication, $\ket{g,h} \rightarrow \ket{g, hg}$. The first qubit-qutrit encode the first group element and the second pair the second group element. The gate $C(23)$ is the controlled permutation implementing the commutation relation of the $S_3$ group and the gate $C(\mathbb{Z}_3)$ is the qutrit-qutrit generalisation of the CX gate, i.e. $\mathbb{Z}_3$-addition.}
@@ -1429,20 +1430,20 @@ The situation is simplified significantly if we encode the group elements by a q
 \begin{figure}
 \begin{equation*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{!R} & \qw & \targ & \gate{X} & \ctrl{3} & \ctrl{3} & \gate{X} & \ctrl{3} & \ctrl{4} & \targ & \qw \\
+\lstick{!r} & \qw & \targ & \gate{X} & \ctrl{3} & \ctrl{3} & \gate{X} & \ctrl{3} & \ctrl{4} & \targ & \qw \\
 \\
 \lstick{m} & \qw & \ctrl{-2} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{-2} & \qw \\
-\lstick{R} & \qw & \qw & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw & \qw \\
-\lstick{R^2} & \qw & \qw & \qw & \targ & \qw & \qw  & \ctrl{-1} & \targ & \qw & \qw
+\lstick{r} & \qw & \qw & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw & \qw \\
+\lstick{r^{2}} & \qw & \qw & \qw & \targ & \qw & \qw  & \ctrl{-1} & \targ & \qw & \qw
 }\quad\quad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R}  & \qw & \qw & \qw & \qw & \ctrl{5}  & \ctrl{6} & \qw\link{1}{1}& &\link{1}{-1} & \qw & \qw & \qw \\
+\lstick{r}  & \qw & \qw & \qw & \qw & \ctrl{5}  & \ctrl{6} & \qw\link{1}{1}& &\link{1}{-1} & \qw & \qw & \qw \\
 &&&&&&&&&&&&&&\\
-\lstick{R^2} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw & \qw  & \qw \link{-1}{1}& &\link{-1}{-1} & \qw & \qw & \qw \\
+\lstick{r^{2}} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw & \qw  & \qw \link{-1}{1}& &\link{-1}{-1} & \qw & \qw & \qw \\
 \\
 \lstick{m} & \gate{X} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{-3} & \qw & \qw & \qw & \qw \\
-\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw & \qw & \qw & \qw & \qw  & \qw \\
-\lstick{R^2} & \qw & \targ & \qw  & \qw & \ctrl{-1} & \targ & \qw & \qw & \qw & \qw & \qw & \qw  
+\lstick{r} & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw & \qw & \qw & \qw & \qw  & \qw \\
+\lstick{r^{2}} & \qw & \targ & \qw  & \qw & \ctrl{-1} & \targ & \qw & \qw & \qw & \qw & \qw & \qw  
 }
 \end{equation*}
 \caption{The $S_3$ controlled left multiplication with the domain restricted to a single conjugacy class, $\mathcal{C}_r$ on the left and $\mathcal{C}_m$ on the right. Note that the encoding of $\mathcal{C}_r$ elements is slightly different from the encoding of the general group elements.}
@@ -1452,7 +1453,7 @@ The situation is simplified significantly if we encode the group elements by a q
 
 
 \textbf{Anyon Content.} The group $S_3$ has three conjugacy classes, $\mathcal{C}_e = \{e\}$, $\mathcal{C}_r = \{r, r^2\}$ and $\mathcal{C}_m = \{m, mr, mr^2\}$. The two nontrivial conjugacy classes have abelian centres. 
-The anyons of this theory alongside their braiding properties have been completely studied \caro{in Ref. \cite{}}. In this section we just note that there are two abelian, four two dimensional and two three dimensional anyons.
+The anyons of this theory alongside their braiding properties have been completely studied \caro{in Ref. \cite{Cui_2015}}\jovan{added}. In this section we just note that there are two abelian, four two dimensional and two three dimensional anyons.
 
 In our ribbon application protocol we rely on two operations, $\mathcal C$-controlled multiplication and generalised conjugation. When restricted to a conjugacy class the controlled multiplication circuit simplifies significantly for the two-dimensional anyons with $\mathcal{C}_r$ flux. $\mathcal{C}_r$ is naturally encoded by a qubit and the $\mathcal{C}_r$-controlled multiplication circuit has only one Toffoli gate for both left and right multiplication.
 
@@ -1476,22 +1477,22 @@ The circuits involved in the partial charge measurement with respect to the subg
 \lstick{m} & \qw & \ctrl{2} & \qw \\
 \\
 \lstick{m} & \qw & \targ & \qw \\
-\lstick{R} & \qw & \qw & \qw \\
-\lstick{R^2} & \qw & \qw & \qw 
+\lstick{r} & \qw & \qw & \qw \\
+\lstick{r^{2}} & \qw & \qw & \qw 
 }\quad\quad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R}  & \qw & \qw & \qw & \qw & \ctrl{4} & \ctrl{5} & \qw\\
-\lstick{R^2} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw & \qw & \qw  \\
+\lstick{r}  & \qw & \qw & \qw & \qw & \ctrl{4} & \ctrl{5} & \qw\\
+\lstick{r^{2}} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw & \qw & \qw  \\
 \\
 \lstick{m} & \qw & \qw & \qw & \qw &  \qw &  \qw &  \qw \\
-\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw\\
-\lstick{R^2} & \qw & \targ & \qw  & \qw & \ctrl{-1} & \targ & \qw
+\lstick{r} & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw\\
+\lstick{r^{2}} & \qw & \targ & \qw  & \qw & \ctrl{-1} & \targ & \qw
 }\quad\quad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \gate{X} & \ctrl{2} & \gate{X} & \qw \\
-\lstick{R} & \qw & \qw \link{1}{1}& &\link{1}{-1} & \qw\\
+\lstick{r} & \qw & \qw \link{1}{1}& &\link{1}{-1} & \qw\\
 &&&&&\\
-\lstick{R^2} & \qw & \qw \link{-1}{1}& &\link{-1}{-1} & \qw 
+\lstick{r^{2}} & \qw & \qw \link{-1}{1}& &\link{-1}{-1} & \qw 
 }
 \end{equation*}
 \caption{(Left) The controlled left multiplication circuit, $\ket{g,h} \rightarrow \ket{g, gh}$, for $g \in H_m$. (Middle) The controlled right multiplication circuit, $\ket{g,h} \rightarrow \ket{g, hg^{-1}}$, for $g \in H_r$. (Right) The inverse circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, needed for reversing arrows.}
@@ -1744,167 +1745,167 @@ Depending on the context in which it appears, i.e., weather the controlled multi
 \bold{G}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{3} & \qw & \qw & \qw & \qw\\
-\lstick{R} & \ctrl{2} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw\\
+\lstick{r} & \ctrl{2} & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
+\lstick{r} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{r^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
 \qquad\qquad\qquad\quad U_{CM}^{(1)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \ctrl{4} & \ctrl{3} & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw\\
+\lstick{r} & \qw & \qw & \ctrl{3} & \ctrl{3} & \qw & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \qw & \targ & \qw & \qw & \qw & \qw\\
-\lstick{R} & \ctrl{1} & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
+\lstick{r} & \ctrl{1} & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{r^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
 \qquad\qquad\qquad\quad U_{CM}^{(2)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{3} & \qw & \qw & \targ & \ctrl{1} & \targ & \qw \\
-\lstick{R} & \ctrl{2} & \qw & \ctrl{3} & \ctrl{3}  & \qw & \ctrl{4} & \qw & \qw \\
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3}  & \qw & \qw & \qw \\
+\lstick{r} & \ctrl{2} & \qw & \ctrl{3} & \ctrl{3}  & \qw & \ctrl{4} & \qw & \qw \\
+\lstick{r^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3}  & \qw & \qw & \qw \\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw & \qw & \qw \\
-\lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw & \qw & \qw \\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ  & \targ & \qw & \qw\\
+\lstick{r} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw & \qw & \qw \\
+\lstick{r^{2}} & \targ & \qw & \targ & \qw & \targ  & \targ & \qw & \qw\\
 \qquad\qquad\qquad\qquad U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{3} & \qw & \qw & \targ & \ctrl{1} & \targ & \qw \\
-\lstick{R} & \ctrl{2} & \qw & \ctrl{3} & \ctrl{3}  & \qw & \ctrl{4} & \qw & \qw \\
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3}  & \qw & \qw & \qw \\
+\lstick{r} & \ctrl{2} & \qw & \ctrl{3} & \ctrl{3}  & \qw & \ctrl{4} & \qw & \qw \\
+\lstick{r^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3}  & \qw & \qw & \qw \\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw & \qw & \qw \\
-\lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw & \qw & \qw \\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ  & \targ & \qw & \qw\\
+\lstick{r} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw & \qw & \qw \\
+\lstick{r^{2}} & \targ & \qw & \targ & \qw & \targ  & \targ & \qw & \qw\\
 \qquad\qquad\qquad\qquad U_{CM}^{(4)}
 }\\
 \\
 \\ \bold{H_m}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \ctrl{2} &  \qw & \qw\\
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw\\
+\lstick{r^{2}} & \qw  & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw \\
-\lstick{R} & \qw & \qw & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw\\
+\lstick{r} & \qw & \qw & \qw\\
+\lstick{r^{2}} & \qw & \targ & \qw\\
 \qquad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \ctrl{2} &  \qw & \qw & \ctrl{3} & \qw\\
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw\\
+\lstick{r^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \qw & \qw & \ctrl{1} & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw & \targ & \qw\\
+\lstick{r} & \qw & \qw & \qw & \ctrl{1} & \qw\\
+\lstick{r^{2}} & \qw & \targ & \qw & \targ & \qw\\
 \qquad\qquad U_{CM}^{(2)} = U_{CM}^{(4)}
 }\qquad\bold{H_{mr}}:\qquad\quad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{mR} & \ctrl{2} &  \ctrl{2} & \ctrl{3} & \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
+\lstick{r^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
+\lstick{r} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{r^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
 \qquad\qquad\qquad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{mR} & \ctrl{2} &  \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw \\
-\lstick{R} & \qw & \targ & \qw & \qw\\
-\lstick{R^{2}} & \qw & \qw & \targ & \qw\\
+\lstick{r} & \qw & \targ & \qw & \qw\\
+\lstick{r^{2}} & \qw & \qw & \targ & \qw\\
 \qquad\quad U_{CM}^{(2)} = U_{CM}^{(4)}
 }\\
 \\
 \\ \bold{H_r}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R} & \ctrl{2}  & \ctrl{3} & \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
+\lstick{r} & \ctrl{2}  & \ctrl{3} & \ctrl{3} & \qw & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \targ & \qw & \targ & \qw\\
+\lstick{r} & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{r^{2}} & \targ & \targ & \qw & \targ & \qw\\
 \qquad\qquad U_{CM}^{(1)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R} & \ctrl{3} &  \ctrl{3} & \qw & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
+\lstick{r} & \ctrl{3} &  \ctrl{3} & \qw & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw \\
-\lstick{R} & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw\\
+\lstick{r} & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{r^{2}} & \targ & \qw & \targ & \qw\\
 \qquad\qquad U_{CM}^{(2)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R} & \ctrl{2}  & \ctrl{3} & \ctrl{3} & \qw & \ctrl{4} & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
+\lstick{r} & \ctrl{2}  & \ctrl{3} & \ctrl{3} & \qw & \ctrl{4} & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw & \qw\\
-\lstick{R^{2}} & \targ & \targ & \qw & \targ & \targ & \qw\\
+\lstick{r} & \qw & \ctrl{1} & \targ & \qw & \qw & \qw\\
+\lstick{r^{2}} & \targ & \targ & \qw & \targ & \targ & \qw\\
 \qquad\qquad\qquad\quad U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R} & \ctrl{3} &  \ctrl{3} & \qw & \ctrl{4} & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw & \qw
+\lstick{r} & \ctrl{3} &  \ctrl{3} & \qw & \ctrl{4} & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \ctrl{3} & \qw & \qw
 \\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw & \qw\\
-\lstick{R} & \ctrl{1} & \targ & \qw & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \targ & \qw\\
+\lstick{r} & \ctrl{1} & \targ & \qw & \qw & \qw\\
+\lstick{r^{2}} & \targ & \qw & \targ & \targ & \qw\\
 \qquad\qquad\quad U_{CM}^{(4)}
 }\\
 \\
 \\ \bold{C_m}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw\\
+\lstick{r^{2}} & \qw  & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw \\
-\lstick{R} & \qw & \qw & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw\\
+\lstick{r} & \qw & \qw & \qw\\
+\lstick{r^{2}} & \qw & \targ & \qw\\
 \qquad\quad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw\\
+\lstick{r^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \qw & \qw & \ctrl{1} & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw & \targ & \qw\\
+\lstick{r} & \qw & \qw & \qw & \ctrl{1} & \qw\\
+\lstick{r^{2}} & \qw & \targ & \qw & \targ & \qw\\
 \qquad \qquad U_{CM}^{(2)} = U_{CM}^{(4)} 
 }\qquad \bold{C_{mr}}: \qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
+\lstick{r^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
+\lstick{r} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{r^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
 \qquad\qquad\qquad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw \\
-\lstick{R} & \qw & \targ & \qw & \qw\\
-\lstick{R^{2}} & \qw & \qw & \targ & \qw\\
+\lstick{r} & \qw & \targ & \qw & \qw\\
+\lstick{r^{2}} & \qw & \qw & \targ & \qw\\
 \qquad \qquad U_{CM}^{(2)} = U_{CM}^{(4)} 
 }\\
 \\
 \\ \bold{C_r}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \targ & \qw & \targ & \qw\\
+\lstick{r} & \qw & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{r^{2}} & \targ & \targ & \qw & \targ & \qw\\
 \qquad\qquad\qquad U_{CM}^{(1)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw \\
-\lstick{R} & \ctrl{1} & \targ & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \qw\\
+\lstick{r} & \ctrl{1} & \targ & \qw & \qw\\
+\lstick{r^{2}} & \targ & \qw & \targ & \qw\\
 \qquad\qquad U_{CM}^{(2)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw & \qw\\
-\lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw & \qw\\
-\lstick{R^{2}} & \targ & \targ & \qw & \targ & \targ & \qw\\
+\lstick{r} & \qw & \ctrl{1} & \targ & \qw & \qw & \qw\\
+\lstick{r^{2}} & \targ & \targ & \qw & \targ & \targ & \qw\\
 \qquad\qquad\qquad U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \ctrl{3} & \qw & \qw\\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw & \qw\\
-\lstick{R} & \ctrl{1} & \targ & \qw & \qw & \qw\\
-\lstick{R^{2}} & \targ & \qw & \targ & \targ & \qw\\
+\lstick{r} & \ctrl{1} & \targ & \qw & \qw & \qw\\
+\lstick{r^{2}} & \targ & \qw & \targ & \targ & \qw\\
 \qquad\qquad\qquad U_{CM}^{(4)}
 }
 \end{gather*}
@@ -1915,7 +1916,7 @@ Depending on the context in which it appears, i.e., weather the controlled multi
 %$U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
 %$U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$ and 
 %$U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$, 
-for $g \in G$ (unrestricted), $g$ restricted to subgroups $H$ and $g$ restricted to conjugacy classes $C$.\caro{fix label for conjugacy class qubit}}
+for $g \in G$ (unrestricted), $g$ restricted to subgroups $H$ and $g$ restricted to conjugacy classes $C$.\caro{fix label for conjugacy class qubit}\jovan{Hopefully adequately addressed in the main text.}}
     \label{fig:CM}
 \end{figure}
 
@@ -1928,26 +1929,26 @@ Another building block of our circuits is the generalised conjugation, $U_{GC}\k
 \begin{gather*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{\quad m} &  \ctrl{3} & \qw & \qw & \qw\\
-\lstick{R} & \qw & \ctrl{2} & \qw & \qw\\
-\lstick{R^{2}} & \qw & \qw & \ctrl{1} & \qw \\
+\lstick{r} & \qw & \ctrl{2} & \qw & \qw\\
+\lstick{r^{2}} & \qw & \qw & \ctrl{1} & \qw \\
 \lstick{a_i} & \gate{A^T(m)} & \gate{A^T(r)} & \gate{A^T(r^2)}  & \qw
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{\quad m} &  \qw & \qw & \ctrl{3} & \qw\\
-\lstick{R} & \qw & \ctrl{2} & \qw & \qw\\
-\lstick{R^{2}} & \ctrl{1} & \qw & \qw & \qw \\
+\lstick{r} & \qw & \ctrl{2} & \qw & \qw\\
+\lstick{r^{2}} & \ctrl{1} & \qw & \qw & \qw \\
 \lstick{a_i} & \gate{A^*(r^2)} & \gate{A^*(r)} & \gate{A^*(m)}  & \qw
 }\\
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{\quad m} &  \ctrl{3} & \qw & \qw & \qw\\
-\lstick{R} & \qw & \ctrl{2} & \qw & \qw\\
-\lstick{R^{2}} & \qw & \qw & \ctrl{1} & \qw \\
+\lstick{r} & \qw & \ctrl{2} & \qw & \qw\\
+\lstick{r^{2}} & \qw & \qw & \ctrl{1} & \qw \\
 \lstick{a_i} & \gate{A^\dag(m)} & \gate{A^\dag(r)} & \gate{A^\dag(r^2)}  & \qw
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{\quad m} &  \qw & \qw & \ctrl{3} & \qw\\
-\lstick{R} & \qw & \ctrl{2} & \qw & \qw\\
-\lstick{R^{2}} & \ctrl{1} & \qw & \qw & \qw \\
+\lstick{r} & \qw & \ctrl{2} & \qw & \qw\\
+\lstick{r^{2}} & \ctrl{1} & \qw & \qw & \qw \\
 \lstick{a_i} & \gate{A(r^2)} & \gate{A(r)} & \gate{A(m)}  & \qw
 }
 \end{gather*}
@@ -1956,19 +1957,19 @@ Another building block of our circuits is the generalised conjugation, $U_{GC}\k
     \label{fig:GConj_scheme}
 \end{figure}
 
-\textbf{Miscellaneous. \caro{propose to omit}} In Section~\ref{sec:D4_double} we have already listed all the decoupling circuits used in the reduced charge measurement protocol in the case of $D(D_4)$. Some other useful circuits are shown in Figure~\ref{fig:Misc_cirq}.
+\textbf{Miscellaneous. \caro{propose to omit}\jovan{Fair point.}} In Section~\ref{sec:D4_double} we have already listed all the decoupling circuits used in the reduced charge measurement protocol in the case of $D(D_4)$. Some other useful circuits are shown in Figure~\ref{fig:Misc_cirq}.
 
 \begin{figure}
 \begin{equation*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{\quad m} &  \targ & \ctrl{1} & \targ & \qw\\
-\lstick{R} & \qw & \ctrl{1} & \qw & \qw\\
-\lstick{R^{2}} & \qw & \targ & \qw & \qw 
+\lstick{r} & \qw & \ctrl{1} & \qw & \qw\\
+\lstick{r^{2}} & \qw & \targ & \qw & \qw 
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{\quad m} &  \qw & \qw & \ctrl{1} & \qw & {\qquad mR}\\
-\lstick{R} & \qw & \targ & \ctrl{1} & \qw & {\qquad R}\\
-\lstick{R^{2}} & \qw & \qw & \targ & \qw  & {\qquad R^2}
+\lstick{\quad m} &  \qw & \qw & \ctrl{1} & \qw & {\qquad mr}\\
+\lstick{r} & \qw & \targ & \ctrl{1} & \qw & {\qquad r}\\
+\lstick{r^{2}} & \qw & \qw & \targ & \qw  & {\qquad r^2}
 }\qquad\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{\quad c} & \targ & \ctrl{1} & \targ & \qw \\
@@ -2050,11 +2051,7 @@ For a general setting, where we have $n$ qubits, post-select on the biased measu
 \begin{equation}
 	P=\vec s \cdot (\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}) + \tilde \epsilon_+ \;,
 \end{equation}
-where $\tilde \epsilon_\pm$ are effective errors that depend on $\rho$. In our experiment we are only interested in the direction of the vector $\vec b$ which contains the information of the $S$- or $T$-matrix entry. The offset is purely due to read-out errors and is discarded. In the tomography, we determine $\vec b^\text{observed}=\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}$ and do not try to distinguish between the two contributions, since we are dealing with an unknown density matrix.
-
-
-\jovan{BIBLIOGRAPHY is not compiled on my end?!}
-
+where $\tilde \epsilon_\pm$ are effective errors that depend on $\rho$. In our experiment we are only interested in the direction of the vector $\vec b$ which contains the information of the $S$- or $T$-matrix entry. The offset is purely due to read-out errors and is discarded. In the tomography, we determine $\vec b^\text{observed}=\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}$ and do not try to distinguish between the two contributions, since we are dealing with an unknown density matrix. 
 %
 
 %\usepackage[style=phys]{biblatex}
