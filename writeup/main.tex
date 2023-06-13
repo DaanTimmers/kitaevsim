@@ -608,10 +608,23 @@ We chose the following map
 \end{equation}
 where $a,b,c \in \{0,1\}$, $r$ is the $90^{\text{o}}$ rotation and $m$ is the reflection.
 
-When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Since the centralizers of these conjugacy classes are abelian and their representations one-dimensional, we can encode the full internal space of the anyon with just one qubit, e.g. for $\Phi_m = (\mathcal{C}_m, (1,-1))$ anyons we have
-\begin{equation}
-	\ket{c, 0} \equiv \ket{a}_{r^2} \iff c = m^1 r^0(r^2)^a \in \{m , mr^2\}.\footnote{In the controlled multiplication circuits we label this bit as $r^2$, i.e. $\ket{a}_{r^2}$, because that is what they represent in the group multiplication. In the generalised conjugation we use either the label $\text{aux}$ (any auxiliary bit), $a_b$ (forward ancilla) or $a_f$ (backwards ancilla), depending on the context.} 
+When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Since the centralizers of these conjugacy classes are abelian and their representations one-dimensional, we can encode the full internal space of the anyon with just one qubit. For anyons with $m$-flux, $(C_m,\chi)$,
+% $\Phi_m = (\mathcal{C}_m, (1,-1))$ anyons 
+we have
+\begin{equation}\label{eq:enc_C}
+	\ket{c, 0} \equiv \ket{a}_{r^2} \iff c = m^1 r^0(r^2)^a \in \{m , mr^2\},
+	\end{equation}
+for anyons with $mr$-flux, $(C_{mr},\chi)$, we have	
+\begin{equation}\label{eq:enc_C}
+	\ket{c, 0} \equiv \ket{a}_{r^2} \iff c = m^1 r^1(r^2)^a \in \{mr , mr^3\},
+	\end{equation}
+	and for anyons with $r$-flux, $(C_r,\chi)$, we have
+\begin{equation}\label{eq:enc_C}
+	\ket{c, 0} \equiv \ket{a}_{r^2} \iff c = m^0 r^1(r^2)^a \in \{r , r^3\}.	
 \end{equation}
+			
+%\footnote{In the controlled multiplication circuits we label this bit as $r^2$, i.e. $\ket{a}_{r^2}$, because that is what they represent in the group multiplication. In the generalised conjugation we use either the label $\text{aux}$ (any auxiliary bit), $a_b$ (forward ancilla) or $a_f$ (backwards ancilla), depending on the context.} 
+
 
 Similarly the subgroups are encoded with two qubits. For example for $h\in H_r$ we use\begin{equation}
     \ket{h} \equiv \ket{a}_r\ket{b}_{r^2} \iff h = m^0r^a(r^2)^b.
@@ -685,7 +698,7 @@ Let us move on to the generalized conjugation. The circuit depths for this heavi
 \lstick{R^{2}} & \qw & \targ & \qw
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw
+\lstick{a} & \qw  & \ctrl{3} & \qw
 \\
 \lstick{\quad m} &  \gate{X} & \qw & \qw \\
 \lstick{R} & \qw & \qw & \qw\\
@@ -693,7 +706,7 @@ Let us move on to the generalized conjugation. The circuit depths for this heavi
 }
 \end{equation*}
 
-    \caption{Circuits for controlled group multiplication $\ket{g,h} \rightarrow \ket{g,gh}$. Left: Both $g$ (first three qubits) and $h$ are unrestricted, i.e., $g,h\in G$. Center: $g \in H_{m}$ is encoded by just the first two qubits. Right: $g \in C_m$ is encoded by just the first qubit.\caro{calling it $r^2$ is misleading, maybe just call it $C_m$ and say in the caption that $\ket{0}$ is identified with $m$ and $\ket{1}$ with $mr^2$.}\caro{fix label of Cm qubit}}
+    \caption{Circuits for controlled group multiplication $\ket{g,h} \rightarrow \ket{g,gh}$. Left: Both $g$ (first three qubits) and $h$ (last three qubits) are unrestricted, i.e., $g,h\in G$. Center: $g \in H_{m}$ is encoded by just the first two qubits. Right: $g \in C_m$ is encoded by just the first qubit $a$ (cf. Eq.~\eqref{eq:enc_C}).}
     \label{fig:restMult}
 \end{figure}
 
@@ -704,18 +717,18 @@ Let us move on to the generalized conjugation. The circuit depths for this heavi
 \lstick{m} & \qw & \qw \\
 \lstick{R} & \ctrl{2}  & \qw \\
 \lstick{R^{2}} & \qw  & \qw \\
-\lstick{\text{aux}} &  \targ & \qw
+\lstick{a} &  \targ & \qw
 }\qquad\qquad
 \Qcircuit @C=0.5em @R=0.7em @!R{
 \lstick{m} & \ctrl{3} & \qw & \gate{Z} & \qw\\
 \lstick{R} & \qw & \ctrl{2} & \gate{S} & \qw\\
 \lstick{R^{2}} & \qw  & \qw & \gate{Z} & \qw\\
-\lstick{\text{aux}} & \gate{Z}  & \gate{Y} & \qw & \qw 
+\lstick{a} & \gate{Z}  & \gate{Y} & \qw & \qw 
 }
 \end{split}
 \end{equation*}
  
-    \caption{Circuits for generalised conjugation. The first three qubits encode the physical, group valued, gauge field. The last qubit encodes the auxiliary qubit representing the internal state of the (two-dimensional) anyon. Left: The conjugation unitary for a pure flux $\Psi_m$ $\ket{c}\ket{g} \rightarrow \ket{gcg^{-1}}\ket{g}$. Right: The generalised conjugation unitary for the dyon $\tilde{\Phi}_m$: $\ket{c}\ket{g} \rightarrow \Gamma(g)\ket{gcg^{-1}}\ket{g}$, where the representation 'matrix' $\Gamma(g) \in U(1)$ and  $S = \text{diag}(1, i)$.}
+    \caption{Circuits for generalised conjugation. The first three qubits encode the physical, group valued, gauge field $\ket{g}$. The last qubit encodes the auxiliary qubit representing the internal state of the (two-dimensional) anyon $\ket{c}$. Left: The conjugation unitary for a pure flux $\Psi_m$ $\ket{c}\ket{g} \rightarrow \ket{gcg^{-1}}\ket{g}$. Right: The generalised conjugation unitary for the dyon $\tilde{\Phi}_m$: $\ket{c}\ket{g} \rightarrow \Gamma(g)\ket{gcg^{-1}}\ket{g}$, where the representation 'matrix' $\Gamma(g) \in U(1)$ and  $S = \text{diag}(1, i)$.}
 
     \label{fig:genConj}
 \end{figure}
@@ -819,7 +832,7 @@ This means that the order of interchanges matter, i.e. $\sigma_{12}\sigma_{23} \
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{Figures/fluxBRAID.pdf}
-    \caption{The two braiding protocols, differing only in order of exchange of two anyons. C stands for creation, M for measurements. Protocol a) will have 4 fusion outcomes, while protocol b) can only produce vacuum.\caro{change C to M in figure}}
+    \caption{The two braiding protocols, differing only in order of exchange of two anyons. C stands for creation, M for measurements. Protocol a) will have 4 fusion outcomes, while protocol b) can only produce vacuum.\caro{change A to M in figure (M for measurement)}}
     \label{fig:flux_braid}
 \end{figure}
 
@@ -892,7 +905,7 @@ The exact method of tomography will be presented alongside the numerical result 
 \lstick{m} & \qw & \qw & \targ& \qw\\
 \lstick{R} & \qw  & \qw & \qw& \qw\\
 \lstick{R^{2}} & \targ  & \qw & \qw& \qw\\
-\lstick{\text{aux}} &  \ctrl{-1} & \qw& \qw& \qw
+\lstick{a} &  \ctrl{-1} & \qw& \qw& \qw
 }%
 \qquad \qquad \qquad
 \Qcircuit @C=0.5em @R=0.7em @!R{
@@ -900,10 +913,10 @@ The exact method of tomography will be presented alongside the numerical result 
 \lstick{m} & \targ & \qw \\
 \lstick{R} & \qw  & \qw \\
 \lstick{R^{2}} & \targ  & \qw \\
-\lstick{\text{aux}} &  \ctrl{-1} & \qw
+\lstick{a} &  \ctrl{-1} & \qw
 }
 \end{equation*}
-\caption{Controlled multiply circuits of an elementary triangle of a ribbon operator conditioned on a control qubit $c$. Left. Implementing $\Psi_m$ vs vacuum, represented as $0\oplus 0$. Right. Implementing $\Psi_m$ vs $0\oplus\tilde{0}$.}
+\caption{Controlled multiply circuits of an elementary triangle of a ribbon operator conditioned on a control qubit $c$ (first qubit) acting on a physical edge (middle three qubits) and a ribbon ancilla qubit (last qubit) Left. Implementing a $\Psi_m$-elementary triangle vs vacuum, represented as $0\oplus 0$. Right. Implementing an $\Psi_m$-elementary triangle vs $0\oplus\tilde{0}$.}
 \label{fig:flavCond}
 \end{figure}
 
@@ -1850,28 +1863,28 @@ Depending on the context in which it appears, i.e., weather the controlled multi
 \\
 \\ \bold{C_m}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw\\
+\lstick{a} & \qw  & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw \\
 \lstick{R} & \qw & \qw & \qw\\
 \lstick{R^{2}} & \qw & \targ & \qw\\
 \qquad\quad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \ctrl{3} & \qw & \qw & \qw\\
+\lstick{a} & \qw  & \ctrl{3} & \qw & \qw & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \qw & \qw & \ctrl{1} & \qw\\
 \lstick{R^{2}} & \qw & \targ & \qw & \targ & \qw\\
 \qquad \qquad U_{CM}^{(2)} = U_{CM}^{(4)} 
 }\qquad \bold{C_{mr}}: \qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
+\lstick{a} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
 \lstick{R^{2}} & \targ & \qw & \targ & \qw & \targ & \qw\\
 \qquad\qquad\qquad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
+\lstick{a} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw \\
 \lstick{R} & \qw & \targ & \qw & \qw\\
 \lstick{R^{2}} & \qw & \qw & \targ & \qw\\
@@ -1880,28 +1893,28 @@ Depending on the context in which it appears, i.e., weather the controlled multi
 \\
 \\ \bold{C_r}:\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
+\lstick{a} & \qw  & \qw & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw\\
 \lstick{R^{2}} & \targ & \targ & \qw & \targ & \qw\\
 \qquad\qquad\qquad U_{CM}^{(1)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
+\lstick{a} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw \\
 \lstick{R} & \ctrl{1} & \targ & \qw & \qw\\
 \lstick{R^{2}} & \targ & \qw & \targ & \qw\\
 \qquad\qquad U_{CM}^{(2)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
+\lstick{a} & \qw  & \qw & \qw & \ctrl{3} & \qw & \qw\\
 \lstick{\quad m} &  \ctrl{2} & \qw & \qw & \qw & \qw & \qw\\
 \lstick{R} & \qw & \ctrl{1} & \targ & \qw & \qw & \qw\\
 \lstick{R^{2}} & \targ & \targ & \qw & \targ & \targ & \qw\\
 \qquad\qquad\qquad U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{R^{2}} & \qw  & \qw & \ctrl{3} & \qw & \qw\\
+\lstick{a} & \qw  & \qw & \ctrl{3} & \qw & \qw\\
 \lstick{\quad m} &  \qw & \qw & \qw & \qw & \qw\\
 \lstick{R} & \ctrl{1} & \targ & \qw & \qw & \qw\\
 \lstick{R^{2}} & \targ & \qw & \targ & \targ & \qw\\
@@ -1915,7 +1928,7 @@ Depending on the context in which it appears, i.e., weather the controlled multi
 %$U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
 %$U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$ and 
 %$U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$, 
-for $g \in G$ (unrestricted), $g$ restricted to subgroups $H$ and $g$ restricted to conjugacy classes $C$.\caro{fix label for conjugacy class qubit}}
+for $g \in G$ (unrestricted), $g$ restricted to subgroups $H$ and $g$ restricted to conjugacy classes $C$.}
     \label{fig:CM}
 \end{figure}
 
