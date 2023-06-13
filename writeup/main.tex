@@ -300,7 +300,7 @@ with $a$, $b$ and $c$ going over a set of anyon labels $(C, \chi)$ and $N_{ab}^c
 
 How this manifests physically is that if we have two anyons $a$ and $b$ in some region and measure the topological charge associated to that region we may get any label $c$ for which $N_{ab}^c \neq 0$. This process is referred to as anyon fusion.
 
-While the general expression for the $N_{ab}^c$ is cumbersome\footnote{and can be found in Appendix \ref{app:reps} for the case of $D(D_4)$ anyons \jovan{The original App was removed.}}, for pure charge anyons $(\{e\}, \chi_i)$ it readily reduces to the well-known  decomposition of tensors products of group irreps into direct sums of irreps $\chi_i\otimes\chi_j = \bigoplus_k n^k_{ij} \chi_k$.
+The general expression for $N_{ab}^c$ is cumbersome. For pure charge anyons $(\{e\}, \chi_i)$ it readily reduces to the well-known  decomposition of tensors products of group irreps into direct sums of irreps $\chi_i\otimes\chi_j = \bigoplus_k n^k_{ij} \chi_k$.
 
 If the gauge group is abelian all algebra representations are one-dimensional and there is no degeneracy once the charge content of a gauge field is specified. The fusion is unambiguous. 
 We can see that by looking at the dimensions of the LHS and RHS of Eq.~\eqref{eqn:fuse}. For every $a$ and $b$ there is only one $c$ for which $N_{ab}^c$ is nonzero, i.e. one.
@@ -390,17 +390,16 @@ As we can see the operation is sequential so at best the depth of a circuit impl
 Of course, we can make this constant depth by separating the main ribbon into $|R|$ smaller ribbons which however requires $|R|$ pairs of qudits. To merge these ribbons, we also need $|R|$ Bell-pair projections. As these are done via measurement and post-selection this requires an exponential in $|R|$ number of repetitions for a $\mathcal{O}(1)$ number of successful projections.
 
 
-\jovan{ToDO: Comment on post-selection.}
-However, even in the variant of the protocol we proposed, the post-selection will necessarily raise concerns about the scaling of the number of total runs needed to build up an adequate number of successful runs in order to perform any statistical analysis. In fact, protocol for applying an open ribbon operator onto a ground state ideally only succeeds with a probability of $1/4$, however, if the ribbon is closed, due to the no-flux condition of the ground state, the protocol ideally succeeds with certainty. The number of runs needed scales exponentially with the number of open ribbon operators in the braiding protocol, which, in the cases we consider, is either one or two. 
+However, in the variant of the protocol we proposed, the post-selection will necessarily raise concerns about the scaling of the number of total runs needed to build up an adequate number of successful runs in order to perform any statistical analysis. In fact, protocol for applying an open ribbon operator onto a ground state ideally succeeds with a probability of $1/4$, however, if the ribbon is closed, due to the no-flux condition of the ground state, the protocol ideally succeeds with certainty. The number of runs needed scales exponentially with the number of open ribbon operators in the braiding protocol, which, in the cases we consider, is either one or two. 
 
-To interpret what we have here, let us look at the quantum resources. We have the qudits representing the matter $\mathcal{H}_{\text{matter}}$ and the ancillary bits representing the internal state of the anyons, or the fusion space, $\mathcal{H}_{\text{ancilas}} \equiv \mathcal{H}_{\text{fusion}}$ which is already embedded non-locally in  $\mathcal{H}_{\text{matter}}$.
+To interpret what we have here, let us look at the quantum resources. We have the qudits representing the matter $\mathcal{H}_{\text{matter}}$ and the ancillary bits representing the internal state of the anyons, or the fusion space, $\mathcal{H}_{\text{ancillas}} \equiv \mathcal{H}_{\text{fusion}}$ which is already embedded non-locally in  $\mathcal{H}_{\text{matter}}$.
 
-The two types of triangles couple the two spaces in two different ways, for type I the $\mathcal{H}_{\text{ancilas}}$ controls an action on $\mathcal{H}_{\text{matter}}$ and for type II it is the other way around. After the measurement that disentangles, the redundant copy of $\mathcal{H}_{\text{fusion}}$ the $\mathcal{H}_{\text{matter}}$ is left in a state with the ribbon operator imprinted on it as signalled by the topological charge, braiding amplitude and phase.
+The two types of triangles couple the two spaces in two different ways, for type I the $\mathcal{H}_{\text{ancillas}}$ controls an action on $\mathcal{H}_{\text{matter}}$ and for type II it is the other way around. After the measurement that disentangles, the redundant copy of $\mathcal{H}_{\text{fusion}}$ the $\mathcal{H}_{\text{matter}}$ is left in a state with the ribbon operator imprinted on it as signalled by the topological charge, braiding amplitude and phase.
 
 
 \subsection{Charge Measurements}\label{sec:redchmmt}
 
-In this section, we will explain how we measure the topological charge, i.e., the anyon label. This is the last element of our toolkit for probing topological order. The ideal charge measurement would differentiate any type of excitation on any site, such measurement is associated with the following set of projectors \caro{Cui?}\jovan{Yes.}\cite{cui2018topological}:
+In this section, we will explain how we measure the topological charge, i.e., the anyon label. This is the last element of our toolkit for probing topological order. The ideal charge measurement would differentiate any type of excitation on any site, such measurement is associated with the following set of projectors \cite{cui2018topological}:
 \begin{equation}
     P_s^{(C, \chi)} = \frac{\chi(e)}{|Z(r)|}\sum_{c \in C}\sum_{z \in Z(r)}\chi^*(z)B_s^{(c)}A_s^{(q_c z \bar{q}_c)},
 \end{equation}
@@ -448,15 +447,16 @@ We may repeat the procedure using different subgroups $H \in G$ to gather furthe
 \textbf{Beyond pure charges.} The partial charge measurement scheme is exact, i.e., unambiguous, when the chosen subgroup coincides with the centre of the conjugacy class of an anyon $(C, \chi)$, i.e., $H = Z(r)$ for $r \in C$.
 The label $\chi_H$ in fact is the label of the irreducible representation of the $Z(r)$ labelling the dyon.
 
-The full measurement protocol, in general, then consist of performing a $H$-partial charge measurement and then reading-off the flux $f$ on the same site. 
+The full measurement protocol, in general, then consist of performing a $H$-partial charge measurement and then reading-off the flux $f$ on the same site. We then compute the center of the measured flux $Z(f)$ and consider the following three cases.
 
-If $H = Z(f)$, where $f \in C_f$ is the measured flux, the protocol is complete, since the measurement outcome correspond to the label $(C_f, \chi_H)$.
+If $H = Z(f)$, the protocol is complete. The measurement outcome corresponds to $(C_f, \chi_H)$.
 
 If $H \subset Z(f)$, we need to perform partial charge measurement results for other subgroups of $G$ that are also subgroups of $Z(f)$. We then combine these results to determine the charge label uniquely. This requires partial orthogonality of the character tables, see Section \ref{sec:D4_double} for an example.
 
-If $H \not\subset Z(f)$ the measurement is discarded in post-selection.
+If $H \not\subset Z(f)$ the measurement is discarded in post-selection and we switch to a different subgroup $H$.
 \caro{steve's bias comment}
 \jovan{In the cases we had, Z(f) = G, so this rule was never invoked.}
+\caro{I don't see how this would bias anything.}
 
 \subsection{Quantum Double of $D_4$}\label{sec:D4_double}
 
@@ -525,12 +525,16 @@ $(-1,-1)$ & $1$   & $-1$            & $-1$             & $1$                    
 \label{tab:char_sub}
 \end{table}
 
+
+\textbf{Anyon content of $D(D_4)$.}
 The task of listing all of the irreducible representations of $D(D_4)$ and their dimensions from this data is straightforward. There are $2 \times 5  + 3 \times 4 = 22$ irreducible representations, i.e., types of anyons in the $D_4$ quantum double model.
 
 Eight of them are one-dimensional, i.e. abelian, while the rest are two-dimensional. Other than the vacuum, four of them are pure charges and four are pure fluxes. For dyons with the $\mathcal{C}_{r^2}$ flux component we say that they have a trivial flux even though it is not the vacuum flux. The flux can be factored out, just like in the case of the toric code fermion. This comes from the fact that $r^2$ commutes with all group elements, just like the identity. 
 
-\textbf{Anyon content of $D(D_4)$.} We label the vacuum and the trivial flux as $0 \equiv (\mathcal{C}_e, 1)$ and $\tilde 0 \equiv (\mathcal{C}_{r^2}, 1)$, respectively. Likewise, the pure charges and dyons with vacuum and trivial flux are labelled as $\Sigma_{\chi} \equiv (\mathcal{C}_e, \chi)$ and $\tilde{\Sigma}_{\chi} \equiv (\mathcal{C}_{r^2}, \chi)$, with $\chi$ being one of the nontrivial irreducible representations of $D_4$.
-Nontrivial pure fluxes are labelled $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ being one of the nontrivial conjugacy classes of $D_4$. The rest of the dyons have less informative labels such as $\{\tilde{\Psi}_x, \Phi_x, \tilde{\Phi}_x\}$ and can be found in Appendix \ref{app:reps}.
+
+
+ We label the vacuum and the trivial flux as $0 \equiv (\mathcal{C}_e, 1)$ and $\tilde 0 \equiv (\mathcal{C}_{r^2}, 1)$, respectively. Likewise, the pure charges and dyons with vacuum and trivial flux are labelled as $\Sigma_{\chi} \equiv (\mathcal{C}_e, \chi)$ and $\tilde{\Sigma}_{\chi} \equiv (\mathcal{C}_{r^2}, \chi)$, with $\chi$ being one of the nontrivial irreducible representations of $D_4$.
+Nontrivial pure fluxes are labelled $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ being one of the nontrivial conjugacy classes of $D_4$. The rest of the dyons have less informative labels such as $\{\tilde{\Psi}_x, \Phi_x, \tilde{\Phi}_x\}$ and can be found in Appendix \ref{app:reps}, where we also provide the quantum dimensions and the topological twists together with the fusion rules. 
 
 \textbf{Charge Measurements Reprise.}
 Let us review the partial charge measurements for $D(D_4)$.
@@ -656,7 +660,7 @@ and for $H_{r}$ we use
 \end{enumerate} 
 
 %The full list of circuits for all variants of the above-mentioned operations are presented in Appendix \ref{app:cirqs}.
-We will focus on a set of examples illustrating the expected circuit depths. The full domain group multiplication (see Fig. \ref{fig:restMult}) consists of three Toffoli and 2 CNOT gates. Note, that on most hardwares a 3-qubit Toffoli gate must be decomposed into 2-qubit gates. \caro{Hence, each Toffoli gate should be seen as a depth-6 circuit in itself. [Steve's comment: depth 12?]}\jovan{With all-to-all it is 6, with n.n. it is 12.}. With this in mind, the circuit depth for a single group multiplication is 22. Current noise levels limit the circuit depth to about 100 gates. Therefore, a naive protocol based on full domain group multiplication is doomed to fail. 
+We will focus on a set of examples illustrating the expected circuit depths. The full domain group multiplication (see Fig. \ref{fig:restMult}) consists of three Toffoli and 2 CNOT gates. Note, that on most hardwares a 3-qubit Toffoli gate must be decomposed into 2-qubit gates. Hence, each Toffoli gate should be seen as a depth-6 circuit in itself. \footnote{If the coupling gates are restricted to act on neighbouring qubits, additional swaps may be needed which increase the depth to up to 12.} With this in mind, the circuit depth for a single group multiplication is 22. Current noise levels limit the circuit depth to about 100 gates. Therefore, a naive protocol based on full domain group multiplication is doomed to fail. 
 
 We now contrast this with the reduced domain multiplication, where the control qubits are restricted to a certain conjugacy class. A representative example is shown in Fig.~\ref{fig:restMult}. The circuit is reduced to a depth-1 circuit with only one CNOT gate. We can appreciate a dramatic reduction of circuit depth achieved by restricting the domain of the controlled multiplication circuit.
 
@@ -834,7 +838,7 @@ This means that the order of interchanges matter, i.e. $\sigma_{12}\sigma_{23} \
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{Figures/fluxBRAID.pdf}
-    \caption{The two braiding protocols, differing only in order of exchange of two anyons. C stands for creation, M for measurements. Protocol a) will have 4 fusion outcomes, while protocol b) can only produce vacuum.\caro{change A to M in figure (M for measurement)}}
+    \caption{The two braiding protocols, differing only in order of exchange of two anyons. C stands for creation, M for measurements. Protocol a) will have 4 fusion outcomes, while protocol b) can only produce vacuum.}
     \label{fig:flux_braid}
 \end{figure}
 
@@ -881,13 +885,12 @@ where $\mathcal D=\sqrt{\sum_i d_i^2}=|G|$ is the total quantum dimension,
 which makes $|\tilde{S}(a,b)| \leq 1$. To see that note that $S_{ab}=\frac{1}{\mathcal D} N_{ab}^c \frac{\theta_c}{\theta_a \theta_b} d_c$ and $|\theta_a|=1$. We also know that $\sum_c N_{ab}^c d_c = d_a d_b$, so it follows that $|S_{ab}| \leq \frac{1}{\mathcal D} d_a d_b$.
 
 
-\jovan{ToDO: Revisit this paragraph. DONE.}
 
 The conceptually simplest interferometry scheme is shown in Figure~\ref{fig:cond_ex}. Here we apply a ribbon of flavour $a$, then, depending on the state of the controlling qubit, either thread a second ribbon of flavour $b$ around the first ribbon or do nothing. This is very similar to the ideal scheme shown in Figure~\ref{fig:intef_example}.\footnote{Only missing a measurement checking that applying a closed ribbon $b$ on it's own doesn't introduce any phase, which it doesn't.}
 
 However, in this protocol every single qubit gate of the $b$-ribbon operator becomes a two qubit gate (since the ribbon is conditioned on the control $c$) and every two qubit gate becomes a three qubit gate (unitarily similar to a Toffoli gate). Hence, the number of entangling gates grows quickly with the ribbon length.
 
-A smarter alternative is to condition the ribbon type instead (see Figure \ref{fig:cond_flav}). In this case we identify where the ribbon operators for the two anyon types differ, and condition only those operations. The circuit for this can be much shorter, see Fig. \ref{fig:cond_flav} for an example. In particular, for the case of $D(D_4)$, it turns out, that, if $b$ has a non-trivial flux content\jovan{we missed this previously}, it is easier to compare the linking of anyons $a$ and $b$ to the linking of anyons $a$ and a reducible charge $0 \oplus \tilde 0$\footnote{Note: It is not a valid anyon label since the representation is reducible.}. Thus, we condition whether we apply the ribbon $b$ or the ribbon corresponding to $0 \oplus \tilde 0$\footnote{The ribbon operator protocol defined for irreducible representations carries over for reducible ones.}. 
+A smarter alternative is to condition the ribbon type instead (see Figure \ref{fig:cond_flav}). In this case we identify where the ribbon operators for the two anyon types differ, and condition only those operations. The circuit for this can be much shorter, see Fig. \ref{fig:cond_flav} for an example. In particular, for the case of $D(D_4)$, it turns out, that, if $b$ has a non-trivial flux content, it is easier to compare the linking of anyons $a$ and $b$ to the linking of anyons $a$ and a reducible charge $0 \oplus \tilde 0$. (Note, that this is not a valid anyon label since the representation is reducible.) Thus, we condition whether we apply the ribbon $b$ or the ribbon corresponding to $0 \oplus \tilde 0$. The ribbon operator protocol defined for irreducible representations carries over for reducible ones.
 
 However, this protocol requires additional knowledge of the theory. Concretely, if we are interested in the S-matrix element $S_{ab}$, we need the additional knowledge of  $S(a, 0)$ and $S(a, \tilde{0})$.
 In fact, both can be measured easily by the protocol in Figure~\ref{fig:cond_ex} since anyons $0$ and $\tilde{0}$ are abelian and their ribbon operator only have single qubit gates. Similar protocol was used to measure the $S$-matrix in the case of the Toric code\cite{Satzinger_2021}\jovan{More refs?}.
@@ -1026,7 +1029,7 @@ The exact ribbon operators and the layout of the qubits on the Sycamore chip use
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Figures/basket_fusion.pdf}
-	\caption{Ribbon operators and qubit layout for the fusion of two $\Psi_m$ anyons on the braiding ladder (top) and a small planar graph (bottom). Note that the lattice is embedded into a sphere, so the outside plaquette that we labelled twice in the braiding ladder diagram should be identified. Red and blue shadings denote the two ribbon operators, respectively. Purple circles mark the plaquette on which we perform the $H_{mr}$-partial charge measurement. Red circles mark the vertex on which we measure the flux. \caro{Add circles in ladder diagram.}\jovan{Added, will retry to make it nicer.}}
+	\caption{Ribbon operators and qubit layout for the fusion of two $\Psi_m$ anyons on the braiding ladder (top) and a small planar graph (bottom). Note that the lattice is embedded into a sphere, so the outside plaquette that we labelled twice in the braiding ladder diagram should be identified. Red and blue shadings denote the two ribbon operators, respectively. Purple circles mark the plaquette on which we perform the $H_{mr}$-partial charge measurement. Red circles mark the vertex on which we measure the flux.}
 	\label{fig:fusion_setup}
 \end{figure}
 
@@ -1034,7 +1037,7 @@ Using the circuits listed in Sec.~\ref{subsec:enc} to implement the ribbon opera
 
 The additional swaps make up a considerable portion of all coupling gates used in the numerical experiments and hence the positioning of qubits is one of the key factors in minimising the circuit depth.
 
-It is also worth noting that not all anyons are equal in complexity. The $r-$dyons ribbon require considerably deeper circuits since the group multiplication controlled by the elements of the $\mathcal{C}_r$ conjugacy class always involve at least one Toffoli gate. Let us recall that the Toffoli gate needs to be compiled into a \caro{steve: not 12? depth-6}\jovan{subtle} circuit using the CZ as the two qubit coupler, however this neglects any swaps needed to place the qubits acted on by the CZ gates adjacent to one another. Hence, reducing the number of Toffoli gates is the main heuristic approach when designing the experiments while keeping the depth minimal.
+It is also worth noting that not all anyons are equal in complexity. The $r-$dyons ribbon require considerably deeper circuits since the group multiplication controlled by the elements of the $\mathcal{C}_r$ conjugacy class always involve at least one Toffoli gate. Let us recall that the Toffoli gate needs to be compiled into a circuit of at least depth 6 using the CZ as the two qubit coupler, however this neglects any swaps needed to place the qubits acted on by the CZ gates adjacent to one another. Hence, reducing the number of Toffoli gates is the main heuristic approach when designing the experiments while keeping the depth minimal.
 
 
 For the fusion of $\Psi_m$-fluxes on the small planar graph, we obtained a device-ready circuit of depth 70. This circuit prepares the ground state, implements the ribbon operators and performs a partial charge measurement. 
@@ -1105,10 +1108,8 @@ Looking at the results of the charge measurement for the two braiding protocols 
 
 The number of runs for both protocol was $16000$. The expected post-selection probabilities for the two protocols are $0.0625$ for $\sigma_{12}\sigma_{23}$ and $0.25$ for $\sigma_{23}\sigma_{12}$, while the actual rates of successes were $0.123$ for $\sigma_{12}\sigma_{23}$ and $0.315$ for $\sigma_{23}\sigma_{12}$, respectively.
 %while the actual number of successes was $1977$ for $\sigma_{12}\sigma_{23}$ and $5036$ for $\sigma_{23}\sigma_{12}$, due to the circuit noise and measurement readout bias.
-\caro{is it clear that the $\pm$ for 4 bins refers to max/min}\jovan{This part of the data is mostly qualitative anyways.}
 In the case of the first braiding we see the four main peaks corresponding to the expected topological charges counting $255\pm 5$ with the biggest peak coming from the noise counting $109$ and resulting in a signal to noise ratio of about $2.3$. In the second case the peak corresponding to the vacuum counts $1890$. The largest peak coming from the noise counts 450 giving a signal to noise ratio of about $4.2$.
 
-\jovan{Removed the App, the Post-Selection was addressed in the Rib Op section.}
 
 
 
@@ -1334,7 +1335,7 @@ We can divide the $S$-matrix protocols into six different difficulty classes mea
 
 The second factor to consider is the number of Toffoli gates in the controlled multiplication and generalised conjugation circuits. The semions $\Phi_r,\tilde \Phi_r$ are difficult in both regards. 
 
-In Fig.~\ref{fig:Smat_diff} we show the $S$-matrix with all its entries color coded according to the difficulty class. In the list below we present the circuit depths and numerical simulation results for the diagonal S-matrix elements for representative cases of each difficulty class. For all protocols \jovan{add:(except for 1. and 4.)} we chose to condition ribbon vs $0\oplus \tilde 0$ rather than ribbon vs vacuum.
+In Fig.~\ref{fig:Smat_diff} we show the $S$-matrix with all its entries color coded according to the difficulty class. In the list below we present the circuit depths and numerical simulation results for the diagonal S-matrix elements for representative cases of all six difficulty classes. For all protocols, except for 1. and 4., we chose to condition ribbon vs $0\oplus \tilde 0$ rather than ribbon vs vacuum.
 
 \begin{enumerate}
 	\item Conditioning an abelian anyon: $\tilde{S}(\Sigma_m, \Sigma_m) = 0.969(6)e^{i\pi 0.004(2)}$, theoretical prediction $\tilde{S}(\Sigma_m, \Sigma_m)=1$. The total compiled circuit depth is 23 with 0 Toffoli gates corresponding to the difficulty class shaded in green in Fig.~\ref{fig:Smat_diff}.
@@ -1362,7 +1363,7 @@ We observe that the magnitude of the $S$-matrix in the simulation results decays
 \begin{figure*}
 	\centering
 	\includegraphics[width=\textwidth]{Figures/S_mat_with_diff.pdf}
-	\caption{The S-matrix of the $D(D_4)$ theory. The color shading represents the difficulty to observe the values experimentally, where green to red denotes increasing difficulty. \jovan{Rewritten:The entries highlighted in bold face and blue had their values numerically obtained by simulating the phase-sentitive measurement protocols and are discussed in the text.}}
+	\caption{The S-matrix of the $D(D_4)$ theory. The color shading represents the difficulty to observe the values experimentally, where green to red denotes increasing difficulty. For the entries highlighted in bold face and blue we numerically obtained the values by simulating the phase-sentitive measurement protocols.}
 	\label{fig:Smat_diff}
 \end{figure*}
 
@@ -1467,7 +1468,7 @@ The situation is simplified significantly if we encode the group elements by a q
 
 
 \textbf{Anyon Content.} The group $S_3$ has three conjugacy classes, $\mathcal{C}_e = \{e\}$, $\mathcal{C}_r = \{r, r^2\}$ and $\mathcal{C}_m = \{m, mr, mr^2\}$. The two nontrivial conjugacy classes have abelian centres. 
-The anyons of this theory alongside their braiding properties have been completely studied \caro{in Ref. \cite{Cui_2015}}\jovan{added}. In this section we just note that there are two abelian, four two dimensional and two three dimensional anyons.
+The anyons of this theory alongside their braiding properties have been completely studied in Ref.~\cite{Cui_2015}. In this section we just note that there are two abelian, four two dimensional and two three dimensional anyons.
 
 In our ribbon application protocol we rely on two operations, $\mathcal C$-controlled multiplication and generalised conjugation. When restricted to a conjugacy class the controlled multiplication circuit simplifies significantly for the two-dimensional anyons with $\mathcal{C}_r$ flux. $\mathcal{C}_r$ is naturally encoded by a qubit and the $\mathcal{C}_r$-controlled multiplication circuit has only one Toffoli gate for both left and right multiplication.
 
@@ -1971,7 +1972,7 @@ Another building block of our circuits is the generalised conjugation, $U_{GC}\k
     \label{fig:GConj_scheme}
 \end{figure}
 
-\textbf{Miscellaneous. \caro{propose to omit}\jovan{Fair point.}} In Section~\ref{sec:D4_double} we have already listed all the decoupling circuits used in the reduced charge measurement protocol in the case of $D(D_4)$. Some other useful circuits are shown in Figure~\ref{fig:Misc_cirq}.
+
 
 \begin{figure}
 \begin{equation*}
@@ -1991,7 +1992,7 @@ Another building block of our circuits is the generalised conjugation, $U_{GC}\k
 }
 \end{equation*}
 
-    \caption{(Left) The inversion circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, used when reversing the arrow direction of the edges. (Middle) The basis change circuit, $\ket{g}_{mRR^2} \rightarrow \ket{g}_{(mR)RR^2}$, can be used to simplify $mr$-based ribbon application protocol by making them analogous to $m$-ribbon application protocols. (Right) The $\tilde{S}(\tilde{0}, a) = -1$ fix for the flavour conditioning protocol. \caro{propose to omit, because the reader will not understand the significance.}}
+    \caption{(Left) The inversion circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, used when reversing the arrow direction of the edges. (Middle) The basis change circuit, $\ket{g}_{mRR^2} \rightarrow \ket{g}_{(mR)RR^2}$, can be used to simplify $mr$-based ribbon application protocol by making them analogous to $m$-ribbon application protocols. (Right) The $\tilde{S}(\tilde{0}, a) = -1$ fix for the flavour conditioning protocol. }
     \label{fig:Misc_cirq}
 \end{figure}
 
