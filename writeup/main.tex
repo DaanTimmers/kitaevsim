@@ -3,13 +3,13 @@
 
 
 
-%\documentclass[a4paper,twocolumn,11pt]{quantumarticle}
-%\pdfoutput=1
-%\usepackage[utf8]{inputenc}
-%\usepackage[english]{babel}
-%\usepackage[T1]{fontenc}
-%\usepackage{amsmath}
-%\usepackage{hyperref}
+\documentclass[a4paper,twocolumn,11pt]{quantumarticle}
+\pdfoutput=1
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
 %
 %\usepackage{tikz}
 %\usepackage{lipsum}
@@ -17,18 +17,18 @@
 
 %% our previous style and packages
 
-\documentclass[two column]{article}
-\usepackage[utf8]{inputenc}
+%\documentclass[two column]{article}
+%\usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor}
-\usepackage[colorlinks=true,linkcolor=Blue,hypertexnames=false]{hyperref}
+%\usepackage[colorlinks=true,linkcolor=Blue,hypertexnames=false]{hyperref}
 \usepackage{braket}
 \usepackage{bbold}
 
 
-\usepackage[numbers]{natbib}
+\usepackage[numbers,sort&compress]{natbib}
 \usepackage{amssymb}
-\usepackage{amsmath}
+%\usepackage{amsmath}
 \usepackage{placeins}
 \usepackage{subcaption}
 
@@ -47,14 +47,28 @@
 
 
 \title{A proposal to demonstrate non-abelian anyons on a NISQ device}
-\author{Jovan Jovanovi\'c, Carolin Wille, Daan Timmers and Steven H. Simon}
-\date{February 2023}
+\author{Jovan Jovanovi\'c}
+\affiliation{Rudolf Peierls Centre for Theoretical Physics, Parks Road, Oxford, OX1 3PU, UK}
+\orcid{0000-0002-2508-3207}
+\author{Carolin Wille}
+\affiliation{Rudolf Peierls Centre for Theoretical Physics, Parks Road, Oxford, OX1 3PU, UK}
+\orcid{0000-0002-9764-6937}
+\author{Daan Timmers}
+\affiliation{Cavendish Laboratory, University of Cambridge,
+Cambridge CB3 0HE, UK}
+\author{Steven H. Simon}
+\affiliation{Rudolf Peierls Centre for Theoretical Physics, Parks Road, Oxford, OX1 3PU, UK}
+\orcid{0000-0001-7757-5978}
+
+
+
+\date{19.6.2023}
 
 \begin{document}
 
 \maketitle
 \begin{abstract}
-In this work we present a proposal to realising non-Abelian anyons on a NISQ device. In particular we explore the feasibility of implementing the quantum double model $D(D_4)$. We propose techniques to drastically simplify the circuits for the manipulation and measurements of anyons. Numerical simulations with realistic noise models suggest that current NISQ technology is capable of probing signatures of non-Abelian anyons far beyond elemental properties such as the non-commutativity of braids. In particular, we conclude that experimentally measuring the full modular data of the model is feasible.   
+In this work we present a proposal for realising non-Abelian anyons on a NISQ device. In particular we explore the feasibility of implementing the quantum double model $D(D_4)$. We propose techniques to drastically simplify the circuits for the manipulation and measurements of anyons. Numerical simulations with realistic noise models suggest that current NISQ technology is capable of probing signatures of non-Abelian anyons far beyond elemental properties such as the non-commutativity of braids. In particular, we conclude that experimentally measuring the full modular data of the model is feasible.   
 \end{abstract}
 \tableofcontents
 
@@ -233,7 +247,7 @@ In the general, non-abelian case the irreducible representations do not factoris
         A_{\mu\nu}{(g)}= \bra{c, i} A{(g)} \ket{c', i'} = \delta_{c,gc'g^{-1}} \Gamma^\chi_{c,ii'}(g).
     \end{split}
 \end{equation}
-\jovan{Here, $\Gamma^\chi_c$ is a map from the entire group, $G$, onto the $\chi$-representation matrices defined by composing the representation matrices, $\Gamma^\chi$, themselves and a projection map $g \to q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$.}
+Here, $\Gamma^\chi_c$ is a map from the entire group, $G$, onto the $\chi$-representation matrices defined by composing the representation matrices, $\Gamma^\chi$, themselves and a projection map $g \to q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$.
 
 
 
@@ -547,7 +561,7 @@ Now imagine we have performed all three measurement and obtained the set of labe
 
 It is only for dyons of trivial flux, $\{e, r^2\}$, that we need to use the repeated partial charge measurements with different subgroups alongside partial orthogonality of the character tables of $D_4$ and its four element subgroups to uniquely determine the topological charge.
 
-\section{Probing non abelian anyons} \label{sec:probing}
+\section{Probing non-abelian anyons} \label{sec:probing}
 
 In this section, we will present a set of protocols that allow us to demonstrate the non-abelian character of the anyons of $D(D_4)$ on realistic to-date quantum hardware. The main obstacle to overcome here is the noise which limits the depth of the circuits. In this section we will show how low circuit depths can be achieved for all protocols. A benchmark of the proposed experiments is presented in the next section showing numerical simulation results for a realistic noise model.
 
@@ -1981,14 +1995,9 @@ For a general setting, where we have $n$ qubits, post-select on the biased measu
 	P=\vec s \cdot (\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}) + \tilde \epsilon_+ \;,
 \end{equation}
 where $\tilde \epsilon_\pm$ are effective errors that depend on $\rho$. In our experiment we are only interested in the direction of the vector $\vec b$ which contains the information of the $S$- or $T$-matrix entry. The offset is purely due to read-out errors and is discarded. In the tomography, we determine $\vec b^\text{observed}=\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}$ and do not try to distinguish between the two contributions, since we are dealing with an unknown density matrix. 
-%
-
-%\usepackage[style=phys]{biblatex}
 
 
-\bibliographystyle{plain}
-%\printbibliography
-%\bibliographystyle{quantum}
+\bibliographystyle{plainnat}
 \bibliography{bibliography}
 
 \end{document}
