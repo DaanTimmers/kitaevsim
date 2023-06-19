@@ -1,3 +1,22 @@
+
+%% quantum's style
+
+
+
+%\documentclass[a4paper,twocolumn,11pt]{quantumarticle}
+%\pdfoutput=1
+%\usepackage[utf8]{inputenc}
+%\usepackage[english]{babel}
+%\usepackage[T1]{fontenc}
+%\usepackage{amsmath}
+%\usepackage{hyperref}
+%
+%\usepackage{tikz}
+%\usepackage{lipsum}
+
+
+%% our previous style and packages
+
 \documentclass[two column]{article}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -12,11 +31,13 @@
 \usepackage{amsmath}
 \usepackage{placeins}
 \usepackage{subcaption}
-\usepackage[qm]{qcircuit}
+
 \usepackage[left=23mm,right=23mm,top=35mm,columnsep=15pt]{geometry}
 
 \usepackage{pgfplotstable}
 \usepackage{array}
+
+\usepackage[qm]{qcircuit}
 
 \newcommand{\caro}[1]{\textcolor{red}{[#1]}}
 \newcommand{\jovan}[1]{\textcolor{blue}{[#1]}}
@@ -1437,7 +1458,7 @@ The situation is simplified significantly if we encode the group elements by a q
 \begin{figure}
 \begin{equation*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{!r} & \qw & \targ & \gate{X} & \ctrl{3} & \ctrl{3} & \gate{X} & \ctrl{3} & \ctrl{4} & \targ & \qw \\
+\lstick{r} & \qw & \targ & \gate{X} & \ctrl{3} & \ctrl{3} & \gate{X} & \ctrl{3} & \ctrl{4} & \targ & \qw \\
 \\
 \lstick{m} & \qw & \ctrl{-2} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{-2} & \qw \\
 \lstick{r} & \qw & \qw & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw & \qw \\
@@ -1813,7 +1834,7 @@ Depending on the context in which it appears, i.e., weather the controlled multi
 \qquad\qquad U_{CM}^{(2)} = U_{CM}^{(4)}
 }\qquad\bold{H_{mr}}:\qquad\quad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{mR} & \ctrl{2} &  \ctrl{2} & \ctrl{3} & \ctrl{3} & \qw & \qw\\
+\lstick{mr} & \ctrl{2} &  \ctrl{2} & \ctrl{3} & \ctrl{3} & \qw & \qw\\
 \lstick{r^{2}} & \qw  & \qw & \qw & \qw & \ctrl{3} 7 \qw\\
 \lstick{\quad m} &  \ctrl{2} & \targ & \qw & \qw & \qw & \qw\\
 \lstick{r} & \qw & \qw & \ctrl{1} & \targ & \qw & \qw\\
@@ -1821,7 +1842,7 @@ Depending on the context in which it appears, i.e., weather the controlled multi
 \qquad\qquad\qquad U_{CM}^{(1)} = U_{CM}^{(3)}
 }\qquad\qquad
 \Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{mR} & \ctrl{2} &  \ctrl{3} & \qw & \qw\\
+\lstick{mr} & \ctrl{2} &  \ctrl{3} & \qw & \qw\\
 \lstick{r^{2}} & \qw  & \qw & \ctrl{3} & \qw\\
 \lstick{\quad m} &  \targ & \qw & \qw & \qw \\
 \lstick{r} & \qw & \targ & \qw & \qw\\
