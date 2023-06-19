@@ -41,9 +41,8 @@
 
 \newcommand{\caro}[1]{\textcolor{red}{[#1]}}
 \newcommand{\jovan}[1]{\textcolor{blue}{[#1]}}
-\newcommand{\todo}[1]{\textcolor{orange}{[#1]}}
 \newcommand{\steve}[1]{\textcolor{purple}{[#1]}}
-\newcommand{\lang}[1]{\textcolor{brown}{#1}}
+
 
 
 
@@ -65,7 +64,6 @@ In this work we present a proposal to realising non-Abelian anyons on a NISQ dev
 
 In 1977 Leinaas and Myrheim\cite{Leinaas1977OnTT} 
 first proposed the idea of \emph{anyons}\footnote{The term was later invented by Frank Wilczek\cite{Wilczek}.} -- particles in 2+1 dimensions with fractional statistics that are neither Bosons nor Fermions. Shortly later, Tsui, Stormer and Gossard\cite{Tsui} discovered the fractional quantum Hall effect, and very rapidly \cite{Halperin84,Arovas84} it was understood that such fractional quantum Hall systems harbour anyons. Since then, the investigation of topological order and its signature -- anyonic excitation -- has become a major topic in modern condensed matter physics.
-%, culminating in the 2016 noble prize\cite{nobel}. 
 
 
 Beyond the study of unconventional phases of matter, topological order has been explored and praised for its potential applications in quantum computation\cite{Nayak} and simultaneously the study of its underlying, rather sophisticated, mathematical structure\cite{Kitaev2006} has received a lot of interested from the mathematical community. 
@@ -75,7 +73,6 @@ Today, almost half a century later, our theoretical understanding of anyons in 2
 
 On that grounds, one may argue that most topological phases of matter are just too complicated to exist in nature and are thus more of a mathematical curiosity than an actual physical phenomenon. However, a series of striking experiments \cite{iqbal2023creation,xu,andersen2022observation} performed recently on noisy intermediate scale quantum computers (NISQ) strongly refutes such  criticism. Two experiments performed on superconducting qubits \cite{xu,andersen2022observation} demonstrated the non-abelian braiding of mobile lattice defects which behave like Ising anyons embedded into an abelian phase. Another experiment performed on trapped ions \cite{iqbal2023creation} prepared the topologically ordered ground state of a non-abelian phase and detected an intrinsically non-abelian braiding processes (Borromean rings) via anyon interferometry. 
 
-%\caro{steve: add sth like gs wave function preparation not the same as realizing a phase (hamiltonian) caro: i don't think it is needed}
 
 All three experiments indicate that today's quantum computers are capable of simulating states of matter whose complexity exceeds that of abelian topological order which can be seen as a significant step towards topologically protected quantum computation. While open questions of the scalability and the improvement of noise levels are left for the future to decide, it is clear that by now non-abelian anyons have descended from the somewhat esoteric mathematical realm to the concrete and tangible.
 
@@ -99,7 +96,7 @@ For concreteness, we will focus on $D(D_4)$ in the following. In Ref.~\cite{iqba
 \subsection{Ground state preparation}
 Having identified a reasonable phase, i.e., $D(D_4)$ in our case, the next task is to find a suitable microscopic realisation of the model and to prepare its ground state. Here, our protocol differs drastically from that presented in Ref.~\cite{iqbal2023creation}. First of all, the Hamiltonian chosen in Ref.~\cite{iqbal2023creation} is that of $D_\alpha(\mathbb Z_2^3)$. This means, its degrees of freedom (dof) are valued in $G=\mathbb Z_2^3$, while for us the dof are $G=D_4$-valued. In fact, the Hamiltonian in Ref.~\cite{iqbal2023creation} is best understood as a gauged version of a symmetry protected topological phase and the ground state preparation reflects that. 
 
-To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^3$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasise that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines, since with certain architectures measurement is expensive -- requiring as much depth as \caro{tens to hundreds of gates\cite{weber}.}
+To be more precise, Ref.~\cite{iqbal2023creation} starts with the preparation of a $\mathbb Z_2^3$ symmetry protected topological (SPT) phase that can be prepared by a constant depth quantum circuit. The internal symmetry of the SPT is then gauged such that the system acquires intrinsic topological order. This gauging protocol is performed using a feed-forward protocol in which the system is entangled to an extensive number of ancillas which are then measured. The measurement outcomes correspond to successful ground state preparation or the preparation of a state with residual, but abelian anyons. The latter can be deterministically removed using error correction such that no post-selection is necessary. However, we emphasise that a feed-forward protocol in which the circuits to be executed depend on intermediate measurement outcomes, is not suitable for all machines, since with certain architectures measurement is expensive -- requiring as much depth as tens to hundreds of gates\cite{weber}.
 
 Therefore, in our protocol we refrain from using any feed-forward protocols and prepare the ground state directly via a unitary circuit. This has the disadvantage of limiting the achievable lattice size. However, we note, that in order to demonstrate signatures of non-abelian braiding, it is not necessary to use a lattice which is fully two-dimensional. In fact, it is sufficient to consider a quasi-one dimensional geometry, which we refer to as a \emph{braiding ladder} as shown in Fig.~\ref{fig:latticeGS}. For this geometry, we can prepare the ground state with a depth-two circuit. While this ground state does not feature long-range entanglement, this is not needed for the demonstration of non-abelian braiding as we will show explicitly in section \ref{sec:num}. We also consider a small truly two-dimensional lattice, just for the sake of proving that a direct unitary circuit preparation of the ground state is feasible and feed-forward protocols are not mandatory for the preparation of non-abelian topological order.
 
@@ -134,12 +131,12 @@ The Hamiltonian, therefore, has two sets of terms -- the gauge-invariant (magnet
 
 Quantum double models can also be understood as a subclass of the more general string-net models\cite{Levin_2005}, which describe all non-chiral (2+1d) topological phases of matter, or as a generalisation of Kitaev's toric code\cite{Kitaev_2003} for which the gauge group $\mathbb Z_2$ is generalized to an arbitrary discrete group $G$. While all quantum double models have anyonic excitations, the anyons for models with abelian gauge group are themselves abelian. In order to obtain non-abelian anyons, it is necessary to consider non-abelian gauge groups $G$. While the models for the latter are conceptually still very similar to the toric code, their definitions require slightly more care and notation, which we will introduce in the following. 
 
-%\footnote{It is worth noting that there exist an even more general class of models, known as Levin-Wen string-net model\cite{Levin_2005}.}.
+
 \textbf{Hamiltonian.}
 For a given group $G$ we can define its quantum double model on any arbitrary \emph{directed} graph. The local degrees of freedom are $|G|$-dimensional and assigned to the edges. The basis of their local Hilbert space is labeled by the group elements, i.e., we think of edges as being labeled by elements $g\in G$. The Hamiltonian is given by a sum of mutually commuting terms that act on vertices $V$ and plaquettes $P$, respectively
 
 
-%In Figure \ref{fig:vertex_ops} the basis vectors are shown on the parts of the graph where the plaquette and vertex terms operate.
+
 
 
 \begin{equation}
@@ -180,14 +177,10 @@ is defined in terms of operators $A_p{(g)}$ which shift the labels of the edges 
 \end{figure*}
 
 \textbf{Ground state.}
-It is not hard to verify that all terms in the Hamiltonian commute, Hence we can diagonalise it term-by-term. One can show that the leftover degeneracy depends only on the genus of the surface the graph is embedded in\cite{Kitaev_2003, cui2018topological}. However, we will work on a sphere-topology, where the ground state is unique. For most quantum computing architectures, interactions need to be local, which limits the accessible topologies. However, a disk or sphere topology \caro{(a disk closed off by one large plaquette)} is accessible.
+It is not hard to verify that all terms in the Hamiltonian commute, Hence we can diagonalise it term-by-term. One can show that the leftover degeneracy depends only on the genus of the surface the graph is embedded in\cite{Kitaev_2003, cui2018topological}. However, we will work on a sphere-topology, where the ground state is unique. For most quantum computing architectures, interactions need to be local, which limits the accessible topologies. However, a disk or sphere topology (a disk closed off by one large plaquette) is accessible.
 
 
 
-% Used to be a Subsection "Ground State"
-
-%The form of the ground state depends heavily on the geometry of the graph the theory is defined on.
-%As an example, ground state degeneracy depends on the topology of the manifold the graph is embedded in.
 
 All terms in the Hamiltonian are also projectors. Hence, one way to construct the ground state is to apply all projectors onto a state that has non-zero overlap with the ground state. In particular, we can start with the state $\ket{\{e\}}$, where every edge is labelled by the identity element.
 This state trivially obeys all vertex projectors, so we just need to apply all plaquette projectors
@@ -212,19 +205,9 @@ In the following we will discuss the anyonic excitations in quantum double model
 for all $v \in V$, $p \in P$ and $g \in G$. Therefore, the elementary excitation above the ground state will violate one or more of the equations above and are characterised by how the operators $B_v(h)$ and $A_p(g)$ act on them. More precisely, these operators form an algebra\cite{cui2018topological, Kitaev_2003} (the quantum double algebra $D(G)$), which contains the full information about the anyonic excitations. In particular its irreducible representations (irreps) label the anyons.
 
 For the toric code model, the $A$ and $B$ operators always commute and their algebras can be investigated independently. One finds the well-known $e$ (for electric) and $m$ (for magnetic) particles associated to vertex and plaquette violations, respectively, and their combination, the fermionic $(e,m)$-particle. However, for non-abelian gauge-groups the operators $A_p(g)$ and $B_v(g)$ no longer commute if the vertex $v$ intersects the plaquette $p$. To discuss their joint algebra, we consider \emph{sites}
-%\footnote{Either some vertices or some plaquettes will be left over depending on the exact geometry of the lattice.} 
  $s_i = (v_i, p_i)$ of adjacent vertices and plaquettes.
-%
-%\jovan{Soften the approach to formalism by the example of Toric code excitations.}
-%%
-%Site being occupied by an excitation means that at least one of the conditions in Eq.~\eqref{eqn:ground_state} for that site is violated. In the example of the toric code, $G = \mathbb{Z}_2 = \{0, 1\}$, we have three kinds of excitations. 
-%
-%These are electric, magnetic and fermionic excitations. The state with an electric excitation at a site $s$ is odd under the action of $A_s^{(1)}$, but is fixed by $B_s^{(0)}$. The state with a magnetic excitation at a site $s$ is annihilated by $B_s^{(0)}$, but fixed under both $A_s^{(g)}$ and by $B_s^{(1)}$. Finally, the state with the fermion at a site $s$ breaks both $A$- and $B$-type conditions, in fact, it is just an electric and a magnetic excitation populating the plaquette and vertex of the site respectively.
-
-%
-%In the case of Non-abelian gauge groups, this notion of breaking an $A$-type or a $B$-type condition becomes much more involved due to the more complicated operator algebra being induced by the more complicated group multiplication.
  
-On the same site we have the following algebraic relations %\footnote{We remark, that the algebraic relations in Eq.~\eqref{eqn:alg} do not depend on the exact grouping of plaquettes and vertices into sites.} 
+On the same site we have the following algebraic relations 
 \begin{equation}
     \begin{split}
         A_s{(g)}A_s{(h)} = A_s{(gh)}, \\
@@ -251,7 +234,6 @@ In the general, non-abelian case the irreducible representations do not factoris
     \end{split}
 \end{equation}
 \jovan{Here, $\Gamma^\chi_c$ is a map from the entire group, $G$, onto the $\chi$-representation matrices defined by composing the representation matrices, $\Gamma^\chi$, themselves and a projection map $g \to q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$.}
-\caro{Here, $\Gamma^\chi_c$ form a representation of the center $Z(r)$ and the map $g \to \Gamma^\chi_c(g)$ for $g \in G$ includes a projection to the center via $g \to q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$. }
 
 
 
@@ -281,7 +263,7 @@ Pure charge excitations are labelled by the group identity and a representation 
     \end{split}
 \end{equation}
 Pure charge excitations only violate the plaquette term, the $A$-term.
-%\footnote{\jovan{Add: Note that $\Gamma_{ii'}^\chi(g)$ are now unmodified $\chi$-representation matrices.}}
+
 
 
 In particular, if we have a gauge field state, $\ket{\chi, p; i}$, where each site houses a trivial representation except for one, $(v, p)$, which is occupied by a pure charge $(\{e\}, \chi)$\footnote{Note, that such a configuration is impossible on a sphere, but may occur on manifolds of genus $g>0$.}, this state satisfies all the constraints in Eq.~\eqref{eqn:ground_state} except for
@@ -312,13 +294,6 @@ In particular, if we have two charges $a$ and $b$ the associated Hilbert space c
 with $a$, $b$ and $c$ going over a set of anyon labels $(C, \chi)$ and $N_{ab}^c$ being integer coefficients. 
 
 
-%\begin{equation}
-%\begin{split}
-%	(\{e\}, \chi_i)\otimes (\{e\}, \chi_j) = \bigoplus_k n^k_{ij} (\{e\}, \chi_k) \;,	
-%\end{split}
-%\end{equation}
-%where .
-
 How this manifests physically is that if we have two anyons $a$ and $b$ in some region and measure the topological charge associated to that region we may get any label $c$ for which $N_{ab}^c \neq 0$. This process is referred to as anyon fusion.
 
 The general expression for $N_{ab}^c$ is cumbersome. For pure charge anyons $(\{e\}, \chi_i)$ it readily reduces to the well-known  decomposition of tensors products of group irreps into direct sums of irreps $\chi_i\otimes\chi_j = \bigoplus_k n^k_{ij} \chi_k$.
@@ -327,48 +302,16 @@ If the gauge group is abelian all algebra representations are one-dimensional an
 We can see that by looking at the dimensions of the LHS and RHS of Eq.~\eqref{eqn:fuse}. For every $a$ and $b$ there is only one $c$ for which $N_{ab}^c$ is nonzero, i.e. one.
 
 The Hilbert space associated with the presence of multiple non-abelian anyons is the stage on which all striking phenomena of non-abelianess are played out. Besides the possibility of multiple fusion outcomes discussed above,  also moving anyons around one another (braiding) acts non-trivially on this space and corresponds to a unitary operation. In such a braiding process the order of exchanges matter as in general the unitary matrices associated to the individual exchanges do not commute. The full theory that describes the braiding and fusion of anyons is a so-called unitary modular tensor category (UMTC)\cite{Kitaev_2003}.
-% and the UMTC for the anyons of quantum double models is reviewed in Appendix \ref{app:umtc}.
-
-%
-%As an example, let us take the charge content of the gauge field to be four Non-abelian anyons of the same type $a$ occupying four sites and look at the form of the degenerate subspace $\mathcal H_{\text{deg.}}$.
-%Using the algebra of Eq.~\eqref{eqn:fuse} to simplify the form of the subspace we get 
-%\begin{equation}
-%	\mathcal{H}_{\text{deg.}} = \bigoplus_{c, d, f} N_{aa}^c N_{ca}^d N_{da}^ff,\label{eqn:decomp} 
-%\end{equation}
-%also assuming that we have measured zero total topological charge of the four sites, i.e. $f$ is fixed to be $(\{e\}, \mathbb{1}) = 0$.
-%
-%The space has $D = \sum_{c, d, f} N_{aa}^c N_{ca}^d N_{da}^0$ one-dimensional sectors, each spanned by the one vector in the trivial representation, $\ket{e,0}$. The sector are labeled by the fusion outcomes $(c, d)$ for which none of the algebra coefficients vanish. Therefore, this space is also called the fusion space and a its natural basis the fusion tree basis
-%$$\mathcal{H}_{\text{deg.}} = \mathcal{H}_{\text{fusion}} = \text{span}_{(c,d)}\{\ket{c,d; e, 0}\}.$$
-%
-%Note that this description has nothing to do with the local spin-like variables we began with and is completely determined by the fusion algebra.
-%
-%Also note that addition of sites occupied by the vacuum doesn't change anything since vacuum fuses trivially with other representations, $a\otimes0 = a$.
-%
-%\jovan{assumed def in the intro}
-%Finally, to answer why studying the space $\mathcal{H}_{\text{fusion}}$ is important in the first place, we look at the action of \emph{anyon braiding}. Braiding doesn't change the charge content, hence, it must transform states only within this degenerate space. Therefore, the degeneracy must be non-trivial, i.e. anyons Non-abelian for their braiding to have any computational power. 
-%
-%The braiding action is best described in the global fusion tree basis in terms of topological variables such as the $F$- and $R$-symbols \cite{cui2018topological, Kitaev_2003}. See Appendix \ref{app:braid} for the treatment of braiding of quantum double anyons in both local spin-like and fusion tree basis. \jovan{Needs reform.}
-%
-%
 \subsection{Ribbon operators}\label{sec:ribbon_ops}
 
 In the following, we will explain how to create and move anyons. Anyons can always be created in pairs from the vacuum. 
-%
-%To see why, imagine we take the ground state on a 2-sphere, the state is a superposition of all assignments of group elements to edges that do not violate the Gauss' law. Now we shift the label of one of the edges, $e_0$, by some constant group element. The superposition is now made up from different assignments, which only differ on the edge $e_0$. This action disturbs two vertex operators on each end of the edge $e_0$, i.e. a pair of pure fluxes have been created.
-%
-%Analogously, there are operations on the edge $e_0$ that disturbs two plaquette operators touching the edge $e_0$. i.e. that create a pair of pure charges.
-%
-%Moreover, 
+
 For any anyon, $(C, \chi)$, and any path in the graph between two sites, see Figure \ref{fig:rib_exampl}, there is a \emph{ribbon operator} that creates a pair of said anyons at the end sites. 
-%These paths are called ribbons and the associated operators ribbon operators, which themselves are labelled by the anyons they create, $(C, \chi)$.
+
 
 If the ribbons are closed and contractable, the associated ribbon operators leave the ground state unchanged. Moreover, they span the loop operator algebra that leave the ground state invariant. It is in that way that the quantum double ground state knows about the anyon spectrum.
 
 We will not explain the derivation of the ribbon operators themselves, see Ref \cite{Kitaev_2003,cui2018topological}, just how to apply them to a state.
-%
-%\jovan{General, add to introduction: These operators represent a planar diagram algebra, i.e. a braiding group representation generated by a specific Braiding Tensor Category (BTC) and hence were conceived as a model of a system that can perform fault-tolerant quantum computing by the means of braiding anyons.
-%However, even though the braid group itself is universal its image on this planar diagram algebra is finite, hence non-universal \cite{cui2018topological}. For some gauge groups it can be made universal by the addition of measurements \cite{Cui_2015}.}
-%
 The ribbon operators are not unitary in general. If the anyons have a dimension larger than one, the operators that create and manipulate them are non-local projectors. To simulate them on a digital quantum computer requires ancillas and measurements\cite{Cirac}. 
 
 In Ref. \cite{andersen2022observation} the group overcame this issue by means of unitary lattice deformations, unitarily transforming from a state with a set of non-abelian defects on one graph to another state with the same defect content but defined on a different graph, hence they were able to move the non-abelian Majorana defects unitarily. However, these are extrinsic and static lattice defects on top of a theory that is an abelian $\mathbb Z_2$ gauge theory, hence, the nature of their non-abelian anyons is different from intrinsic gauge field excitations.
@@ -379,8 +322,6 @@ Every ribbon (cf. Fig.~\ref{fig:rib_exampl}) is made up from two types of elemen
 \begin{itemize}
     \item[I)] A triangle consisting of two vertices and one plaquette center of the underlying graph. One side of the triangle coincides with an edge of the graph.
         \item[II)] A triangle consisting of two plaquette centers and one vertex of the underlying graph. One of the triangle's sides crosses an edge of the graph.
-%    \item[I)] Triangles whose side follow the edge they touch, whose points include two vertices and one plaquette. These triangles move the flux component of the anyon from the first vertex to the second vertex,
-%    \item[II)] Triangles which cross the edge they touch, whose points include two plaquettes and one vertex. these triangles move the charge component of the anyon from the first plaquette to the second plaquette.
 \end{itemize}
 Moving anyons means appending elementary triangles onto a ribbon. Each triangle type corresponds to a specific operator, the details of which also depend on the orientations of the edges and whether the triangle is attached to the back or front end of the ribbon. A detailed list is provided in Fig.~\ref{fig:al_trigs} in Appendix \ref{app:ribs}.
 
@@ -443,7 +384,6 @@ With Eq.~\eqref{eqn:tranfs} in mind, we propose the following algorithm for the 
     \item Measure the ancilla qudit $a$.
 \end{enumerate}
 
-%Needs a case example
 To see how this protocol works, let us examine the case of a  gauge field with well-defined pure charge on a plaquette  $\ket{\psi}_\text{phys} = \ket{\chi; i}$. Using  Eq.~\eqref{eqn:tranfs} we can write the joint state after step 2 as
 \begin{equation}
     \sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\chi; i} = \sum_{h \in H} \ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi; j}.
@@ -493,7 +433,6 @@ The group law is defined by following identities
 
 This group is solvable and all of its proper subgroups are abelian. It can be decomposed as $D_4 = \mathbb{Z}^m_2 \ltimes \mathbb{Z}^r_4$.
 This decomposition is not unique, $D_4 = \mathbb{Z}_2^m\ltimes(\mathbb{Z}_2^{r^2}\times\mathbb{Z}^{mr}_2)$ is also a valid decomposition.\footnote{The superscripts in $\mathbb{Z}_n^x$ label the group generator.}
-%, $\mathbb{Z}_n^x = \{x, x^2, \ldots, x^{n-1}, x^n = e\}$.}
 
 The conjugacy classes of $D_4$ alongside their centres are listed in Table \ref{tab:conjs}.
 \begin{table}[h]
@@ -561,9 +500,7 @@ Nontrivial pure fluxes are labelled $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ be
 \textbf{Charge measurements reprise.}
 Let us review the partial charge measurements for $D(D_4)$.
 We choose the subgroups $\{H_r, H_m, H_{mr}\}$ for the measurement protocol. All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional, this means that the measurement outcome of the partial charge measurement is just the irrep label $(\chi_{H_x})$. Looking at their character tables, we find a partial orthogonality with the characters of the irreps of $G$. 
-%\caro{steve's comment 26}
 
-%The character table of $D_4$ is given in Table \ref{tab:char}, while the character tables of relevant subgroups are given in Table \ref{tab:char_sub}. Note, the subgroups $\{H_r, H_m, H_{mr}\}$ were mentioned in the context of centres of relevant conjugacy classes, but they also prove to be a great choice of subgroups to be used in the reduced charge measurement protocol, in this case. \jovan{word better}
 
 
 More concretely, we compute $ \braket{\chi_{H_x}, \chi} = \sum_{h\in H_x} \chi_{H_x}(h)\chi(h)$ for the five different charges and list the results in Table \ref{tab:red_ch}.
@@ -623,10 +560,8 @@ The main experiments showcasing the non-abelian nature of the excitations we pro
 \item[ii)] Non-abelian braiding. The order of the braids does not commute.
 
 \item[iii)] S- and T-matrix measurements. This data describes the amplitudes of links and twists and almost uniquely\footnote{There are some exceptions, where the anyon theory, i.e., the UMTC is not determined uniquely by the $S$-and $T$-matrices alone\cite{notdetermined2021}. The smallest known example where this is the case has 49 particle types.} characterises the full anyon theory.
-%Technically speaking, the UMTC data is not captured by S and T matrix alone
 \end{itemize}
 
-%It is easy to obtain the results of the first two experiments from the result of the last one, however it is useful to consider the two foundational phenomenological facts pertaining to the non-abelian anyons in separate points.
 
 \subsection{Achieving low circuit depth }\label{subsec:enc}
 
@@ -642,7 +577,6 @@ where $a,b,c \in \{0,1\}$, $r$ is the $90^{\text{o}}$ rotation and $m$ is the re
 
 
 When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Since the centralizers of these conjugacy classes are abelian and their representations one-dimensional, we can encode the full internal space of the anyon with just one qubit. For anyons with $m$-flux, $(C_m,\chi)$,
-% $\Phi_m = (\mathcal{C}_m, (1,-1))$ anyons 
 we have
 \begin{equation}\label{eq:enc_C}
 	\ket{c, 0} \equiv \ket{a}_{a} \iff c = m^1 r^0(r^2)^a \in \{m , mr^2\},
@@ -685,7 +619,7 @@ and for $H_{r}$ we use
     \item Decoupling unitary of the partial charge measurement $$ U_a = \sum_{\chi_H}\sum_{i', j'}\sum_{h'\in H}  \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a. $$
 \end{enumerate} 
 
-%The full list of circuits for all variants of the above-mentioned operations are presented in Appendix \ref{app:cirqs}.
+
 We will focus on a set of examples illustrating the expected circuit depths. The full domain group multiplication (see Fig. \ref{fig:restMult}) consists of three Toffoli and 2 CNOT gates. Note, that on most hardwares a 3-qubit Toffoli gate must be decomposed into 2-qubit gates. Hence, each Toffoli gate should be seen as a depth-6 circuit in itself. \footnote{If the coupling gates are restricted to act on neighbouring qubits, additional swaps may be needed which increase the depth to up to 12.} With this in mind, the circuit depth for a single group multiplication is 22. Current noise levels limit the circuit depth to about 100 gates. Therefore, a naive protocol based on full domain group multiplication is doomed to fail. 
 
 We now contrast this with the reduced domain multiplication, where the control qubits are restricted to a certain conjugacy class. A representative example is shown in Fig.~\ref{fig:restMult}. The circuit is reduced to a depth-1 circuit with only one CNOT gate. We can appreciate a dramatic reduction of circuit depth achieved by restricting the domain of the controlled multiplication circuit.
@@ -696,18 +630,6 @@ This is one of the main facts that allows us to greatly simplify many circuits r
 
 Let us move on to the generalized conjugation. The circuit depths for this heavily depends on the type of anyon. For a pure flux the representation matrix $\Gamma$ is trivial and the generalized conjugation simplifies to a conventional conjugation which can be implemented by a circuit of depth one or two (see Fig.~\ref{fig:genConj} for an example). In contrast for a dyon with a one-dimensional but non-trivial irrep of the center, the circuit is more involved. Since the irrep is one dimensional, it corresponds to a phase factor and does not need to be encoded in an additional vector space. I.e., we can still use $\ket{c}$ instead of $\ket{c,i}$. However, the conjugation of $c$ has to be accompanied by appropriate phase factors implementing the action of $\Gamma^\chi_c(g)$. A circuit showing such a generalized conjugation for the $m$-dyon $\tilde{\Phi}_m \equiv (C_m, (-1, -1))$ is shown in Fig.~\ref{fig:genConj}. We note, that there is still no need for Toffoli gates, however, the circuit is more complex than for pure fluxes. The full list of circuits for generalised conjugations is given in Appendix \ref{app:reps}.
 
-%\begin{table}[]
-%    \centering
-%    \begin{tabular}{|p{0.5cm}||p{0.25cm}|p{0.5cm}|p{0.5cm}|p{0.6cm}|p{0.5cm}|p{0.5cm}|p{0.5cm}|p{0.5cm}|}
-%    \hline
-%  $A{(g)}$ & $e$ &   $r$ & $r^2$ & $r^3$ &  $m$ & $mr$ & $mr^2$ & $mr^3$ \\
-%\hline\hline
-% $\Psi_{m}$ &$\mathbb{1}$&  $\sigma_x$ & $\mathbb{1}$&  $\sigma_x$ & $\mathbb{1}$& $\sigma_x$ &  $\mathbb{1}$&   $\sigma_x$ \\\hline
-% $\tilde{\Phi}_{m}$ &$\mathbb{1}$&$i\sigma_y$ &$-\mathbb{1}$& $-i\sigma_y$ &$-\sigma_z$ &$-\sigma_x$ &  $\sigma_z$ &   $\sigma_x$ \\\hline
-%\end{tabular}
-%    \caption{$A{(g)}$ matrices for $\Psi_m$ and $\tilde{\Phi}_m$ representation of $D(D_4)$.}
-%    \label{tab:somereps}
-%\end{table}
 
 
 \begin{figure}
@@ -826,7 +748,7 @@ The ground state on this geometry can be prepared in constant-depth. The ground 
 \end{equation}
 This state has no long-range entanglement and factorises into a sequence of qudit Bell-pairs. 
 However, entanglement is built up once one introduces anyons via ribbon operators.
-In fact, this geometry is sufficient to correctly show the braiding statistics of the anyons. \caro{The only requirement for correctly reproducing the braiding statistics is that the ribbon paths only \emph{touch}, but do not intersect and is fulfilled here.}
+In fact, this geometry is sufficient to correctly show the braiding statistics of the anyons. The only requirement for correctly reproducing the braiding statistics is that the ribbon paths only \emph{touch}, but do not intersect and is fulfilled here.
 
 The shallow circuit preparing this state is shown in Figure \ref{fig:latticeGS}.
 
@@ -968,11 +890,7 @@ The exact method of tomography will be presented alongside the numerical result 
     \caption{Conditioning the existence of the $b$-ribbon. The $b$-ribbon is only applied if the state of the control qubit is $\ket{1}_c$. Equivalently, we say that we condition whether to apply $b$ or the reducible representation $0\oplus 0$.}
     \label{fig:cond_ex}
 \end{subfigure}
-%\begin{subfigure}{0.47\textwidth}
-%    \includegraphics[width=\linewidth]{Figures/phaseCheck.pdf}
-%    \caption{Phase check. Making sure to remove any phase that is due to the application of the closed ribbon $\Psi_m$ itself.}
-%    \label{fig:phase_check}
-%\end{subfigure} 
+
 
 \vspace{15pt}
 
@@ -1028,9 +946,7 @@ In this section, we provide numerical evidence for the feasibility of our propos
 
 
 Knowing the characteristics of the single and two-qubit gates, and single- and multi-qubit readout performances of the chip \cite{weber} we have chosen a suitable part of the chip for our simulations. A similar setup would be suitable for an actual experiment on the Sycamore chip. However, the optimal allocation of recourses will be chip dependent. The layout we used is shown in Figure \ref{fig:fusion_setup}.
-\caro{REMOVED A PARAGRAPH HERE}
-%Given that we argue for feasibility of these experiments, we need to ask how well this numerical scheme will reproduce the actual measurements.
-%\caro{which heuristics?}\jovan{The claim that their simulator is good, is something I only heard from Steve.} Heuristics shows that it is in fact a good approximation of what we expect to see from the actual experiment \cite{}, even if it neglects any cross-talk between qubits that are not directly coupled by the circuit\jovan{This is our observation.}.
+
 
 The number of qubits we could simulate classically using this software is limited to 30, which is less than the number of qubits currently available on an actual machine. To see how this comes about, let us note that even though in our protocols there are only a few non-Clifford gates, we can not exploit the advantage of Clifford simulators because we simulate \emph{noisy circuits}. 
 
@@ -1073,11 +989,8 @@ On the braiding ladder the same protocol leads to a much shorter circuit of dept
 	\label{fig:braiding_setup}
 \end{figure}
 
-%The circuit depths achieved for braiding the $\Psi_m$ fluxes are 23 and 25 
 
 The circuit depths achieved for braiding the $\Psi_m$ fluxes are 60 and 68 for the cases of $\sigma_{23}\sigma_{12}$ and $\sigma_{12}\sigma_{23}$, respectively. We performed these experiments on the double braiding ladder. This is due to constraints of the simulation. Adding 6 extra qubits needed for a triple-ladder, dramatically slows down the classical simulation run times to the point of impracticality. On a real quantum device this problem would not occur.
-
-%Once compiled to only use CZ as the two-qubit gate we get 60 and 68 for the two cases respectively.
 
 
 
@@ -1085,7 +998,7 @@ The circuit depths achieved for braiding the $\Psi_m$ fluxes are 60 and 68 for t
 The results of the fusion experiments on the ladder and the planar graph, as well as the braiding on the ladder are shown in Figure \ref{fig:red_charge_res}.
 
 \begin{figure*}
-\vspace*{-5\baselineskip} % Latex was placing this big figure way to low!
+\vspace*{-5\baselineskip} 
 \centering
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width = \linewidth]{Figures/fusion_on_glasses.png}
@@ -1119,7 +1032,6 @@ corresponding to measuring no flux or $r^2$ flux combined with no charge ($(1,1)
 In the case of the small planar graph we see a significantly 
 increased background noise due the deeper circuit used in the ground state preparation.
 
-%while the actual number of successes was $1807$, 
 The number of runs for the fusion on the braiding ladder was $16000$. The expected post-selection probability for the projection of the two ribbon ancilla pairs is $1/4^2=0.0625$, while the actual rate of success was $0.113$, due to the circuit noise and measurement readout bias. The four main bins corresponding to the expected topological charges count $270\pm5$ while the largest noise peak is $77$ leaving us with a signal to noise ratio of approximately $3.5$. 
 
 The number of runs for the fusion on the small planar graph was $64000$. The expected post-selection probability for projection of the two ribbon ancilla pairs is again $0.0625$, while the actual number of successes was $0.0826$. The four main bins count $450\pm7$ with the biggest noise peak being $242$ leaving us with a signal to noise ratio of approximately $1.9$.
@@ -1129,7 +1041,7 @@ Looking at the results of the charge measurement for the two braiding protocols 
 
 
 The number of runs for both protocol was $16000$. The expected post-selection probabilities for the two protocols are $0.0625$ for $\sigma_{12}\sigma_{23}$ and $0.25$ for $\sigma_{23}\sigma_{12}$, while the actual rates of successes were $0.123$ for $\sigma_{12}\sigma_{23}$ and $0.315$ for $\sigma_{23}\sigma_{12}$, respectively.
-%while the actual number of successes was $1977$ for $\sigma_{12}\sigma_{23}$ and $5036$ for $\sigma_{23}\sigma_{12}$, due to the circuit noise and measurement readout bias.
+
 In the case of the first braiding we see the four main peaks corresponding to the expected topological charges counting $255\pm 5$ with the biggest peak coming from the noise counting $109$ and resulting in a signal to noise ratio of about $2.3$. In the second case the peak corresponding to the vacuum counts $1890$. The largest peak coming from the noise counts 450 giving a signal to noise ratio of about $4.2$.
 
 
@@ -1172,33 +1084,6 @@ The depths of the circuits for the $S$-matrix protocol heavily depend on the any
 In the following we present in detail the circuits and results for the exemplary $S$-matrix elements $\tilde{S}(\Psi_m, \Psi_m)=1$, $\tilde{S}(\Psi_m, \tilde{\Psi}_m)=-1$ and $\tilde{S}(\Psi_m, \Psi_r)$ which are of intermediate depth. For conditioning the ribbon type we have 58 for $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$	 and 64  for $S(\Psi_m, \Psi_r)$, while for conditioning the existence of the ribbon we find 84 and 90, respectively. We will return to a more detailed discussion of the circuit depths and results for all other $S$-matrix elements at the end of this section.
 
 For the $T$-matrix elements we chose to measure $T(\Phi_r,\Phi_r)=i$, which together with $T(\tilde{\Phi}_r,\tilde{\Phi}_r)=i$ is the most non-trivial entry corresponding to the two semions (all other anyons have topological spin $\pm 1$). The circuit depth of 89 for this protocol is larger than for all other $T$-matrix elements and leads to reasonable results. Hence, we did not investigate the other $T$-matrix entries as they seem to be less challenging to measure.
-
-%
-%
-%\begin{itemize}
-%	\item[i)] Conditioning the ribbon type \begin{itemize}
-%		\item 58 for $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$		\item 64  for $S(\Psi_m, \Psi_r)$
-%	\end{itemize}
-%	\item[ii)] Conditioning the existence of the ribbon \begin{itemize}
-%		\item 84 for $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$
-%		\item 90 for $S(\Psi_m, \Psi_r)$	\end{itemize}  
-%	\item[iii)] 89 for measuring $T(\tilde{\Phi}_r, \tilde{\Phi}_r)$
-%\end{itemize}
-%
-
-%The act of conditioning the application of the equal time ribbon or its type makes the $S$-matrix protocol significantly more complex in terms of the number of multi-qubit gates. The two main factors to consider are the following. The first concerns the flux of the dyon. The $r-$dyons are more difficult to implement conditionally since they are more difficult to implement unconditionally. The $\mathbb{Z}_4$ $r$-multiplication necessitates a Toffoli gate upon conditioning.
-%
-%The second difficulty arrises from the charge. If the irreducible representation of the dyon assigns $-1$ to the nontrivial element of the group's centre, $r^2$, the linear representation formed by $A{(g)}$ is faithful. Therefore a circuit that implements the generalised conjugation is significantly more complex even before conditioning it.
-
-
-% Given the noise levels present in the simulator we resorted to the more simple $m$-dyons for most parts. 
-
-
-
-%However, the twist phase interferometry experiment was performed for the most complicated anyon, the $\Phi_r$ semion or its antisemion $\tilde \Phi_r$, in order to demonstrate a nontrivial twist phase.
-
-
-
 
 \textbf{Interference and tomography.}
 In Section \ref{subsec:Intef}, we proposed an interference scheme that entangles an ancilla qubit with the space-time history of the gauge field excitations in such a way that by the end of the protocol the qubit and the field are disentangled and the qubit is left in a state that depends only on the topological properties of the spacetime history of the anyons, the $S-$ and $T-$matrix elements.
@@ -1244,7 +1129,7 @@ This probability is, however, modulate by the readout bias
     p(b|\vec{s}_i, \vec{r}) = (1-\epsilon_b)p_{QM}(b|\vec{s}_i, \vec{r}) + \epsilon_{\bar{b}} p_{QM}(\bar{b}|\vec{s}_i, \vec{r}), \label{eqn:marg}
 \end{equation}
 where $\epsilon_b$ is the probability to measure the qubit in state $\bar{b}$ ($\equiv 1-b$) even though it is in the state $b$.
-%, these values are known through \caro{calibration \cite{}}.
+
 
 
 We perform the measurement $N=n_0 + n_1$ times and record the measurement outcomes $(n_0, n_1)$ and define the estimator 
@@ -1315,12 +1200,7 @@ We perform the same type of tomography to estimate $\vec r$ and calculate the ma
     \label{fig:S_res}
 \end{figure*}
 
-%\begin{figure*}
-%        \centering
-%        \includegraphics[width=\textwidth]{Figures/exist_s_minus.pdf}
-%        \caption{Numerical simulation of the S-matrix interference protocol and control qubit tomography: The tomography of the control qubit's state after the interference protocol for measuring $\tilde S(\Psi_m, \tilde{\Psi}_m) = -1$. The measurement basis was scanned across two planes, see the Bloch sphere diagram (blue dotted circles), and the polarization $P$ was estimated from these measurements, fitting the Eq. \ref{eqn:estim} we have extracted the Bloch vector (orange arrow), from which we have made the estimate: $\tilde{S}(\Psi_m, \tilde{\Psi}_m) = 0.58(1)e^{i\pi 1.002(8)}$. Here the second ribbon was fully conditioned, Figure \ref{fig:cond_ex}.}
-%        \label{fig:ex_cond_res}
-%\end{figure*}
+
 
 \begin{figure*}
     \centering
@@ -1366,10 +1246,6 @@ We observe that the magnitude of the $S$-matrix in the simulation results decays
 
 
 
-%As mentioned before for the $T$-matrix elements we have already presented the most difficult of the cases, the semions, and it shows excellent agreement with the theoretical expectations.
-
-
-
  
 
 
@@ -1384,13 +1260,8 @@ We observe that the magnitude of the $S$-matrix in the simulation results decays
 \section{Extension to $S_3$}\label{sec:other_gauge}
 
 The anyons of $D_4$ lattice gauge theory are not suitable for universal topological quantum computation.
-% and 
-%when looking at the circuits for our experiments, we note that they are Clifford or close to Clifford circuits. 
-%They are efficiently classically simulatable, given we keep the number of Toffoli gates low.
-%The image of the braid group onto the transformations of the wavefunction as we braid anyons is finite, hence highly non-universal \cite{}.
 This is due to the simple structure of $D_4$. All of its subgroups are abelian and the group is nilpotent and solvable. 
 
-%It is an interesting question to consider how simplification
 
 
 However, the slightly more complex gauge group $S_3$, can be used for universal topological quantum computation, if we allow measurements. Hence, it is interesting to investigate how our schemes carry over to this case. We find that the main tricks we use to achieve a manageable circuit depth for $D_4$, in particular the simplified group multiplication circuits for elements restricted to subgroups or conjugacy classes, would carry over straight forwardly to $S_3$ if the quantum hardware had native \emph{qutrits}. However, for a qubit based hardware implementing $S_3$ is considerably more difficult. In the following we will discuss the difficulties and increase in circuit depth for all steps in detail. 
@@ -1403,8 +1274,7 @@ This alone complicates the $\mathbb{Z}_3$ multiplication of $S_3 = \mathbb{Z}_2 
 
 There are two reasons for this complication, one is the aforementioned unnatural encoding, while the second is the fact that $S_3$ has a trivial center. In the case of $D_4$ the commutation of the two generators amounts to multiplying the expression by $r^2 \in Z(G)$ which is a simple operation.
 
-The situation is simplified significantly if we encode the group elements by a qubit and a qutrit, assuming that we have a full one-qutrit control as one has for qubits in current devices. A possible controlled group multiplication circuit utilising this recourse is shown in Figure~\ref{fig:S3mult_qutrit}.%\caro{The circuit defined in Figure \ref{fig:S3mult} then becomes a depth-4 circuit involving only two qubit, qubit-qutrit and two qutrit gates.}
-
+The situation is simplified significantly if we encode the group elements by a qubit and a qutrit, assuming that we have a full one-qutrit control as one has for qubits in current devices. A possible controlled group multiplication circuit utilising this recourse is shown in Figure~\ref{fig:S3mult_qutrit}.
  
 \begin{figure}
 \begin{equation*}
@@ -1528,7 +1398,7 @@ The circuits involved in the partial charge measurement with respect to the subg
 \label{fig:H_red_S3}
 \end{figure}
 
-%\caro{In general, sets of group elements onto which we reduce the domain of the controlled multiply maps such that the circuit simplifies significantly is scarce for such a small group. }
+
 
 
 \begin{table}[h]
@@ -1597,8 +1467,6 @@ For type II triangles we need to apply different variants of generalized conjuga
 
 
 
-%
-%Another main distinction is between triangles that are appended to the front and the back of the ribbon, one set involving the forward ancilla, $a_f$, and the other backwards ancilla, $a_b$, respectively. 
 \begin{figure}
 \centering
 \caption*{$U_{CM}\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i}_{\text{phys}} = $}
@@ -1622,16 +1490,7 @@ For type II triangles we need to apply different variants of generalized conjuga
 \label{fig:al_trigs}
 \end{figure}
 
-%The ability to append to the backend helps in halving the circuit depth of the ribbon application, since, both ends can be grown in parallel, see Figure \ref{fig:both_ends}. In this example the ribbon in Figure \ref{fig:rib_exampl} can be applied in four sequential steps instead of seven if we only grew it by appending the triangles to the frontend.
 
-%\begin{figure}
-%	\centering
-%	\includegraphics[width=0.45\linewidth]{Figures/front_end.pdf}
-%	\includegraphics[width=0.45\linewidth]{Figures/both_ends.pdf}
-%	\caption{The ribbon in Figure \ref{fig:rib_exampl}, broken down so that it can be applied in half the depth, by extending it from the middle ($\times$) in both directions. The numbers label in which layer each elementary triangle can be applied.}
-%	\label{fig:both_ends}
-%\end{figure}
-%\caro{I removed the grow ribbons in parallel figure because I don't think we need it and we explain in the main text that we can do it and that is is useful.}
 
 \section{Representation theory of $D(D_4)$}\label{app:reps}
 
@@ -1680,7 +1539,6 @@ $\mathcal C$    & $\mathcal C_e$ &       &       &       &              &   $\ma
 T & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & -1\\
 dim $d$ & 1 & 1 & 1 & 1 & 2 & 1 & 1 & 1 & 1& 2
 \end{tabular}
-%\caption{\raggedright $\mathcal C_e$-flux, i.e., pure charge, and $\mathcal C_{r^2}$-flux with possible charge given by irreps of the centralizer $\mathcal Z = D_4$.}
 \end{subtable}
 
 \vspace{0.5cm}
@@ -1695,7 +1553,6 @@ T  & 1 & -1 & 1 & -1 & 1 & -1 & 1 & -1 \\
 dim $d$ & 2 & 2 & 2 & 2 & 2 & 2 & 2 & 2 
  %\hline
 \end{tabular}
-%\caption{\raggedright $\mathcal C_m$- and $\mathcal C_{mr}$-flux, with centralizers $Z = Z_2 \times Z_2$}
 \end{subtable}
 \medskip
 
@@ -1711,7 +1568,6 @@ $\chi$ & $1$    & $ i$              & $-1$     & $- i$   \\           %\hline
 T  & 1 & $i$ & $-1$ & $-i$ \\
 dim $d$ & 2 & 2 & 2 & 2
 \end{tabular}
-%\caption{$Z = Z_4$}
 \end{subtable} 
 \caption{  Anyon content of $D(D_4)$ defined by flux-charge pairs $(\mathcal C,\chi)$, listing the topological spin as given by the (diagonal) $T$-matrix entry and the quantum dimension $d$. }\label{tab:anyons}
 \end{table}
@@ -1760,12 +1616,6 @@ In Section~\ref{sec:D4_double} we have spelled out some of the above mentioned o
 
 \textbf{Controlled multiplication.} 
 There are four kinds of controlled multiplications that appear in all of our elementary protocols
-%\begin{itemize}
-%	\item $U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh}$,
-%\item $U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg}$,
-%\item $U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$, 
-%\item $U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$.
-%\end{itemize}
 \begin{equation}\label{eq:circs}
 U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh}, \quad
 U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg}, \quad
@@ -1948,11 +1798,6 @@ Depending on the context in which it appears, i.e., weather the controlled multi
 \end{gather*}
 
     \caption{The circuits implementing the controlled group multiplications $U_{CM}$ defined in Eq.~\eqref{eq:circs}
-%    }
-%$U_{CM}^{(1)}: \ket{g,h} \rightarrow \ket{g, gh},$
-%$U_{CM}^{(2)}: \ket{g,h} \rightarrow \ket{g, hg},$
-%$U_{CM}^{(3)}: \ket{g,h} \rightarrow \ket{g, g^{-1}h}$ and 
-%$U_{CM}^{(4)}: \ket{g,h} \rightarrow \ket{g, hg^{-1}}$, 
 for $g \in G$ (unrestricted), $g$ restricted to subgroups $H$ and $g$ restricted to conjugacy classes $C$.}
     \label{fig:CM}
 \end{figure}
@@ -2074,10 +1919,6 @@ If one does not want to rely on the knowledge of the fusion algebra to label the
 \section{Uncertainty estimation and measurement bias}
 In this appendix we provide more details on the measurement uncertainty and the effect of the measurement bias relevant in the $S$-and $T$-matrix protocols in section \ref{sec:num:intef}.
 \subsection{Polarization uncertainty} \label{app:DATA_Anl}In the following, we discuss the uncertainty estimations for the polarization $P$ -- the central quantity of interest in the interference protocols in section \ref{sec:num:intef}, and the resulting uncertainty for the amplitude and phase of the $S$-and $T$-matrix elements. The polarization was determined for different measurement bases $\vec b$, but here we focus on a single fixed measurement basis first. To estimate $P$, we performed $N$ measurements and recorded the number of measurement outcomes $n_s$, $s\in \{0,1\}$. From these results we estimated the polarization $P = \frac{p_0 - p_1}{p_0 + p_1}$ via $p_s=n_s/N$. The probability to find the outcome $s$ in $n_s$ of the $N$ shots is given by the binomial distribution, $p(n_s) = {N \choose n_s} p_s^{n_s} p_{\bar{s}}^{N-n_s}$, where $\bar{s} = 1-s$. Thus,
-%
-%From the $N$ measurement outcomes we want to estimate the polarisation $P = \frac{p_0 - p_1}{p_0 + p_1}$.
-%, that is, by our assumption, related to the parameters defining the single qubit state and read-out characteristics of the machine, 
-%
 the unbiased estimator for the polarisation is $\hat P = \frac{n_0 - n_1}{n_0 + n_1}$, with $$\text{Mean}(\hat P) =P\text{ and }\text{Var}(\hat{P}) = N\sigma_{P}^2 = P(1-P),$$ where $\sigma_{P}=\sqrt{P(1-P)/N}$ is the error in determining this mean. This procedure of uncertainty estimation was used for all measurement bases and yields the error bars in Figures~\ref{fig:S_res} and ~\ref{fig:t_mat_results}.
 
 To obtain the amplitude and phase of the $S$- and $T$-matrix entries from the interference protocols we used that the measurement basis dependent polarisation $P(\vec b)$ is related to the Bloch vector $\vec r$ of the single qubit density matrix and the read-out biases of the machine via
