@@ -1,9 +1,7 @@
-
 %% quantum's style
 
-
-
 \documentclass[a4paper,twocolumn,11pt]{quantumarticle}
+
 \pdfoutput=1
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -914,7 +912,7 @@ The exact method of tomography will be presented alongside the numerical result 
     \label{fig:cond_flav}
 \end{subfigure}
 
-\caption{The interference protocols used for phase sensitive measurement of the (normalized) S-matrix elements  $\tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b)$.}
+\caption{The interference protocols used for phase sensitive measurement of the (normalized) S-matrix elements  $\tilde{S}(a,b) = \frac{|D_4|}{d_a d_b}S(a,b)$.	}
 \label{fig:S-mat}
 \end{figure*}
 
@@ -1341,14 +1339,14 @@ The situation is simplified significantly if we encode the group elements by a q
 
 
 \begin{figure}
-\begin{equation*}
+\begin{gather*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{r} & \qw & \targ & \gate{X} & \ctrl{3} & \ctrl{3} & \gate{X} & \ctrl{3} & \ctrl{4} & \targ & \qw \\
 \\
 \lstick{m} & \qw & \ctrl{-2} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{-2} & \qw \\
 \lstick{r} & \qw & \qw & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw & \qw \\
 \lstick{r^{2}} & \qw & \qw & \qw & \targ & \qw & \qw  & \ctrl{-1} & \targ & \qw & \qw
-}\quad\quad
+}\\
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{r}  & \qw & \qw & \qw & \qw & \ctrl{5}  & \ctrl{6} & \qw\link{1}{1}& &\link{1}{-1} & \qw & \qw & \qw \\
 &&&&&&&&&&&&&&\\
@@ -1358,8 +1356,8 @@ The situation is simplified significantly if we encode the group elements by a q
 \lstick{r} & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw & \qw & \qw & \qw & \qw  & \qw \\
 \lstick{r^{2}} & \qw & \targ & \qw  & \qw & \ctrl{-1} & \targ & \qw & \qw & \qw & \qw & \qw & \qw  
 }
-\end{equation*}
-\caption{The $S_3$ controlled left multiplication with the domain restricted to a single conjugacy class, $\mathcal{C}_r$ on the left and $\mathcal{C}_m$ on the right. Note that the encoding of $\mathcal{C}_r$ elements is slightly different from the encoding of the general group elements.}
+\end{gather*}
+\caption{The $S_3$ controlled left multiplication with the domain restricted to a single conjugacy class, $\mathcal{C}_r$ on the top and $\mathcal{C}_m$ on the bottom. Note that the encoding of $\mathcal{C}_r$ elements is slightly different from the encoding of the general group elements.}
 \label{fig:C_S3mult}
 \end{figure}
 
@@ -1922,7 +1920,7 @@ If one does not want to rely on the knowledge of the fusion algebra to label the
     \end{subfigure}
     \begin{subfigure}{0.5\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{Figures/all_triangles.pdf}
+        \includegraphics[width=\linewidth]{Figures/basket_r.png}
         \caption{$H_r$-reduced charge measurement}
         \label{fig:basket_Hr}
     \end{subfigure}
