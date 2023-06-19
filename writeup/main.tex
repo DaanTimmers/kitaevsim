@@ -725,14 +725,14 @@ Let us move on to the generalized conjugation. The circuit depths for this heavi
 \begin{split}
 \Qcircuit @C=0.5em @R=0.7em @!R{
 \lstick{m} & \qw & \qw \\
-\lstick{R} & \ctrl{2}  & \qw \\
-\lstick{R^{2}} & \qw  & \qw \\
+\lstick{r} & \ctrl{2}  & \qw \\
+\lstick{r^{2}} & \qw  & \qw \\
 \lstick{a} &  \targ & \qw
 }\qquad\qquad
 \Qcircuit @C=0.5em @R=0.7em @!R{
 \lstick{m} & \ctrl{3} & \qw & \gate{Z} & \qw\\
-\lstick{R} & \qw & \ctrl{2} & \gate{S} & \qw\\
-\lstick{R^{2}} & \qw  & \qw & \gate{Z} & \qw\\
+\lstick{r} & \qw & \ctrl{2} & \gate{S} & \qw\\
+\lstick{r^{2}} & \qw  & \qw & \gate{Z} & \qw\\
 \lstick{a} & \gate{Z}  & \gate{Y} & \qw & \qw 
 }
 \end{split}
@@ -912,16 +912,16 @@ The exact method of tomography will be presented alongside the numerical result 
 \Qcircuit @C=0.5em @R=0.7em @!R{
 \lstick{c} & \ctrl{3} & \qw& \ctrl{1}& \qw\\
 \lstick{m} & \qw & \qw & \targ& \qw\\
-\lstick{R} & \qw  & \qw & \qw& \qw\\
-\lstick{R^{2}} & \targ  & \qw & \qw& \qw\\
+\lstick{r} & \qw  & \qw & \qw& \qw\\
+\lstick{r^{2}} & \targ  & \qw & \qw& \qw\\
 \lstick{a} &  \ctrl{-1} & \qw& \qw& \qw
 }%
 \qquad \qquad \qquad
 \Qcircuit @C=0.5em @R=0.7em @!R{
 \lstick{c} & \ctrl{1} & \qw\\
 \lstick{m} & \targ & \qw \\
-\lstick{R} & \qw  & \qw \\
-\lstick{R^{2}} & \targ  & \qw \\
+\lstick{r} & \qw  & \qw \\
+\lstick{r^{2}} & \targ  & \qw \\
 \lstick{a} &  \ctrl{-1} & \qw
 }
 \end{equation*}
