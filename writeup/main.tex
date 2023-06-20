@@ -1010,7 +1010,7 @@ The circuit depths achieved for braiding the $\Psi_m$ fluxes are 60 and 68 for t
 The results of the fusion experiments on the ladder and the planar graph, as well as the braiding on the ladder are shown in Figure \ref{fig:red_charge_res}.
 
 \begin{figure*}
-\vspace*{-5\baselineskip} 
+%\vspace*{-5\baselineskip} 
 \centering
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width = \linewidth]{Figures/fusion_on_glasses.png}
@@ -1289,7 +1289,7 @@ There are two reasons for this complication, one is the aforementioned unnatural
 The situation is simplified significantly if we encode the group elements by a qubit and a qutrit, assuming that we have a full one-qutrit control as one has for qubits in current devices. A possible controlled group multiplication circuit utilising this recourse is shown in Figure~\ref{fig:S3mult_qutrit}.
  
 \begin{figure}
-\begin{equation*}
+\begin{gather*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw & \qw  & \ctrl{5} & \qw \\
 \lstick{r} & \qw \link{1}{1}& &\link{1}{-1} & \ctrl{5} & \ctrl{5} & \qw    & \qw & \qw\link{1}{1}& &\link{1}{-1} & \qw  & \qw \\
@@ -1300,7 +1300,7 @@ The situation is simplified significantly if we encode the group elements by a q
 \lstick{r} & \qw & \qw & \qw & \ctrl{1}  & \targ & \targ & \qw & \qw & \qw & \qw & \qw & \qw & \qw \\
 \lstick{r^{2}} & \qw & \qw & \qw & \targ  & \qw  & \ctrl{-1} & \targ & \qw & \qw & \qw  & \qw & \qw 
 }
-\quad\quad
+\\
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{6} & \qw & \ctrl{4} & \qw & \qw & \qw  & \qw & \qw \\
 \lstick{r} & \qw  & \qw & \qw & \qw & \ctrl{4} & \ctrl{4} & \qw & \qw & \qw \\
@@ -1311,8 +1311,8 @@ The situation is simplified significantly if we encode the group elements by a q
 &&&&&&&&&&&&&&&\\
 \lstick{r^{2}} & \qw \link{-1}{1}& &\link{-1}{-1}& \qw & \targ & \qw & \ctrl{-2} & \targ & \qw 
 }
-\end{equation*}
-\caption{The general controlled multiplication circuit for the group $S_3$. The left circuit is the left multiplication, $\ket{g,h} \rightarrow \ket{g, gh}$, and the circuit on the right is the right multiplication, $\ket{g,h} \rightarrow \ket{g, hg}$. The first three qubits encode the first group element and the second three the second group element.}
+\end{gather*}
+\caption{The general controlled multiplication circuit for the group $S_3$. The top circuit is the left multiplication, $\ket{g,h} \rightarrow \ket{g, gh}$, and the bottom circuit is the right multiplication, $\ket{g,h} \rightarrow \ket{g, hg}$. The first three qubits encode the first group element and the second three the second group element.}
 \label{fig:S3mult}
 \end{figure}
 
