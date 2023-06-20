@@ -1301,6 +1301,7 @@ The situation is simplified significantly if we encode the group elements by a q
 \lstick{r^{2}} & \qw & \qw & \qw & \targ  & \qw  & \ctrl{-1} & \targ & \qw & \qw & \qw  & \qw & \qw 
 }
 \\
+\\
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{m} & \qw & \ctrl{6} & \qw & \ctrl{4} & \qw & \qw & \qw  & \qw & \qw \\
 \lstick{r} & \qw  & \qw & \qw & \qw & \ctrl{4} & \ctrl{4} & \qw & \qw & \qw \\
@@ -1346,7 +1347,9 @@ The situation is simplified significantly if we encode the group elements by a q
 \lstick{m} & \qw & \ctrl{-2} & \qw & \qw & \qw & \qw & \qw & \qw & \ctrl{-2} & \qw \\
 \lstick{r} & \qw & \qw & \qw & \ctrl{1} & \targ & \qw & \targ & \qw & \qw & \qw \\
 \lstick{r^{2}} & \qw & \qw & \qw & \targ & \qw & \qw  & \ctrl{-1} & \targ & \qw & \qw
-}\\
+}
+\\
+\\
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{r}  & \qw & \qw & \qw & \qw & \ctrl{5}  & \ctrl{6} & \qw\link{1}{1}& &\link{1}{-1} & \qw & \qw & \qw \\
 &&&&&&&&&&&&&&\\
@@ -1482,22 +1485,22 @@ For type II triangles we need to apply different variants of generalized conjuga
 \begin{figure}
 \centering
 \caption*{$U_{CM}\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i}_{\text{phys}} = $}
-\vspace{10pt}
+\vspace{20pt}
 	\begin{tabular}{llll}
  \includegraphics[width=0.12\linewidth]{Figures/IRgf.pdf} &   $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{cg_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IRif.pdf}           &       $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i c^{-1}}_{\text{phys}}$                  \\ 
 \includegraphics[width=0.12\linewidth]{Figures/ILif.pdf} &   $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{c^{-1}g_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/ILgf.pdf}           &       $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i c}_{\text{phys}}$                  \\  
  \includegraphics[width=0.12\linewidth]{Figures/IRgb.pdf} &   $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{c'g_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IRib.pdf}           &       $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i c'^{-1}}_{\text{phys}}$                  \\ 
 \includegraphics[width=0.12\linewidth]{Figures/ILib.pdf} &   $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{c'^{-1}g_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/ILgb.pdf}           &       $\ket{c', i'}_{a_b}\ket{c, i}_{a_f}\ket{g_i c'}_{\text{phys}}$                  \\  
-\end{tabular}\vspace{10pt}
+\end{tabular}\vspace{60pt}
 
 \caption*{$U_{GC}\ket{\alpha'}_{a_b} \ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}} = $}
-\vspace{10pt}
+\vspace{20pt}
 	\begin{tabular}{llll}
  \includegraphics[width=0.12\linewidth]{Figures/IIRgf.pdf} &   $\ket{\alpha'}_{a_b}A^T(h_i)\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IIRif.pdf}           &       $\ket{\alpha'}_{a_b}A^T(h_i^{-1})\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$                  \\ 
 \includegraphics[width=0.12\linewidth]{Figures/IILif.pdf} &   $\ket{\alpha'}_{a_b}A^T(h_i^{-1})\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IILgf.pdf}           &       $\ket{\alpha'}_{a_b}A^T(h_i)\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$                  \\  
  \includegraphics[width=0.12\linewidth]{Figures/IIRgb.pdf} &   $A(h_i)\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$  &  \includegraphics[width=0.12\linewidth]{Figures/IIRib.pdf}           &       $A(h_i^{-1})\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$               \\ 
 \includegraphics[width=0.12\linewidth]{Figures/IILib.pdf} &   $A(h_i^{-1})\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$ &  \includegraphics[width=0.12\linewidth]{Figures/IILgb.pdf}           &       $A(h_i)\ket{\alpha'}_{a_b}\ket{\alpha}_{a_f}\ket{h_i}_{\text{phys}}$                  \\  
-\end{tabular}\vspace{10pt}
+\end{tabular}\vspace{20pt}
 \caption{The 16 variants of the elementary triangles of type I (top) and type II (bottom).}
 \label{fig:al_trigs}
 \end{figure}
@@ -1832,7 +1835,9 @@ Another building block of our circuits is the generalised conjugation, $U_{GC}\k
 \lstick{r} & \qw & \ctrl{2} & \qw & \qw\\
 \lstick{r^{2}} & \ctrl{1} & \qw & \qw & \qw \\
 \lstick{a_i} & \gate{A^*(r^2)} & \gate{A^*(r)} & \gate{A^*(m)}  & \qw
-}\\
+}
+\\
+\\
 \Qcircuit @C=0.4em @R=0.7em @!R{
 \lstick{\quad m} &  \ctrl{3} & \qw & \qw & \qw\\
 \lstick{r} & \qw & \ctrl{2} & \qw & \qw\\
