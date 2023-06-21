@@ -177,13 +177,13 @@ is defined in terms of operators $A_p{(g)}$ which shift the labels of the edges 
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width= \linewidth]{Figures/B_ops.pdf}
-        \caption{Vertex operator. The vertices are oriented in accordance with the plaquette operators (counter-clockwise) and have a starting edge to make the group multiplication assignment unambiguous.}
+        \caption{Vertex operator. The vertices are oriented in accordance with the plaquettes (counter-clockwise) and have a starting edge to make the group multiplication assignment unambiguous.}
         \label{eqn:Bs_def}
     \end{subfigure}\hfill
     \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width = \linewidth]{Figures/A_ops.pdf}
-        \caption{Plaquette operator. The orientation of the plaquettes determines pre or post multiplication with the inverse and is chosen in agreement with the orientation of the vertex operators (counter-clockwise).}
+        \caption{Plaquette operator. The orientation of the plaquettes determines pre or post multiplication with the inverse and is chosen in agreement with the orientation of the vertices (counter-clockwise).}
         \label{eqn:As_def}
     \end{subfigure}\hfill
     \caption{The vertex and plaquette operators.}
@@ -207,7 +207,7 @@ This state is the unique ground state and corresponds to the equal weight superp
 
 
 \subsection{Anyon content}\label{sec:anyon}
-In the following we will discuss the anyonic excitations in quantum double models and the algebra describing them.
+In the following, we will discuss the anyonic excitations in quantum double models and the algebra describing them.
 
 \textbf{The algebra $D(G)$.} The ground state is stabilised\footnote{Meaning, it is the $+1$ eigenstate.} by the projectors in Eq.~\eqref{eqn:ham}. Together with the property $A_p{(g_1)}A_p{(g_2)} = A_p{(g_1 g_2)}$ this implies the stronger condition
 \begin{equation}
@@ -340,7 +340,7 @@ Moving anyons means appending elementary triangles onto a ribbon. Each triangle 
 \begin{figure}
     \centering
     \includegraphics[width= \linewidth]{Figures/ribbon_exampl.pdf}
-    \caption{An example of a ribbon, $R = \{t_1, t_2, \ldots, t_7\}$, between site $s_1$ and $s_2$. The black lines are the edges of the graph. The ribbon is made up from four Type I elementary triangles and three Type II elementary triangles, they are labelled.}
+    \caption{An example of a ribbon, $R = \{t_1, t_2, \ldots, t_7\}$, between site $s_1$ and $s_2$. The black lines are the edges of the graph. The ribbon is made up from four type I elementary triangles and three type II elementary triangles.}
     \label{fig:rib_exampl}
 \end{figure}
 
@@ -790,7 +790,7 @@ This means that the order of interchanges matter, i.e. $\sigma_{12}\sigma_{23} \
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{Figures/fluxBRAID.pdf}
-    \caption{The two braiding protocols, differing only in order of exchange of two anyons. C stands for creation, M for measurements. Protocol a) will have 4 fusion outcomes, while protocol b) can only produce vacuum.}
+    \caption{The two braiding protocols, differing only in the order of exchanging the two anyons. C stands for creation, M for measurements.  The protocol on the left will have 4 fusion outcomes, while the protocol on the right can only produce vacuum.}
     \label{fig:flux_braid}
 \end{figure}
 
@@ -891,7 +891,7 @@ The exact method of tomography will be presented alongside the numerical results
 \end{subfigure}\hfill
 \begin{subfigure}{0.47\textwidth}
     \includegraphics[width=\linewidth]{Figures/intefEx.pdf}
-    \caption{Conditioning the existence of the $b$-ribbon. The $b$-ribbon is only applied if the state of the control qubit is $\ket{1}_c$. Equivalently, we say that we condition whether to apply $b$ or the reducible representation $0\oplus 0$.}
+    \caption{Conditioning the existence of the $b$-ribbon. The $b$-ribbon is only applied, if the state of the control qubit is $\ket{1}_c$. Equivalently, we say that we condition whether to apply $b$ or the reducible representation $0\oplus 0$.}
     \label{fig:cond_ex}
 \end{subfigure}
 
@@ -924,7 +924,7 @@ The exact method of tomography will be presented alongside the numerical results
 \lstick{GF}&\qw&\ghost{U}&\qw&\qw&\qw&\ghost{V}&\qw&\qw&\qw
 }
 \end{equation*}
-\caption{A circuit that depending on the state of the control bit $c$ either applies a unitary $U$ or $V$ onto the joint gauge field ($GF$) and ancilla (anc) degrees of freedom.}
+\caption{A circuit that, depending on the state of the control qubit $c$, either applies a unitary $U$ or $V$ onto the joint gauge field ($GF$) and ancilla (anc) degrees of freedom.}
 \label{fig:condcirq}
 \end{subfigure}
 \caption{The interferometry scheme to measure the phase difference between two paths alongside with a circuit diagram implementing the difference of the two paths.}
@@ -972,7 +972,7 @@ The exact ribbon operators and the layout of the qubits on the Sycamore chip use
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Figures/basket_fusion.pdf}
-	\caption{Ribbon operators and qubit layout for the fusion of two $\Psi_m$ anyons on the braiding ladder (top) and a small planar graph (bottom). Note that the lattice is embedded into a sphere, so the outside plaquette that we labelled twice in the braiding ladder diagram should be identified. Red and blue shadings denote the two ribbon operators, respectively. Purple circles mark the plaquette on which we perform the $H_{mr}$-partial charge measurement. Red circles mark the vertex on which we measure the flux.}
+	\caption{Ribbon operators and qubit layout for the fusion of two $\Psi_m$ anyons on the braiding ladder (top) and a small planar graph (bottom). Note, that the lattice is embedded into a sphere, so the outside plaquette that we labelled twice in the braiding ladder diagram should be identified. Red and blue shadings denote the two ribbon operators, respectively. Purple circles mark the plaquette on which we perform the $H_{mr}$-partial charge measurement. Red circles mark the vertex on which we measure the flux.}
 	\label{fig:fusion_setup}
 \end{figure}
 
@@ -991,7 +991,7 @@ On the braiding ladder the same protocol leads to a much shorter circuit of dept
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{Figures/braiding_setup.pdf}
-	\caption{Ribbon operators for the two braiding experiments. On the last step we also draw a circle around the plaquette where we perform the $H_{mr}$-partial charge measurement. Note that the lattice is embedded into a sphere, so the outside plaquette that we labelled twice for clarity should be identified.}
+	\caption{Ribbon operators for the two braiding experiments. On the last step we also draw a circle around the plaquette where we perform the $H_{mr}$-partial charge measurement. Note, that the lattice is embedded into a sphere, so the outside plaquette that we labelled twice for clarity should be identified.}
 	\label{fig:braiding_setup}
 \end{figure}
 
@@ -1087,7 +1087,7 @@ The layout on the chip is chosen such as to reduce the number of two-qubit gates
 For the $T$-matrix experiment we chose the same layout as for the $S$-matrix experiment and the concrete form of the ribbon is shown in Fig.~\ref{fig:T_intef_setup}.
 
 The depths of the circuits for the $S$-matrix protocol heavily depend on the anyons involved.
-In the following we present in detail the circuits and results for the exemplary $S$-matrix elements $\tilde{S}(\Psi_m, \Psi_m)=1$, $\tilde{S}(\Psi_m, \tilde{\Psi}_m)=-1$ and $\tilde{S}(\Psi_m, \Psi_r)$ which are of intermediate depth. For conditioning the ribbon type we have 58 for $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$	 and 64  for $S(\Psi_m, \Psi_r)$, while for conditioning the existence of the ribbon we find 84 and 90, respectively. We will return to a more detailed discussion of the circuit depths and results for all other $S$-matrix elements at the end of this section.
+In the following, we present in detail the circuits and results for the exemplary $S$-matrix elements $\tilde{S}(\Psi_m, \Psi_m)=1$, $\tilde{S}(\Psi_m, \tilde{\Psi}_m)=-1$ and $\tilde{S}(\Psi_m, \Psi_r)$ which are of intermediate depth. For conditioning the ribbon type we have 58 for $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$	 and 64  for $S(\Psi_m, \Psi_r)$, while for conditioning the existence of the ribbon we find 84 and 90, respectively. We will return to a more detailed discussion of the circuit depths and results for all other $S$-matrix elements at the end of this section.
 
 For the $T$-matrix elements we chose to measure $T(\Phi_r,\Phi_r)=i$, which together with $T(\tilde{\Phi}_r,\tilde{\Phi}_r)=i$ is the most non-trivial entry corresponding to the two semions (all other anyons have topological spin $\pm 1$). The circuit depth of 89 for this protocol is larger than for all other $T$-matrix elements and leads to reasonable results. Hence, we did not investigate the other $T$-matrix entries as they seem to be less challenging to measure.
 
@@ -1158,7 +1158,7 @@ For the sake of concreteness we chose the following sets of measurements bases  
 \end{enumerate}
 The extraction of the relevant angles is done by fitting Eq.~\eqref{eqn:estim}.
 The two angles then fix the value of $\tilde{S}_{ab}$ via $$\tilde{S}_{ab} = \sqrt{\frac{1-\cos{\theta_{\text{max}}}}{1+\cos{\theta_{\text{max}}}}}e^{i\phi_{\text{max}}}.$$
-The other two parameters, the amplitude and the offset of the polarization, do not convey any physical information. The offset determines the difference of the effective readout biases, $\Delta\epsilon$, and the amplitude determines the product of the mean readout bias and the length of the Bloch vector, $(1-2\bar{\epsilon})|\vec{r}|$.
+The other two parameters, the amplitude and the offset of the polarisation, do not convey any physical information. The offset determines the difference of the effective readout biases, $\Delta\epsilon$, and the amplitude determines the product of the mean readout bias and the length of the Bloch vector, $(1-2\bar{\epsilon})|\vec{r}|$.
 
 
 In the discussion above, we have neglected the fact that in addition to the measurement of the control qubit, we measure the ribbon ancillas and post-select on their biased measurement outcomes. This causes an increased observed effective readout bias $\Delta \epsilon$, obtained from the fitting procedure described in the last section, which exceeds the $\Delta \epsilon$ estimate from calibration data. A more detailed discussion of this issue is given in Appendix \ref{app:bias}. 
@@ -1263,7 +1263,7 @@ This is due to the simple structure of $D_4$. All of its subgroups are abelian a
 
 
 
-However, the slightly more complex gauge group $S_3$, can be used for universal topological quantum computation, if we allow measurements. Hence, it is interesting to investigate how our schemes carry over to this case. We find that the main tricks we use to achieve a manageable circuit depth for $D_4$, in particular the simplified group multiplication circuits for elements restricted to subgroups or conjugacy classes, would carry over straight forwardly to $S_3$ if the quantum hardware had native \emph{qutrits}. However, for a qubit based hardware implementing $S_3$ is considerably more difficult. In the following we will discuss the difficulties and increase in circuit depth for all steps in detail. 
+However, the slightly more complex gauge group $S_3$, can be used for universal topological quantum computation, if we allow measurements. Hence, it is interesting to investigate how our schemes carry over to this case. We find that the main tricks we use to achieve a manageable circuit depth for $D_4$, in particular the simplified group multiplication circuits for elements restricted to subgroups or conjugacy classes, would carry over straight forwardly to $S_3$ if the quantum hardware had native \emph{qutrits}. However, for a qubit based hardware implementing $S_3$ is considerably more difficult. In the following, we will discuss the difficulties and increase in circuit depth for all steps in detail. 
 
 \textbf{Encoding and basic circuits.} The first obstacle we face is the fact that the qubit encoding of elements of $S_3$ is not trivial, i.e. some states of the encoding qubits will not be allowed.
 
@@ -1271,7 +1271,7 @@ We assume the same encoding as for the case of $D_4$, i.e., $\ket{i_1,i_2,i_3} \
 
 This alone complicates the $\mathbb{Z}_3$ multiplication of $S_3 = \mathbb{Z}_2 \ltimes \mathbb{Z}_3$ significantly. In Figure \ref{fig:S3mult}, we show the general controlled left and right $S_3$-multiplication circuit. For the left multiplication the controlled SWAP gates implement the defining commutation rule between the two generators, $mr = r^2m$, while the middle portion implements the $\mathbb{Z}_3$-multiplication. The circuit contains 8 Toffoli gates, once the SWAPs are decomposed. The circuit for the right multiplication is simpler, containing 6 Toffoli gates.
 
-There are two reasons for this complication, one is the aforementioned unnatural encoding, while the second is the fact that $S_3$ has a trivial center. In the case of $D_4$ the commutation of the two generators amounts to multiplying the expression by $r^2 \in Z(G)$ which is a simple operation.
+There are two reasons for this complication. One is the aforementioned unnatural encoding, while the second is the fact that $S_3$ has a trivial center. In the case of $D_4$ the commutation of the two generators amounts to multiplying the expression by $r^2 \in Z(G)$ which is a simple operation.
 
 The situation is simplified significantly if we encode the group elements by a qubit and a qutrit, assuming that we have a full one-qutrit control as one has for qubits in current devices. A possible controlled group multiplication circuit utilising this recourse is shown in Figure~\ref{fig:S3mult_qutrit}.
  
@@ -1347,7 +1347,7 @@ The situation is simplified significantly if we encode the group elements by a q
 \lstick{r^{2}} & \qw & \targ & \qw  & \qw & \ctrl{-1} & \targ & \qw & \qw & \qw & \qw & \qw & \qw  
 }
 \end{gather*}
-\caption{The $S_3$ controlled left multiplication with the domain restricted to a single conjugacy class, $\mathcal{C}_r$ on the top and $\mathcal{C}_m$ on the bottom. Note that the encoding of $\mathcal{C}_r$ elements is slightly different from the encoding of the general group elements.}
+\caption{The $S_3$ controlled left multiplication with the domain restricted to a single conjugacy class, $\mathcal{C}_r$ on the top and $\mathcal{C}_m$ on the bottom. Note, that the encoding of $\mathcal{C}_r$ elements is slightly different from the encoding of the general group elements.}
 \label{fig:C_S3mult}
 \end{figure}
 
@@ -1362,7 +1362,7 @@ For the three dimensional anyons with $\mathcal{C}_m$-flux, we can reduce the nu
 
 The generalised conjugations are derived from the representation matrices $A{(g)}$ and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
 
-As in the case of the unrestricted controlled multiplication circuit we would see significant reduction in circuit depth if we had access to well controlled qutrits.
+As in the case of the unrestricted controlled multiplication circuit we would see significant reduction in circuit depth, if we had access to well controlled qutrits.
 
 \textbf{Ground state.}
 The ground state preparation protocol (without feed-forward) requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
@@ -1418,7 +1418,7 @@ $1$ & 2   & 0            & 2                             \\
 $-1$ & 0   & 2            & 2                              \\ \hline
 
 \end{tabular}
-\caption{Partial orthogonality of $S_3$ with respect to its two proper.}
+\caption{Partial orthogonality of the character table for $S_3$ with respect to its two proper subgroups.}
 \label{tab:red_ch_S3}
 \end{table}
 
@@ -1427,13 +1427,13 @@ Table \ref{tab:red_ch_S3} shows the partial orthogonality of character tables of
 \textbf{Summary.}
 The computational universality of $D(S_3)$ complemented with measurements comes at the expense of significantly longer elementary circuits for our protocols. The elementary circuits are about ten times deeper once compiled into native gates that the Sycamore chip can perform, neglecting the SWAPs needed to place the relevant qubits into appropriate proximity to one another.
 
-This is mainly a consequence of the unnatural way we encode the group elements, unnatural in the sense that it does not respect the group structure ($\mathbb{Z}_2 \ltimes \mathbb{Z}_3$). A more suitable encoding is achieved by introducing qutrits alongside the full one-qutrit control and ability to condition arbitrary one-qutrit gates. In this encoding all of the elementary circuits become even shallower than in the case of $D_4$. 
+This is mainly a consequence of the unnatural way we encode the group elements. Unnatural in the sense that it does not respect the group structure ($\mathbb{Z}_2 \ltimes \mathbb{Z}_3$). A more suitable encoding is achieved by introducing qutrits alongside the full one-qutrit control and ability to condition arbitrary one-qutrit gates. In this encoding all of the elementary circuits become even shallower than in the case of $D_4$. 
 
 However, for any qubit based architecture we reckon that realising $D(S_3)$ is beyond the limits of current NISQ technology.
 
 
 \section{Conclusions and outlook} \label{sec:outlook}
-In this work we explored the feasibility of preparing the ground state of the quantum double model $D(D_4)$, as well as creating, manipulating, and measuring its (non-abelian) anyons on current NISQ technology, in particular Google's Sycamore chip. We demonstrated that by exploiting the structure of the group $D_4$ one can achieve moderate circuit depths for the creation and manipulation of anyons with ribbon operators. We also proposed a partial charge measurement which uniquely determines the anyon content without relying on prohibitively costly full group multiplications. Our numerical results suggest that current NISQ technology is capable of probing the full modular data of $D(D_4)$ on a quasi-one dimensional lattice architecture and that ground state preparation without feed-forward protocols are possible on small two-dimensional lattices. 
+In this work we explored the feasibility of preparing the ground state of the quantum double model $D(D_4)$, as well as creating, manipulating, and measuring its (non-abelian) anyons on current NISQ technology, in particular Google's Sycamore chip. We demonstrated that by exploiting the structure of the group $D_4$ one can achieve moderate circuit depths for the creation and manipulation of anyons with ribbon operators. We also proposed a partial charge measurement which uniquely determines the anyon content without relying on prohibitively costly full group multiplications. Our numerical results suggest that current NISQ technology is capable of probing the full modular data of $D(D_4)$ on a quasi one-dimensional lattice architecture and that ground state preparation without feed-forward protocols are possible on small two-dimensional lattices. 
 
 
 The qubit layout we used respects the geometry of the physical lattice and can straightforwardly be extended to larger system sizes once more qubits are available. However, with current noise levels for larger two-dimensional lattices, feed-forward protocols would need to be invoked for the ground state preparation. 
@@ -1443,7 +1443,7 @@ We note, that in this proposal we did not include error mitigation or noise redu
 
 
 We investigated how the circuit simplifications carry over to the group $S_3$ and its double $D(S_3)$ which is more powerful for topological quantum computation in the sense that braiding anyons assisted by measurement allows for universal computations.
-We found that for an architecture that features qubits and qutrits, all of our simplifications carry over and the circuit depth would be even shorter than the qubit implementation of $D(D_4)$. In contrast, for a qubit-based architecture, the circuit depths we could achieve lie outside of the range currently accessible by roughly one order of magnitude. However, given the steady improvement in quantum technologies, the implementation of $D(S_3)$ might soon be possible and the methods and concrete protocols proposed in this work would be useful for that.
+We found that for an architecture that features qubits and qutrits, all of our simplifications carry over and the circuit depths become even shorter than the qubit implementation of $D(D_4)$. In contrast, for a qubit-based architecture, the circuit depths we could achieve lie outside of the range currently accessible by roughly one order of magnitude. However, given the steady improvement in quantum technologies, the implementation of $D(S_3)$ might soon be possible and the methods and concrete protocols proposed in this work could be useful for that.
 
 
 All in all we conclude that our work contributes to the thriving and exciting field of exploring the usability and readiness of current NISQ devices for realising and utilising topological quantum order and anyons. The non-abelian quantum double model $D(D_4)$ presents an important intermediate step between simple abelian systems such as the toric code and more complex ones such as $D(S_3)$ or general string-net models, in particular, the (doubled) Fibonacci model for which braiding anyons alone allows for universal quantum computation. 
