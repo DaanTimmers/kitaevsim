@@ -1391,7 +1391,7 @@ For the three dimensional anyons with $\mathcal{C}_m$-flux, we can reduce the nu
 
 The generalised conjugations are derived from the representation matrices $A{(g)}$ and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
 
-As in the case of the unrestricted controlled multiplication circuit we would see significant reduction in circuit depth if we had access to well controlled qutrits.
+As in the case of the unrestricted controlled multiplication circuit we would see significant reduction in circuit depth, if we had access to well controlled qutrits.
 
 \textbf{Ground state.}
 The ground state preparation protocol (without feed-forward) requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
@@ -1400,7 +1400,6 @@ The ground state preparation protocol (without feed-forward) requires setting up
 Arguably, where we loose out the most is with the partial charge measurement. The group $S_3$ has only few very simple proper subgroups, $H_r = \mathbb{Z}_3^r$, $H_m = \mathbb{Z}_2^m$, $H_{mr^2} = \mathbb{Z}_2^{mr^2}$ and $H_{mr} = \mathbb{Z}_2^{mr}$.
 
 The circuits involved in the partial charge measurement with respect to the subgroups $H_m$ and $H_r$ are shown in Figure~\ref{fig:H_red_S3}. We chose to implement left and right multiplication for the two subgroups respectively because the circuits are significantly shallower. If the orientation of the arrows differs from what we need we can always reverse using the inverse circuit shown in the same figure.
-
 
 
 \begin{table}[h]
