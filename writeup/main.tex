@@ -24,7 +24,9 @@
 \usepackage{bbold}
 
 
+
 \usepackage[numbers,sort&compress]{natbib}
+%\usepackage[style=phys]{biblatex}
 \usepackage{amssymb}
 %\usepackage{amsmath}
 \usepackage{placeins}
@@ -1238,10 +1240,8 @@ In Fig.~\ref{fig:Smat_diff} we show the $S$-matrix with all its entries color co
 \end{enumerate}
 We assume that the first element is conditioned and largely determines the circuit depth while the specific choice of the other, unconditioned ribbon operator only mildly influences the depth. This means that the difficulty is set by the row of the S-matrix and one can use the symmetry of the S-matrix to pick the better of the two interference procedures. For example for measuring $S(\Phi_r, \Sigma_m)$ one would condition the $\Sigma_m$ ribbon and not the semion $\Phi_r$.
 
-\caro{We observe that the magnitude of the $S$-matrix in the simulation results decays strongly with the circuit depth. This is due to accumulating errors on the control qubit. However, the errors (apart from causing a uniform mixing reflected in the shortening of the Bloch vector) seem to be mostly caused by dephasing, pulling the Bloch vector towards the $z$-axis and hence, they do not affect the phase which agree with the theoretical predictions even for the deepest circuits.}
 
-\jovan{We observe that the magnitude of the $S$-matrix in the simulation results decays strongly with the circuit depth. This is due to accumulating errors on the control qubit. We speculate that the main error channel responsible for the drift of the estimated angle $\theta_{\text{max}}$, and hence the braiding amplitude, is dephasing. Dephasing reduces the $r_x$ and $r_y$ components of the Bloch vector, while keeping $r_z$ fixed, so any error in estimating this angle due to any small offset $\delta r_z \neq 0$ will be amplified. On the upside, this error channel does not change the ratio between $r_x$ and $r_y$ and hence the braiding phase estimates are well within the theoretical values.}
-
+We observe that the magnitude of the $S$-matrix in the simulation results decays strongly with the circuit depth. This is due to accumulating errors on the control qubit. We speculate that the main error channel responsible for the drift of the estimated angle $\theta_{\text{max}}$, and hence the braiding amplitude, is dephasing. Dephasing reduces the $r_x$ and $r_y$ components of the Bloch vector, while keeping $r_z$ fixed, so any error in estimating this angle due to any small offset $\delta r_z \neq 0$ will be amplified. On the upside, this error channel does not change the ratio between $r_x$ and $r_y$ and hence the braiding phase estimates are well within the theoretical values.
 
 
 
@@ -1845,28 +1845,6 @@ Another building block of our circuits is the generalised conjugation, $U_{GC}\k
 
 
 
-\begin{figure}
-\begin{equation*}
-\Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{\quad m} &  \targ & \ctrl{1} & \targ & \qw\\
-\lstick{r} & \qw & \ctrl{1} & \qw & \qw\\
-\lstick{r^{2}} & \qw & \targ & \qw & \qw 
-}\qquad\qquad
-\Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{\quad m} &  \qw & \qw & \ctrl{1} & \qw & {\qquad mr}\\
-\lstick{r} & \qw & \targ & \ctrl{1} & \qw & {\qquad r}\\
-\lstick{r^{2}} & \qw & \qw & \targ & \qw  & {\qquad r^2}
-}\qquad\qquad\qquad
-\Qcircuit @C=0.4em @R=0.7em @!R{
-\lstick{\quad c} & \targ & \ctrl{1} & \targ & \qw \\
-\lstick{a_{f(b)}} & \qw & \ctrl{-1} & \qw & \qw
-}
-\end{equation*}
-
-    \caption{(Left) The inversion circuit, $\ket{g} \rightarrow \ket{g^{-1}}$, used when reversing the arrow direction of the edges. (Middle) The basis change circuit, $\ket{g}_{mRR^2} \rightarrow \ket{g}_{(mR)RR^2}$, can be used to simplify $mr$-based ribbon application protocol by making them analogous to $m$-ribbon application protocols. (Right) The $\tilde{S}(\tilde{0}, a) = -1$ fix for the flavour conditioning protocol. }
-    \label{fig:Misc_cirq}
-\end{figure}
-
 
 \section{Partial charge measurement -- additional data}\label{app:more_data}
 In this appendix, we show the results of the partial charge measurements with respect to all four-element subgroups of $D_4$ in the anyon fusion experiment. Fig.~\ref{fig:glasses_all_subs} shows the data for the experiment performed on the braiding ladder and Fig.~\ref{fig:basket_all_subs} shows the data for the experiment performed on the small planar graph.
@@ -1922,7 +1900,7 @@ If one does not want to rely on the knowledge of the fusion algebra to label the
 
 \section{Uncertainty estimation and measurement bias}
 In this appendix we provide more details on the measurement uncertainty and the effect of the measurement bias relevant in the $S$-and $T$-matrix protocols in Section \ref{sec:num:intef}.
-\subsection{Polarization uncertainty} \label{app:DATA_Anl}In the following, we discuss the uncertainty estimations for the polarization $P$ -- the central quantity of interest in the interference protocols in Section \ref{sec:num:intef}, and the resulting uncertainty for the amplitude and phase of the $S$-and $T$-matrix elements. The polarization was determined for different measurement bases $\vec b$, but here we focus on a single fixed measurement basis first. To estimate $P$, we performed $N$ measurements and recorded the number of measurement outcomes $n_s$, $s\in \{0,1\}$. From these results we estimated the polarization $P = \frac{p_0 - p_1}{p_0 + p_1}$ via $p_s=n_s/N$. The probability to find the outcome $s$ in $n_s$ of the $N$ shots is given by the binomial distribution, $p(n_s) = {N \choose n_s} p_s^{n_s} p_{\bar{s}}^{N-n_s}$, where $\bar{s} = 1-s$. Thus,
+\subsection{Polarisation uncertainty} \label{app:DATA_Anl}In the following, we discuss the uncertainty estimations for the polarisation $P$ -- the central quantity of interest in the interference protocols in Section \ref{sec:num:intef}, and the resulting uncertainty for the amplitude and phase of the $S$-and $T$-matrix elements. The polarisation was determined for different measurement bases $\vec b$, but here we focus on a single fixed measurement basis first. To estimate $P$, we performed $N$ measurements and recorded the number of measurement outcomes $n_s$, $s\in \{0,1\}$. From these results we estimated the polarisation $P = \frac{p_0 - p_1}{p_0 + p_1}$ via $p_s=n_s/N$. The probability to find the outcome $s$ in $n_s$ of the $N$ shots is given by the binomial distribution, $p(n_s) = {N \choose n_s} p_s^{n_s} p_{\bar{s}}^{N-n_s}$, where $\bar{s} = 1-s$. Thus,
 the unbiased estimator for the polarisation is $\hat P = \frac{n_0 - n_1}{n_0 + n_1}$, with $$\text{Mean}(\hat P) =P\text{ and }\text{Var}(\hat{P}) = N\sigma_{P}^2 = P(1-P),$$ where $\sigma_{P}=\sqrt{P(1-P)/N}$ is the error in determining this mean. This procedure of uncertainty estimation was used for all measurement bases and yields the error bars in Figures~\ref{fig:S_res} and ~\ref{fig:t_mat_results}.
 
 To obtain the amplitude and phase of the $S$- and $T$-matrix entries from the interference protocols we used that the measurement basis dependent polarisation $P(\vec b)$ is related to the Bloch vector $\vec r$ of the single qubit density matrix and the read-out biases of the machine via
@@ -1967,7 +1945,7 @@ p_1=&	\frac{1}{4} [-\epsilon_1 s^-_\alpha(\epsilon_0r^-_{\alpha}+(1-\epsilon_1)r
 +(1-\epsilon_0) s^+_\alpha (\epsilon_0r^-_{\alpha}+(1-\epsilon_1)r^+_{\alpha})   ]\;.
 \end{aligned}
 \end{equation}
-This yields the polarization 
+This yields the polarisation 
 \begin{equation}
 	P=p_0-p_1= a+ \vec s \cdot \vec b \;,
 \end{equation}
@@ -1980,14 +1958,15 @@ where $a,\vec b$ are polynomials in $\epsilon_{0/1}$ and $r_\alpha^\pm$, in part
 \end{equation}
 We see that to leading order in $\epsilon$, the offset is proportional to $\Delta \epsilon=\epsilon_1-\epsilon_0$, while the vector $\vec b$ is dominated by terms $\mathcal O(1)$.
 
-For a general setting, where we have $n$ qubits, post-select on the biased measurement outcomes of $k$ qubits and tomograph one qubit, the polarization will have the same structure, just that $a$ and $b_j$ are higher polynomials in $\epsilon$, with the coefficients depending on the full density matrix. The polarization can be written as 
+For a general setting, where we have $n$ qubits, post-select on the biased measurement outcomes of $k$ qubits and tomograph one qubit, the polarisation will have the same structure, just that $a$ and $b_j$ are higher polynomials in $\epsilon$, with the coefficients depending on the full density matrix. The polarisation can be written as 
 \begin{equation}
 	P=\vec s \cdot (\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}) + \tilde \epsilon_+ \;,
 \end{equation}
 where $\tilde \epsilon_\pm$ are effective errors that depend on $\rho$. In our experiment we are only interested in the direction of the vector $\vec b$ which contains the information of the $S$- or $T$-matrix entry. The offset is purely due to read-out errors and is discarded. In the tomography, we determine $\vec b^\text{observed}=\vec b^\text{no bias} + \tilde{\epsilon}_- \vec b^\text{bias}$ and do not try to distinguish between the two contributions, since we are dealing with an unknown density matrix. 
 
+%\printbibliography
 
-\bibliographystyle{apsrev4-1}
+\bibliographystyle{quantum}
 \bibliography{bibliography}
 
 \end{document}
