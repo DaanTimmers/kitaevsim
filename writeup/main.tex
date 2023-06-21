@@ -1240,6 +1240,8 @@ We assume that the first element is conditioned and largely determines the circu
 
 \caro{We observe that the magnitude of the $S$-matrix in the simulation results decays strongly with the circuit depth. This is due to accumulating errors on the control qubit. However, the errors (apart from causing a uniform mixing reflected in the shortening of the Bloch vector) seem to be mostly caused by dephasing, pulling the Bloch vector towards the $z$-axis and hence, they do not affect the phase which agree with the theoretical predictions even for the deepest circuits.}
 
+\jovan{We observe that the magnitude of the $S$-matrix in the simulation results decays strongly with the circuit depth. This is due to accumulating errors on the control qubit. We speculate that the main error channel responsible for the drift of the estimated angle $\theta_{\text{max}}$, and hence the braiding amplitude, is dephasing. Dephasing reduces the $r_x$ and $r_y$ components of the Bloch vector, while keeping $r_z$ fixed, so any error in estimating this angle due to any small offset $\delta r_z \neq 0$ will be amplified. On the upside, this error channel does not change the ratio between $r_x$ and $r_y$ and hence the braiding phase estimates are well within the theoretical values.}
+
 
 
 
