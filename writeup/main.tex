@@ -1351,27 +1351,6 @@ The situation is simplified significantly if we encode the group elements by a q
 \label{fig:C_S3mult}
 \end{figure}
 
-
-
-\textbf{Anyon content.} The group $S_3$ has three conjugacy classes, $\mathcal{C}_e = \{e\}$, $\mathcal{C}_r = \{r, r^2\}$ and $\mathcal{C}_m = \{m, mr, mr^2\}$. The two nontrivial conjugacy classes have abelian centres. 
-The anyons of this theory alongside their braiding properties have been completely studied in Ref.~\cite{Cui_2015}. In this section, we just note that there are two abelian, four two-dimensional and two three-dimensional anyons.
-
-In our ribbon application protocol we rely on two operations, $\mathcal C$-controlled multiplication and generalised conjugation. When restricted to a conjugacy class the controlled multiplication circuit simplifies significantly for the two-dimensional anyons with $\mathcal{C}_r$ flux. $\mathcal{C}_r$ is naturally encoded by a qubit and the $\mathcal{C}_r$-controlled multiplication circuit has only one Toffoli gate for both left and right multiplication.
-
-For the three dimensional anyons with $\mathcal{C}_m$-flux, we can reduce the number of Toffoli gates to 5 in the case of right and to 2 in the case of left controlled multiplication. The conjugacy class is encoded with two qubits with one disallowed state. Figure \ref{fig:C_S3mult} shows these circuits.
-
-The generalised conjugations are derived from the representation matrices $A{(g)}$ and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
-
-As in the case of the unrestricted controlled multiplication circuit we would see significant reduction in circuit depth if we had access to well controlled qutrits.
-
-\textbf{Ground state.}
-The ground state preparation protocol (without feed-forward) requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
-
-\textbf{Charge measurement.}
-Arguably, where we loose out the most is with the partial charge measurement. The group $S_3$ has only few very simple proper subgroups, $H_r = \mathbb{Z}_3^r$, $H_m = \mathbb{Z}_2^m$, $H_{mr^2} = \mathbb{Z}_2^{mr^2}$ and $H_{mr} = \mathbb{Z}_2^{mr}$.
-
-The circuits involved in the partial charge measurement with respect to the subgroups $H_m$ and $H_r$ are shown in Figure~\ref{fig:H_red_S3}. We chose to implement left and right multiplication for the two subgroups respectively because the circuits are significantly shallower. If the orientation of the arrows differs from what we need we can always reverse using the inverse circuit shown in the same figure.
-
 \begin{figure}
 \begin{equation*}
 \Qcircuit @C=0.4em @R=0.7em @!R{
@@ -1400,6 +1379,26 @@ The circuits involved in the partial charge measurement with respect to the subg
 \label{fig:H_red_S3}
 \end{figure}
 
+
+
+\textbf{Anyon content.} The group $S_3$ has three conjugacy classes, $\mathcal{C}_e = \{e\}$, $\mathcal{C}_r = \{r, r^2\}$ and $\mathcal{C}_m = \{m, mr, mr^2\}$. The two nontrivial conjugacy classes have abelian centres. 
+The anyons of this theory alongside their braiding properties have been completely studied in Ref.~\cite{Cui_2015}. In this section, we just note that there are two abelian, four two-dimensional and two three-dimensional anyons.
+
+In our ribbon application protocol we rely on two operations, $\mathcal C$-controlled multiplication and generalised conjugation. When restricted to a conjugacy class the controlled multiplication circuit simplifies significantly for the two-dimensional anyons with $\mathcal{C}_r$ flux. $\mathcal{C}_r$ is naturally encoded by a qubit and the $\mathcal{C}_r$-controlled multiplication circuit has only one Toffoli gate for both left and right multiplication.
+
+For the three dimensional anyons with $\mathcal{C}_m$-flux, we can reduce the number of Toffoli gates to 5 in the case of right and to 2 in the case of left controlled multiplication. The conjugacy class is encoded with two qubits with one disallowed state. Figure \ref{fig:C_S3mult} shows these circuits.
+
+The generalised conjugations are derived from the representation matrices $A{(g)}$ and can be compiled into circuits of similar complexity as the controlled multiplication circuits of restricted domain.
+
+As in the case of the unrestricted controlled multiplication circuit we would see significant reduction in circuit depth if we had access to well controlled qutrits.
+
+\textbf{Ground state.}
+The ground state preparation protocol (without feed-forward) requires setting up the superposition $\sum_{g \in S_3} \ket{g}=\ket{+}\otimes \ket{+_3}$, where $\ket{+_3}=\frac{\ket{00}+\ket{10}+\ket{01}}{{\sqrt{3}} }$. We therefore need a circuit that implements the unitary $U_{+_3}\ket{00}= \ket{+_3}$. This unitary can be chosen to be purely real, i.e., $U_{+_3}\in SO(4)$ such that we can use the minimal gate decomposition from Ref.~\cite{decomp} to write it as $U_{+_3}=M^\dag(A\otimes B)M$, where $M$ is the magic basis rotation that can be implemented with a single CNOT and two single qubit gates  (see Fig.~2 of Ref.~\cite{decomp}). A suitable choice for $A$ and $B$ is $B=\mathbb 1$ and $A=R_z(5\pi/4)R_y(\theta_m) R_z(\pi/4)$, where $R_z$ and $R_y$ are rotations around $z$ and $y$ axis, respectively and $\theta_m=2 \arctan(1/\sqrt{2})$. 
+
+\textbf{Charge measurement.}
+Arguably, where we loose out the most is with the partial charge measurement. The group $S_3$ has only few very simple proper subgroups, $H_r = \mathbb{Z}_3^r$, $H_m = \mathbb{Z}_2^m$, $H_{mr^2} = \mathbb{Z}_2^{mr^2}$ and $H_{mr} = \mathbb{Z}_2^{mr}$.
+
+The circuits involved in the partial charge measurement with respect to the subgroups $H_m$ and $H_r$ are shown in Figure~\ref{fig:H_red_S3}. We chose to implement left and right multiplication for the two subgroups respectively because the circuits are significantly shallower. If the orientation of the arrows differs from what we need we can always reverse using the inverse circuit shown in the same figure.
 
 
 
