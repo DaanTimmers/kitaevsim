@@ -85,12 +85,14 @@ Beyond the study of unconventional phases of matter, topological order has been 
 
 Today, almost half a century later, our theoretical understanding of anyons in 2+1 dimensions is slowly approaching completion. However, unambiguous experimental evidence of anyons in 'natural' physical systems is still scarce. Recent experiments have beautifully demonstrated the existence of quasiparticles outside the Boson-Fermion dichotomy in quantum Hall systems~\cite{Nakamura_2020,Bartolomei}. However, the more complex types of anyons, so called \emph{non-abelian anyons} for which  braiding two particles changes the (vector-valued) wave-function by a unitary rotation instead of just a phase factor, have not been unambiguously observed so far.
 
-On that grounds, one may argue that most topological phases of matter are just too complicated to exist in nature and are thus more of a mathematical curiosity than an actual physical phenomenon. However, a series of striking experiments~\cite{iqbal2023creation,xu,andersen2022observation} performed recently on noisy intermediate scale quantum computers (NISQ) strongly refutes such  criticism. Two experiments performed on superconducting qubits~\cite{xu,andersen2022observation} demonstrated the non-abelian braiding of mobile lattice defects which behave like Ising anyons embedded into an abelian phase. Another experiment performed on trapped ions~\cite{iqbal2023creation} prepared the topologically ordered ground state of a non-abelian phase and detected an intrinsically non-abelian braiding processes (Borromean rings) via anyon interferometry. 
+On that grounds, one may argue that most topological phases of matter are just too complicated to exist in nature and are thus more of a mathematical curiosity than an actual physical phenomenon. However, a series of striking experiments~\cite{iqbal2023creation,xu,andersen2022observation} performed recently on noisy intermediate scale quantum computers (NISQ) strongly refutes such  criticism. Two experiments performed on superconducting qubits~\cite{xu,andersen2022observation} demonstrated the non-abelian braiding of mobile lattice defects which behave like Ising anyons embedded into an abelian phase \cite{Bombin2010,Lensky2023}. Another experiment performed on trapped ions~\cite{iqbal2023creation} prepared the topologically ordered ground state of a non-abelian phase and detected an intrinsically non-abelian braiding processes (Borromean rings) via anyon interferometry. 
 
 
 All three experiments indicate that today's quantum computers are capable of simulating states of matter whose complexity exceeds that of abelian topological order which can be seen as a significant step towards topologically protected quantum computation. While open questions of the scalability and the improvement of noise levels are left for the future to decide, it is clear that by now non-abelian anyons have descended from the somewhat esoteric mathematical realm to the concrete and tangible.
 
 Motivated by these findings, we propose an alternative scheme to realise non-abelian anyons on a NISQ device. This scheme has certain advantages and disadvantages compared to Refs.~\cite{iqbal2023creation,xu,andersen2022observation} which we will elaborate on in the next section. Our proposal focuses on Kitaev's quantum double models -- a discrete realisation of lattice gauge theory -- and in particular the topological phase $D(D_4)$. This phase is (Morita) equivalent to the phase realised in Ref.~\cite{iqbal2023creation}. However, its microscopic Hamiltonian and the protocols we propose to demonstrate non-abelian braiding are quite different from the ones in Ref.~\cite{iqbal2023creation}. 
+
+We note, that the simulation of quantum double models and the more general string-net models\cite{Levin_2005} which include quantum double models as a subset, has been investigated previously in several studies \cite{Cirac,2009Brennen,PRXQuantum.3.040315,goel2023unveiling}. The focus of our work is on the concrete implementation and the feasibility to execute the latter on a state of the art NISQ device and the simplifications employed to achieve the latter.
 
 In the next section we will present a non-technical summary of our main methods and results. All following sections are devoted to a more technical and in-depth discussion, starting with a review of Kitaev's quantum double models in Section \ref{sec:qm_double}, where we also discuss the implementation of ribbon operators, charge measurements, and the concrete example of $D(D_4)$. In Section \ref{sec:probing} we present a detailed description of the protocols to probe non-abelian anyons and their concrete implementation as quantum circuits of low depth. In Section \ref{sec:num} we show the results of numerical simulations. Section \ref{sec:other_gauge} discusses the feasibility of our protocols for other gauge groups, in particular $S_3$, which would be universal for quantum computation in contrast to $D_4$. In Section \ref{sec:outlook} we summarise our results and comment on future perspectives.
 
@@ -586,11 +588,11 @@ we have
 	\ket{c, 0} \equiv \ket{a}_{a} \iff c = m^1 r^0(r^2)^a \in \{m , mr^2\},
 	\end{equation}
 for anyons with $mr$-flux, $(C_{mr},\chi)$, we have	
-\begin{equation}\label{eq:enc_C}
+\begin{equation}\label{eq:enc_C2}
 	\ket{c, 0} \equiv \ket{a}_{a} \iff c = m^1 r^1(r^2)^a \in \{mr , mr^3\},
 	\end{equation}
 	and for anyons with $r$-flux, $(C_r,\chi)$, we have
-\begin{equation}\label{eq:enc_C}
+\begin{equation}\label{eq:enc_C3}
 	\ket{c, 0} \equiv \ket{a}_{a} \iff c = m^0 r^1(r^2)^a \in \{r , r^3\}.	
 \end{equation}
 			
