@@ -92,7 +92,7 @@ All three experiments indicate that today's quantum computers are capable of sim
 
 Motivated by these findings, we propose an alternative scheme to realise non-abelian anyons on a NISQ device. This scheme has certain advantages and disadvantages compared to Refs.~\cite{iqbal2023creation,xu,andersen2022observation} which we will elaborate on in the next section. Our proposal focuses on Kitaev's quantum double models -- a discrete realisation of lattice gauge theory -- and in particular the topological phase $D(D_4)$. This phase is (Morita) equivalent to the phase realised in Ref.~\cite{iqbal2023creation}. However, its microscopic Hamiltonian and the protocols we propose to demonstrate non-abelian braiding are quite different from the ones in Ref.~\cite{iqbal2023creation}. 
 
-We note, that the simulation of quantum double models and the more general string-net models\cite{Levin_2005} which include quantum double models as a subset, has been investigated previously in several studies \cite{Cirac,2009Brennen,PRXQuantum.3.040315,goel2023unveiling}. The focus of our work is on the concrete implementation and the feasibility to execute the latter on a state of the art NISQ device and the simplifications employed to achieve the latter.
+We note, that the simulation of quantum double models and the more general string-net models \cite{Levin_2005}, which include quantum double models as a subset, has been investigated previously in several studies \cite{Cirac,2009Brennen,PRXQuantum.3.040315,goel2023unveiling}. The focus of our work is on the concrete implementation and the simplifications devised to achieve feasibility on a state of the art NISQ device.
 
 In the next section we will present a non-technical summary of our main methods and results. All following sections are devoted to a more technical and in-depth discussion, starting with a review of Kitaev's quantum double models in Section \ref{sec:qm_double}, where we also discuss the implementation of ribbon operators, charge measurements, and the concrete example of $D(D_4)$. In Section \ref{sec:probing} we present a detailed description of the protocols to probe non-abelian anyons and their concrete implementation as quantum circuits of low depth. In Section \ref{sec:num} we show the results of numerical simulations. Section \ref{sec:other_gauge} discusses the feasibility of our protocols for other gauge groups, in particular $S_3$, which would be universal for quantum computation in contrast to $D_4$. In Section \ref{sec:outlook} we summarise our results and comment on future perspectives.
 
@@ -1448,6 +1448,12 @@ We found that for an architecture that features qubits and qutrits, all of our s
 
 
 All in all we conclude that our work contributes to the thriving and exciting field of exploring the usability and readiness of current NISQ devices for realising and utilising topological quantum order and anyons. The non-abelian quantum double model $D(D_4)$ presents an important intermediate step between simple abelian systems such as the toric code and more complex ones such as $D(S_3)$ or general string-net models, in particular, the (doubled) Fibonacci model for which braiding anyons alone allows for universal quantum computation. 
+
+\section*{Acknowledgments}
+C.W. acknowledges support from the European Research Council under the
+European Union Horizon 2020 Research and Innovation
+Programme via Grant Agreement No. 804213-TMCS.
+
 
 \FloatBarrier
 \onecolumn
