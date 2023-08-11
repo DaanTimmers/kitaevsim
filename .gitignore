@@ -1,9 +1,13 @@
 .vscode
 .DS_Store
 writeup/*
+SPT_notes/prep_protocol/*
 
 !writeup/Figures
 !writeup/*.bib
 !writeup/*.tex
 !writeup/*.zip
+!SPT_notes/prep_protocol/Figures
+!SPT_notes/prep_protocol/*.tex
+!SPT_notes/prep_protocol/*.bib
 .DS_Store

@@ -1,0 +1,106 @@
+%% quantum's style
+
+\documentclass[a4paper,twocolumn,11pt]{quantumarticle}
+
+\pdfoutput=1
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
+%
+%\usepackage{tikz}
+%\usepackage{lipsum}
+
+
+%% our previous style and packages
+
+%\documentclass[two column]{article}
+%\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage[colorlinks=true,linkcolor=Blue,hypertexnames=false]{hyperref}
+\usepackage{braket}
+\usepackage{bbold}
+
+
+
+\usepackage[numbers,sort&compress]{natbib}
+%\usepackage[style=phys]{biblatex}
+\usepackage{amssymb}
+%\usepackage{amsmath}
+\usepackage{placeins}
+\usepackage{subcaption}
+
+\usepackage[left=23mm,right=23mm,top=35mm,columnsep=15pt]{geometry}
+
+\usepackage{pgfplotstable}
+\usepackage{array}
+
+\usepackage[qm]{qcircuit}
+
+\newcommand{\caro}[1]{\textcolor{red}{[#1]}}
+\newcommand{\jovan}[1]{\textcolor{blue}{[#1]}}
+\newcommand{\steve}[1]{\textcolor{purple}{[#1]}}
+
+
+
+
+\title{Notes on $\mathbb{Z}_2$-SPT preparation protocols}
+\author{Jovan Jovanovi\'c}
+\affiliation{Rudolf Peierls Centre for Theoretical Physics, Parks Road, Oxford, OX1 3PU, UK}
+\orcid{0000-0002-2508-3207}
+\author{Carolin Wille}
+\affiliation{Rudolf Peierls Centre for Theoretical Physics, Parks Road, Oxford, OX1 3PU, UK}
+\orcid{0000-0002-9764-6937}
+\author{Steven H. Simon}
+\affiliation{Rudolf Peierls Centre for Theoretical Physics, Parks Road, Oxford, OX1 3PU, UK}
+\orcid{0000-0001-7757-5978}
+
+
+
+\date{11.08.2023.}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+TBC  
+\end{abstract}
+\tableofcontents
+
+
+
+\section{Overview}
+
+Symmetry protected topological phases (SPTs) can be characterised by the properties of their fixed point wave-functions. Those properties are: \begin{enumerate}
+\item Symmetric under an onsite representation of some symmetry group $G$.
+\item It's parent Hamiltonian is gapped and it's ground state is unique, if the system lives on a closed manifold.
+\item  If the manifold has an edge, a suitable parent Hamiltonian either supports a gapless edge mode or symmetry is spontaneously broken at the edge.
+\end{enumerate}
+
+Given the onsite symmetry group $G$ in $2+1$ dimensions we can classify all bosonic SPTs by the third cohomology group $\mathcal{H}^{3}(G, U(1))$ \cite{spt_coho_org}. Bosonic in this sense means that the elementary degrees of freedom commute, i.e. spin lattices. 
+
+Given an element of the cohomology group $[\omega] \in \mathcal{H}^{3}(G, U(1))$ we can construct the fixed point wavefunction on a closed manifold.
+
+For the case of concreteness we will immediately limit ourselves to the case at hand, $G = \mathbb{Z}_2$, its third cohomology group is $\mathcal{H}^{3}(\mathbb{Z}_2, U(1)) = \mathbb{Z}_2$. The two elements of the cohomology group represent the trivial paramagnet $\ket{\Psi_0}$ and our target state (the nontrivial SPT) $\ket{\Psi_1}$.
+
+The two states are deceptively similar, given a spin-$1/2$ configuration on any lattice of $N$ sites the two states are: \begin{gather}
+\ket{\Psi_0} = \sum_{\{s_i\}\in\{0,1\}^N}\ket{\{s_i\}}, \\ \ket{\Psi_1} = \sum_{\{s_i\}\in\{0,1\}^N}(-1)^{N_{d.w.}(\{s_i\})}\ket{\{s_i\}},
+\end{gather} where $N_{d.w.}(\{s_i\})$ is the number of domain walls in a given configuration $\{s_i\}$. It is in the definition of this quantity that the embedding manifold plays a role.
+
+\subsection{The fixed point Hamiltonian}
+
+\section{State preparation on manifolds without boundary}
+
+We will introduce our lattice. 
+
+
+
+
+%\printbibliography
+
+\bibliographystyle{quantum}
+\bibliography{bibliography}
+
+\end{document}
