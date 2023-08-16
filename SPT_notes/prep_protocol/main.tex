@@ -93,8 +93,51 @@ The two states are deceptively similar, given a spin-$1/2$ configuration on any 
 
 \section{State preparation on manifolds without boundary}
 
-We will introduce our lattice. 
+We will introduce our lattice, see Figure \ref{fig:3x3pbc} for an example,
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/3x3_pbc.png}
+\caption{An example of a N = 9 triangular lattice on a torus. (Proto)}
+\label{fig:3x3pbc}
+\end{figure}
+in this example we have $N = 9$ spins on vertices of a triangular lattice on the periodic topology of a torus. For the sake of clarity we will drop the diagonal edges so we work with a simpler square lattice, only invoking the original stricture to resolve some ambiguities when it comes to defining $N_{d.w.}$ on a square lattice.
 
+Given the simple structure of SPT states on closed manifolds, it is no surprise that there exist an efficient preparation protocol. In fact, once we prepare the trivial paramagnet we can just apply a phase to each plaquette according to a set of local plaquette rules, see Figure \ref{fig:plaq}.\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/plaq_rules.png}
+\caption{A set of plaquette rules that generate the correct phase factor on a closed manifold. (Proto)}
+\label{fig:plaq}
+\end{figure}
+To see this generates the correct phase, consider the case of one rectangular domain. It contributes with the phase $i \times i =  - 1$ ($-i \times -i =  - 1$) due to its two out of four corners contributing the adequate phase. Furthermore, introducing kinks and elongating the wall doesn't change the overall phase associated with that domain wall. Note that the rules are not compatible with the symmetries of the square precisely because the underlying structure is a triangular lattice.
+
+It is also imperative to emphasise that these rules only reproduce the correct phase if we deal with a regular square lattice on a torus.
+This, however, is far form the unique set of local rules. They are many that reproduce the same phase on a closed manifold, however thet all fail if the manifold has an edge (where domain walls enter and leave the system without closing).
+
+\emph{Concrete protocol.} We will describe the concrete protocol for preparing a SPT fixed point wavefunction on a regular cubic lattice on a torus. 
+
+Given the following layout of qubit's on the chip, see Figure \ref{fig:chip},
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/on_chip.png}
+\caption{The layout of cubits on the chip. The green qubits represent the spin-1/2 physical degrees of freedom, while the yellow qubits (one per green plaquette) are used as auxiliary degrees of freedom. The blue links are representing the physical links between qubits on the chip over which we can implement two-qubit gates.}
+\label{fig:chip}
+\end{figure}
+the protocol can be formulated in following six steps, see Figure \ref{fig:prot}.
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/torus_protocol.png}
+\caption{The six step protocol for preparing the $\mathbb{Z}_2$-SPT fixed point wavefunction on a regular square lattice on a torus.}
+\label{fig:prot}
+\end{figure}
+
+The six steps are as follows:\begin{enumerate}
+\item Given all states start in the state $\ket{0}$ apply a Haddamard gate to all green qubits (not shown in Figure \ref{fig:prot}),
+\item Apply a CNOT gate from each green qubit to the auxiliary qubit to its left (Figure \ref{fig:prot}a.i.),
+\item Apply a CNOT gate from each green qubit to the auxiliary qubit to its right (Figure \ref{fig:prot}a.ii.),
+\item Apply the three-qubit circuit shown in Figure \ref{fig:prot}b. to the triples shown in Figure \ref{fig:prot}a.iii. implementing the local plaquette phase rules on the plaquettes in the odd rows,
+\item Apply the three-qubit circuit shown in Figure \ref{fig:prot}b. to the triples shown in Figure \ref{fig:prot}a.iv. implementing the local plaquette phase rules on the plaquettes in the even rows,
+\item Repeat steps 1. and 2. to disentangle the auxiliary qubits.
+\end{enumerate}
 
 
 
