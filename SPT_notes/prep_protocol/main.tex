@@ -39,6 +39,8 @@
 
 \usepackage[qm]{qcircuit}
 
+\usepackage{cancel}
+
 \newcommand{\caro}[1]{\textcolor{red}{[#1]}}
 \newcommand{\jovan}[1]{\textcolor{blue}{[#1]}}
 \newcommand{\steve}[1]{\textcolor{purple}{[#1]}}
@@ -89,9 +91,42 @@ The two states are deceptively similar, given a spin-$1/2$ configuration on any 
 \ket{\Psi_0} = \sum_{\{s_i\}\in\{0,1\}^N}\ket{\{s_i\}}, \\ \ket{\Psi_1} = \sum_{\{s_i\}\in\{0,1\}^N}(-1)^{N_{d.w.}(\{s_i\})}\ket{\{s_i\}},
 \end{gather} where $N_{d.w.}(\{s_i\})$ is the number of domain walls in a given configuration $\{s_i\}$. It is in the definition of this quantity that the embedding manifold plays a role.
 
-\subsection{The fixed point Hamiltonian}
+\subsection{The fixed point Hamiltonian and Edge states}
 
-\section{State preparation on manifolds without boundary}
+Given a system made up of spin-$1/2$ occupying the sites of a regular triangular lattice we can construct a local Hamiltonian which is $\mathbb{Z}_2$-symmetric and whose ground state, $\ket{\Psi_1}$, is unique on a manifold without a boundary, \begin{equation}
+H = - \sum_p h_p B_p.\label{eqn:ham}
+\end{equation}
+The sum in this expression goes over the sites $p$ and $h_p$ are any positive numbers (we will take to $h_p = 1$) since operators $B_p$ all commute. 
+The operators $B_p$ themselves are defines as:\begin{equation}
+B_p = \sigma^x_p \prod_{\langle pqq' \rangle} i^{\frac{1}{2}(1-\sigma^z_q\sigma^z_{q'})},
+\end{equation}
+where the sites in angled brackets mean that the three sites are a part of a triangle on a triangular lattice. See Figure \ref{fig:bp} for a schematic definition.\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/b_p.png}
+\caption{The action of the operator $B_p$ on a site $p$ and triangles touching $p$, action is shown of a demonstrative set of basis vectors. The green lines represent the domain walls.}
+\label{fig:bp}
+\end{figure}
+In essence, it flips a spin at a site $p$ and if that operation changes the domain wall parity (which can be determined locally) it add a $\pi$ phase shift, hence, it is clear that $\ket{\Psi_1}$ is fixed by all $B_p$-operators by definition.
+
+This model was first proposed in 2012 by Levin and Gu \cite{levin-gu-z2}, for the reason of studying this phase of matter.
+
+Once we open up a boundary we have left with a choice. We can divide up the sites into bulk sites $p \in R$ and boundary sites $\tilde p \in \partial R$, in the bulk the Hamiltonian is the same as for the manifold without boundary \begin{equation}
+H = H_{\text{bulk}} + \cancelto{0}{H_{\text{edge}}} = \sum_{p \in R} B_p.
+\end{equation}
+If we leave it at that we are left with a degenerate ground state manifold, the dimension of which is $|\mathcal{H}_{\text{edge}}| = 2^{|\partial R|}$ and whose basis can be chosen to be labelled by the boundary spin configuration.
+
+As mentioned before the model is $\mathbb{Z}_2$ symmetric. On a manifold without boundary this symmetry is represented in a familiar on-site way $S = \prod_{p \in R} \sigma^x_p$. However, where this phase differentiates itself from the trivial para magnet is when an edge is involved.
+
+If we choose, as mentioned, to label the states in the $\mathcal{H}_{\text{edge}}$ by the boundary spin configuration, $\ket{\{s_i\}_{\partial R}}$, we find \cite{levin-gu-z2} that the representation of the symmetry on this Hilbert space take this non on-site form \begin{equation}
+S = - \prod_{i \in \partial R} \bar \sigma_i^x \exp{\left(\frac{i\pi}{4}\sum_{i \in \partial R}(1-\bar \sigma_i^z \bar \sigma_i^z)\right)}.
+\end{equation}
+We have to note that the Pauli operators in the above expression are not bare Pauli operators operating on the boundary physical spins, they also have an appropriate phase component depending on how the flip of the boundary spins affect the domain wall structure. In short, they act as Pauli operators but on the edge state labels themselves, $\{s_i\}_{\partial R}$. 
+
+Given this symmetry action, we are free to explore possible edge extensions to our Hamiltonian. The fact that this symmetry action cannot stabilise a short-range entangled state (SRE, or an Matrix Product State) \cite{levin-gu-z2, Chen_2011} in the thermodynamic limit implies that any edge Hamiltonian cannot have it as a ground state. That is the reason behind the usual mantra, the edge of an SPT is either symmetry broken or gapless.
+
+\subsection{Edge Physics}
+
+\section{State preparation}
 
 We will introduce our lattice, see Figure \ref{fig:3x3pbc} for an example,
 \begin{figure}
@@ -140,6 +175,9 @@ The six steps are as follows:\begin{enumerate}
 \end{enumerate}
 
 
+\subsection{The Edge States and the "Bulk-Extension" circuit}
+
+Let us examine the effects of applying the algorithms 
 
 %\printbibliography
 
