@@ -111,7 +111,7 @@ In essence, it flips a spin at a site $p$ and if that operation changes the doma
 This model was first proposed in 2012 by Levin and Gu \cite{levin-gu-z2}, for the reason of studying this phase of matter.
 
 Once we open up a boundary we have left with a choice. We can divide up the sites into bulk sites $p \in R$ and boundary sites $\tilde p \in \partial R$, in the bulk the Hamiltonian is the same as for the manifold without boundary \begin{equation}
-H = H_{\text{bulk}} + \cancelto{0}{H_{\text{edge}}} = \sum_{p \in R} B_p.
+H = H_{\text{bulk}} + \cancelto{0}{H_{\text{edge}}} = \sum_{p \in R} B_p.\label{eqn:edge_bulk_ham}
 \end{equation}
 If we leave it at that we are left with a degenerate ground state manifold, the dimension of which is $|\mathcal{H}_{\text{edge}}| = 2^{|\partial R|}$ and whose basis can be chosen to be labelled by the boundary spin configuration.
 
@@ -126,6 +126,10 @@ Given this symmetry action, we are free to explore possible edge extensions to o
 
 \subsection{Edge Physics}
 
+\subsection{The String-Net Construction and F-moves}
+
+Let us look at another way to define a fixed point wave-function of an SPT.
+A wave-function of a $2+1$-dimensional SPO can be written as 
 \section{State preparation}
 
 We will introduce our lattice, see Figure \ref{fig:3x3pbc} for an example,
@@ -142,6 +146,12 @@ Given the simple structure of SPT states on closed manifolds, it is no surprise 
 \includegraphics[width=\linewidth]{Figures/plaq_rules.png}
 \caption{A set of plaquette rules that generate the correct phase factor on a closed manifold. (Proto)}
 \label{fig:plaq}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/point_split.png}
+\caption{The point splitting convention. The two ways of treating this edge case results in domain wall counts of opposite parity, to resolve this inconsistency we call on the original triangular lattice.}
+\label{fig:point_split}
 \end{figure}
 To see this generates the correct phase, consider the case of one rectangular domain. It contributes with the phase $i \times i =  - 1$ ($-i \times -i =  - 1$) due to its two out of four corners contributing the adequate phase. Furthermore, introducing kinks and elongating the wall doesn't change the overall phase associated with that domain wall. Note that the rules are not compatible with the symmetries of the square precisely because the underlying structure is a triangular lattice.
 
@@ -177,7 +187,32 @@ The six steps are as follows:\begin{enumerate}
 
 \subsection{The Edge States and the "Bulk-Extension" circuit}
 
-Let us examine the effects of applying the algorithms 
+Let us examine what happens when there is an edge involved. 
+Edge allows domain walls to enter and leave the system without closing.
+Our protocol is designed to assign to each closed domain wall a phase of $e^{i\pi} = -1$ phase via the local plaquette phase rules which are predicated on the fact that closed domain walls will have a topologically invariant linear combination of left and right turns on a regular square lattice \begin{gather}
+n_l  + n_r = \pm 4\\
+n_l^{I} - n_r^{I} = \pm 2,\\
+n_l^{II} - n_r^{II} = \pm 2.
+\end{gather}
+Last two equations come from the fact that also split the turn into two categories depending if they cross the main (present in the original triangular lattice picture) diagonal.  
+
+For the domain walls that do not close we have do not have these invariants and our rules assign seemingly arbitrary phases, see Figure \ref{fig:edge_wall_phases}.
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/edge_wall_phases.png}
+\caption{Deformation robust phases our algorithm assigns to domain walls entering and leaving the system via the edge.}
+\label{fig:edge_wall_phases}
+\end{figure}
+For each edge spin configuration labelling our edge space $\mathcal{H}_{\text{edge}}$, the number of such domain walls is constant.
+One would imagine that each of these walls needs to be associated with a phase of $-1$, however the resulting state would in fact not be stabilised by the Hamiltonian \eqref{eqn:edge_bulk_ham} in the bulk.
+
+The phases associated with these walls must be compatible with the application of the F-moves in the bulk, which we checked that they are, se Figure \ref{fig:bulk_edge_move} for an example.\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/bulk_F_move.png}
+\caption{An example of an F-move on the unclosed domain walls. The number of domain walls remains the same but the move will incur an additional $-1$ phase, covered by the phases assigned to the open domain walls by our algorithm.}
+\label{fig:bulk_edge_move}
+\end{figure}
+Different by 
 
 %\printbibliography
 
