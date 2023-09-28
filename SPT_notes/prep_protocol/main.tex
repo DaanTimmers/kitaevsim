@@ -273,6 +273,73 @@ Unlike the case of intrinsically topologically ordered phases, the entanglement 
 
 One category of experiments one can do is to measure the stabilisers. The preparation protocol is unitary and defined in terms of square plaquette while the stabilisers are defined in terms of underlying hexagonal lattice, therefore the result would not be completely trivial.
 
+The graph we will consider is the cube, with hidden diagonals added to resolve the undetermined point splitting (just like in the square lattice case).
+
+We need only to determine the plaquette phase rules for this graph.
+
+\subsection{Issues with Local Plaquette Rules}
+
+Before we define the plaquette rules that we would use for this graph, we need to draw a distinction between the Levin-Gu stabiliser and the plaquette rules defined for the square latice. For this section we will relabel the two spin/qubit states, $s_\text{new} = (-1)^{s_\text{old}} \in \{-1, 1\}$.
+
+Levin-Gu stabiliser is manifestly topological. If we would start with a configuration $\{s_i\}$ on any graph and apply the stabiliser to all vertices where the spin is  the state $\ket{1}$ we would end up with a state without domain walls with an overall phase of $(-1)^{N_{d.w.}(\{s_i\})}$, since for all spin fills we acquire a sign factor depending on whether the spin flip changes the parity of the domain wall number. 
+
+The definition does not depend on the graph as long as all plaquettes are triangular. We can just triangulate the cube with the new Levin-Gu stabilisers being comprised of four or five triangles around each site.
+
+On the other hand, the plaquette rules are geometrical. For each plaquette it checks if a domain wall is making a certain $90^o$ turn and it sum them all up, up to mod $4$.
+
+We can formulate a similar rule for a regular triangular lattice on a plane. Similarly counting the number of $60^o$ turns up to mod $12$. The plaquette phase rule is simply $U(s_1, s_2, s_3) = e^{-i s^\text{m} \pi/6}$, where $s^\text{m}$ is the value of the minority spin if not all three are equal, otherwise $U(1, 1, 1) = U(-1, -1, -1) = 1$.
+
+Similarly we can derive plaquette rules for any lattice on a plane.
+For a general triangulation of a flat surface we have a more general plaquette rule, $\phi(s_1, s_2, s_3) = e^{-i s^\text{m} \alpha^\text{m}/2}$, where $\alpha^\text{m}$ is the interior triangle angle at the site of the minority spin.
+
+However here we rely on the fact that domain walls can only close onto themselves by curving into themselves in the plane of the sample. Each domain wall makes a net turn of $\pm 2\pi$, hence, by evaluating the sum of all turning angles on all plaquettes we can determine the parity of the domain wall number. 
+
+When we are not on a plane we run into a problem of intrinsic and extrinsic curvature. The curves can close in on themselves without curving in the plane.
+
+\subsection{Flat Disc Surgery}
+
+In this section, we present one of the possible resolutions of the problem of non-flat surfaces.
+
+If we want to use geometric plaquette rules in order to produce a simpler state preparation circuit, we need to flatten the surface of our system. Here we represent the surface as a series of flat discs/faces with edged glued to one another accordingly.
+
+In general given a triangulation of a surface, flattening is a process of assigning interior angles to each triangle such that for all triangles they add up to $\pi$ and for all vertices all angles meeting at that vertex sum up to $2\pi$. For a general surface and it's triangulation there will be topological obstruction to this process, which we will circumvent by the protocol defined below.
+
+We will do this in two ways in the case of a sphere.
+
+Firstly, we will flatten the two hemispheres of the sphere and glue them along the equator. Secondly, we will represent the sphere as a regular polygon with its sides corresponding to the flat discs in question. See Figure \ref{fig:surg_all} for the details.
+
+\begin{figure*}
+     \centering
+     \begin{subfigure}[b]{\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Figures/hemisphere_surg.png}
+         \caption{Flattening the sphere by flattening the two hemispheres. The white degrees of freedom on the lower hemisphere's edge are copies of their upper hemisphere counterparts. After the flattening of each hemisphere we get the set of interior angles for each triangular plaquette, we then apply the the local geometrical plaquette rules to both hemipheres given these angles. To account to the angle additionally traced by a domain wall passing from one hemisphere to another, we act with a two-qubit phase gate on the boundary spins pairs, the unitary being of the form $U = \text{diag}(1, e^{i\phi/2}, e^{-i\phi/2}, 1)$, where the angle $\phi$ is the angle between the line segment where the domain wall exits one hemisphere and the line segment where it enters another.}
+         \label{fig:surg_sphere}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Figures/cube_surg.png}
+         \caption{General convention described above implemented on an example of a flattened cube, with the local plaquette rules same as the case of the square lattice.}
+         \label{fig:surg_cube}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Figures/tetrahedra_surg.png}
+         \caption{General convention described above implemented on an example of a flattened tetrahedra.}
+         \label{fig:surg_tetra}
+     \end{subfigure}
+        \caption{Three examples of flattening a spherical surface in order to apply local geometrical plaquette rules to derive the correct topological weights in the ground state superposition, $(-1)^{N_\text{d.w.}(\{s_i\})}$. }
+        \label{fig:surg_all}
+\end{figure*}
+
+To further clarify this construction, we will present a detailed breakdown of the experiments that aim to measure the expectation value of the Levin-Gu stabiliser in the ground state on the cube and on the tetrahedra.
+
+\subsubsection{Measuring the stabiliser on the tetrahedra}
+
+\subsubsection{Measuring the stabiliser on the cube}
+
 \section{Disc Operators}
 
 The Ref. \cite{Kawagoe_2021} details the majority of the ideas in this section, but in terms of edge theory degrees of freedom.
@@ -307,7 +374,7 @@ If we now expand the product we get the expression for the state as a  sum of al
 \end{figure}•
 This makes the invariance of the state to application of any disc operator manifest, since the state is a disc operator condensate. This also implies that the disc operators acquire an expectation value one in this state etc.
 
-In this context we define the disc operator as $\mathcal{D}(S) = \prod_{p \in S} B_p$, where $S$ is a simply connected subset of sites. If we now introduce an edge, $\partial R$, we note that there is a choice of how we define the $B_p$ stabilisers on the sites belonging to the edge, $p \in \partial R$. Leaving this ambiguity unresolved for now we see that, when focusing on the edge, we have that we are also condensing domain walls. The state is symmetric and critical. Ground states of different gapless theories are derived from different compatible choices for $B_p^{\partial R}$. Compatible in what way?
+In this context we define the disc operator as $\mathcal{D}(S) = \prod_{p \in S} B_p$, where $S$ is a simply connected subset of sites. If we now introduce an edge, $\partial R$, we note that there is a choice of how we define the $B_p$ stabilisers on the sites belonging to the edge, $p \in \partial R$. Leaving this ambiguity unresolved for now we see that, when focusing on the edge, we have that we are also condensing domain walls. The state is symmetric and critical. Ground states of different gapless theories are derived from different compatible choices for $B_p^{\partial R}$. Compatible in what way? Generating these terms is the main goal of this part of the analysis!
 
 This way we recast the problem of characterising the properties of Hamiltonians commuting with the non-trivial global symmetry action to the study of state preparation protocols/circuits that are compatible with the symmetry. The correspondence obviously being that the state at the end of the protocol is a ground state of a symmetric Hamiltonian.
 
