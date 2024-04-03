@@ -149,12 +149,7 @@ Quantum double models can also be understood as a subclass of the more general s
 
 
 \textbf{Hamiltonian.}
-For a given group $G$ we can define its quantum double model on any arbitrary \emph{directed} graph. The local degrees of freedom are $|G|$-dimensional and assigned to the edges. The basis of their local Hilbert space is labeled by the group elements, i.e., we think of edges as being labeled by elements $g\in G$. The Hamiltonian is given by a sum of mutually commuting terms that act on vertices $V$ and plaquettes $P$, respectively
-
-
-
-
-
+For a given group $G$ we can define its quantum double model on any arbitrary cellulation of a surface without boundary. To consistently define the model, the edges (1-cells) need to be oriented as will be explained in more detail below. The local degrees of freedom are $|G|$-dimensional and assigned to the edges. The basis of their local Hilbert space is labeled by the group elements, i.e., we think of edges as being labeled by elements $g\in G$. The Hamiltonian is given by a sum of mutually commuting terms that act on vertices (0-cells) $V$ and plaquettes (2-cells) $P$, respectively
 \begin{equation}
     H = -  \sum_{v \in V} \mathbf B_v -  \sum_{p  \in  P} \mathbf A_p \label{eqn:ham} \;.
 \end{equation}
@@ -248,7 +243,7 @@ In the general, non-abelian case the irreducible representations do not factoris
         A_{\mu\nu}{(g)}= \bra{c, i} A{(g)} \ket{c', i'} = \delta_{c,gc'g^{-1}} \Gamma^\chi_{c,ii'}(g).
     \end{split}
 \end{equation}
-Here, $\Gamma^\chi_c$ is a map from the entire group, $G$, onto the $\chi$-representation matrices defined by composing the representation matrices $\Gamma^\chi$ themselves and a projection map $g \to q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$.
+Here, $\Gamma^\chi_c$ is a map from the entire group, $G$, onto the $\chi$-representation matrices defined by composing the representation matrices $\Gamma^\chi$ themselves and a map $G\to Z(r)$ defined by $g \mapsto q_{c}^{-1}gq_{c'}$, where $q_c$ is a group element that satisfies $q_c c q_c^{-1} = r$ and $c'=g^{-1}cg$.
 
 
 
@@ -348,7 +343,7 @@ Moving anyons means appending elementary triangles onto a ribbon. Each triangle 
 
 \textbf{The algorithm} that creates two anyons of type $(C,\chi)$ along a ribbon path in the internal state $\ket{\alpha; \beta} = \ket{c', i'; c, i}$ is the following
 \begin{enumerate}
-    \item Initialise two ($d=|C| \operatorname{dim} \chi$-dimensional ancilla qudits in the states $\ket{\alpha; \beta} = \ket{c', i'; c, i}$.  We will think of the first qudit as the ribbon's back end and the second as its front end.
+    \item Initialise two ($|C| \times \operatorname{dim} \chi$-dimensional) ancilla qudits in the states $\ket{\alpha; \beta} = \ket{c', i'; c, i}$.  We will think of the first qudit as the ribbon's back end and the second as its front end.
     \item For each triangle in the ribbon path, depending on the triangle \textit{type} (and the edge orientations), sequentially apply one of the following unitaries acting on ancilla qudits $\ket{c, i}$ and qudits encoding the group element $g$ associated to the edge of the lattice $\ket{g}_\text{phys}$  
     \begin{itemize}
         \item[I)] Multiply on the coinciding edge\\  $\ket{c, i}\ket{g}_\text{phys} \rightarrow \ket{c, i}\ket{cg}_\text{phys}$.
@@ -366,7 +361,7 @@ Of course, we can make this constant depth by separating the main ribbon into $|
 
 In the variant of the protocol we proposed, the post-selection will necessarily raise concerns about the scaling of the number of total runs needed to build up an adequate number of successful runs. In fact, the protocol for applying an open ribbon operator onto the ground state succeeds with a probability of $1/d^2$ (neglecting the effect of noise). However, if the ribbon is closed, due to the no-flux condition of the ground state, the protocol succeeds with certainty. The number of runs needed scales exponentially with the number of open ribbon operators in the braiding protocol, which, in the cases we consider, is either one or two. 
 
-To interpret what we have here, let us look at the quantum resources. We have qudits representing the matter $\mathcal{H}_{\text{matter}}$ and ancilla qubits representing the internal state of the anyons, or the fusion space, $\mathcal{H}_{\text{ancillas}} \equiv \mathcal{H}_{\text{fusion}}$ which is already embedded non-locally in  $\mathcal{H}_{\text{matter}}$. The two types of triangles couple the two spaces in two different ways. Dor type I the $\mathcal{H}_{\text{ancillas}}$ controls an action on $\mathcal{H}_{\text{matter}}$ and for type II it is the other way around. After the measurement that disentangles the redundant copy of $\mathcal{H}_{\text{fusion}}$, $\mathcal{H}_{\text{matter}}$ is left in a state with the ribbon operator imprinted on it as signalled by the topological charge, braiding amplitude and phase.
+To interpret what we have here, let us look at the quantum resources. We have qudits representing the matter $\mathcal{H}_{\text{matter}}$ and ancilla qubits representing the internal state of the anyons, or the fusion space, $\mathcal{H}_{\text{ancillas}} \equiv \mathcal{H}_{\text{fusion}}$ which is already embedded non-locally in  $\mathcal{H}_{\text{matter}}$. The two types of triangles couple the two spaces in two different ways. For type I the $\mathcal{H}_{\text{ancillas}}$ controls an action on $\mathcal{H}_{\text{matter}}$ and for type II it is the other way around. After the measurement that disentangles the redundant copy of $\mathcal{H}_{\text{fusion}}$, $\mathcal{H}_{\text{matter}}$ is left in a state with the ribbon operator imprinted on it as signalled by the topological charge, braiding amplitude and phase.
 
 
 \subsection{Charge measurements}\label{sec:redchmmt}
@@ -397,7 +392,7 @@ With Eq.~\eqref{eqn:tranfs} in mind, we propose the following algorithm for the 
 
 To see how this protocol works, let us examine the case of a  gauge field with well-defined pure charge on a plaquette  $\ket{\psi}_\text{phys} = \ket{\chi; i}$. Using  Eq.~\eqref{eqn:tranfs} we can write the joint state after Step~2 as
 \begin{equation}
-    \sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\chi; i} = \sum_{h \in H} \ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi; j}.
+    \sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\chi; i} = \sum_{h \in H,j} \ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi; j}.
 \end{equation}
 If $H = G$, the state after Step~3 becomes\begin{equation}
     \begin{split}
@@ -480,7 +475,7 @@ When labelling the representations of the algebra $D(D_4)$, we will also need th
 $1$ & $1$   & $1$            & $1$             & $1$                                  \\ 
 $i$ & $1$   & $i$            & $-1$             & $-i$                                  \\ 
 $-1$ & $1$   & $-1$            & $1$             & $-1$                                  \\ 
-$-i$ & $1$   & $i$            & $-1$             & $i$                                  \\ \hline
+$-i$ & $1$   & $-i$            & $-1$             & $i$                                  \\ \hline
 \end{tabular}
 
 \vspace{0.3cm}
@@ -509,7 +504,7 @@ Nontrivial pure fluxes are labelled $\Psi_x = (\mathcal{C}_x, 1)$, with $C_x$ be
 
 \textbf{Charge measurements reprise.}
 Let us review the partial charge measurements for $D(D_4)$.
-We choose the subgroups $\{H_r, H_m, H_{mr}\}$ for the measurement protocol. All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional. This means that the measurement outcome of the partial charge measurement is just the irrep label $(\chi_{H_x})$. Looking at their character tables, we find a partial orthogonality with the characters of the irreps of $G$. Concretely, we compute $ \braket{\chi_{H_x}, \chi} = \sum_{h\in H_x} \chi_{H_x}(h)\chi(h)$ for the five different charges and list the results in Table \ref{tab:red_ch}.
+We choose the subgroups $\{H_r, H_m, H_{mr}\}$ for the measurement protocol. All the irreducible representations of these subgroups, $\chi_{H_x}$, are one dimensional. This means that the measurement outcome of the partial charge measurement is just the irrep label $(\chi_{H_x})$. Looking at their character tables, we find a partial orthogonality with the characters of the irreps of $G$. Concretely, we compute $ \braket{\chi_{H_x}, \chi} = \sum_{h\in H_x} \chi^*_{H_x}(h)\chi(h)$ for the five different charges and list the results in Table \ref{tab:red_ch}.
 
 
 \begin{table}[h]
@@ -582,7 +577,7 @@ We chose the following map
 where $a,b,c \in \{0,1\}$, $r$ is the $90^{\text{o}}$ rotation and $m$ is the reflection.
 
 
-When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Since the centralisers of these conjugacy classes are abelian and their representations one-dimensional, we can encode the full internal space of the anyon with just one qubit. For anyons with $m$-flux, $(C_m,\chi)$,
+When encoding the internal space of the anyon, which we need for the ribbon operator protocol, we note that the basis $\ket{\nu} = \ket{c, i}$, contains a group element $c\in C$ restricted to a conjugacy class. All the non-trivial conjugacy classes contain just two elements and can be encoded with only one qubit. Since the centralisers of these conjugacy classes are abelian and their representations are one-dimensional, we can encode the full internal space of the anyon with just one qubit. For anyons with $m$-flux, $(C_m,\chi)$,
 we have
 \begin{equation}\label{eq:enc_C}
 	\ket{c, 0} \equiv \ket{a}_{a} \iff c = m^1 r^0(r^2)^a \in \{m , mr^2\},
@@ -603,15 +598,16 @@ Similarly the subgroups are encoded with two qubits. For example for $h\in H_r$ 
 \end{equation}
 
 
-To encode the representations of the subgroups $\chi_H$ for $H_m$ and $H_{mr}$ we use
+To encode the four different representations of the subgroups $\chi_H$ for $H_m$ and $H_{mr}$ we use
 \begin{equation}
     \ket{(-1)^a,(-1)^b} \equiv \ket{a}_a\ket{b}_b,
 \end{equation}
+where $(a,b)$ corresponds to the representation label used in Table \ref{tab:char_sub}, 
 and for $H_{r}$ we use
 \begin{equation}
-    \ket{i^{2a+b}} \equiv \ket{a}_a\ket{b}_b.
+    \ket{i^{2a+b}} \equiv \ket{a}_a\ket{b}_b,
 \end{equation}
-
+where $i^{2a+b}$ corresponds to the representation label used in Table \ref{tab:char_sub}.
 
 
 \textbf{Circuits.} To implement the anyon protocols we need circuits for the following operations.

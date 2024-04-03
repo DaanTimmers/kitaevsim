@@ -1,0 +1,5 @@
+Response to Referee 1
+
+We are very grateful for the positive feedback and are happy to read that the referee agrees with the placement of our work as being complementary to that of Quantinuum. We would in particular like to thank the referee for providing valuable corrections to our manuscript. We have changed our manuscript accordingly.
+
+12) We do not encode the group elements in the given representation, but simply encode the (labels of) the four different (one-dimensional) representations of the subgroups by 2 qubits.
