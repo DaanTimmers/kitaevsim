@@ -1,0 +1,425 @@
+%% quantum's style
+
+\documentclass[a4paper,twocolumn,11pt]{quantumarticle}
+
+\pdfoutput=1
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
+%
+%\usepackage{tikz}
+%\usepackage{lipsum}
+
+
+%% our previous style and packages
+
+%\documentclass[two column]{article}
+%\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+%\usepackage[colorlinks=true,linkcolor=Blue,hypertexnames=false]{hyperref}
+\usepackage{braket}
+\usepackage{bbold}
+
+
+
+\usepackage[numbers,sort&compress]{natbib}
+%\usepackage[style=phys]{biblatex}
+\usepackage{amssymb}
+%\usepackage{amsmath}
+\usepackage{placeins}
+\usepackage{subcaption}
+
+\usepackage[left=23mm,right=23mm,top=35mm,columnsep=15pt]{geometry}
+
+\usepackage{pgfplotstable}
+\usepackage{array}
+
+\usepackage[qm]{qcircuit}
+
+\usepackage{cancel}
+
+\newcommand{\caro}[1]{\textcolor{red}{[#1]}}
+\newcommand{\jovan}[1]{\textcolor{blue}{[#1]}}
+\newcommand{\steve}[1]{\textcolor{purple}{[#1]}}
+
+
+
+
+\title{Notes on $\mathbb{Z}_2$-SPT on NISQ}
+\author{Jovan Jovanovi\'c}
+\affiliation{Rudolf Peierls Centre for Theoretical Physics, Parks Road, Oxford, OX1 3PU, UK}
+\orcid{0000-0002-2508-3207}
+\author{Carolin Wille}
+\affiliation{Rudolf Peierls Centre for Theoretical Physics, Parks Road, Oxford, OX1 3PU, UK}
+\orcid{0000-0002-9764-6937}
+\author{Steven H. Simon}
+\affiliation{Rudolf Peierls Centre for Theoretical Physics, Parks Road, Oxford, OX1 3PU, UK}
+\orcid{0000-0001-7757-5978}
+
+
+
+\date{11.08.2023.}
+
+\begin{document}
+
+\maketitle
+\begin{abstract}
+TBC  
+\end{abstract}
+\tableofcontents
+
+
+
+\section{Overview}
+
+Symmetry protected topological phases (SPTs) can be characterised by the properties of their fixed point wave-functions. Those properties are: \begin{enumerate}
+\item Symmetric under an onsite representation of some symmetry group $G$.
+\item It's parent Hamiltonian is gapped and it's ground state is unique, if the system lives on a closed manifold.
+\item  If the manifold has an edge, a suitable parent Hamiltonian either supports a gapless edge mode or symmetry is spontaneously broken at the edge.
+\end{enumerate}
+
+Given the onsite symmetry group $G$ in $2+1$ dimensions we can classify all bosonic SPTs by the third cohomology group $\mathcal{H}^{3}(G, U(1))$ \cite{spt_coho_org}. Bosonic in this sense means that the elementary degrees of freedom commute, i.e. spin lattices. 
+
+Given an element of the cohomology group $[\omega] \in \mathcal{H}^{3}(G, U(1))$ we can construct the fixed point wavefunction on a closed manifold.
+
+For the case of concreteness we will immediately limit ourselves to the case at hand, $G = \mathbb{Z}_2$, its third cohomology group is $\mathcal{H}^{3}(\mathbb{Z}_2, U(1)) = \mathbb{Z}_2$. The two elements of the cohomology group represent the trivial paramagnet $\ket{\Psi_0}$ and our target state (the nontrivial SPT) $\ket{\Psi_1}$.
+
+The two states are deceptively similar, given a spin-$1/2$ configuration on any lattice of $N$ sites the two states are: \begin{gather}
+\ket{\Psi_0} = \sum_{\{s_i\}\in\{0,1\}^N}\ket{\{s_i\}}, \\ \ket{\Psi_1} = \sum_{\{s_i\}\in\{0,1\}^N}(-1)^{N_{d.w.}(\{s_i\})}\ket{\{s_i\}},
+\end{gather} where $N_{d.w.}(\{s_i\})$ is the number of domain walls in a given configuration $\{s_i\}$. It is in the definition of this quantity that the embedding manifold plays a role.
+
+\subsection{The fixed point Hamiltonian and Edge states}
+
+Given a system made up of spin-$1/2$ occupying the sites of a regular triangular lattice we can construct a local Hamiltonian which is $\mathbb{Z}_2$-symmetric and whose ground state, $\ket{\Psi_1}$, is unique on a manifold without a boundary, \begin{equation}
+H = - \sum_p h_p B_p.\label{eqn:ham}
+\end{equation}
+The sum in this expression goes over the sites $p$ and $h_p$ are any positive numbers (we will take to $h_p = 1$) since operators $B_p$ all commute. 
+The operators $B_p$ themselves are defines as:\begin{equation}
+B_p = \sigma^x_p \prod_{\langle pqq' \rangle} i^{\frac{1}{2}(1-\sigma^z_q\sigma^z_{q'})},
+\end{equation}
+where the sites in angled brackets mean that the three sites are a part of a triangle on a triangular lattice. See Figure \ref{fig:bp} for a schematic definition.\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/b_p.png}
+\caption{The action of the operator $B_p$ on a site $p$ and triangles touching $p$, action is shown of a demonstrative set of basis vectors. The green lines represent the domain walls.}
+\label{fig:bp}
+\end{figure}
+In essence, it flips a spin at a site $p$ and if that operation changes the domain wall parity (which can be determined locally) it add a $\pi$ phase shift, hence, it is clear that $\ket{\Psi_1}$ is fixed by all $B_p$-operators by definition.
+
+This model was first proposed in 2012 by Levin and Gu \cite{levin-gu-z2}, for the reason of studying this phase of matter.
+
+Once we open up a boundary we have left with a choice. We can divide up the sites into bulk sites $p \in R$ and boundary sites $\tilde p \in \partial R$, in the bulk the Hamiltonian is the same as for the manifold without boundary \begin{equation}
+H = H_{\text{bulk}} + \cancelto{0}{H_{\text{edge}}} = \sum_{p \in R} B_p.\label{eqn:edge_bulk_ham}
+\end{equation}
+If we leave it at that we are left with a degenerate ground state manifold, the dimension of which is $|\mathcal{H}_{\text{edge}}| = 2^{|\partial R|}$ and whose basis can be chosen to be labelled by the boundary spin configuration.
+
+As mentioned before the model is $\mathbb{Z}_2$ symmetric. On a manifold without boundary this symmetry is represented in a familiar on-site way $S = \prod_{p \in R} \sigma^x_p$. However, where this phase differentiates itself from the trivial para magnet is when an edge is involved.
+
+If we choose, as mentioned, to label the states in the $\mathcal{H}_{\text{edge}}$ by the boundary spin configuration, $\ket{\{s_i\}_{\partial R}}$, we find \cite{levin-gu-z2} that the representation of the symmetry on this Hilbert space take this non on-site form \begin{equation}
+S = - \prod_{i \in \partial R} \bar \sigma_i^x \exp{\left(\frac{i\pi}{4}\sum_{i \in \partial R}(1-\bar \sigma_i^z \bar \sigma_i^z)\right)}.\label{eqn:symm}
+\end{equation}
+We have to note that the Pauli operators in the above expression are not bare Pauli operators operating on the boundary physical spins, they also have an appropriate phase component depending on how the flip of the boundary spins affect the domain wall structure. In short, they act as Pauli operators but on the edge state labels themselves, $\{s_i\}_{\partial R}$. 
+
+Given this symmetry action, we are free to explore possible edge extensions to our Hamiltonian. The fact that this symmetry action cannot stabilise a short-range entangled state (SRE, or an Matrix Product State) \cite{levin-gu-z2, Chen_2011} in the thermodynamic limit implies that any edge Hamiltonian cannot have it as a ground state. That is the reason behind the usual mantra, the edge of an SPT is either symmetry broken or gapless.
+
+\subsection{Edge Physics}
+
+In the previous section, we have began discussing the effects of putting an SPT wavefunction on an open manifold. 
+The Hamiltonian in the bulk is the same as for the one that stabilises the SPT wave-function on a closed manifold, while the edge is left open. This acts implied the degenerate edge subspace which houses a non-on-site global symmetry action.
+
+If we want to split the edge degeneracy in a symmetric way, by completing the Hamiltonian  by the addition of $H_{\text{egde}}$ that commutes with the non-on-site symmetry action, also known as anomalous symmetry action \jovan{citations}, the constrains put on the edge Hamiltonian would require that the edge is either gapless or that the symmetry is spontaneously broken on the edge.
+
+In Ref. \cite{Chen_2011} the authors have shown that the anomalous $\mathbb{Z}_2$ symmetry action cannot leave a short-range entangled state (SRE) invariant. The only invariant states are long-range entangled states such as the cat states of symmetry broken vacua (GHZ state in this case) and ground states of gapless Hamiltonians (Luthinger liquids). Therefore, any edge completion of our Hamiltonian will either be gapless or symmetry broken.
+
+The example of the symmetry broken edge is \begin{equation}
+H_{\text{edge}}^{\text{SSB}} = -\sum_{i \in \partial R} \bar\sigma_i^z\bar\sigma_{i+1}^z,
+\end{equation}
+while the example of a gapless edge would be \cite{Chen_2011} \begin{equation}
+H_{\text{edge}}^{\text{LL}} = -\sum_{i \in \partial R} \bar\sigma_i^x-\bar\sigma_{i-1}^z\bar\sigma_i^x\bar\sigma_{i+1}^z.
+\end{equation}
+
+
+
+\subsection{The String-Net Construction and F-moves}
+
+Let us look at another way to define a fixed point wave-function of an SPT.
+A wave-function of a $2+1$-dimensional SPT can be written as \begin{equation}
+\ket{\text{SPT}} = \sum_{\{s_i\}} \phi(\{s_i\})\ket{\{s_i\}},
+\end{equation}
+where $s_i$ spans some on-site basis, i.e. labels domains. The domain walls form a graph which one can evaluate using some plannar diagram algebra, the evaluation being the associated phase in the superposition $\phi(\{s_i\})$.
+
+A plannar diagram algebra for the domain walls can be  derived from the symmetry group 3-cocycle, $\omega \in [\omega] \in \mathcal{H}^3(G, U(1))$, this is known as the String-Net Construction of the SPT fixed point wave-function. In this way the correspondence between the SPT and the intrinsically topologically ordered system (TO) one get's upon gauging this SPT order is made manifest, the TO wave-function is described by the String-Net wave-function defined by the same group 3-cocycle \jovan{citation}. 
+
+The plannar diagram algebra generated by the nontrivial 3-cocycle of $\mathbb{Z}_2$ is shown in Figure \ref{fig:plan_alg}.\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/plan_alg.png}
+\caption{The plannar algebra of the $\mathbb{Z}_2$ domain walls induced by it's nontrivial 3-cocycle. Each move that changes the parity of the domain wall number comes with a minus sign as expected. The geometric deformation of the domain walls do not affect the evaluation.}
+\label{fig:plan_alg}
+\end{figure}
+Looking at the definition of the local bulk terms of our Hamiltonian, Figure \ref{fig:bp}, we see the origin of the plannar diagram algebra. The first line suggests that each domain wall induces a sign change, the second line suggests robustness under deformation of the domain walls and the last two inform the action of the F-move (sign flip).
+
+Upon gauging the system, the domain walls themselves become the degrees of freedom, the strings in the String-Net construction and the amplitude in the superposition is determined by evaluating the string net under the same F-rules.
+
+\subsection{Dijkgraaf-Witten Construction}
+
+An alternative, but equivalent (up to a  constant-depth $G$-symmetric unitary circuit) definition of the SPT fixed point wave function can be formulated via the Dijkgraff-Witten (DW) discrete field theory.
+
+Similarly to String-Net construction, upon gauging we manifestly have arrived at a topological quantum field theory, but in this case the DW field theory instead of the String-Net Condensate, the two being unitarily equivalent.	
+
+
+\section{State preparation}
+
+We will introduce our lattice, see Figure \ref{fig:3x3pbc} for an example,
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/3x3_pbc.png}
+\caption{An example of a N = 9 triangular lattice on a torus. (Proto)}
+\label{fig:3x3pbc}
+\end{figure}
+in this example we have $N = 9$ spins on vertices of a triangular lattice on the periodic topology of a torus. For the sake of clarity we will drop the diagonal edges so we work with a simpler square lattice, only invoking the original stricture to resolve some ambiguities when it comes to defining $N_{d.w.}$ on a square lattice.
+
+Given the simple structure of SPT states on closed manifolds, it is no surprise that there exist an efficient preparation protocol. In fact, once we prepare the trivial paramagnet we can just apply a phase to each plaquette according to a set of local plaquette rules, see Figure \ref{fig:plaq}.\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/plaq_rules.png}
+\caption{A set of plaquette rules that generate the correct phase factor on a closed manifold. (Proto)}
+\label{fig:plaq}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/point_split.png}
+\caption{The point splitting convention. The two ways of treating this edge case results in domain wall counts of opposite parity, to resolve this inconsistency we call on the original triangular lattice.}
+\label{fig:point_split}
+\end{figure}
+To see this generates the correct phase, consider the case of one rectangular domain. It contributes with the phase $i \times i =  - 1$ ($-i \times -i =  - 1$) due to its two out of four corners contributing the adequate phase. Furthermore, introducing kinks and elongating the wall doesn't change the overall phase associated with that domain wall. Note that the rules are not compatible with the symmetries of the square precisely because the underlying structure is a triangular lattice.
+
+It is also imperative to emphasise that these rules only reproduce the correct phase if we deal with a regular square lattice on a torus.
+This, however, is far form the unique set of local rules. They are many that reproduce the same phase on a closed manifold, however thet all fail if the manifold has an edge (where domain walls enter and leave the system without closing).
+
+\emph{Concrete protocol.} We will describe the concrete protocol for preparing a SPT fixed point wavefunction on a regular cubic lattice on a torus. 
+
+Given the following layout of qubit's on the chip, see Figure \ref{fig:chip},
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/on_chip.png}
+\caption{The layout of cubits on the chip. The green qubits represent the spin-1/2 physical degrees of freedom, while the yellow qubits (one per green plaquette) are used as auxiliary degrees of freedom. The blue links are representing the physical links between qubits on the chip over which we can implement two-qubit gates.}
+\label{fig:chip}
+\end{figure}
+the protocol can be formulated in following six steps, see Figure \ref{fig:prot}.
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/torus_protocol.png}
+\caption{The six step protocol for preparing the $\mathbb{Z}_2$-SPT fixed point wavefunction on a regular square lattice on a torus.}
+\label{fig:prot}
+\end{figure}
+
+The six steps are as follows:\begin{enumerate}
+\item Given all states start in the state $\ket{0}$ apply a Haddamard gate to all green qubits (not shown in Figure \ref{fig:prot}),
+\item Apply a CNOT gate from each green qubit to the auxiliary qubit to its left (Figure \ref{fig:prot}a.i.),
+\item Apply a CNOT gate from each green qubit to the auxiliary qubit to its right (Figure \ref{fig:prot}a.ii.),
+\item Apply the three-qubit circuit shown in Figure \ref{fig:prot}b. to the triples shown in Figure \ref{fig:prot}a.iii. implementing the local plaquette phase rules on the plaquettes in the odd rows,
+\item Apply the three-qubit circuit shown in Figure \ref{fig:prot}b. to the triples shown in Figure \ref{fig:prot}a.iv. implementing the local plaquette phase rules on the plaquettes in the even rows,
+\item Repeat steps 1. and 2. to disentangle the auxiliary qubits.
+\end{enumerate}
+
+
+\subsection{The Edge States and the "Bulk-Extension" circuit}
+
+Let us examine what happens when there is an edge involved. 
+Edge allows domain walls to enter and leave the system without closing.
+Our protocol is designed to assign to each closed domain wall a phase of $e^{i\pi} = -1$ phase via the local plaquette phase rules which are predicated on the fact that closed domain walls will have a topologically invariant linear combination of left and right turns on a regular square lattice \begin{gather}
+n_l  + n_r = \pm 4\\
+n_l^{I} - n_r^{I} = \pm 2,\\
+n_l^{II} - n_r^{II} = \pm 2.
+\end{gather}
+Last two equations come from the fact that also split the turn into two categories depending if they cross the main (present in the original triangular lattice picture) diagonal.  
+
+For the domain walls that do not close we have do not have these invariants and our rules assign seemingly arbitrary phases, see Figure \ref{fig:edge_wall_phases}.
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/edge_wall_phases.png}
+\caption{Deformation robust phases our algorithm assigns to domain walls entering and leaving the system via the edge.}
+\label{fig:edge_wall_phases}
+\end{figure}
+For each edge spin configuration labelling our edge space $\mathcal{H}_{\text{edge}}$, the number of such domain walls is constant.
+One would imagine that each of these walls needs to be associated with a phase of $-1$, however the resulting state would in fact not be stabilised by the Hamiltonian \eqref{eqn:edge_bulk_ham} in the bulk.
+
+The phases associated with these walls must be compatible with the application of the F-moves in the bulk, which we checked that they are, se Figure \ref{fig:bulk_edge_move} for an example.\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/bulk_F_move.png}
+\caption{An example of an F-move on the unclosed domain walls. The number of domain walls remains the same but the move will incur an additional $-1$ phase, covered by the phases assigned to the open domain walls by our algorithm.}
+\label{fig:bulk_edge_move}
+\end{figure}
+Different protocols that reproduce the correct wave-function on a torus will have different phase assignments of these open domain walls, but will all be consistent with the bulk F-moves. This is due to the fact that the SPT edge basis states are short range entangled and the bulk plaquette terms $B_p$ will still be satisfied which implies consistency with bulk F-moves.
+
+In general different protocols will just assign different phases to the edge basis states\begin{equation}
+\ket{\{s_i\}_{\partial R}} \rightarrow e^{i\phi(\{s_i\}_{\partial R})}\ket{\{s_i\}_{\partial R}}.  
+\end{equation}
+
+This now allows us to formulate a preparation protocol for edge states.
+
+Given the edge state $\ket{\{s_i\}_{\partial R}}$:\begin{enumerate}
+\item Cast the edge qubits/spins into the state labelling the edge state,
+\item Cast each of the bulk qubits into the state $\ket{+}_x = H\ket{0}$,
+\item Perform the steps 2.-6. of the Protocol proposed in the previous section.
+\end{enumerate}
+The resulting state will be stabilised by the Bulk plaquette terms $B_p$ (hence also by $H_{\text{bulk}}$) and will have the correct edge spin configuration.
+
+\section{Testable Phenomenology}
+
+In this section we outline a set of doable experimental protocols. These mostly revolve around the ground state preparation and characterisation.
+Unlike the case of intrinsically topologically ordered phases, the entanglement structure of SPT states is trivial (SRE) and hence the physics one can explore is limited.
+
+One category of experiments one can do is to measure the stabilisers. The preparation protocol is unitary and defined in terms of square plaquette while the stabilisers are defined in terms of underlying hexagonal lattice, therefore the result would not be completely trivial.
+
+The graph we will consider is the cube, with hidden diagonals added to resolve the undetermined point splitting (just like in the square lattice case).
+
+We need only to determine the plaquette phase rules for this graph.
+
+\subsection{Issues with Local Plaquette Rules}
+
+Before we define the plaquette rules that we would use for this graph, we need to draw a distinction between the Levin-Gu stabiliser and the plaquette rules defined for the square latice. For this section we will relabel the two spin/qubit states, $s_\text{new} = (-1)^{s_\text{old}} \in \{-1, 1\}$.
+
+Levin-Gu stabiliser is manifestly topological. If we would start with a configuration $\{s_i\}$ on any graph and apply the stabiliser to all vertices where the spin is  the state $\ket{1}$ we would end up with a state without domain walls with an overall phase of $(-1)^{N_{d.w.}(\{s_i\})}$, since for all spin fills we acquire a sign factor depending on whether the spin flip changes the parity of the domain wall number. 
+
+The definition does not depend on the graph as long as all plaquettes are triangular. We can just triangulate the cube with the new Levin-Gu stabilisers being comprised of four or five triangles around each site.
+
+On the other hand, the plaquette rules are geometrical. For each plaquette it checks if a domain wall is making a certain $90^o$ turn and it sum them all up, up to mod $4$.
+
+We can formulate a similar rule for a regular triangular lattice on a plane. Similarly counting the number of $60^o$ turns up to mod $12$. The plaquette phase rule is simply $U(s_1, s_2, s_3) = e^{-i s^\text{m} \pi/6}$, where $s^\text{m}$ is the value of the minority spin if not all three are equal, otherwise $U(1, 1, 1) = U(-1, -1, -1) = 1$.
+
+Similarly we can derive plaquette rules for any lattice on a plane.
+For a general triangulation of a flat surface we have a more general plaquette rule, $\phi(s_1, s_2, s_3) = e^{-i s^\text{m} \alpha^\text{m}/2}$, where $\alpha^\text{m}$ is the interior triangle angle at the site of the minority spin.
+
+However here we rely on the fact that domain walls can only close onto themselves by curving into themselves in the plane of the sample. Each domain wall makes a net turn of $\pm 2\pi$, hence, by evaluating the sum of all turning angles on all plaquettes we can determine the parity of the domain wall number. 
+
+When we are not on a plane we run into a problem of intrinsic and extrinsic curvature. The curves can close in on themselves without curving in the plane.
+
+\subsection{Flat Disc Surgery}
+
+In this section, we present one of the possible resolutions of the problem of non-flat surfaces.
+
+If we want to use geometric plaquette rules in order to produce a simpler state preparation circuit, we need to flatten the surface of our system. Here we represent the surface as a series of flat discs/faces with edged glued to one another accordingly.
+
+In general given a triangulation of a surface, flattening is a process of assigning interior angles to each triangle such that for all triangles they add up to $\pi$ and for all vertices all angles meeting at that vertex sum up to $2\pi$. For a general surface and it's triangulation there will be topological obstruction to this process, which we will circumvent by the protocol defined below.
+
+We will do this in two ways in the case of a sphere.
+
+Firstly, we will flatten the two hemispheres of the sphere and glue them along the equator. Secondly, we will represent the sphere as a regular polygon with its sides corresponding to the flat discs in question. See Figure \ref{fig:surg_all} for the details.
+
+\begin{figure*}
+     \centering
+     \begin{subfigure}[b]{\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Figures/hemisphere_surg.png}
+         \caption{Flattening the sphere by flattening the two hemispheres. The white degrees of freedom on the lower hemisphere's edge are copies of their upper hemisphere counterparts. After the flattening of each hemisphere we get the set of interior angles for each triangular plaquette, we then apply the the local geometrical plaquette rules to both hemipheres given these angles. To account to the angle additionally traced by a domain wall passing from one hemisphere to another, we act with a two-qubit phase gate on the boundary spins pairs, the unitary being of the form $U = \text{diag}(1, e^{i\phi/2}, e^{-i\phi/2}, 1)$, where the angle $\phi$ is the angle between the line segment where the domain wall exits one hemisphere and the line segment where it enters another.}
+         \label{fig:surg_sphere}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Figures/cube_surg.png}
+         \caption{General convention described above implemented on an example of a flattened cube, with the local plaquette rules same as the case of the square lattice.}
+         \label{fig:surg_cube}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.4\textwidth}
+         \centering
+         \includegraphics[width=\textwidth]{Figures/tetrahedra_surg.png}
+         \caption{General convention described above implemented on an example of a flattened tetrahedra.}
+         \label{fig:surg_tetra}
+     \end{subfigure}
+        \caption{Three examples of flattening a spherical surface in order to apply local geometrical plaquette rules to derive the correct topological weights in the ground state superposition, $(-1)^{N_\text{d.w.}(\{s_i\})}$. }
+        \label{fig:surg_all}
+\end{figure*}
+
+To further clarify this construction, we will present a detailed breakdown of the experiments that aim to measure the expectation value of the Levin-Gu stabiliser in the ground state on the cube and on the tetrahedra.
+
+\subsubsection{Measuring the stabiliser on the tetrahedra}
+
+\subsubsection{Measuring the stabiliser on the cube}
+
+\section{Disc Operators}
+
+The Ref. \cite{Kawagoe_2021} details the majority of the ideas in this section, but in terms of edge theory degrees of freedom.
+
+Symmetry Broken Phases are characterised by a local order parameter acquiring an expectation value. Symmetric phases also have operators that pick up an expectation values, although, they usually are not local, Anionic loop operators pick up an expectation values in the intrinsically topologically ordered phases and in 2+1D SPTs we have disc operators. Actually, upon gauging the SPT wavefunction the disc operator maps onto the loop operators (the edge of the dics) of the magnetic Lagrange subgroup/subalgebra in the gauged theory.
+
+The action of the disc operator on the ground state on a closed manifold is trivial, they all leave the state invariant. Note that one cannot thread discs as one can do loops in 2+1D. The non-trivial physics lies with the way discs interface with the edges of the sample. In fact, in the symmetry broken phase, the disk operators create domain wall defect, see Figure \ref{fig:disc_domain}. \begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/disc_domain_wall.png}
+\caption{The disc operator cut by the sample edge (in the symmetry broken phase) creates a domain wall defect on the same edge. The disc operators are labelled by the group elements as are the flux defects in the gauged topological theory.}
+\label{fig:disc_domain}
+\end{figure}
+
+The domain wall creation operators are essential in the evaluation of symmetry anomalies (domain wall F-symbols corresponding to group 3-cocyles) of edge theories proposed in Ref. \cite{Kawagoe_2021}. The nontrivial statistics of the domain walls correspond to nontrivial disc operator algebra, but only when they are intersected by the edge.
+
+At the moment it is not clear what domain wall fusion and splitting operator correspond to in this language, but the disc operators are enough to access $g$-type domain wall Frobenius-Schur indicator, which is equal to $\omega(g, g^{-1}, g)$ in terms of the SPT defining 3-cocycle.
+
+\section{Disc Condensation}
+
+\jovan{Not really a practical idea?}
+
+Given that the Hamiltonian is made up from commuting projectors we can write the ground state as\begin{equation}
+\ket{\Psi_1} = \prod_p (1+B_p)\ket{\{0\}},
+\end{equation}
+where $p$ goes over all sites.
+
+If we now expand the product we get the expression for the state as a  sum of all possible disc configurations acting on the ferromagnetic state, see Figure \ref{fig:disc_cond}.
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{Figures/disc_cond.png}
+\caption{The nontrivial $\mathbb{Z}_2$-SPT ground state as a disc operator condensate. The sum goes over all possible disc configurations.}
+\end{figure}•
+This makes the invariance of the state to application of any disc operator manifest, since the state is a disc operator condensate. This also implies that the disc operators acquire an expectation value one in this state etc.
+
+In this context we define the disc operator as $\mathcal{D}(S) = \prod_{p \in S} B_p$, where $S$ is a simply connected subset of sites. If we now introduce an edge, $\partial R$, we note that there is a choice of how we define the $B_p$ stabilisers on the sites belonging to the edge, $p \in \partial R$. Leaving this ambiguity unresolved for now we see that, when focusing on the edge, we have that we are also condensing domain walls. The state is symmetric and critical. Ground states of different gapless theories are derived from different compatible choices for $B_p^{\partial R}$. Compatible in what way? Generating these terms is the main goal of this part of the analysis!
+
+This way we recast the problem of characterising the properties of Hamiltonians commuting with the non-trivial global symmetry action to the study of state preparation protocols/circuits that are compatible with the symmetry. The correspondence obviously being that the state at the end of the protocol is a ground state of a symmetric Hamiltonian.
+
+ 
+
+%\printbibliography
+
+\bibliographystyle{quantum}
+\bibliography{bibliography}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
