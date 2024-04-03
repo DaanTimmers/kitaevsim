@@ -739,7 +739,7 @@ This geometry is shown in Figure~\ref{fig:latticeGS}.
 }
 \end{equation*}\vfill
 \end{subfigure}
-    \caption{Quasi one-dimensional lattice allowing for shallow ground state preparation of the quantum double model $D(D_4)$. Left: Yellow bars denote individual spins associated to edges, which are composed of three qubits each. Edge orientations are needed to define the vertex- and plaquette operators of the corresponding Hamiltonian. Right: Circuit for groundstate preparation per loop.}
+    \caption{Quasi one-dimensional lattice allowing for shallow ground state preparation of the quantum double model $D(D_4)$. Left: Yellow bars denote individual spins associated to edges, which are composed of three qubits each. Edge orientations are needed to define the vertex- and plaquette operators of the corresponding Hamiltonian. The lattice is embedded into a sphere, meaning in addition to the 2-gons, there is one large 'outer' plaquette. Right: Circuit for groundstate preparation per loop.}
     \label{fig:latticeGS}
 \end{figure*}
 
@@ -1087,7 +1087,7 @@ For the $T$-matrix experiment we chose the same layout as for the $S$-matrix exp
 The depths of the circuits for the $S$-matrix protocol heavily depend on the anyons involved.
 In the following, we present in detail the circuits and results for the exemplary $S$-matrix elements $\tilde{S}(\Psi_m, \Psi_m)=1$, $\tilde{S}(\Psi_m, \tilde{\Psi}_m)=-1$ and $\tilde{S}(\Psi_m, \Psi_r)$ which are of intermediate depth. For conditioning the ribbon type we have 58 for $S(\Psi_m, \Psi_m)$ and $S(\Psi_m, \tilde{\Psi}_m)$	 and 64  for $S(\Psi_m, \Psi_r)$, while for conditioning the existence of the ribbon we find 84 and 90, respectively. We will return to a more detailed discussion of the circuit depths and results for all other $S$-matrix elements at the end of this section.
 
-For the $T$-matrix elements we chose to measure $T(\Phi_r,\Phi_r)=i$, which together with $T(\tilde{\Phi}_r,\tilde{\Phi}_r)=i$ is the most non-trivial entry corresponding to the two semions (all other anyons have topological spin $\pm 1$). The circuit depth of 89 for this protocol is larger than for all other $T$-matrix elements and leads to reasonable results. Hence, we did not investigate the other $T$-matrix entries as they seem to be less challenging to measure.
+For the $T$-matrix elements we chose to measure $T(\Phi_r,\Phi_r)=i$, which together with $T(\tilde{\Phi}_r,\tilde{\Phi}_r)=-i$ is the most non-trivial entry corresponding to the two semions (all other anyons have topological spin $\pm 1$). The circuit depth of 89 for this protocol is larger than for all other $T$-matrix elements and leads to reasonable results. Hence, we did not investigate the other $T$-matrix entries as they seem to be less challenging to measure.
 
 \textbf{Interference and tomography.}
 In Section \ref{subsec:Intef}, we proposed an interference scheme that entangles an ancilla qubit with the space-time history of the gauge field excitations in such a way that by the end of the protocol the qubit and the field are disentangled and the qubit is left in a state that depends only on the topological properties of the spacetime history of the anyons -- the $S$- and $T$-matrix elements.
@@ -1528,8 +1528,9 @@ The (abelian) fusion algebra of the excitations of this theory is highly symmetr
 		\item $\Phi_x \otimes \Phi_y  = \Psi_{\lfloor xy \rfloor} \oplus \tilde\Psi_{\lfloor xy \rfloor}$, for $x \neq y$ and $y \in \{m, r, mr\}$.
 \end{enumerate}
 \end{enumerate}
-The fusion rules not covered above can be derived by the following prescription. Pick one anyon $X$ on the LHS ($\otimes$-side) and let $X \rightarrow \tilde X$. Take all elements on the RHS ($\oplus$-side) and take all $Y \rightarrow \tilde Y$. Here we use the definition $\tilde{\tilde{X}} = X$. 
-	Note that this prescription is only suitable to derive the rules not explicitly stated above. In particular, it is \emph{not} a symmetry (or a $\mathbb{Z}_2$-grading) of the algebra and is not true for pairs involving $\Psi_x$ and $\tilde\Psi_x$, for $x \in \{m, r, mr\}$, as can be seen from 5(a) above.
+In the fusion rules stated so far, we have omitted several rules where one or both of the anyons carry a tilde symbol. Note, that while for the pure charges, the tilde symbol is meaningful and distinguishes between the two conjugacy classes defined for the two elements of the centralizer $C_e$ anr $C_{r^2}$, the convention of naming the four dyons for the other conjugacy classes as $\Psi,\tilde \Psi,\Phi,\tilde \Phi$ is somewhat arbitrary (cf. Table \ref{tab:anyons}). Nevertheless, the additional fusion rules involving the tilde anyons can be derived from the ones above by (multiple) application of a simple rule. To state this rule, we note that for any anyon $X$ the anyon $\tilde X$ can be read off from Table \ref{tab:anyons}. For convenience, we also define $\tilde{\tilde X}=X$. The rule can then be given as follows. Pick one anyon $X$ on the LHS ($\otimes$-side) and replace $X$ by $\tilde X$. For all elements $X_i$ in the direct sum $\oplus_i X_i$ on the RHS, replace $X_i$ by $\tilde X_i$.	
+ 
+Note that this prescription is only suitable to derive the rules not explicitly stated above. In particular, it is \emph{not} a symmetry (or a $\mathbb{Z}_2$-grading) of the algebra and is not true for pairs involving $\Psi_x$ and $\tilde\Psi_x$, for $x \in \{m, r, mr\}$, as can be seen from 5(a) above.
 
 
 \begin{table}
