@@ -139,8 +139,7 @@ Our numerical findings indicate that current NISQ technology is ready to demonst
 
 
 \section{Quantum double models}\label{sec:qm_double}
-
-In this section, we will review Kitaev's quantum double models~\cite{Kitaev_2003} and discuss their ground states and anyonic excitations. We will also present our protocols for creating and manipulating anyons, and for measuring topological charge. 
+In this section, we will discuss Kitaev's quantum double models~\cite{Kitaev_2003}. While we assume that our readers are largely familiar with quantum double models, we nevertheless include this review to set notations and conventions, which vary throughout the literature. In addition to that, the last two parts of this section include additional material crucial for our implementation. In particular, we discucss the concrete protocol for applying ribbon operators and a non-standard protocol to infer anyonic charge via a so-called \emph{partial} charge measurement. 
 
 Kitaev's quantum double models are (2+1d) Hamiltonian formulations of lattice gauge theory for finite gauge groups. Gauss' law is enforced energetically at each vertex by a Hamiltonian term and the model is at the deconfinement fixed point, where there are no electric field terms.
 The Hamiltonian, therefore, has two sets of terms -- the gauge-invariant (magnetic) plaquette terms and the Gauss' law vertex terms~\cite{cui2018topological, Kitaev_2003}. 
@@ -355,9 +354,10 @@ For the other variants of Step 2 (for different edge orientations etc.) consult 
 
 In the way presented above, we have started building up the ribbon from start-to-finish using only forward-type elementary triangles. Similarly, we could have started in the middle and extended in parallel both forward and backwards with appropriate types of elementary triangles, see Appendix \ref{app:ribs}. Backwards-type elementary triangles, analogously to Step \textbf{2.} stated above, act on the backwards ancilla qudit.
 
-As we can see, the operation is sequential so at best the depth of a circuit implementing this is $\mathcal{O}(|R|)$, with the best depth achieved by starting at the middle and growing it both ways.
+As we can see, the operation is sequential so at best the depth of a circuit implementing this is $\mathcal{O}(|R|)$, with the best depth achieved by starting at the middle and growing it both ways. 
 
-Of course, we can make this constant depth by separating the main ribbon into $|R|$ smaller ribbons which however requires $|R|$ pairs of qudits. To merge these ribbons, we also need $|R|$ Bell-pair projections. As these are done via measurement and post-selection this requires an exponential in $|R|$ number of repetitions for a $\mathcal{O}(1)$ number of successful projections.
+
+We can make this constant depth by separating the main ribbon into $|R|$ smaller ribbons which however requires $|R|$ pairs of qudits. To merge these ribbons, we also need to work with $2R$ ancillas (one pair for each cut of the circuit) and $|R|$ Bell-pair projections. As these are done via measurement and post-selection this requires an exponential in $|R|$ number of repetitions for a $\mathcal{O}(1)$ number of successful projections. Note, that this procedure is independent of quantum double models and can be applied to any sequential circuit.
 
 In the variant of the protocol we proposed, the post-selection will necessarily raise concerns about the scaling of the number of total runs needed to build up an adequate number of successful runs. In fact, the protocol for applying an open ribbon operator onto the ground state succeeds with a probability of $1/d^2$ (neglecting the effect of noise). However, if the ribbon is closed, due to the no-flux condition of the ground state, the protocol succeeds with certainty. The number of runs needed scales exponentially with the number of open ribbon operators in the braiding protocol, which, in the cases we consider, is either one or two. 
 
