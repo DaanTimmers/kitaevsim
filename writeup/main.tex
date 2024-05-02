@@ -384,21 +384,22 @@ The key idea behind the partial measurement protocol is that controlled $A_s^{(g
 
 With Eq.~\eqref{eqn:tranfs} in mind, we propose the following algorithm for the $H$-partial charge measurement on a plaquette $p$
 \begin{enumerate}
-    \item Prepare an ancilla qudit, $a$, encoding the elements of $H\subset G$, in an equal superposition over all elements, so that the joint total state of the system is $$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys}, $$where $\ket{\Psi}_\text{phys}$ is the physical system.
-    \item Apply an $a$-controlled $A$-multiplication onto the edges of the plaquette $p$$$ \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys} \rightarrow \sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\psi}_\text{phys}. $$
-    \item Apply a unitary $$ U_a = \sum_{\chi_H}\sum_{i', j'}\sum_{h'\in H}  \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a $$ onto the ancilla qudit $a$. Here $\chi_H$ labels the irreducible representations of $H \subset G$ and $\Gamma^{\chi_H}(h')$ are the representation matrices, with $i'$ and $j'$ being the vector indices for a given representation $\chi_H$.
-    \item Measure the ancilla qudit $a$.
+    \item Prepare an ancilla qudit, $a$, encoding the elements of $H\subset G$, in an equal superposition over all elements, so that the joint total state of the system is $$ \frac{1}{\sqrt{|H|}} \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys}, $$where $\ket{\Psi}_\text{phys}$ is the physical system.
+    \item Apply an $a$-controlled $A$-multiplication onto the edges of the plaquette $p$$$ \frac{1}{\sqrt{|H|}} \sum_{h \in H} \ket{h}_a\ket{\psi}_\text{phys} x\rightarrow  $$ $$ \frac{1}{\sqrt{|H|}}\sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\psi}_\text{phys}. $$
+    \item Apply a unitary $$ U_a = \sum_{\chi_H}\sum_{i, j}\sum_{h\in H} \sqrt{\frac{d_\chi}{|G|}}  \bar \Gamma^{\chi_H}_{ij}(h)  \ket{\chi_H; i, j}_a\bra{h}_a $$ onto the ancilla qudit $a$. Here $\chi_H$ labels the irreducible representations of $H \subset G$ and $\Gamma^{\chi_H}(h')$ are the representation matrices, with $i$ and $j$ being the vector indices for a given representation $\chi_H$. The state $\ket{\chi;i,j}$ should be understood as one of the basis states of a $\sum_{\chi} d_\chi^2$-dimensional vector space which simply enumerate the irreps and their corresponding vector spaces. When $H$ is Abelian, this reduces to a $\sum_\chi=|G|$ dimensional space, labeled by the irreps alone. A concrete qubit encoding for $H=\mathbb Z_4$ and $H=\mathbb Z_2 \times \mathbb Z_2$ is presented in Eqs.~\eqref{eq:enc_irr1} and \eqref{eq:enc_irr2}.
+        \item Measure the ancilla qudit $a$.
 \end{enumerate}
 
 To see how this protocol works, let us examine the case of a  gauge field with well-defined pure charge on a plaquette  $\ket{\psi}_\text{phys} = \ket{\chi; i}$. Using  Eq.~\eqref{eqn:tranfs} we can write the joint state after Step~2 as
 \begin{equation}
-    \sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\chi; i} = \sum_{h \in H,j} \ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi; j}.
+    %\sum_{h \in H} \ket{h}_a A_p{(h)} \ket{\chi; i} = 
+   \frac{1}{\sqrt{|H|}} \sum_{h \in H,j} \ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi; j}.
 \end{equation}
 If $H = G$, the state after Step~3 becomes\begin{equation}
     \begin{split}
-        \sum_{h \in G} U_a\ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi, p; j} = \\
-        \sum_{h \in G} \sum_{\chi'}\sum_{i', j'}  \Gamma^{\chi'}_{i'j'}(h)\Gamma^{\chi}_{ij}(h) \ket{\chi'; i', j'}_a \ket{\chi, p; j} =\\
-        \sum_j\ket{\chi; i, j}_a \ket{\chi, p; j}
+       \frac{1}{\sqrt{|G|}}  \sum_{h \in G,j} U_a\ket{h}_a \Gamma^{\chi}_{ij}(h) \ket{\chi; j} = \\
+        \frac{1}{|G|}  \sum_{h,\chi',i', j',j} \sqrt{d_\chi} \bar \Gamma^{\chi'}_{i'j'}(h)\Gamma^{\chi}_{ij}(h) \ket{\chi'; i', j'}_a \ket{\chi; j} =\\
+        \sum_j \frac{1}{\sqrt{d_\chi}} \ket{\chi; i, j}_a \ket{\chi; j}
     \end{split}
 \end{equation}
 The decoupling we see in the last line after summing over $h$ is guaranteed by Schur's orthogonality lemma.
@@ -600,12 +601,12 @@ Similarly the subgroups are encoded with two qubits. For example for $h\in H_r$ 
 
 To encode the four different representations of the subgroups $\chi_H$ for $H_m$ and $H_{mr}$ we use
 \begin{equation}
-    \ket{(-1)^a,(-1)^b} \equiv \ket{a}_a\ket{b}_b,
+    \ket{(-1)^a,(-1)^b} \equiv \ket{a}_a\ket{b}_b, \label{eq:enc_irr1}
 \end{equation}
 where $(a,b)$ corresponds to the representation label used in Table \ref{tab:char_sub}, 
 and for $H_{r}$ we use
 \begin{equation}
-    \ket{i^{2a+b}} \equiv \ket{a}_a\ket{b}_b,
+    \ket{i^{2a+b}} \equiv \ket{a}_a\ket{b}_b, \label{eq:enc_irr2}
 \end{equation}
 where $i^{2a+b}$ corresponds to the representation label used in Table \ref{tab:char_sub}.
 
@@ -618,7 +619,7 @@ where $i^{2a+b}$ corresponds to the representation label used in Table \ref{tab:
         \item restricted domain variant ($g \in H$), used for partial charge measurements. 
     \end{enumerate}
     \item Controlled generalised conjugation\\ $\ket{c} \ket{i}\ket{g} \rightarrow \ket{gcg^{-1}} \Gamma^\chi_{c} \ket{i}\ket{g}$.
-    \item Decoupling unitary of the partial charge measurement $$ U_a = \sum_{\chi_H}\sum_{i', j'}\sum_{h'\in H}  \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a. $$
+    \item Decoupling unitary of the partial charge measurement $$ U_a = \sum_{\chi_H,i', j',h'\in H} \sqrt{\frac{d_\chi}{|G|}} \bar \Gamma^{\chi_H}_{i'j'}(h')  \ket{\chi_H; i', j'}_a\bra{h'}_a. $$
 \end{enumerate} 
 
 
