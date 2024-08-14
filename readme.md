@@ -4,6 +4,6 @@ Numerical simulations, done via Google Colab using Google Quantum's `cirq_google
 
 `/IBM` has code used on testing on IBM Quantum Cloud
 
-`/Quantum double` has examples of analytical calcuations, e.g. calcualtion of $F-$ and $R-$symbols in the case of doubles of $D_4$, $Q_8$ and $S_3$.
+`/Quantum double` has examples of analytical calcuations, e.g. calcualtion of $F-$ and $R-$ symbols in the case of doubles of $D_4$, $Q_8$ and $S_3$.
 
 $\ldots$
